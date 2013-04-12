@@ -1,0 +1,11 @@
+[
+{firstName: 'Pearlie', lastName: 'White', contactno:'011-9865460', address:'365-Andrews Street, CA'},
+{firstName: 'John', lastName: 'Suttle', contactno:'011-7658740', address:'Donut Avenue, Bill\'s Palace, Washington'},
+{firstName: 'Javier', lastName: 'Henderson', contactno:'011-9865460', address:'365-Andrews Street, CA'}, //keeping the data same for demo purpose
+{firstName: 'Young', lastName: 'Alverd', contactno:'011-9865460', address:'365-Andrews Street, CA'},
+{firstName: 'Billy', lastName: 'Artega', contactno:'011-9865460', address:'365-Andrews Street, CA'},
+{firstName: 'Dona', lastName: 'Bigglker', contactno:'011-9865460', address:'365-Andrews Street, CA'},
+{firstName: 'Alfred', lastName: 'Blackburn', contactno:'011-9865460', address:'365-Andrews Street, CA'},
+{firstName: 'Trenton', lastName: 'Bollinger', contactno:'011-9865460', address:'365-Andrews Street, CA'},
+{firstName: 'Tom', lastName: 'Foose', contactno:'011-9865460', address:'365-Andrews Street, CA'}
+]

@@ -1,0 +1,4 @@
+- replace first '{' by '['
+- replace last '}' by ']'
+- remove all pseudo keys
+  ("\d{5}"\:)(\{) -> $2

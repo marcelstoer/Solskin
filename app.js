@@ -22,16 +22,64 @@ Ext.Loader.setPath({
 
 Ext.application({
   name: 'SunApp',
-  viewport: {
-    autoMaximize: true
-  },
 
   launch: function () {
+    Ext.define('StationData', {
+      extend: 'Ext.data.Model',
+      config: {
+        fields: [
+          {name: 'name', type: 'string'},
+          {name: 'lat', type: 'string'} ,
+          {name: 'lon', type: 'string'},
+          {name: 'ss', type: 'int'}
+        ]
+      }
+    });
+    var stationStore = Ext.create('Ext.data.Store', {
+      model: 'StationData',
+      autoLoad: true,
+      proxy: {
+        type: 'ajax',
+        url: 'data.json',
+        reader: {
+          type: 'json'
+        }
+      }
+    });
+    var stationItemTemplate = new Ext.XTemplate(
+      '<tpl for=".">',
+      '{name}: {lat}/{lon}, {ss}min',
+      '</tpl>'
+    );
+    var stationList = Ext.create('Ext.dataview.List', {
+      title: 'Station List',
+      iconCls: 'home',
+      store: stationStore,
+      itemTpl: stationItemTemplate
+    });
+
     Ext.create('Ext.util.Geolocation', {
       autoUpdate: false,
       listeners: {
         locationupdate: function (geo) {
-          alert(geo.getLatitude() + ' / ' + geo.getLongitude());
+          var geoLat = geo.getLatitude();
+          var geoLong = geo.getLongitude();
+          stationStore.filterBy(function(record, id){
+            return record.data.ss >= 55;
+          });
+          stationStore..sort([{
+            direction: 'DESC',
+            sorterFn: function(station1, station2) {
+              var value1 = o1.getAddress().get('street'));
+              var value2 = o2.getAddress().get('street'));
+              return value1 > value2 ? 1 : (value1 < value2 ? -1 : 0);
+            }
+          }]);
+          Ext.create("Ext.tab.Panel", {
+            fullscreen: true,
+            tabBarPosition: 'bottom',
+            items: [stationList]
+          });
         },
         locationerror: function (geo, bTimeout, bPermissionDenied, bLocationUnavailable, message) {
           if (bTimeout) {
@@ -42,89 +90,5 @@ Ext.application({
         }
       }
     }).updateLocation();
-    Ext.create("Ext.tab.Panel", {
-      fullscreen: true,
-      tabBarPosition: 'bottom',
-      items: [
-        {
-          title: 'Home',
-          iconCls: 'home',
-          cls: 'home',
-          html: [
-            '<img width="25%" src="http://staging.sencha.com/img/sencha.png" />',
-            '<h1>Welcome to Sencha Touch</h1>',
-            "<p>You're creating the Getting Started app. This demonstrates how ",
-            "to use tabs, lists and forms to create a simple app</p>",
-            '<h2>Sencha Touch 2</h2>'
-          ].join("")
-        },
-        {
-          xtype: 'nestedlist',
-          title: 'Blog',
-          iconCls: 'star',
-          displayField: 'title',
-
-          detailCard: {
-            xtype: 'panel',
-            scrollable: true,
-            styleHtmlContent: true
-          },
-
-          listeners: {
-            itemtap: function (nestedlist, list, index, element, post) {
-              this.getDetailCard().setHtml(post.get('content'))
-            }
-          },
-
-          store: {
-            type: 'tree',
-            fields: [
-              'title', 'link', 'author', 'contentSnippet', 'content', {name: 'leaf', defaultValue: true}
-            ],
-
-            root: {
-              leaf: false
-            },
-
-            proxy: {
-              type: 'jsonp',
-              url: 'https://ajax.googleapis.com/ajax/services/feed/load?v=1.0&q=http://feeds.feedburner.com/SenchaBlog',
-              reader: {
-                type: 'json',
-                rootProperty: 'responseData.feed.entries'
-              }
-            }
-          }
-        },
-        {
-          xtype: 'formpanel',
-          title: 'Contact',
-          iconCls: 'user',
-          url: 'contact.php',
-          layout: 'vbox',
-
-          items: [
-            {
-              xtype: 'fieldset',
-              title: 'Contact Us',
-              instructions: '(email address is optional)',
-              items: [
-                {xtype: 'textfield', label: 'Name'},
-                {xtype: 'emailfield', label: 'Email'},
-                {xtype: 'textareafield', label: 'Message'}
-              ]
-            },
-            {
-              xtype: 'button',
-              text: 'Send',
-              ui: 'confirm',
-              handler: function () {
-                this.up('formpanel').submit();
-              }
-            }
-          ]
-        }
-      ]
-    });
   }
 });
