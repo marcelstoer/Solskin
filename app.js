@@ -67,14 +67,14 @@ Ext.application({
           stationStore.filterBy(function(record, id){
             return record.data.ss >= 55;
           });
-          stationStore..sort([{
-            direction: 'DESC',
-            sorterFn: function(station1, station2) {
-              var value1 = o1.getAddress().get('street'));
-              var value2 = o2.getAddress().get('street'));
-              return value1 > value2 ? 1 : (value1 < value2 ? -1 : 0);
-            }
-          }]);
+//          stationStore..sort([{
+//            direction: 'DESC',
+//            sorterFn: function(station1, station2) {
+//              var value1 = o1.getAddress().get('street'));
+//              var value2 = o2.getAddress().get('street'));
+//              return value1 > value2 ? 1 : (value1 < value2 ? -1 : 0);
+//            }
+//          }]);
           Ext.create("Ext.tab.Panel", {
             fullscreen: true,
             tabBarPosition: 'bottom',

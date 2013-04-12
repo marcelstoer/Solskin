@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="22cd0136-cbe4-408f-952b-557e2517cc6e" name="Default" comment="Some markdown.">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/parsing-json.txt" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app.js" afterPath="$PROJECT_DIR$/app.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
@@ -192,7 +191,7 @@
       <file leaf-file-name="app.js" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="60" column="0" selection-start="1667" selection-end="1667" vertical-scroll-proportion="0.044585988">
+            <state line="76" column="16" selection-start="2000" selection-end="2337" vertical-scroll-proportion="0.42675158">
               <folding>
                 <element signature="n#!!doc" expanded="true" />
               </folding>
@@ -664,7 +663,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="60" column="0" selection-start="1667" selection-end="1667" vertical-scroll-proportion="0.044585988">
+        <state line="76" column="16" selection-start="2000" selection-end="2337" vertical-scroll-proportion="0.42675158">
           <folding>
             <element signature="n#!!doc" expanded="true" />
           </folding>
