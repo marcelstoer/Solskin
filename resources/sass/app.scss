@@ -1,3 +1,17 @@
+div.weather60, div.weather59, div.weather58, div.weather57, div.weather56 { 
+  padding-left: 40px;
+  padding-top: 5px;
+  background: url(Sun.svg) no-repeat left;
+  background-size: 30px 30px;
+}
+
+div.weather55, div.weather54, div.weather53, div.weather52, div.weather51 { 
+  padding-left: 40px;
+  padding-top: 5px;
+  background: url(Cloud-Sun.svg) no-repeat left;
+  background-size: 30px 30px;
+}
+
 @import 'sencha-touch/default/all';
 
 // You may remove any of the following modules that you
@@ -15,5 +29,7 @@
 @include sencha-carousel;
 @include sencha-form;
 @include sencha-msgbox;
+
+@include pictos-iconmask('brightness1');
 
 // Your custom code goes here...
