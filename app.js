@@ -20,21 +20,50 @@ Ext.Loader.setPath({
 });
 //</debug>
 
+// http://www.movable-type.co.uk/scripts/latlong.html
+if (typeof(Number.prototype.toRad) === "undefined") {
+  Number.prototype.toRad = function () {
+    return this * Math.PI / 180;
+  }
+}
+var coordinate = function (lat, lon) {
+  var R = 6371; // km
+  return {
+    distanceTo: function (other) {
+      var dLat = (other.lat - lat).toRad();
+      var dLon = (other.lon - lon).toRad();
+      var lat1 = lat.toRad();
+      var lat2 = other.lat.toRad();
+
+      var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+        Math.sin(dLon / 2) * Math.sin(dLon / 2) * Math.cos(lat1) * Math.cos(lat2);
+      var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+      return Math.round(R * c * 1000) / 1000; // distance
+    },
+    lat: lat,
+    lon: lon
+  };
+};
+
+var allStationData = new Array();
+
+Ext.define('StationData', {
+  extend: 'Ext.data.Model',
+  config: {
+    fields: [
+      {name: 'name', type: 'string'},
+      {name: 'lat', type: 'float'} ,
+      {name: 'lon', type: 'float'},
+      {name: 'ss', type: 'int'},
+      {name: 'distance', type: 'float', defaultValue: '0.0'}
+    ]
+  }
+});
+
 Ext.application({
   name: 'SunApp',
 
   launch: function () {
-    Ext.define('StationData', {
-      extend: 'Ext.data.Model',
-      config: {
-        fields: [
-          {name: 'name', type: 'string'},
-          {name: 'lat', type: 'string'} ,
-          {name: 'lon', type: 'string'},
-          {name: 'ss', type: 'int'}
-        ]
-      }
-    });
     var stationStore = Ext.create('Ext.data.Store', {
       model: 'StationData',
       autoLoad: true,
@@ -46,39 +75,51 @@ Ext.application({
         }
       }
     });
+    stationStore.on('load', function (storeRef, records, successful) {
+      allStationData = records;
+    }, this);
     var stationItemTemplate = new Ext.XTemplate(
       '<tpl for=".">',
-      '{name}: {lat}/{lon}, {ss}min',
+      '{name}: {lat}/{lon}, {ss}min, {distance}km',
       '</tpl>'
     );
-    var stationList = Ext.create('Ext.dataview.List', {
-      title: 'Station List',
-      iconCls: 'home',
-      store: stationStore,
-      itemTpl: stationItemTemplate
-    });
 
     Ext.create('Ext.util.Geolocation', {
       autoUpdate: false,
       listeners: {
         locationupdate: function (geo) {
           var geoLat = geo.getLatitude();
-          var geoLong = geo.getLongitude();
-          stationStore.filterBy(function(record, id){
-            return record.data.ss >= 55;
+          var geoLon = geo.getLongitude();
+
+          stationStore.filterBy(function (record, id) {
+            if (record.get('ss') >= 55) {
+              if (record.get('distance') === 0.0) {
+                var recordCoordinate = coordinate(record.get('lat'), record.get('lon'));
+                var geoCoordinate = coordinate(geoLat, geoLon);
+                record.data.distance = recordCoordinate.distanceTo(geoCoordinate);
+              }
+              return true;
+            } else {
+              return false;
+            }
           });
-//          stationStore..sort([{
-//            direction: 'DESC',
-//            sorterFn: function(station1, station2) {
-//              var value1 = o1.getAddress().get('street'));
-//              var value2 = o2.getAddress().get('street'));
-//              return value1 > value2 ? 1 : (value1 < value2 ? -1 : 0);
-//            }
-//          }]);
+          stationStore.sort([
+            {
+              property: 'distance',
+              direction: 'ASC'
+            }
+          ]);
           Ext.create("Ext.tab.Panel", {
             fullscreen: true,
             tabBarPosition: 'bottom',
-            items: [stationList]
+            items: [
+              Ext.create('Ext.dataview.List', {
+                title: 'Station List',
+                iconCls: 'home',
+                store: stationStore,
+                itemTpl: stationItemTemplate
+              })
+            ]
           });
         },
         locationerror: function (geo, bTimeout, bPermissionDenied, bLocationUnavailable, message) {
