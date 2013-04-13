@@ -20,6 +20,9 @@ Ext.Loader.setPath({
 });
 //</debug>
 
+var allStationData;
+var tabPanel;
+
 // http://www.movable-type.co.uk/scripts/latlong.html
 if (typeof(Number.prototype.toRad) === "undefined") {
   Number.prototype.toRad = function () {
@@ -45,8 +48,6 @@ var coordinate = function (lat, lon) {
   };
 };
 
-var allStationData = new Array();
-
 Ext.define('StationData', {
   extend: 'Ext.data.Model',
   config: {
@@ -58,6 +59,26 @@ Ext.define('StationData', {
       {name: 'distance', type: 'float', defaultValue: '0.0'}
     ]
   }
+});
+
+allStationData = new Array();
+
+tabPanel = Ext.create("Ext.tab.Panel", {
+  fullscreen: true,
+  tabBarPosition: 'bottom',
+  items: [
+    {
+      title: 'Home',
+      iconCls: 'home',
+      cls: 'home',
+      html: [
+        '<img width="12.5%" src="http://staging.sencha.com/img/sencha.png" />',
+        "<h1>Wait, there's more....</h1>",
+        '<p>Stay tuned while we do some number crunching in the ',
+        'background for you.</p>'
+      ].join("")
+    }
+  ]
 });
 
 Ext.application({
@@ -88,9 +109,9 @@ Ext.application({
       autoUpdate: false,
       listeners: {
         locationupdate: function (geo) {
+          var stationList;
           var geoLat = geo.getLatitude();
           var geoLon = geo.getLongitude();
-
           stationStore.filterBy(function (record, id) {
             if (record.get('ss') >= 55) {
               if (record.get('distance') === 0.0) {
@@ -109,27 +130,32 @@ Ext.application({
               direction: 'ASC'
             }
           ]);
-          Ext.create("Ext.tab.Panel", {
-            fullscreen: true,
-            tabBarPosition: 'bottom',
-            items: [
-              Ext.create('Ext.dataview.List', {
-                title: 'Station List',
-                iconCls: 'home',
-                store: stationStore,
-                itemTpl: stationItemTemplate
-              })
-            ]
+          stationList = Ext.create('Ext.dataview.List', {
+            title: 'Station List',
+            iconCls: 'home',
+            store: stationStore,
+            itemTpl: stationItemTemplate
           });
+          tabPanel.setItems([stationList]);
         },
         locationerror: function (geo, bTimeout, bPermissionDenied, bLocationUnavailable, message) {
-          if (bTimeout) {
-            alert('Timeout occurred.');
-          } else {
-            alert('Error occurred.');
-          }
+          tabPanel.setItems([
+            {
+              title: 'Home',
+              iconCls: 'home',
+              cls: 'home',
+              html: [
+                '<img width="12.5%" src="http://staging.sencha.com/img/sencha.png" />',
+                "<h1>Ouchh!</h1>",
+                "<p>We're really sorry but your device didn't ",
+                'allow us to detect your location or it failed ',
+                'to do so. Pity.</p>'
+              ].join("")
+            }
+          ]);
         }
       }
     }).updateLocation();
+    tabPanel.show();
   }
 });
