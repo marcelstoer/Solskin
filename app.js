@@ -106,7 +106,7 @@ Ext.application({
     }, this);
     var stationItemTemplate = new Ext.XTemplate(
       '<tpl for=".">',
-      '<div class="stationList sunLevel{sunLevel}">{name}: {ss}min, {distance}km</div>',
+      '<div class="stationList sunLevel{sunLevel}">{name}: <span class="distance">{distance}km</span></div>',
       '</tpl>'
     );
 
