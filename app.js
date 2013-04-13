@@ -195,8 +195,7 @@ Ext.application({
               {
                 docked: 'top',
                 xtype: 'titlebar',
-                title: 'Bern'
-              },
+                title: 'Bern'              },
              stationList
              ]
           );
