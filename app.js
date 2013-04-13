@@ -69,22 +69,21 @@ allStationData = new Array();
 
 tabPanel = Ext.create("Ext.tab.Panel", {
   requires: [
-             'Ext.TitleBar'
-           ],
+    'Ext.TitleBar'
+  ],
   fullscreen: true,
   tabBarPosition: 'bottom',
   items: [
-     {
-       docked: 'top',
-       xtype: 'titlebar',
-       title: 'SunApp'
-     },
+    {
+      docked: 'top',
+      xtype: 'titlebar',
+      title: 'SunApp'
+    },
     {
       title: 'Home',
       iconCls: 'brightness1',
       cls: 'home',
       html: [
-        '<img src="http://docs.sencha.com/ext-js/4-1/resources/images/loading.gif" />',
         "<h1>Wait, there's more....</h1>",
         '<p>Stay tuned while we do some number crunching in the ',
         'background for you.</p>'
@@ -126,8 +125,8 @@ Ext.application({
 
     Ext.create('Ext.util.Geolocation', {
       requires: [
-                 'Ext.TitleBar'
-               ],
+        'Ext.TitleBar'
+      ],
       autoUpdate: false,
       listeners: {
         locationupdate: function (geo) {
@@ -192,12 +191,12 @@ Ext.application({
             itemTpl: stationItemTemplate
           });
           tabPanel.setItems([
-              {
-                docked: 'top',
-                xtype: 'titlebar',
-                title: 'Bern'              },
-             stationList
-             ]
+            {
+              docked: 'top',
+              xtype: 'titlebar',
+              title: 'Bern'              },
+            stationList
+          ]
           );
         },
         locationerror: function (geo, bTimeout, bPermissionDenied, bLocationUnavailable, message) {
