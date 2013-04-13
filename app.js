@@ -52,10 +52,12 @@ Ext.define('StationData', {
   extend: 'Ext.data.Model',
   config: {
     fields: [
+      {name: 'wmo', type: 'int'},
       {name: 'name', type: 'string'},
       {name: 'lat', type: 'float'} ,
       {name: 'lon', type: 'float'},
       {name: 'ss', type: 'int'},
+      {name: 'sunLevel', type: 'int'},
       {name: 'distance', type: 'float', defaultValue: '0.0'}
     ]
   }
@@ -104,7 +106,7 @@ Ext.application({
     }, this);
     var stationItemTemplate = new Ext.XTemplate(
       '<tpl for=".">',
-      '<div class="' + "weather{ss}" + '">{name}: {lat}/{lon}, {ss}min, {distance}km</div>',
+      '<div class="stationList weather{ss} sunLevel{sunLevel}">{name}: {ss}min, {distance}km</div>',
       '</tpl>'
     );
 
@@ -114,9 +116,37 @@ Ext.application({
         locationupdate: function (geo) {
           var stationList;
           var geoLat = geo.getLatitude();
-          var geoLon = geo.getLongitude();
+          var geoLon = geo.getLongitude()
+
+//          Ext.Ajax.request({
+//            url: 'http://transport.opendata.ch/v1/locations',
+//            params: {
+//              x: geoLat,
+//              y: geoLon
+//            },
+//            success: function (response) {
+//              var text = response.responseText;
+//              alert(text.stations[0].name);
+//            }
+//          });
+
           stationStore.filterBy(function (record, id) {
-            if (record.get('ss') >= 55) {
+            var sunLevel;
+            var sunshineMinutes = record.get('ss');
+
+            if (sunshineMinutes < 5) {         // 0-4
+              sunLevel = 0;
+            } else if (sunshineMinutes < 50) { // 5 - 49
+              sunLevel = 1;
+            } else if (sunshineMinutes < 60) { // 50 - 59
+              sunLevel = 2;
+            } else {                          // 60
+              sunLevel = 3;
+            }
+
+            record.data.sunLevel = sunLevel;
+
+            if (sunLevel >= 2) {
               if (record.get('distance') === 0.0) {
                 var recordCoordinate = coordinate(record.get('lat'), record.get('lon'));
                 var geoCoordinate = coordinate(geoLat, geoLon);
