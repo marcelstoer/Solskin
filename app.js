@@ -66,15 +66,23 @@ Ext.define('StationData', {
 allStationData = new Array();
 
 tabPanel = Ext.create("Ext.tab.Panel", {
+  requires: [
+             'Ext.TitleBar'
+           ],
   fullscreen: true,
   tabBarPosition: 'bottom',
   items: [
+     {
+       docked: 'top',
+       xtype: 'titlebar',
+       title: 'SunApp'
+     },
     {
       title: 'Home',
-      iconCls: 'home',
+      iconCls: 'brightness1',
       cls: 'home',
       html: [
-        '<img width="12.5%" src="http://staging.sencha.com/img/sencha.png" />',
+        '<img src="http://docs.sencha.com/ext-js/4-1/resources/images/loading.gif" />',     
         "<h1>Wait, there's more....</h1>",
         '<p>Stay tuned while we do some number crunching in the ',
         'background for you.</p>'
@@ -111,6 +119,9 @@ Ext.application({
     );
 
     Ext.create('Ext.util.Geolocation', {
+      requires: [
+                 'Ext.TitleBar'
+               ],
       autoUpdate: false,
       listeners: {
         locationupdate: function (geo) {
@@ -165,17 +176,30 @@ Ext.application({
           ]);
           stationList = Ext.create('Ext.dataview.List', {
             title: 'Station List',
-            iconCls: 'home',
+            iconCls: 'brightness1',
             store: stationStore,
             itemTpl: stationItemTemplate
           });
-          tabPanel.setItems([stationList]);
+          tabPanel.setItems([
+              {
+                docked: 'top',
+                xtype: 'titlebar',
+                title: 'Bern'
+              },
+             stationList
+             ]
+          );
         },
         locationerror: function (geo, bTimeout, bPermissionDenied, bLocationUnavailable, message) {
           tabPanel.setItems([
             {
+              docked: 'top',
+              xtype: 'titlebar',
+              title: 'Sorry'
+            },
+            {
               title: 'Home',
-              iconCls: 'home',
+              iconCls: 'brightness1',
               cls: 'home',
               html: [
                 '<img width="12.5%" src="http://staging.sencha.com/img/sencha.png" />',
