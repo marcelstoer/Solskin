@@ -22,6 +22,8 @@ Ext.Loader.setPath({
 
 var allStationData;
 var tabPanel;
+var myLocationName;
+var myCoordinate;
 
 // http://www.movable-type.co.uk/scripts/latlong.html
 if (typeof(Number.prototype.toRad) === "undefined") {
@@ -86,6 +88,10 @@ tabPanel = Ext.create("Ext.tab.Panel", {
 Ext.application({
   name: 'SunApp',
 
+  requires: [
+    'Ext.MessageBox'
+  ],
+
   icon: {
     57: 'resources/images/glasses.svg'
   },
@@ -115,20 +121,26 @@ Ext.application({
       listeners: {
         locationupdate: function (geo) {
           var stationList;
-          var geoLat = geo.getLatitude();
-          var geoLon = geo.getLongitude()
+          myCoordinate = coordinate(geo.getLatitude(), geo.getLongitude())
 
-//          Ext.Ajax.request({
-//            url: 'http://transport.opendata.ch/v1/locations',
-//            params: {
-//              x: geoLat,
-//              y: geoLon
-//            },
-//            success: function (response) {
-//              var text = response.responseText;
-//              alert(text.stations[0].name);
-//            }
-//          });
+          Ext.Ajax.request({
+            url: '../transport/api.php/v1/locations',
+            method: 'GET',
+            params: {
+              x: myCoordinate.lat,
+              y: myCoordinate.lon
+            },
+            success: function (response) {
+              var text = response.responseText;
+              myLocationName = Ext.JSON.decode(text).stations[0].name;
+              Ext.Msg.show({
+                title: myLocationName,
+                msg: 'We believe your nearest station is ' + myLocationName,
+                buttons: Ext.Msg.OK,
+                icon: Ext.Msg.INFO
+              });
+            }
+          });
 
           stationStore.filterBy(function (record, id) {
             var sunLevel;
@@ -149,8 +161,7 @@ Ext.application({
             if (sunLevel >= 2) {
               if (record.get('distance') === 0.0) {
                 var recordCoordinate = coordinate(record.get('lat'), record.get('lon'));
-                var geoCoordinate = coordinate(geoLat, geoLon);
-                record.data.distance = recordCoordinate.distanceTo(geoCoordinate);
+                record.data.distance = recordCoordinate.distanceTo(myCoordinate);
               }
               return true;
             } else {

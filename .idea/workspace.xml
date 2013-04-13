@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="22cd0136-cbe4-408f-952b-557e2517cc6e" name="Default" comment="Some markdown.">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app.js" afterPath="$PROJECT_DIR$/app.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="SunApp.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -116,9 +115,11 @@
     <file path="$APPLICATION_HOME_DIR$/plugins/JavaEE/lib/javaee-impl.jar!/standardSchemas/web-app_2_5.xsd" changelist="22cd0136-cbe4-408f-952b-557e2517cc6e" time="1365682059927" ignored="false" />
     <file path="$APPLICATION_HOME_DIR$/plugins/JavaEE/lib/javaee-impl.jar!/standardSchemas/javaee_web_services_client_1_3.xsd" changelist="22cd0136-cbe4-408f-952b-557e2517cc6e" time="1365682059927" ignored="false" />
     <file path="/a.js" changelist="22cd0136-cbe4-408f-952b-557e2517cc6e" time="1365779883448" ignored="false" />
-    <file path="/app.js" changelist="22cd0136-cbe4-408f-952b-557e2517cc6e" time="1365846624875" ignored="false" />
+    <file path="/app.js" changelist="22cd0136-cbe4-408f-952b-557e2517cc6e" time="1365857558249" ignored="false" />
     <file path="/data.json" changelist="22cd0136-cbe4-408f-952b-557e2517cc6e" time="1365779683778" ignored="false" />
     <file path="/parsing-json.txt" changelist="22cd0136-cbe4-408f-952b-557e2517cc6e" time="1365779930751" ignored="false" />
+    <file path="$PROJECT_DIR$/.idea/workspace.xml" changelist="22cd0136-cbe4-408f-952b-557e2517cc6e" time="1365857573559" ignored="false" />
+    <file path="/foo.html" changelist="22cd0136-cbe4-408f-952b-557e2517cc6e" time="1365855956625" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -182,10 +183,19 @@
       <file leaf-file-name="app.js" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="131" column="0" selection-start="3670" selection-end="3670" vertical-scroll-proportion="0.40095848">
+            <state line="135" column="18" selection-start="3774" selection-end="3774" vertical-scroll-proportion="0.50319487">
               <folding>
                 <element signature="n#!!doc" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="foo.html" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/foo.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="5" column="59" selection-start="121" selection-end="121" vertical-scroll-proportion="-3.125">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -222,6 +232,7 @@
         <option value="$PROJECT_DIR$/index.html" />
         <option value="$PROJECT_DIR$/data.json" />
         <option value="$PROJECT_DIR$/parsing-json.txt" />
+        <option value="$PROJECT_DIR$/foo.html" />
         <option value="$PROJECT_DIR$/app.js" />
       </list>
     </option>
@@ -323,6 +334,7 @@
     <property name="MemberChooser.sorted" value="false" />
     <property name="options.lastSelected" value="preferences.keymap" />
     <property name="JavaScriptLanguageLevel" value="JS_1_8_5" />
+    <property name="DefaultHtmlFileTemplate" value="Html5" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="MemberChooser.copyJavadoc" value="false" />
     <property name="GoToClass.toSaveIncludeLibraries" value="false" />
@@ -612,9 +624,16 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/foo.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="5" column="59" selection-start="121" selection-end="121" vertical-scroll-proportion="-3.125">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="131" column="0" selection-start="3670" selection-end="3670" vertical-scroll-proportion="0.40095848">
+        <state line="135" column="18" selection-start="3774" selection-end="3774" vertical-scroll-proportion="0.50319487">
           <folding>
             <element signature="n#!!doc" expanded="true" />
           </folding>
