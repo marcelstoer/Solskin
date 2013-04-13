@@ -1,15 +1,15 @@
 div.weather60, div.weather59, div.weather58, div.weather57, div.weather56 { 
-  padding-left: 40px;
-  padding-top: 5px;
-  background: url(Sun.svg) no-repeat left;
-  background-size: 30px 30px;
+  padding-left: 60px;
+  background: url(../images/Sun.svg) no-repeat left;
+  background-size: 60px 60px;
+  font-size: 150%;
 }
 
 div.weather55, div.weather54, div.weather53, div.weather52, div.weather51 { 
-  padding-left: 40px;
-  padding-top: 5px;
-  background: url(Cloud-Sun.svg) no-repeat left;
-  background-size: 30px 30px;
+  padding-left: 60px;
+  background: url(../images/Cloud-Sun.svg) no-repeat left;
+  background-size: 60px 60px;
+  font-size: 150%;
 }
 
 @import 'sencha-touch/default/all';

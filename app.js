@@ -84,6 +84,9 @@ tabPanel = Ext.create("Ext.tab.Panel", {
 Ext.application({
   name: 'SunApp',
 
+  icon: {
+    57: 'resources/images/glasses.svg'
+  },
   launch: function () {
     var stationStore = Ext.create('Ext.data.Store', {
       model: 'StationData',
