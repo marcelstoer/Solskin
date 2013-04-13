@@ -86,9 +86,9 @@ tabPanel = Ext.create("Ext.tab.Panel", {
 Ext.application({
   name: 'SunApp',
 
-  icon: {
-    57: 'resources/images/glasses.svg'
-  },
+//  icon: {
+//    57: 'resources/images/glasses.svg'
+//  },
   launch: function () {
     var stationStore = Ext.create('Ext.data.Store', {
       model: 'StationData',
@@ -106,7 +106,7 @@ Ext.application({
     }, this);
     var stationItemTemplate = new Ext.XTemplate(
       '<tpl for=".">',
-      '<div class="stationList weather{ss} sunLevel{sunLevel}">{name}: {ss}min, {distance}km</div>',
+      '<div class="stationList sunLevel{sunLevel}">{name}: {ss}min, {distance}km</div>',
       '</tpl>'
     );
 
