@@ -3,9 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="22cd0136-cbe4-408f-952b-557e2517cc6e" name="Default" comment="Some markdown.">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/css/app.css" afterPath="$PROJECT_DIR$/resources/css/app.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app.js" afterPath="$PROJECT_DIR$/app.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/sass/app.scss" afterPath="$PROJECT_DIR$/resources/sass/app.scss" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="SunApp.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -122,6 +120,7 @@
     <file path="/data.json" changelist="22cd0136-cbe4-408f-952b-557e2517cc6e" time="1365779683778" ignored="false" />
     <file path="/parsing-json.txt" changelist="22cd0136-cbe4-408f-952b-557e2517cc6e" time="1365779930751" ignored="false" />
     <file path="/foo.html" changelist="22cd0136-cbe4-408f-952b-557e2517cc6e" time="1365855956625" ignored="false" />
+    <file path="$PROJECT_DIR$/.idea/workspace.xml" changelist="22cd0136-cbe4-408f-952b-557e2517cc6e" time="1365858319456" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -185,28 +184,10 @@
       <file leaf-file-name="app.js" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="97" column="0" selection-start="2639" selection-end="2639" vertical-scroll-proportion="2.3242812">
+            <state line="197" column="29" selection-start="5656" selection-end="5656" vertical-scroll-proportion="4.5523114">
               <folding>
                 <element signature="n#!!doc" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="foo.html" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/foo.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="5" column="59" selection-start="121" selection-end="121" vertical-scroll-proportion="-3.125">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="data.json" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/data.json">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="25309" selection-start="25305" selection-end="25309" vertical-scroll-proportion="-0.0">
-              <folding />
             </state>
           </provider>
         </entry>
@@ -236,6 +217,8 @@
         <option value="$PROJECT_DIR$/parsing-json.txt" />
         <option value="$PROJECT_DIR$/foo.html" />
         <option value="$PROJECT_DIR$/app.js" />
+        <option value="$PROJECT_DIR$/resources/sass/app.scss" />
+        <option value="$PROJECT_DIR$/resources/css/app.css" />
       </list>
     </option>
   </component>
@@ -324,6 +307,38 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SunApp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SunApp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="resources" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SunApp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SunApp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="resources" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="images" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
     </panes>
@@ -334,7 +349,7 @@
     <property name="project.structure.proportion" value="0.0" />
     <property name="options.splitter.main.proportions" value="0.3" />
     <property name="MemberChooser.sorted" value="false" />
-    <property name="options.lastSelected" value="preferences.keymap" />
+    <property name="options.lastSelected" value="appearance" />
     <property name="JavaScriptLanguageLevel" value="JS_1_8_5" />
     <property name="DefaultHtmlFileTemplate" value="Html5" />
     <property name="project.structure.side.proportion" value="0.2" />
@@ -476,7 +491,7 @@
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32874617" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3292683" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32874617" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -577,13 +592,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/css/app.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="1" column="0" selection-start="217204" selection-end="217204" vertical-scroll-proportion="0.02446982">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/packager.json">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
@@ -633,9 +641,72 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/resources/sass/app.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="1" column="0" selection-start="23" selection-end="23" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/css/app.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="e#7364#7849#1" expanded="true" />
+            <element signature="e#8009#10106#1" expanded="true" />
+            <element signature="e#10283#12460#1" expanded="true" />
+            <element signature="e#12616#14773#1" expanded="true" />
+            <element signature="e#22043#22928#1" expanded="true" />
+            <element signature="e#23443#24100#1" expanded="true" />
+            <element signature="e#27305#29166#2" expanded="true" />
+            <element signature="e#29253#29926#2" expanded="true" />
+            <element signature="e#30027#32004#2" expanded="true" />
+            <element signature="e#32105#34130#2" expanded="true" />
+            <element signature="e#34233#36278#2" expanded="true" />
+            <element signature="e#36375#38284#2" expanded="true" />
+            <element signature="e#38379#40532#2" expanded="true" />
+            <element signature="e#40625#42930#2" expanded="true" />
+            <element signature="e#43027#44656#2" expanded="true" />
+            <element signature="e#44751#47188#2" expanded="true" />
+            <element signature="e#47279#48852#2" expanded="true" />
+            <element signature="e#48945#51254#2" expanded="true" />
+            <element signature="e#51351#54384#2" expanded="true" />
+            <element signature="e#54473#56454#2" expanded="true" />
+            <element signature="e#56545#58362#2" expanded="true" />
+            <element signature="e#58451#59784#2" expanded="true" />
+            <element signature="e#59877#62734#2" expanded="true" />
+            <element signature="e#62823#64352#2" expanded="true" />
+            <element signature="e#85901#88410#2" expanded="true" />
+            <element signature="e#88507#90808#2" expanded="true" />
+            <element signature="e#90907#92888#2" expanded="true" />
+            <element signature="e#92977#95546#2" expanded="true" />
+            <element signature="e#95635#96816#2" expanded="true" />
+            <element signature="e#96905#99822#2" expanded="true" />
+            <element signature="e#99911#101500#2" expanded="true" />
+            <element signature="e#101589#103450#2" expanded="true" />
+            <element signature="e#138137#138358#2" expanded="true" />
+            <element signature="e#139501#144286#1" expanded="true" />
+            <element signature="e#147645#153054#1" expanded="true" />
+            <element signature="e#163684#163791#2" expanded="true" />
+            <element signature="e#163954#164061#2" expanded="true" />
+            <element signature="e#169289#171094#2" expanded="true" />
+            <element signature="e#171343#175952#2" expanded="true" />
+            <element signature="e#176306#181651#2" expanded="true" />
+            <element signature="e#192050#194359#2" expanded="true" />
+            <element signature="e#194571#199140#1" expanded="true" />
+            <element signature="e#201013#202990#2" expanded="true" />
+            <element signature="e#204024#206593#2" expanded="true" />
+            <element signature="e#206641#208918#2" expanded="true" />
+            <element signature="e#208967#210996#2" expanded="true" />
+            <element signature="e#211042#212887#2" expanded="true" />
+            <element signature="e#214465#217262#2" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="97" column="0" selection-start="2639" selection-end="2639" vertical-scroll-proportion="2.3242812">
+        <state line="197" column="29" selection-start="5656" selection-end="5656" vertical-scroll-proportion="4.5523114">
           <folding>
             <element signature="n#!!doc" expanded="true" />
           </folding>
