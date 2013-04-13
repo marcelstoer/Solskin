@@ -2,7 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="22cd0136-cbe4-408f-952b-557e2517cc6e" name="Default" comment="Some markdown.">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/css/app.css" afterPath="$PROJECT_DIR$/resources/css/app.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app.js" afterPath="$PROJECT_DIR$/app.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/sass/app.scss" afterPath="$PROJECT_DIR$/resources/sass/app.scss" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="SunApp.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -118,7 +121,6 @@
     <file path="/app.js" changelist="22cd0136-cbe4-408f-952b-557e2517cc6e" time="1365857558249" ignored="false" />
     <file path="/data.json" changelist="22cd0136-cbe4-408f-952b-557e2517cc6e" time="1365779683778" ignored="false" />
     <file path="/parsing-json.txt" changelist="22cd0136-cbe4-408f-952b-557e2517cc6e" time="1365779930751" ignored="false" />
-    <file path="$PROJECT_DIR$/.idea/workspace.xml" changelist="22cd0136-cbe4-408f-952b-557e2517cc6e" time="1365857573559" ignored="false" />
     <file path="/foo.html" changelist="22cd0136-cbe4-408f-952b-557e2517cc6e" time="1365855956625" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -183,7 +185,7 @@
       <file leaf-file-name="app.js" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="135" column="18" selection-start="3774" selection-end="3774" vertical-scroll-proportion="0.50319487">
+            <state line="97" column="0" selection-start="2639" selection-end="2639" vertical-scroll-proportion="2.3242812">
               <folding>
                 <element signature="n#!!doc" expanded="true" />
               </folding>
@@ -633,7 +635,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="135" column="18" selection-start="3774" selection-end="3774" vertical-scroll-proportion="0.50319487">
+        <state line="97" column="0" selection-start="2639" selection-end="2639" vertical-scroll-proportion="2.3242812">
           <folding>
             <element signature="n#!!doc" expanded="true" />
           </folding>
