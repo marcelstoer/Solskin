@@ -1,18 +1,10 @@
 $backgroundsize: 60px;
 
-<<<<<<< HEAD
-=======
-h1.wait {
-  background: url(../images/Shades.svg) no-repeat top;
-  background-size: 200px;
-}
->>>>>>> ab6607865706e60f14f4735a99da02e77b07bec0
 .stationList {
   padding-left: 60px;
   font-size: 150%;
 }
 
-<<<<<<< HEAD
 .sunLevel3 {
   background: url(../images/Sun.svg) no-repeat left;
   background-size: $backgroundsize;
@@ -33,28 +25,6 @@ h1.wait {
   background-size: $backgroundsize;
 }
 
-=======
-.sunLevel3 { 
-  background: url(../images/Sun.svg) no-repeat left;
-  background-size: $backgroundsize;
-}
-  
-.sunLevel2 { 
-  background: url(../images/Cloud-Sun.svg) no-repeat left;
-  background-size: $backgroundsize;  
-}
-
-.sunLevel1 { 
-  background: url(../images/Cloud-Light-Sun.svg) no-repeat left;
-  background-size: $backgroundsize; 
-}
-
-.sunLevel0 { 
-  background: url(../images/Cloud.svg) no-repeat left;
-  background-size: $backgroundsize;
-}
-  
->>>>>>> ab6607865706e60f14f4735a99da02e77b07bec0
 span.distance {
   font-style: italic;
 }
