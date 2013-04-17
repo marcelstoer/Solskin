@@ -105,7 +105,10 @@
     ],
 
     icon: {
-      57: 'resources/images/glasses.svg'
+      57: 'resources/images/MyShades57.png',
+      72: 'resources/images/MyShades72.png',
+      114: 'resources/images/MyShades114.png',
+      144: 'resources/images/MyShades144.png'
     },
     launch: function () {
       var stationStore, stationItemTemplate;
