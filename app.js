@@ -128,7 +128,7 @@
       }, this);
       stationItemTemplate = new Ext.XTemplate(
         '<tpl for=".">',
-        '<div class="stationList sunLevel{sunLevel}">{name}: <span class="distance">{distance}km</span></div>',
+        '<div class="stationList sunLevel{sunLevel}"><p class="name">{name}</p><p class="distance">{distance}km</p></div>',
         '</tpl>'
       );
 
@@ -169,10 +169,12 @@
                 sunLevel = 0;
               } else if (sunshineMinutes < 50) { // 5 - 49
                 sunLevel = 1;
-              } else if (sunshineMinutes < 60) { // 50 - 59
+              } else if (sunshineMinutes < 57) { // 50 - 56
                 sunLevel = 2;
-              } else {                          // 60
+              } else if (sunshineMinutes < 60) { // 57 - 59
                 sunLevel = 3;
+              } else {                          // 60
+                sunLevel = 4;
               }
 
               record.data.sunLevel = sunLevel;
