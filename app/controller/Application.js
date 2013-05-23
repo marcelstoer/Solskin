@@ -28,7 +28,7 @@ Ext.define('SunApp.controller.Application', {
   },
 
   onStationSelect: function (list, index, node, record) {
-    this.stationDetail = Ext.create('SunApp.view.station.Show', { title: record.data.name });
+    this.stationDetail = Ext.create('SunApp.view.StationDetail', { title: record.data.name });
     this.stationDetail.setRecord(record);
     this.getMain().push(this.stationDetail);
   }

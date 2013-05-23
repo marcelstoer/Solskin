@@ -1,4 +1,4 @@
-Ext.define('SunApp.view.station.Show', {
+Ext.define('SunApp.view.StationDetail', {
   extend: 'Ext.Container',
   xtype: 'stationDetail',
 

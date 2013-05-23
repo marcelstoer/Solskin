@@ -4,9 +4,8 @@ Ext.define('SunApp.view.Main', {
 
   requires: [
     'Ext.Img',
-    'SunApp.view.StationsPanel',
     'SunApp.view.Stations',
-    'SunApp.view.station.Show'
+    'SunApp.view.StationDetail'
   ],
 
   config: {

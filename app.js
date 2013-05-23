@@ -21,7 +21,7 @@ Ext.Loader.setPath({
 //</debug>
 
 Ext.Loader.setConfig({
-  // avoids '_dc' cache-busting query string param for all the .js files (model, store, etc.)
+  // avoids '_dc' cache-busting query string param for all the .js files (model, store, etc.) if false
   disableCaching: true
 });
 
@@ -30,7 +30,7 @@ Ext.application({
   currentLocation: null,
 
   requires: [
-    'Ext.MessageBox', 'SunApp.Location'
+    'Ext.MessageBox', 'SunApp.Location', 'SunApp.TransportApi'
   ],
 
   models: ['Station'],
@@ -62,45 +62,47 @@ Ext.application({
       maximumAge: 0,
       listeners: {
         locationupdate: function (geo) {
-          SunApp.app.setCurrentLocation(Ext.create('SunApp.Location', {
-              lat: geo.getLatitude(),
-              long: geo.getLongitude()
-            }
-          ));
-          // Required because Transport API got CORS wrong: http://bit.ly/18k4O6H
-          Ext.Ajax.setUseDefaultXhrHeader(false);
-          Ext.Ajax.request({
-//            url: '../transport/api.php/v1/locations',
-            url: 'http://transport.opendata.ch/v1/locations',
-            method: 'GET',
-            params: {
-              x: geo.getLatitude(),
-              y: geo.getLongitude()
-            },
-            success: function (response) {
-              var mainView;
-              var station = Ext.JSON.decode(response.responseText).stations[0];
-              SunApp.app.getCurrentLocation().setClosestStation(station.name);
-              Ext.getStore('Stations').load();
-              Ext.fly('appLoadingIndicator').destroy();
-              mainView = Ext.create('SunApp.view.Main');
-              mainView.getNavigationBar().setTitle(station.name);
-              Ext.Viewport.add(mainView);
-            },
-            failure: function (response, opts) {
-              SunApp.app.displayError('Error finding the closest public transport station: ' + response.status);
-            }
-          });
+          var lat = geo.getLatitude();
+          var long = geo.getLongitude();
+//          var lat = 47.46342478;
+//          var long = 8.95429439;
+          var transportApi = Ext.create('SunApp.TransportApi');
+          var transportApiError = function (response, opts) {
+            SunApp.app.displayError('Error finding the closest public transport station: ' + response.status);
+          };
+          SunApp.app.setCurrentLocation(Ext.create('SunApp.Location', { lat: lat, long: long }));
+          transportApi.getClosestStation(lat, long, SunApp.app.initAfterStationIsDetermined, transportApiError);
         },
-        locationerror: function (geo, bTimeout, bPermissionDenied, bLocationUnavailable, message) {
+        locationerror: function (geo, timeout, permissionDenied, locationUnavailable, message) {
           SunApp.app.displayError("Error determining geo location: " + message);
         }
       }
     }).updateLocation();
   },
 
-  displayError: function (htmlMsg) {
+  initAfterStationIsDetermined: function (station) {
+    var mainView;
+    SunApp.app.getCurrentLocation().setClosestStation(station.name);
+    Ext.getStore('Stations').load();
     Ext.fly('appLoadingIndicator').destroy();
+    mainView = Ext.create('SunApp.view.Main');
+    mainView.getNavigationBar().setTitle(station.name);
+    Ext.Viewport.add(mainView);
+  },
+
+  setCurrentLocation: function (currentLocation) {
+    console.log('setting current location: ' + currentLocation.getLat() + '/' + currentLocation.getLong());
+    this.currentLocation = currentLocation
+  },
+  getCurrentLocation: function () {
+    return this.currentLocation;
+  },
+
+  displayError: function (htmlMsg) {
+    var appLoadingIndicator = Ext.fly('appLoadingIndicator');
+    if (appLoadingIndicator !== null) {
+      appLoadingIndicator.destroy();
+    }
     Ext.Viewport.add(Ext.create('SunApp.view.Error', {html: msg}));
   },
 
@@ -114,13 +116,5 @@ Ext.application({
         }
       }
     );
-  },
-
-  setCurrentLocation: function (currentLocation) {
-    console.log('setting current location: ' + currentLocation.getLat() + '/' + currentLocation.getLong());
-    this.currentLocation = currentLocation
-  },
-  getCurrentLocation: function () {
-    return this.currentLocation;
   }
 });
