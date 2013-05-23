@@ -16,8 +16,6 @@ Ext.define('SunApp.store.StationReader', {
       this.addSunlevelTo(record);
       this.addDistanceTo(record);
     }
-    var loc = SunApp.app.getCurrentLocation();
-    console.log(loc === null ? '' : 'closest station: ' + loc.getClosestStation());
     return data;
   },
 

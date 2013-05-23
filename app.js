@@ -22,7 +22,7 @@ Ext.Loader.setPath({
 
 Ext.Loader.setConfig({
   // avoids '_dc' cache-busting query string param for all the .js files (model, store, etc.) if false
-  disableCaching: true
+  disableCaching: false
 });
 
 Ext.application({
@@ -57,27 +57,27 @@ Ext.application({
   },
 
   launch: function () {
-    Ext.create('Ext.util.Geolocation', {
-      autoUpdate: false,
-      maximumAge: 0,
-      listeners: {
-        locationupdate: function (geo) {
-          var lat = geo.getLatitude();
-          var long = geo.getLongitude();
-//          var lat = 47.46342478;
-//          var long = 8.95429439;
+//    Ext.create('Ext.util.Geolocation', {
+//      autoUpdate: false,
+//      maximumAge: 0,
+//      listeners: {
+//        locationupdate: function (geo) {
+//          var lat = geo.getLatitude();
+//          var long = geo.getLongitude();
+          var lat = 47.46342478;
+          var long = 8.95429439;
           var transportApi = Ext.create('SunApp.TransportApi');
           var transportApiError = function (response, opts) {
             SunApp.app.displayError('Error finding the closest public transport station: ' + response.status);
           };
           SunApp.app.setCurrentLocation(Ext.create('SunApp.Location', { lat: lat, long: long }));
           transportApi.getClosestStation(lat, long, SunApp.app.initAfterStationIsDetermined, transportApiError);
-        },
-        locationerror: function (geo, timeout, permissionDenied, locationUnavailable, message) {
-          SunApp.app.displayError("Error determining geo location: " + message);
-        }
-      }
-    }).updateLocation();
+//        },
+//        locationerror: function (geo, timeout, permissionDenied, locationUnavailable, message) {
+//          SunApp.app.displayError("Error determining geo location: " + message);
+//        }
+//      }
+//    }).updateLocation();
   },
 
   initAfterStationIsDetermined: function (station) {
@@ -103,7 +103,7 @@ Ext.application({
     if (appLoadingIndicator !== null) {
       appLoadingIndicator.destroy();
     }
-    Ext.Viewport.add(Ext.create('SunApp.view.Error', {html: msg}));
+    Ext.Viewport.add(Ext.create('SunApp.view.Error', {html: htmlMsg}));
   },
 
   onUpdated: function () {
