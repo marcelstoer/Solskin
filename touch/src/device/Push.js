@@ -24,26 +24,26 @@
  * @aside guide native_apis
  */
 Ext.define('Ext.device.Push', {
-  singleton: true,
+    singleton: true,
 
-  requires: [
-    'Ext.device.Communicator',
-    'Ext.device.push.Sencha'
-  ],
+    requires: [
+        'Ext.device.Communicator',
+        'Ext.device.push.Sencha'
+    ],
 
-  constructor: function () {
-    var browserEnv = Ext.browser.is;
+    constructor: function() {
+        var browserEnv = Ext.browser.is;
 
-    if (browserEnv.WebView) {
-      if (!browserEnv.PhoneGap) {
-        return Ext.create('Ext.device.push.Sencha');
-      }
-      else {
-        return Ext.create('Ext.device.push.Abstract');
-      }
+        if (browserEnv.WebView) {
+            if (!browserEnv.PhoneGap) {
+                return Ext.create('Ext.device.push.Sencha');
+            }
+            else {
+                return Ext.create('Ext.device.push.Abstract');
+            }
+        }
+        else {
+            return Ext.create('Ext.device.push.Abstract');
+        }
     }
-    else {
-      return Ext.create('Ext.device.push.Abstract');
-    }
-  }
 });

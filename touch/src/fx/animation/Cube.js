@@ -2,29 +2,29 @@
  * @private
  */
 Ext.define('Ext.fx.animation.Cube', {
-  extend: 'Ext.fx.animation.Abstract',
+    extend: 'Ext.fx.animation.Abstract',
 
-  alias: 'animation.cube',
+    alias: 'animation.cube',
 
-  config: {
-    /**
-     * @cfg
-     * @inheritdoc
-     */
-    before: {
+    config: {
+        /**
+         * @cfg
+         * @inheritdoc
+         */
+        before: {
 //            'transform-style': 'preserve-3d'
+        },
+
+        after: {},
+
+        /**
+         * @cfg {String} direction The direction of which the slide animates
+         * @accessor
+         */
+        direction: 'right',
+
+        out: false
     },
-
-    after: {},
-
-    /**
-     * @cfg {String} direction The direction of which the slide animates
-     * @accessor
-     */
-    direction: 'right',
-
-    out: false
-  },
 
 //    getData: function() {
 //        var to = this.getTo(),
@@ -108,49 +108,49 @@ Ext.define('Ext.fx.animation.Cube', {
 //        return this.callParent(arguments);
 //    },
 
-  getData: function () {
-    var to = this.getTo(),
-      from = this.getFrom(),
-      before = this.getBefore(),
-      after = this.getAfter(),
-      out = this.getOut(),
-      direction = this.getDirection(),
-      el = this.getElement(),
-      elW = el.getWidth(),
-      elH = el.getHeight(),
-      origin = out ? '100% 100%' : '0% 0%',
-      fromOpacity = 1,
-      toOpacity = 1,
-      transformFrom = {
-        rotateY: 0,
-        translateZ: 0
-      },
-      transformTo = {
-        rotateY: 0,
-        translateZ: 0
-      };
+    getData: function() {
+        var to = this.getTo(),
+            from = this.getFrom(),
+            before = this.getBefore(),
+            after = this.getAfter(),
+            out  = this.getOut(),
+            direction  = this.getDirection(),
+            el = this.getElement(),
+            elW = el.getWidth(),
+            elH = el.getHeight(),
+            origin = out ? '100% 100%' : '0% 0%',
+            fromOpacity = 1,
+            toOpacity = 1,
+            transformFrom = {
+                rotateY: 0,
+                translateZ: 0
+            },
+            transformTo = {
+                rotateY: 0,
+                translateZ: 0
+            };
 
-    if (direction == "left" || direction == "right") {
-      if (out) {
-        toOpacity = 0.5;
-        transformTo.translateZ = elW;
-        transformTo.rotateY = -90;
-      } else {
-        fromOpacity = 0.5;
-        transformFrom.translateZ = elW;
-        transformFrom.rotateY = 90;
-      }
+        if (direction == "left" || direction == "right") {
+            if (out) {
+                toOpacity = 0.5;
+                transformTo.translateZ = elW;
+                transformTo.rotateY = -90;
+            } else {
+                fromOpacity = 0.5;
+                transformFrom.translateZ = elW;
+                transformFrom.rotateY = 90;
+            }
+        }
+
+        before['transform-origin'] = origin;
+        after['transform-origin'] = null;
+
+        to.set('transform', transformTo);
+        from.set('transform', transformFrom);
+
+        from.set('opacity', fromOpacity);
+        to.set('opacity', toOpacity);
+
+        return this.callParent(arguments);
     }
-
-    before['transform-origin'] = origin;
-    after['transform-origin'] = null;
-
-    to.set('transform', transformTo);
-    from.set('transform', transformFrom);
-
-    from.set('opacity', fromOpacity);
-    to.set('opacity', toOpacity);
-
-    return this.callParent(arguments);
-  }
 });

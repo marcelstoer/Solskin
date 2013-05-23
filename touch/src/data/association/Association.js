@@ -118,188 +118,188 @@
  *     });
  */
 Ext.define('Ext.data.association.Association', {
-  alternateClassName: 'Ext.data.Association',
+    alternateClassName: 'Ext.data.Association',
 
-  requires: ['Ext.data.ModelManager'],
+    requires: ['Ext.data.ModelManager'],
 
-  config: {
-    /**
-     * @cfg {Ext.data.Model/String} ownerModel (required) The full class name or reference to the class that owns this
-     * associations. This is a required configuration on every association.
-     * @accessor
-     */
-    ownerModel: null,
+    config: {
+        /**
+         * @cfg {Ext.data.Model/String} ownerModel (required) The full class name or reference to the class that owns this
+         * associations. This is a required configuration on every association.
+         * @accessor
+         */
+        ownerModel: null,
 
-    /*
-     * @cfg {String} ownerName The name for the owner model. This defaults to the last part
-     * of the class name of the {@link #ownerModel}.
-     */
-    ownerName: undefined,
+        /*
+         * @cfg {String} ownerName The name for the owner model. This defaults to the last part
+         * of the class name of the {@link #ownerModel}.
+         */
+        ownerName: undefined,
 
-    /**
-     * @cfg {String} associatedModel (required) The full class name or reference to the class that the {@link #ownerModel}
-     * is being associated with. This is a required configuration on every association.
-     * @accessor
-     */
-    associatedModel: null,
+        /**
+         * @cfg {String} associatedModel (required) The full class name or reference to the class that the {@link #ownerModel}
+         * is being associated with. This is a required configuration on every association.
+         * @accessor
+         */
+        associatedModel: null,
 
-    /**
-     * @cfg {String} associatedName The name for the associated model. This defaults to the last part
-     * of the class name of the {@link #associatedModel}.
-     * @accessor
-     */
-    associatedName: undefined,
+        /**
+         * @cfg {String} associatedName The name for the associated model. This defaults to the last part
+         * of the class name of the {@link #associatedModel}.
+         * @accessor
+         */
+        associatedName: undefined,
 
 
-    /**
-     * @cfg {String} associationKey The name of the property in the data to read the association from.
-     * Defaults to the {@link #associatedName} plus '_id'.
-     */
-    associationKey: undefined,
+        /**
+         * @cfg {String} associationKey The name of the property in the data to read the association from.
+         * Defaults to the {@link #associatedName} plus '_id'.
+         */
+        associationKey: undefined,
 
-    /**
-     * @cfg {String} primaryKey The name of the primary key on the associated model.
-     * In general this will be the {@link Ext.data.Model#idProperty} of the Model.
-     */
-    primaryKey: 'id',
+        /**
+         * @cfg {String} primaryKey The name of the primary key on the associated model.
+         * In general this will be the {@link Ext.data.Model#idProperty} of the Model.
+         */
+        primaryKey: 'id',
 
-    /**
-     * @cfg {Ext.data.reader.Reader} reader A special reader to read associated data.
-     */
-    reader: null,
+        /**
+         * @cfg {Ext.data.reader.Reader} reader A special reader to read associated data.
+         */
+        reader: null,
 
-    /**
-     * @cfg {String} type The type configuration can be used when creating associations using a configuration object.
-     * Use `hasMany` to create a HasMany association.
-     *
-     *     associations: [{
+        /**
+         * @cfg {String} type The type configuration can be used when creating associations using a configuration object.
+         * Use `hasMany` to create a HasMany association.
+         *
+         *     associations: [{
          *         type: 'hasMany',
          *         model: 'User'
          *     }]
-     */
-    type: null,
+         */
+        type: null,
 
-    name: undefined
-  },
+        name: undefined
+    },
 
-  statics: {
-    create: function (association) {
-      if (!association.isAssociation) {
-        if (Ext.isString(association)) {
-          association = {
-            type: association
-          };
+    statics: {
+        create: function(association) {
+            if (!association.isAssociation) {
+                if (Ext.isString(association)) {
+                    association = {
+                        type: association
+                    };
+                }
+                association.type = association.type.toLowerCase();
+                return Ext.factory(association, Ext.data.association.Association, null, 'association');
+            }
+
+            return association;
         }
-        association.type = association.type.toLowerCase();
-        return Ext.factory(association, Ext.data.association.Association, null, 'association');
-      }
+    },
 
-      return association;
-    }
-  },
+    /**
+     * Creates the Association object.
+     * @param {Object} config (optional) Config object.
+     */
+    constructor: function(config) {
+        this.initConfig(config);
+    },
 
-  /**
-   * Creates the Association object.
-   * @param {Object} config (optional) Config object.
-   */
-  constructor: function (config) {
-    this.initConfig(config);
-  },
+    applyName: function(name) {
+        if (!name) {
+            name = this.getAssociatedName();
+        }
+        return name;
+    },
 
-  applyName: function (name) {
-    if (!name) {
-      name = this.getAssociatedName();
-    }
-    return name;
-  },
+    applyOwnerModel: function(ownerName) {
+        var ownerModel = Ext.data.ModelManager.getModel(ownerName);
+        if (ownerModel === undefined) {
+            Ext.Logger.error('The configured ownerModel was not valid (you tried ' + ownerName + ')');
+        }
+        return ownerModel;
+    },
 
-  applyOwnerModel: function (ownerName) {
-    var ownerModel = Ext.data.ModelManager.getModel(ownerName);
-    if (ownerModel === undefined) {
-      Ext.Logger.error('The configured ownerModel was not valid (you tried ' + ownerName + ')');
-    }
-    return ownerModel;
-  },
+    applyOwnerName: function(ownerName) {
+        if (!ownerName) {
+            ownerName = this.getOwnerModel().modelName;
+        }
+        ownerName = ownerName.slice(ownerName.lastIndexOf('.')+1);
+        return ownerName;
+    },
 
-  applyOwnerName: function (ownerName) {
-    if (!ownerName) {
-      ownerName = this.getOwnerModel().modelName;
-    }
-    ownerName = ownerName.slice(ownerName.lastIndexOf('.') + 1);
-    return ownerName;
-  },
+    updateOwnerModel: function(ownerModel, oldOwnerModel) {
+        if (oldOwnerModel) {
+            this.setOwnerName(ownerModel.modelName);
+        }
+    },
 
-  updateOwnerModel: function (ownerModel, oldOwnerModel) {
-    if (oldOwnerModel) {
-      this.setOwnerName(ownerModel.modelName);
-    }
-  },
+    applyAssociatedModel: function(associatedName) {
+        var associatedModel = Ext.data.ModelManager.types[associatedName];
+        if (associatedModel === undefined) {
+            Ext.Logger.error('The configured associatedModel was not valid (you tried ' + associatedName + ')');
+        }
+        return associatedModel;
+    },
 
-  applyAssociatedModel: function (associatedName) {
-    var associatedModel = Ext.data.ModelManager.types[associatedName];
-    if (associatedModel === undefined) {
-      Ext.Logger.error('The configured associatedModel was not valid (you tried ' + associatedName + ')');
-    }
-    return associatedModel;
-  },
+    applyAssociatedName: function(associatedName) {
+        if (!associatedName) {
+            associatedName = this.getAssociatedModel().modelName;
+        }
+        associatedName = associatedName.slice(associatedName.lastIndexOf('.')+1);
+        return associatedName;
+    },
 
-  applyAssociatedName: function (associatedName) {
-    if (!associatedName) {
-      associatedName = this.getAssociatedModel().modelName;
-    }
-    associatedName = associatedName.slice(associatedName.lastIndexOf('.') + 1);
-    return associatedName;
-  },
+    updateAssociatedModel: function(associatedModel, oldAssociatedModel) {
+        if (oldAssociatedModel) {
+            this.setAssociatedName(associatedModel.modelName);
+        }
+    },
 
-  updateAssociatedModel: function (associatedModel, oldAssociatedModel) {
-    if (oldAssociatedModel) {
-      this.setAssociatedName(associatedModel.modelName);
-    }
-  },
+    applyReader: function(reader) {
+        if (reader) {
+            if (Ext.isString(reader)) {
+                reader = {
+                    type: reader
+                };
+            }
 
-  applyReader: function (reader) {
-    if (reader) {
-      if (Ext.isString(reader)) {
-        reader = {
-          type: reader
-        };
-      }
+            if (!reader.isReader) {
+                Ext.applyIf(reader, {
+                    type: 'json'
+                });
+            }
+        }
 
-      if (!reader.isReader) {
-        Ext.applyIf(reader, {
-          type: 'json'
-        });
-      }
-    }
+        return Ext.factory(reader, Ext.data.Reader, this.getReader(), 'reader');
+    },
 
-    return Ext.factory(reader, Ext.data.Reader, this.getReader(), 'reader');
-  },
-
-  updateReader: function (reader) {
-    reader.setModel(this.getAssociatedModel());
-  }
-
-  // Convert old properties in data into a config object
-  // <deprecated product=touch since=2.0>
-  , onClassExtended: function (cls, data, hooks) {
-    var Component = this,
-      defaultConfig = Component.prototype.config,
-      config = data.config || {},
-      key;
-
-
-    for (key in defaultConfig) {
-      if (key in data) {
-        config[key] = data[key];
-        delete data[key];
-        // <debug warn>
-        Ext.Logger.deprecate(key + ' is deprecated as a property directly on the Association prototype. ' +
-          'Please put it inside the config object.');
-        // </debug>
-      }
+    updateReader: function(reader) {
+        reader.setModel(this.getAssociatedModel());
     }
 
-    data.config = config;
-  }
-  // </deprecated>
+    // Convert old properties in data into a config object
+    // <deprecated product=touch since=2.0>
+    ,onClassExtended: function(cls, data, hooks) {
+        var Component = this,
+            defaultConfig = Component.prototype.config,
+            config = data.config || {},
+            key;
+
+
+        for (key in defaultConfig) {
+            if (key in data) {
+                config[key] = data[key];
+                delete data[key];
+                // <debug warn>
+                Ext.Logger.deprecate(key + ' is deprecated as a property directly on the Association prototype. ' +
+                    'Please put it inside the config object.');
+                // </debug>
+            }
+        }
+
+        data.config = config;
+    }
+    // </deprecated>
 });

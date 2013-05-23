@@ -99,76 +99,76 @@
  * [1]: source/Rest.html#Ext-data-proxy-Rest-method-buildUrl
  */
 Ext.define('Ext.data.proxy.Rest', {
-  extend: 'Ext.data.proxy.Ajax',
-  alternateClassName: 'Ext.data.RestProxy',
-  alias: 'proxy.rest',
+    extend: 'Ext.data.proxy.Ajax',
+    alternateClassName: 'Ext.data.RestProxy',
+    alias : 'proxy.rest',
 
-  config: {
+    config: {
+        /**
+         * @cfg {Boolean} appendId
+         * `true` to automatically append the ID of a Model instance when performing a request based on that single instance.
+         * See Rest proxy intro docs for more details.
+         */
+        appendId: true,
+
+        /**
+         * @cfg {String} format
+         * Optional data format to send to the server when making any request (e.g. 'json'). See the Rest proxy intro docs
+         * for full details.
+         */
+        format: null,
+
+        /**
+         * @cfg {Boolean} batchActions
+         * `true` to batch actions of a particular type when synchronizing the store.
+         */
+        batchActions: false,
+
+        actionMethods: {
+            create : 'POST',
+            read   : 'GET',
+            update : 'PUT',
+            destroy: 'DELETE'
+        }
+    },
+
     /**
-     * @cfg {Boolean} appendId
-     * `true` to automatically append the ID of a Model instance when performing a request based on that single instance.
-     * See Rest proxy intro docs for more details.
+     * Specialized version of `buildUrl` that incorporates the {@link #appendId} and {@link #format} options into the
+     * generated url. Override this to provide further customizations, but remember to call the superclass `buildUrl` so
+     * that additional parameters like the cache buster string are appended.
+     * @param {Object} request
+     * @return {Object}
      */
-    appendId: true,
+    buildUrl: function(request) {
+        var me        = this,
+            operation = request.getOperation(),
+            records   = operation.getRecords() || [],
+            record    = records[0],
+            model     = me.getModel(),
+            idProperty= model.getIdProperty(),
+            format    = me.getFormat(),
+            url       = me.getUrl(request),
+            params    = request.getParams() || {},
+            id        = (record && !record.phantom) ? record.getId() : params[idProperty];
 
-    /**
-     * @cfg {String} format
-     * Optional data format to send to the server when making any request (e.g. 'json'). See the Rest proxy intro docs
-     * for full details.
-     */
-    format: null,
+        if (me.getAppendId() && id) {
+            if (!url.match(/\/$/)) {
+                url += '/';
+            }
+            url += id;
+            delete params[idProperty];
+        }
 
-    /**
-     * @cfg {Boolean} batchActions
-     * `true` to batch actions of a particular type when synchronizing the store.
-     */
-    batchActions: false,
+        if (format) {
+            if (!url.match(/\.$/)) {
+                url += '.';
+            }
 
-    actionMethods: {
-      create: 'POST',
-      read: 'GET',
-      update: 'PUT',
-      destroy: 'DELETE'
+            url += format;
+        }
+
+        request.setUrl(url);
+
+        return me.callParent([request]);
     }
-  },
-
-  /**
-   * Specialized version of `buildUrl` that incorporates the {@link #appendId} and {@link #format} options into the
-   * generated url. Override this to provide further customizations, but remember to call the superclass `buildUrl` so
-   * that additional parameters like the cache buster string are appended.
-   * @param {Object} request
-   * @return {Object}
-   */
-  buildUrl: function (request) {
-    var me = this,
-      operation = request.getOperation(),
-      records = operation.getRecords() || [],
-      record = records[0],
-      model = me.getModel(),
-      idProperty = model.getIdProperty(),
-      format = me.getFormat(),
-      url = me.getUrl(request),
-      params = request.getParams() || {},
-      id = (record && !record.phantom) ? record.getId() : params[idProperty];
-
-    if (me.getAppendId() && id) {
-      if (!url.match(/\/$/)) {
-        url += '/';
-      }
-      url += id;
-      delete params[idProperty];
-    }
-
-    if (format) {
-      if (!url.match(/\.$/)) {
-        url += '.';
-      }
-
-      url += format;
-    }
-
-    request.setUrl(url);
-
-    return me.callParent([request]);
-  }
 });

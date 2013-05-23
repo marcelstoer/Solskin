@@ -2,39 +2,39 @@
  *
  */
 Ext.define('Ext.layout.Box', {
-  extend: 'Ext.layout.Default',
+    extend: 'Ext.layout.Default',
 
-  config: {
-    orient: 'horizontal',
+    config: {
+        orient: 'horizontal',
 
-    align: 'start',
+        align: 'start',
 
-    pack: 'start'
-  },
+        pack: 'start'
+    },
 
-  alias: 'layout.tablebox',
+    alias: 'layout.tablebox',
 
-  layoutBaseClass: 'x-layout-tablebox',
+    layoutBaseClass: 'x-layout-tablebox',
 
-  itemClass: 'x-layout-tablebox-item',
+    itemClass: 'x-layout-tablebox-item',
 
-  setContainer: function (container) {
-    this.callSuper(arguments);
+    setContainer: function(container) {
+        this.callSuper(arguments);
 
-    container.innerElement.addCls(this.layoutBaseClass);
+        container.innerElement.addCls(this.layoutBaseClass);
 
-    container.on('flexchange', 'onItemFlexChange', this, {
-      delegate: '> component'
-    });
-  },
+        container.on('flexchange', 'onItemFlexChange', this, {
+            delegate: '> component'
+        });
+    },
 
-  onItemInnerStateChange: function (item, isInner) {
-    this.callSuper(arguments);
+    onItemInnerStateChange: function(item, isInner) {
+        this.callSuper(arguments);
 
-    item.toggleCls(this.itemClass, isInner);
-  },
+        item.toggleCls(this.itemClass, isInner);
+    },
 
-  onItemFlexChange: function () {
+    onItemFlexChange: function() {
 
-  }
+    }
 });

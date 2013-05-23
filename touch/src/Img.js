@@ -37,198 +37,198 @@
  * {@link Ext.layout.HBox hbox docs} for more information on flexing items.
  */
 Ext.define('Ext.Img', {
-  extend: 'Ext.Component',
-  xtype: ['image', 'img'],
-
-  /**
-   * @event tap
-   * Fires whenever the component is tapped
-   * @param {Ext.Img} this The Image instance
-   * @param {Ext.EventObject} e The event object
-   */
-
-  /**
-   * @event load
-   * Fires when the image is loaded
-   * @param {Ext.Img} this The Image instance
-   * @param {Ext.EventObject} e The event object
-   */
-
-  /**
-   * @event error
-   * Fires if an error occured when trying to load the image
-   * @param {Ext.Img} this The Image instance
-   * @param {Ext.EventObject} e The event object
-   */
-
-  config: {
-    /**
-     * @cfg {String} src The source of this image
-     * @accessor
-     */
-    src: null,
+    extend: 'Ext.Component',
+    xtype: ['image', 'img'],
 
     /**
-     * @cfg
-     * @inheritdoc
+     * @event tap
+     * Fires whenever the component is tapped
+     * @param {Ext.Img} this The Image instance
+     * @param {Ext.EventObject} e The event object
      */
-    baseCls: Ext.baseCSSPrefix + 'img',
 
     /**
-     * @cfg {String} imageCls The CSS class to be used when {@link #mode} is not set to 'background'
-     * @accessor
+     * @event load
+     * Fires when the image is loaded
+     * @param {Ext.Img} this The Image instance
+     * @param {Ext.EventObject} e The event object
      */
-    imageCls: Ext.baseCSSPrefix + 'img-image',
 
     /**
-     * @cfg {String} backgroundCls The CSS class to be used when {@link #mode} is set to 'background'
-     * @accessor
+     * @event error
+     * Fires if an error occured when trying to load the image
+     * @param {Ext.Img} this The Image instance
+     * @param {Ext.EventObject} e The event object
      */
-    backgroundCls: Ext.baseCSSPrefix + 'img-background',
+
+    config: {
+        /**
+         * @cfg {String} src The source of this image
+         * @accessor
+         */
+        src: null,
+
+        /**
+         * @cfg
+         * @inheritdoc
+         */
+        baseCls : Ext.baseCSSPrefix + 'img',
+
+        /**
+         * @cfg {String} imageCls The CSS class to be used when {@link #mode} is not set to 'background'
+         * @accessor
+         */
+        imageCls : Ext.baseCSSPrefix + 'img-image',
+
+        /**
+         * @cfg {String} backgroundCls The CSS class to be used when {@link #mode} is set to 'background'
+         * @accessor
+         */
+        backgroundCls : Ext.baseCSSPrefix + 'img-background',
+
+        /**
+         * @cfg {String} mode If set to 'background', uses a background-image CSS property instead of an
+         * `<img>` tag to display the image.
+         */
+        mode: 'background'
+    },
+
+    beforeInitialize: function() {
+        var me = this;
+        me.onLoad = Ext.Function.bind(me.onLoad, me);
+        me.onError = Ext.Function.bind(me.onError, me);
+    },
+
+    initialize: function() {
+        var me = this;
+        me.callParent();
+
+        me.relayEvents(me.renderElement, '*');
+
+        me.element.on({
+            tap: 'onTap',
+            scope: me
+        });
+    },
+
+    hide: function() {
+        this.callParent();
+        this.hiddenSrc = this.hiddenSrc || this.getSrc();
+        this.setSrc(null);
+    },
+
+    show: function() {
+        this.callParent();
+        if (this.hiddenSrc) {
+            this.setSrc(this.hiddenSrc);
+            delete this.hiddenSrc;
+        }
+    },
+
+    updateMode: function(mode) {
+        var me            = this,
+            imageCls      = me.getImageCls(),
+            backgroundCls = me.getBackgroundCls();
+
+        if (mode === 'background') {
+            if (me.imageElement) {
+                me.imageElement.destroy();
+                delete me.imageElement;
+                me.updateSrc(me.getSrc());
+            }
+
+            me.replaceCls(imageCls, backgroundCls);
+        } else {
+            me.imageElement = me.element.createChild({ tag: 'img' });
+
+            me.replaceCls(backgroundCls, imageCls);
+        }
+    },
+
+    updateImageCls : function (newCls, oldCls) {
+        this.replaceCls(oldCls, newCls);
+    },
+
+    updateBackgroundCls : function (newCls, oldCls) {
+        this.replaceCls(oldCls, newCls);
+    },
+
+    onTap: function(e) {
+        this.fireEvent('tap', this, e);
+    },
+
+    onAfterRender: function() {
+        this.updateSrc(this.getSrc());
+    },
 
     /**
-     * @cfg {String} mode If set to 'background', uses a background-image CSS property instead of an
-     * `<img>` tag to display the image.
+     * @private
      */
-    mode: 'background'
-  },
+    updateSrc: function(newSrc) {
+        var me = this,
+            dom;
 
-  beforeInitialize: function () {
-    var me = this;
-    me.onLoad = Ext.Function.bind(me.onLoad, me);
-    me.onError = Ext.Function.bind(me.onError, me);
-  },
+        if (me.getMode() === 'background') {
+            dom = this.imageObject || new Image();
+        }
+        else {
+            dom = me.imageElement.dom;
+        }
 
-  initialize: function () {
-    var me = this;
-    me.callParent();
+        this.imageObject = dom;
 
-    me.relayEvents(me.renderElement, '*');
+        dom.setAttribute('src', Ext.isString(newSrc) ? newSrc : '');
+        dom.addEventListener('load', me.onLoad, false);
+        dom.addEventListener('error', me.onError, false);
+    },
 
-    me.element.on({
-      tap: 'onTap',
-      scope: me
-    });
-  },
+    detachListeners: function() {
+        var dom = this.imageObject;
 
-  hide: function () {
-    this.callParent();
-    this.hiddenSrc = this.hiddenSrc || this.getSrc();
-    this.setSrc(null);
-  },
+        if (dom) {
+            dom.removeEventListener('load', this.onLoad, false);
+            dom.removeEventListener('error', this.onError, false);
+        }
+    },
 
-  show: function () {
-    this.callParent();
-    if (this.hiddenSrc) {
-      this.setSrc(this.hiddenSrc);
-      delete this.hiddenSrc;
+    onLoad : function(e) {
+        this.detachListeners();
+
+        if (this.getMode() === 'background') {
+            this.element.dom.style.backgroundImage = 'url("' + this.imageObject.src + '")';
+        }
+
+        this.fireEvent('load', this, e);
+    },
+
+    onError : function(e) {
+        this.detachListeners();
+        this.fireEvent('error', this, e);
+    },
+
+    doSetWidth: function(width) {
+        var sizingElement = (this.getMode() === 'background') ? this.element : this.imageElement;
+
+        sizingElement.setWidth(width);
+
+        this.callParent(arguments);
+    },
+
+    doSetHeight: function(height) {
+        var sizingElement = (this.getMode() === 'background') ? this.element : this.imageElement;
+
+        sizingElement.setHeight(height);
+
+        this.callParent(arguments);
+    },
+
+    destroy: function() {
+        this.detachListeners();
+
+        Ext.destroy(this.imageObject, this.imageElement);
+        delete this.imageObject;
+        delete this.imageElement;
+
+        this.callParent();
     }
-  },
-
-  updateMode: function (mode) {
-    var me = this,
-      imageCls = me.getImageCls(),
-      backgroundCls = me.getBackgroundCls();
-
-    if (mode === 'background') {
-      if (me.imageElement) {
-        me.imageElement.destroy();
-        delete me.imageElement;
-        me.updateSrc(me.getSrc());
-      }
-
-      me.replaceCls(imageCls, backgroundCls);
-    } else {
-      me.imageElement = me.element.createChild({ tag: 'img' });
-
-      me.replaceCls(backgroundCls, imageCls);
-    }
-  },
-
-  updateImageCls: function (newCls, oldCls) {
-    this.replaceCls(oldCls, newCls);
-  },
-
-  updateBackgroundCls: function (newCls, oldCls) {
-    this.replaceCls(oldCls, newCls);
-  },
-
-  onTap: function (e) {
-    this.fireEvent('tap', this, e);
-  },
-
-  onAfterRender: function () {
-    this.updateSrc(this.getSrc());
-  },
-
-  /**
-   * @private
-   */
-  updateSrc: function (newSrc) {
-    var me = this,
-      dom;
-
-    if (me.getMode() === 'background') {
-      dom = this.imageObject || new Image();
-    }
-    else {
-      dom = me.imageElement.dom;
-    }
-
-    this.imageObject = dom;
-
-    dom.setAttribute('src', Ext.isString(newSrc) ? newSrc : '');
-    dom.addEventListener('load', me.onLoad, false);
-    dom.addEventListener('error', me.onError, false);
-  },
-
-  detachListeners: function () {
-    var dom = this.imageObject;
-
-    if (dom) {
-      dom.removeEventListener('load', this.onLoad, false);
-      dom.removeEventListener('error', this.onError, false);
-    }
-  },
-
-  onLoad: function (e) {
-    this.detachListeners();
-
-    if (this.getMode() === 'background') {
-      this.element.dom.style.backgroundImage = 'url("' + this.imageObject.src + '")';
-    }
-
-    this.fireEvent('load', this, e);
-  },
-
-  onError: function (e) {
-    this.detachListeners();
-    this.fireEvent('error', this, e);
-  },
-
-  doSetWidth: function (width) {
-    var sizingElement = (this.getMode() === 'background') ? this.element : this.imageElement;
-
-    sizingElement.setWidth(width);
-
-    this.callParent(arguments);
-  },
-
-  doSetHeight: function (height) {
-    var sizingElement = (this.getMode() === 'background') ? this.element : this.imageElement;
-
-    sizingElement.setHeight(height);
-
-    this.callParent(arguments);
-  },
-
-  destroy: function () {
-    this.detachListeners();
-
-    Ext.destroy(this.imageObject, this.imageElement);
-    delete this.imageObject;
-    delete this.imageElement;
-
-    this.callParent();
-  }
 });

@@ -2,57 +2,57 @@
  * @private
  */
 Ext.define('Ext.device.geolocation.Sencha', {
-  extend: 'Ext.device.geolocation.Abstract',
+    extend: 'Ext.device.geolocation.Abstract',
 
-  getCurrentPosition: function (config) {
-    config = this.callParent([config]);
+    getCurrentPosition: function(config) {
+        config = this.callParent([config]);
 
-    Ext.apply(config, {
-      command: 'Geolocation#getCurrentPosition',
-      callbacks: {
-        success: config.success,
-        failure: config.failure
-      }
-    });
+        Ext.apply(config, {
+            command: 'Geolocation#getCurrentPosition',
+            callbacks: {
+                success: config.success,
+                failure: config.failure
+            }
+        });
 
-    Ext.applyIf(config, {
-      scope: this
-    });
+        Ext.applyIf(config, {
+            scope: this
+        });
 
-    delete config.success;
-    delete config.failure;
+        delete config.success;
+        delete config.failure;
 
-    Ext.device.Communicator.send(config);
+        Ext.device.Communicator.send(config);
 
-    return config;
-  },
+        return config;
+    },
 
-  watchPosition: function (config) {
-    config = this.callParent([config]);
+    watchPosition: function(config) {
+        config = this.callParent([config]);
 
-    Ext.apply(config, {
-      command: 'Geolocation#watchPosition',
-      callbacks: {
-        success: config.callback,
-        failure: config.failure
-      }
-    });
+        Ext.apply(config, {
+            command: 'Geolocation#watchPosition',
+            callbacks: {
+                success: config.callback,
+                failure: config.failure
+            }
+        });
 
-    Ext.applyIf(config, {
-      scope: this
-    });
+        Ext.applyIf(config, {
+            scope: this
+        });
 
-    delete config.callback;
-    delete config.failure;
+        delete config.callback;
+        delete config.failure;
 
-    Ext.device.Communicator.send(config);
+        Ext.device.Communicator.send(config);
 
-    return config;
-  },
+        return config;
+    },
 
-  clearWatch: function () {
-    Ext.device.Communicator.send({
-      command: 'Geolocation#clearWatch'
-    });
-  }
+    clearWatch: function() {
+        Ext.device.Communicator.send({
+            command: 'Geolocation#clearWatch'
+        });
+    }
 });

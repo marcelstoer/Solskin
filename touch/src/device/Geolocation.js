@@ -37,22 +37,22 @@
  * @aside guide native_apis
  */
 Ext.define('Ext.device.Geolocation', {
-  singleton: true,
+    singleton: true,
 
-  requires: [
-    'Ext.device.Communicator',
-    'Ext.device.geolocation.Sencha',
-    'Ext.device.geolocation.Simulator'
-  ],
+    requires: [
+        'Ext.device.Communicator',
+        'Ext.device.geolocation.Sencha',
+        'Ext.device.geolocation.Simulator'
+    ],
 
-  constructor: function () {
-    var browserEnv = Ext.browser.is;
+    constructor: function() {
+        var browserEnv = Ext.browser.is;
 
-    if (browserEnv.WebView && browserEnv.Sencha) {
-      return Ext.create('Ext.device.geolocation.Sencha');
+        if (browserEnv.WebView && browserEnv.Sencha) {
+            return Ext.create('Ext.device.geolocation.Sencha');
+        }
+        else {
+            return Ext.create('Ext.device.geolocation.Simulator');
+        }
     }
-    else {
-      return Ext.create('Ext.device.geolocation.Simulator');
-    }
-  }
 });

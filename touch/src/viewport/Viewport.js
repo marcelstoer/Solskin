@@ -5,30 +5,30 @@
  * @private
  */
 Ext.define('Ext.viewport.Viewport', {
-  requires: [
-    'Ext.viewport.Ios',
-    'Ext.viewport.Android'
-  ],
+    requires: [
+        'Ext.viewport.Ios',
+        'Ext.viewport.Android'
+    ],
 
-  constructor: function (config) {
-    var osName = Ext.os.name,
-      viewportName, viewport;
+    constructor: function(config) {
+        var osName = Ext.os.name,
+            viewportName, viewport;
 
-    switch (osName) {
-      case 'Android':
-        viewportName = (Ext.browser.name == 'ChromeMobile') ? 'Default' : 'Android';
-        break;
-      case 'iOS':
-        viewportName = 'Ios';
-        break;
-      default:
-        viewportName = 'Default';
+        switch (osName) {
+            case 'Android':
+                viewportName = (Ext.browser.name == 'ChromeMobile') ? 'Default' : 'Android';
+                break;
+            case 'iOS':
+                viewportName = 'Ios';
+                break;
+            default:
+                viewportName = 'Default';
+        }
+
+        viewport = Ext.create('Ext.viewport.' + viewportName, config);
+
+        return viewport;
     }
-
-    viewport = Ext.create('Ext.viewport.' + viewportName, config);
-
-    return viewport;
-  }
 });
 
 // Docs for the singleton instance created by above factory:

@@ -32,28 +32,28 @@
  * @aside guide native_apis
  */
 Ext.define('Ext.device.Camera', {
-  singleton: true,
+    singleton: true,
 
-  requires: [
-    'Ext.device.Communicator',
-    'Ext.device.camera.PhoneGap',
-    'Ext.device.camera.Sencha',
-    'Ext.device.camera.Simulator'
-  ],
+    requires: [
+        'Ext.device.Communicator',
+        'Ext.device.camera.PhoneGap',
+        'Ext.device.camera.Sencha',
+        'Ext.device.camera.Simulator'
+    ],
 
-  constructor: function () {
-    var browserEnv = Ext.browser.is;
+    constructor: function() {
+        var browserEnv = Ext.browser.is;
 
-    if (browserEnv.WebView) {
-      if (browserEnv.PhoneGap) {
-        return Ext.create('Ext.device.camera.PhoneGap');
-      }
-      else {
-        return Ext.create('Ext.device.camera.Sencha');
-      }
+        if (browserEnv.WebView) {
+            if (browserEnv.PhoneGap) {
+                return Ext.create('Ext.device.camera.PhoneGap');
+            }
+            else {
+                return Ext.create('Ext.device.camera.Sencha');
+            }
+        }
+        else {
+            return Ext.create('Ext.device.camera.Simulator');
+        }
     }
-    else {
-      return Ext.create('Ext.device.camera.Simulator');
-    }
-  }
 });

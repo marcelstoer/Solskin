@@ -31,118 +31,118 @@
  *     }
  */
 Ext.define('Ext.dataview.component.ListItem', {
-  extend: 'Ext.dataview.component.DataItem',
-  xtype: 'listitem',
+    extend: 'Ext.dataview.component.DataItem',
+    xtype : 'listitem',
 
-  config: {
-    baseCls: Ext.baseCSSPrefix + 'list-item',
+    config: {
+        baseCls: Ext.baseCSSPrefix + 'list-item',
 
-    dataMap: null,
+        dataMap: null,
 
-    body: {
-      xtype: 'component',
-      cls: 'x-list-item-body'
+        body: {
+            xtype: 'component',
+            cls: 'x-list-item-body'
+        },
+
+        disclosure: {
+            xtype: 'component',
+            cls: 'x-list-disclosure',
+            hidden: true,
+            docked: 'right'
+        },
+
+        header: {
+            xtype: 'component',
+            cls: 'x-list-header',
+            html: ' ',
+            hidden: true
+        },
+
+        tpl: null,
+        items: null
     },
 
-    disclosure: {
-      xtype: 'component',
-      cls: 'x-list-disclosure',
-      hidden: true,
-      docked: 'right'
+    applyBody: function(body) {
+        if (body && !body.isComponent) {
+            body = Ext.factory(body, Ext.Component, this.getBody());
+        }
+        return body;
     },
 
-    header: {
-      xtype: 'component',
-      cls: 'x-list-header',
-      html: ' ',
-      hidden: true
+    updateBody: function(body, oldBody) {
+        if (body) {
+            this.add(body);
+        } else if (oldBody) {
+            oldBody.destroy();
+        }
     },
 
-    tpl: null,
-    items: null
-  },
+    applyHeader: function(header) {
+        if (header && !header.isComponent) {
+            header = Ext.factory(header, Ext.Component, this.getHeader());
+        }
+        return header;
+    },
 
-  applyBody: function (body) {
-    if (body && !body.isComponent) {
-      body = Ext.factory(body, Ext.Component, this.getBody());
+    updateHeader: function(header, oldHeader) {
+        if (header) {
+            this.element.getFirstChild().insertFirst(header.element);
+        } else if (oldHeader) {
+            oldHeader.destroy();
+        }
+    },
+
+    applyDisclosure: function(disclosure) {
+        if (disclosure && !disclosure.isComponent) {
+            disclosure = Ext.factory(disclosure, Ext.Component, this.getDisclosure());
+        }
+        return disclosure;
+    },
+
+    updateDisclosure: function(disclosure, oldDisclosure) {
+        if (disclosure) {
+            this.add(disclosure);
+        } else if (oldDisclosure) {
+            oldDisclosure.destroy();
+        }
+    },
+
+    updateTpl: function(tpl) {
+        this.getBody().setTpl(tpl);
+    },
+
+    updateRecord: function(record) {
+        var me = this,
+            dataview = me.dataview || this.getDataview(),
+            data = record && dataview.prepareData(record.getData(true), dataview.getStore().indexOf(record), record),
+            dataMap = me.getDataMap(),
+            body = this.getBody(),
+            disclosure = this.getDisclosure();
+
+        me._record = record;
+
+        if (dataMap) {
+            me.doMapData(dataMap, data, body);
+        } else if (body) {
+            body.updateData(data || null);
+        }
+
+        if (disclosure && record && dataview.getOnItemDisclosure()) {
+            var disclosureProperty = dataview.getDisclosureProperty();
+            disclosure[(data.hasOwnProperty(disclosureProperty) && data[disclosureProperty] === false) ? 'hide' : 'show']();
+        }
+
+        /**
+         * @event updatedata
+         * Fires whenever the data of the DataItem is updated.
+         * @param {Ext.dataview.component.DataItem} this The DataItem instance.
+         * @param {Object} newData The new data.
+         */
+        me.fireEvent('updatedata', me, data);
+    },
+
+    destroy: function() {
+        Ext.destroy(this.getHeader());
+        this.callParent(arguments);
     }
-    return body;
-  },
-
-  updateBody: function (body, oldBody) {
-    if (body) {
-      this.add(body);
-    } else if (oldBody) {
-      oldBody.destroy();
-    }
-  },
-
-  applyHeader: function (header) {
-    if (header && !header.isComponent) {
-      header = Ext.factory(header, Ext.Component, this.getHeader());
-    }
-    return header;
-  },
-
-  updateHeader: function (header, oldHeader) {
-    if (header) {
-      this.element.getFirstChild().insertFirst(header.element);
-    } else if (oldHeader) {
-      oldHeader.destroy();
-    }
-  },
-
-  applyDisclosure: function (disclosure) {
-    if (disclosure && !disclosure.isComponent) {
-      disclosure = Ext.factory(disclosure, Ext.Component, this.getDisclosure());
-    }
-    return disclosure;
-  },
-
-  updateDisclosure: function (disclosure, oldDisclosure) {
-    if (disclosure) {
-      this.add(disclosure);
-    } else if (oldDisclosure) {
-      oldDisclosure.destroy();
-    }
-  },
-
-  updateTpl: function (tpl) {
-    this.getBody().setTpl(tpl);
-  },
-
-  updateRecord: function (record) {
-    var me = this,
-      dataview = me.dataview || this.getDataview(),
-      data = record && dataview.prepareData(record.getData(true), dataview.getStore().indexOf(record), record),
-      dataMap = me.getDataMap(),
-      body = this.getBody(),
-      disclosure = this.getDisclosure();
-
-    me._record = record;
-
-    if (dataMap) {
-      me.doMapData(dataMap, data, body);
-    } else if (body) {
-      body.updateData(data || null);
-    }
-
-    if (disclosure && record && dataview.getOnItemDisclosure()) {
-      var disclosureProperty = dataview.getDisclosureProperty();
-      disclosure[(data.hasOwnProperty(disclosureProperty) && data[disclosureProperty] === false) ? 'hide' : 'show']();
-    }
-
-    /**
-     * @event updatedata
-     * Fires whenever the data of the DataItem is updated.
-     * @param {Ext.dataview.component.DataItem} this The DataItem instance.
-     * @param {Object} newData The new data.
-     */
-    me.fireEvent('updatedata', me, data);
-  },
-
-  destroy: function () {
-    Ext.destroy(this.getHeader());
-    this.callParent(arguments);
-  }
 });

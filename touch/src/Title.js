@@ -3,24 +3,24 @@
  * @private
  */
 Ext.define('Ext.Title', {
-  extend: 'Ext.Component',
-  xtype: 'title',
+    extend: 'Ext.Component',
+    xtype: 'title',
 
-  config: {
-    /**
-     * @cfg
-     * @inheritdoc
-     */
-    baseCls: 'x-title',
+    config: {
+        /**
+         * @cfg
+         * @inheritdoc
+         */
+        baseCls: 'x-title',
 
-    /**
-     * @cfg {String} title The title text
-     */
-    title: ''
-  },
+        /**
+         * @cfg {String} title The title text
+         */
+        title: ''
+    },
 
-  // @private
-  updateTitle: function (newTitle) {
-    this.setHtml(newTitle);
-  }
+    // @private
+    updateTitle: function(newTitle) {
+        this.setHtml(newTitle);
+    }
 });

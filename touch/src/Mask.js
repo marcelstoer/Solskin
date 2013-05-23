@@ -18,74 +18,74 @@
  *     container.setMasked(true);
  */
 Ext.define('Ext.Mask', {
-  extend: 'Ext.Component',
-  xtype: 'mask',
+    extend: 'Ext.Component',
+    xtype: 'mask',
 
-  config: {
+    config: {
+        /**
+         * @cfg
+         * @inheritdoc
+         */
+        baseCls: Ext.baseCSSPrefix + 'mask',
+
+        /**
+         * @cfg {Boolean} transparent True to make this mask transparent.
+         */
+        transparent: false,
+
+        /**
+         * @cfg
+         * @hide
+         */
+        top: 0,
+
+        /**
+         * @cfg
+         * @hide
+         */
+        left: 0,
+
+        /**
+         * @cfg
+         * @hide
+         */
+        right: 0,
+
+        /**
+         * @cfg
+         * @hide
+         */
+        bottom: 0
+    },
+
     /**
-     * @cfg
-     * @inheritdoc
+     * @event tap
+     * A tap event fired when a user taps on this mask
+     * @param {Ext.Mask} this The mask instance
+     * @param {Ext.EventObject} e The event object
      */
-    baseCls: Ext.baseCSSPrefix + 'mask',
+    initialize: function() {
+        this.callSuper();
 
-    /**
-     * @cfg {Boolean} transparent True to make this mask transparent.
-     */
-    transparent: false,
+        this.element.on('*', 'onEvent', this);
+    },
 
-    /**
-     * @cfg
-     * @hide
-     */
-    top: 0,
+    onEvent: function(e) {
+        var controller = arguments[arguments.length - 1];
 
-    /**
-     * @cfg
-     * @hide
-     */
-    left: 0,
+        if (controller.info.eventName === 'tap') {
+            this.fireEvent('tap', this, e);
+            return false;
+        }
 
-    /**
-     * @cfg
-     * @hide
-     */
-    right: 0,
+        if (e && e.stopEvent) {
+            e.stopEvent();
+        }
 
-    /**
-     * @cfg
-     * @hide
-     */
-    bottom: 0
-  },
+        return false;
+    },
 
-  /**
-   * @event tap
-   * A tap event fired when a user taps on this mask
-   * @param {Ext.Mask} this The mask instance
-   * @param {Ext.EventObject} e The event object
-   */
-  initialize: function () {
-    this.callSuper();
-
-    this.element.on('*', 'onEvent', this);
-  },
-
-  onEvent: function (e) {
-    var controller = arguments[arguments.length - 1];
-
-    if (controller.info.eventName === 'tap') {
-      this.fireEvent('tap', this, e);
-      return false;
+    updateTransparent: function(newTransparent) {
+        this[newTransparent ? 'addCls' : 'removeCls'](this.getBaseCls() + '-transparent');
     }
-
-    if (e && e.stopEvent) {
-      e.stopEvent();
-    }
-
-    return false;
-  },
-
-  updateTransparent: function (newTransparent) {
-    this[newTransparent ? 'addCls' : 'removeCls'](this.getBaseCls() + '-transparent');
-  }
 });

@@ -3,13 +3,13 @@
  */
 Ext.define('Ext.util.paintmonitor.OverflowChange', {
 
-  extend: 'Ext.util.paintmonitor.Abstract',
+    extend: 'Ext.util.paintmonitor.Abstract',
 
-  eventName: 'overflowchanged',
+    eventName: 'overflowchanged',
 
-  monitorClass: 'overflowchange',
+    monitorClass: 'overflowchange',
 
-  onElementPainted: function (e) {
-    this.getCallback().apply(this.getScope(), this.getArgs());
-  }
+    onElementPainted: function(e) {
+        this.getCallback().apply(this.getScope(), this.getArgs());
+    }
 });

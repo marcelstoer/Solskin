@@ -61,12 +61,12 @@
  * attached store has a storeId, the storeId will be used. If neither option is presented the proxy will throw an error.
  */
 Ext.define('Ext.data.proxy.LocalStorage', {
-  extend: 'Ext.data.proxy.WebStorage',
-  alias: 'proxy.localstorage',
-  alternateClassName: 'Ext.data.LocalStorageProxy',
+    extend: 'Ext.data.proxy.WebStorage',
+    alias: 'proxy.localstorage',
+    alternateClassName: 'Ext.data.LocalStorageProxy',
 
-  //inherit docs
-  getStorageObject: function () {
-    return window.localStorage;
-  }
+    //inherit docs
+    getStorageObject: function() {
+        return window.localStorage;
+    }
 });

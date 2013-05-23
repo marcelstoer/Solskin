@@ -217,116 +217,116 @@
  * make the request.
  */
 Ext.define('Ext.data.proxy.Ajax', {
-  extend: 'Ext.data.proxy.Server',
+    extend: 'Ext.data.proxy.Server',
 
-  requires: ['Ext.util.MixedCollection', 'Ext.Ajax'],
-  alias: 'proxy.ajax',
-  alternateClassName: ['Ext.data.HttpProxy', 'Ext.data.AjaxProxy'],
+    requires: ['Ext.util.MixedCollection', 'Ext.Ajax'],
+    alias: 'proxy.ajax',
+    alternateClassName: ['Ext.data.HttpProxy', 'Ext.data.AjaxProxy'],
 
-  config: {
-    /**
-     * @cfg {Boolean} withCredentials
-     * This configuration is sometimes necessary when using cross-origin resource sharing.
-     * @accessor
-     */
-    withCredentials: false,
+    config: {
+        /**
+         * @cfg {Boolean} withCredentials
+         * This configuration is sometimes necessary when using cross-origin resource sharing.
+         * @accessor
+         */
+        withCredentials: false,
 
-    /**
-     * @cfg {String} username
-     * Most oData feeds require basic HTTP authentication. This configuration allows
-     * you to specify the username.
-     * @accessor
-     */
-    username: null,
+        /**
+         * @cfg {String} username
+         * Most oData feeds require basic HTTP authentication. This configuration allows
+         * you to specify the username.
+         * @accessor
+         */
+        username: null,
 
-    /**
-     * @cfg {String} password
-     * Most oData feeds require basic HTTP authentication. This configuration allows
-     * you to specify the password.
-     * @accessor
-     */
-    password: null,
+        /**
+         * @cfg {String} password
+         * Most oData feeds require basic HTTP authentication. This configuration allows
+         * you to specify the password.
+         * @accessor
+         */
+        password: null,
 
-    /**
-     * @property {Object} actionMethods
-     * Mapping of action name to HTTP request method. In the basic AjaxProxy these are set to
-     * 'GET' for 'read' actions and 'POST' for 'create', 'update' and 'destroy' actions.
-     * The {@link Ext.data.proxy.Rest} maps these to the correct RESTful methods.
-     */
-    actionMethods: {
-      create: 'POST',
-      read: 'GET',
-      update: 'POST',
-      destroy: 'POST'
+        /**
+         * @property {Object} actionMethods
+         * Mapping of action name to HTTP request method. In the basic AjaxProxy these are set to
+         * 'GET' for 'read' actions and 'POST' for 'create', 'update' and 'destroy' actions.
+         * The {@link Ext.data.proxy.Rest} maps these to the correct RESTful methods.
+         */
+        actionMethods: {
+            create : 'POST',
+            read   : 'GET',
+            update : 'POST',
+            destroy: 'POST'
+        },
+
+        /**
+         * @cfg {Object} [headers=undefined]
+         * Any headers to add to the Ajax request.
+         */
+        headers: {}
     },
 
     /**
-     * @cfg {Object} [headers=undefined]
-     * Any headers to add to the Ajax request.
+     * Performs Ajax request.
+     * @protected
+     * @param operation
+     * @param callback
+     * @param scope
+     * @return {Object}
      */
-    headers: {}
-  },
+    doRequest: function(operation, callback, scope) {
+        var me = this,
+            writer  = me.getWriter(),
+            request = me.buildRequest(operation);
 
-  /**
-   * Performs Ajax request.
-   * @protected
-   * @param operation
-   * @param callback
-   * @param scope
-   * @return {Object}
-   */
-  doRequest: function (operation, callback, scope) {
-    var me = this,
-      writer = me.getWriter(),
-      request = me.buildRequest(operation);
+        request.setConfig({
+            headers  : me.getHeaders(),
+            timeout  : me.getTimeout(),
+            method   : me.getMethod(request),
+            callback : me.createRequestCallback(request, operation, callback, scope),
+            scope    : me,
+            proxy    : me
+        });
 
-    request.setConfig({
-      headers: me.getHeaders(),
-      timeout: me.getTimeout(),
-      method: me.getMethod(request),
-      callback: me.createRequestCallback(request, operation, callback, scope),
-      scope: me,
-      proxy: me
-    });
+        if (operation.getWithCredentials() || me.getWithCredentials()) {
+            request.setWithCredentials(true);
+            request.setUsername(me.getUsername());
+            request.setPassword(me.getPassword());
+        }
 
-    if (operation.getWithCredentials() || me.getWithCredentials()) {
-      request.setWithCredentials(true);
-      request.setUsername(me.getUsername());
-      request.setPassword(me.getPassword());
+        // We now always have the writer prepare the request
+        request = writer.write(request);
+
+        Ext.Ajax.request(request.getCurrentConfig());
+
+        return request;
+    },
+
+    /**
+     * Returns the HTTP method name for a given request. By default this returns based on a lookup on
+     * {@link #actionMethods}.
+     * @param {Ext.data.Request} request The request object.
+     * @return {String} The HTTP method to use (should be one of 'GET', 'POST', 'PUT' or 'DELETE').
+     */
+    getMethod: function(request) {
+        return this.getActionMethods()[request.getAction()];
+    },
+
+    /**
+     * @private
+     * @param {Ext.data.Request} request The Request object.
+     * @param {Ext.data.Operation} operation The Operation being executed.
+     * @param {Function} callback The callback function to be called when the request completes.
+     * This is usually the callback passed to `doRequest`.
+     * @param {Object} scope The scope in which to execute the callback function.
+     * @return {Function} The callback function.
+     */
+    createRequestCallback: function(request, operation, callback, scope) {
+        var me = this;
+
+        return function(options, success, response) {
+            me.processResponse(success, operation, request, response, callback, scope);
+        };
     }
-
-    // We now always have the writer prepare the request
-    request = writer.write(request);
-
-    Ext.Ajax.request(request.getCurrentConfig());
-
-    return request;
-  },
-
-  /**
-   * Returns the HTTP method name for a given request. By default this returns based on a lookup on
-   * {@link #actionMethods}.
-   * @param {Ext.data.Request} request The request object.
-   * @return {String} The HTTP method to use (should be one of 'GET', 'POST', 'PUT' or 'DELETE').
-   */
-  getMethod: function (request) {
-    return this.getActionMethods()[request.getAction()];
-  },
-
-  /**
-   * @private
-   * @param {Ext.data.Request} request The Request object.
-   * @param {Ext.data.Operation} operation The Operation being executed.
-   * @param {Function} callback The callback function to be called when the request completes.
-   * This is usually the callback passed to `doRequest`.
-   * @param {Object} scope The scope in which to execute the callback function.
-   * @return {Function} The callback function.
-   */
-  createRequestCallback: function (request, operation, callback, scope) {
-    var me = this;
-
-    return function (options, success, response) {
-      me.processResponse(success, operation, request, response, callback, scope);
-    };
-  }
 });

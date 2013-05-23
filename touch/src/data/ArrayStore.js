@@ -38,18 +38,18 @@
  * **{@link Ext.data.reader.Array ArrayReader}**.
  */
 Ext.define('Ext.data.ArrayStore', {
-  extend: 'Ext.data.Store',
-  alias: 'store.array',
-  uses: ['Ext.data.reader.Array'],
+    extend: 'Ext.data.Store',
+    alias: 'store.array',
+    uses: ['Ext.data.reader.Array'],
 
-  config: {
-    proxy: {
-      type: 'memory',
-      reader: 'array'
-    }
-  },
+    config: {
+        proxy: {
+            type: 'memory',
+            reader: 'array'
+        }
+    },
 
-  loadData: function (data, append) {
+    loadData: function(data, append) {
 //        if (this.expandData === true) {
 //            var r = [],
 //                i = 0,
@@ -62,10 +62,10 @@ Ext.define('Ext.data.ArrayStore', {
 //            data = r;
 //        }
 
-    this.callParent([data, append]);
-  }
-}, function () {
-  // backwards compat
-  Ext.data.SimpleStore = Ext.data.ArrayStore;
-  // Ext.reg('simplestore', Ext.data.SimpleStore);
+        this.callParent([data, append]);
+    }
+}, function() {
+    // backwards compat
+    Ext.data.SimpleStore = Ext.data.ArrayStore;
+    // Ext.reg('simplestore', Ext.data.SimpleStore);
 });

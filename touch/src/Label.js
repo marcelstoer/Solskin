@@ -8,15 +8,15 @@
  *     });
  */
 Ext.define('Ext.Label', {
-  extend: 'Ext.Component',
-  xtype: 'label',
+    extend: 'Ext.Component',
+    xtype: 'label',
 
-  config: {
-    baseCls: Ext.baseCSSPrefix + 'label'
+    config: {
+        baseCls: Ext.baseCSSPrefix + 'label'
 
-    /**
-     * @cfg {String} html
-     * The label of this component.
-     */
-  }
+        /**
+         * @cfg {String} html
+         * The label of this component.
+         */
+    }
 });

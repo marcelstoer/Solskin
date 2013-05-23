@@ -37,162 +37,159 @@
  *     });
  */
 Ext.define('Ext.Video', {
-  extend: 'Ext.Media',
-  xtype: 'video',
+    extend: 'Ext.Media',
+    xtype: 'video',
 
-  config: {
-    /**
-     * @cfg {String/Array} urls
-     * Location of the video to play. This should be in H.264 format and in a .mov file format.
-     * @accessor
-     */
+    config: {
+        /**
+         * @cfg {String/Array} urls
+         * Location of the video to play. This should be in H.264 format and in a .mov file format.
+         * @accessor
+         */
 
-    /**
-     * @cfg {String} posterUrl
-     * Location of a poster image to be shown before showing the video.
-     * @accessor
-     */
-    posterUrl: null,
+        /**
+         * @cfg {String} posterUrl
+         * Location of a poster image to be shown before showing the video.
+         * @accessor
+         */
+        posterUrl: null,
 
-    /**
-     * @cfg
-     * @inheritdoc
-     */
-    cls: Ext.baseCSSPrefix + 'video'
-  },
-
-  template: [
-    {
-      /**
-       * @property {Ext.dom.Element} ghost
-       * @private
-       */
-      reference: 'ghost',
-      classList: [Ext.baseCSSPrefix + 'video-ghost']
+        /**
+         * @cfg
+         * @inheritdoc
+         */
+        cls: Ext.baseCSSPrefix + 'video'
     },
-    {
-      tag: 'video',
-      reference: 'media',
-      classList: [Ext.baseCSSPrefix + 'media']
+
+    template: [{
+        /**
+         * @property {Ext.dom.Element} ghost
+         * @private
+         */
+        reference: 'ghost',
+        classList: [Ext.baseCSSPrefix + 'video-ghost']
+    }, {
+        tag: 'video',
+        reference: 'media',
+        classList: [Ext.baseCSSPrefix + 'media']
+    }],
+
+    initialize: function() {
+        var me = this;
+
+        me.callParent();
+
+        me.media.hide();
+
+        me.onBefore({
+            erased: 'onErased',
+            scope: me
+        });
+
+        me.ghost.on({
+            tap: 'onGhostTap',
+            scope: me
+        });
+
+        me.media.on({
+            pause: 'onPause',
+            scope: me
+        });
+
+        if (Ext.os.is.Android4 || Ext.os.is.iPad) {
+            this.isInlineVideo = true;
+        }
+    },
+
+    applyUrl: function(url) {
+        return [].concat(url);
+    },
+
+    updateUrl: function(newUrl) {
+        var me = this,
+            media = me.media,
+            newLn = newUrl.length,
+            existingSources = media.query('source'),
+            oldLn = existingSources.length,
+            i;
+
+
+        for (i = 0; i < oldLn; i++) {
+            Ext.fly(existingSources[i]).destroy();
+        }
+
+        for (i = 0; i < newLn; i++) {
+            media.appendChild(Ext.Element.create({
+                tag: 'source',
+                src: newUrl[i]
+            }));
+        }
+
+        if (me.isPlaying()) {
+            me.play();
+        }
+    },
+
+    onErased: function() {
+        this.pause();
+        this.media.setTop(-2000);
+        this.ghost.show();
+    },
+
+    /**
+     * @private
+     * Called when the {@link #ghost} element is tapped.
+     */
+    onGhostTap: function() {
+        var me = this,
+            media = this.media,
+            ghost = this.ghost;
+
+        media.show();
+        if (Ext.os.is.Android2) {
+            setTimeout(function() {
+                me.play();
+                setTimeout(function() {
+                    media.hide();
+                }, 10);
+            }, 10);
+        } else {
+            // Browsers which support native video tag display only, move the media down so
+            // we can control the Viewport
+            ghost.hide();
+            me.play();
+        }
+    },
+
+    /**
+     * @private
+     * native video tag display only, move the media down so we can control the Viewport
+     */
+    onPause: function() {
+        this.callParent(arguments);
+        if (!this.isInlineVideo) {
+            this.media.setTop(-2000);
+            this.ghost.show();
+        }
+    },
+
+    /**
+     * @private
+     * native video tag display only, move the media down so we can control the Viewport
+     */
+    onPlay: function() {
+        this.callParent(arguments);
+        this.media.setTop(0);
+    },
+
+    /**
+     * Updates the URL to the poster, even if it is rendered.
+     * @param {Object} newUrl
+     */
+    updatePosterUrl: function(newUrl) {
+        var ghost = this.ghost;
+        if (ghost) {
+            ghost.setStyle('background-image', 'url(' + newUrl + ')');
+        }
     }
-  ],
-
-  initialize: function () {
-    var me = this;
-
-    me.callParent();
-
-    me.media.hide();
-
-    me.onBefore({
-      erased: 'onErased',
-      scope: me
-    });
-
-    me.ghost.on({
-      tap: 'onGhostTap',
-      scope: me
-    });
-
-    me.media.on({
-      pause: 'onPause',
-      scope: me
-    });
-
-    if (Ext.os.is.Android4 || Ext.os.is.iPad) {
-      this.isInlineVideo = true;
-    }
-  },
-
-  applyUrl: function (url) {
-    return [].concat(url);
-  },
-
-  updateUrl: function (newUrl) {
-    var me = this,
-      media = me.media,
-      newLn = newUrl.length,
-      existingSources = media.query('source'),
-      oldLn = existingSources.length,
-      i;
-
-
-    for (i = 0; i < oldLn; i++) {
-      Ext.fly(existingSources[i]).destroy();
-    }
-
-    for (i = 0; i < newLn; i++) {
-      media.appendChild(Ext.Element.create({
-        tag: 'source',
-        src: newUrl[i]
-      }));
-    }
-
-    if (me.isPlaying()) {
-      me.play();
-    }
-  },
-
-  onErased: function () {
-    this.pause();
-    this.media.setTop(-2000);
-    this.ghost.show();
-  },
-
-  /**
-   * @private
-   * Called when the {@link #ghost} element is tapped.
-   */
-  onGhostTap: function () {
-    var me = this,
-      media = this.media,
-      ghost = this.ghost;
-
-    media.show();
-    if (Ext.os.is.Android2) {
-      setTimeout(function () {
-        me.play();
-        setTimeout(function () {
-          media.hide();
-        }, 10);
-      }, 10);
-    } else {
-      // Browsers which support native video tag display only, move the media down so
-      // we can control the Viewport
-      ghost.hide();
-      me.play();
-    }
-  },
-
-  /**
-   * @private
-   * native video tag display only, move the media down so we can control the Viewport
-   */
-  onPause: function () {
-    this.callParent(arguments);
-    if (!this.isInlineVideo) {
-      this.media.setTop(-2000);
-      this.ghost.show();
-    }
-  },
-
-  /**
-   * @private
-   * native video tag display only, move the media down so we can control the Viewport
-   */
-  onPlay: function () {
-    this.callParent(arguments);
-    this.media.setTop(0);
-  },
-
-  /**
-   * Updates the URL to the poster, even if it is rendered.
-   * @param {Object} newUrl
-   */
-  updatePosterUrl: function (newUrl) {
-    var ghost = this.ghost;
-    if (ghost) {
-      ghost.setStyle('background-image', 'url(' + newUrl + ')');
-    }
-  }
 });

@@ -1,11 +1,11 @@
 //<feature logger>
 Ext.define('Ext.log.Base', {
-  config: {},
+    config: {},
 
-  constructor: function (config) {
-    this.initConfig(config);
+    constructor: function(config) {
+        this.initConfig(config);
 
-    return this;
-  }
+        return this;
+    }
 });
 //</feature>

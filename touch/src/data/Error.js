@@ -10,21 +10,21 @@
  */
 
 Ext.define('Ext.data.Error', {
-  config: {
-    /**
-     * @cfg {String} field
-     * The name of the field this error belongs to.
-     */
-    field: null,
+    config: {
+        /**
+         * @cfg {String} field
+         * The name of the field this error belongs to.
+         */
+        field: null,
 
-    /**
-     * @cfg {String} message
-     * The message containing the description of the error.
-     */
-    message: ''
-  },
+        /**
+         * @cfg {String} message
+         * The message containing the description of the error.
+         */
+        message: ''
+    },
 
-  constructor: function (config) {
-    this.initConfig(config);
-  }
+    constructor: function(config) {
+        this.initConfig(config);
+    }
 });

@@ -129,160 +129,160 @@
  *     Response.Write(responseString);
  */
 Ext.define('Ext.data.proxy.JsonP', {
-  extend: 'Ext.data.proxy.Server',
-  alternateClassName: 'Ext.data.ScriptTagProxy',
-  alias: ['proxy.jsonp', 'proxy.scripttag'],
-  requires: ['Ext.data.JsonP'],
+    extend: 'Ext.data.proxy.Server',
+    alternateClassName: 'Ext.data.ScriptTagProxy',
+    alias: ['proxy.jsonp', 'proxy.scripttag'],
+    requires: ['Ext.data.JsonP'],
 
-  config: {
-    defaultWriterType: 'base',
+    config: {
+        defaultWriterType: 'base',
+
+        /**
+         * @cfg {String} callbackKey
+         * See {@link Ext.data.JsonP#callbackKey}.
+         * @accessor
+         */
+        callbackKey : 'callback',
+
+        /**
+         * @cfg {String} recordParam
+         * The param name to use when passing records to the server (e.g. 'records=someEncodedRecordString').
+         * @accessor
+         */
+        recordParam: 'records',
+
+        /**
+         * @cfg {Boolean} autoAppendParams
+         * `true` to automatically append the request's params to the generated url.
+         * @accessor
+         */
+        autoAppendParams: true
+    },
 
     /**
-     * @cfg {String} callbackKey
-     * See {@link Ext.data.JsonP#callbackKey}.
-     * @accessor
+     * Performs the read request to the remote domain. JsonP proxy does not actually create an Ajax request,
+     * instead we write out a `<script>` tag based on the configuration of the internal Ext.data.Request object
+     * @param {Ext.data.Operation} operation The {@link Ext.data.Operation Operation} object to execute.
+     * @param {Function} callback A callback function to execute when the Operation has been completed.
+     * @param {Object} scope The scope to execute the callback in.
+     * @return {Object}
+     * @protected
      */
-    callbackKey: 'callback',
-
-    /**
-     * @cfg {String} recordParam
-     * The param name to use when passing records to the server (e.g. 'records=someEncodedRecordString').
-     * @accessor
-     */
-    recordParam: 'records',
-
-    /**
-     * @cfg {Boolean} autoAppendParams
-     * `true` to automatically append the request's params to the generated url.
-     * @accessor
-     */
-    autoAppendParams: true
-  },
-
-  /**
-   * Performs the read request to the remote domain. JsonP proxy does not actually create an Ajax request,
-   * instead we write out a `<script>` tag based on the configuration of the internal Ext.data.Request object
-   * @param {Ext.data.Operation} operation The {@link Ext.data.Operation Operation} object to execute.
-   * @param {Function} callback A callback function to execute when the Operation has been completed.
-   * @param {Object} scope The scope to execute the callback in.
-   * @return {Object}
-   * @protected
-   */
-  doRequest: function (operation, callback, scope) {
-    // <debug>
-    var action = operation.getAction();
-    if (action !== 'read') {
-      Ext.Logger.error('JsonP proxies can only be used to read data.');
-    }
-    // </debug>
-
-    //generate the unique IDs for this request
-    var me = this,
-      request = me.buildRequest(operation),
-      params = request.getParams();
-
-    // apply JsonP proxy-specific attributes to the Request
-    request.setConfig({
-      callbackKey: me.getCallbackKey(),
-      timeout: me.getTimeout(),
-      scope: me,
-      callback: me.createRequestCallback(request, operation, callback, scope)
-    });
-
-    // Prevent doubling up because the params are already added to the url in buildUrl
-    if (me.getAutoAppendParams()) {
-      request.setParams({});
-    }
-
-    request.setJsonP(Ext.data.JsonP.request(request.getCurrentConfig()));
-
-    // Set the params back once we have made the request though
-    request.setParams(params);
-
-    operation.setStarted();
-
-    me.lastRequest = request;
-
-    return request;
-  },
-
-  /**
-   * @private
-   * Creates and returns the function that is called when the request has completed. The returned function
-   * should accept a Response object, which contains the response to be read by the configured Reader.
-   * The third argument is the callback that should be called after the request has been completed and the Reader has decoded
-   * the response. This callback will typically be the callback passed by a store, e.g. in proxy.read(operation, theCallback, scope)
-   * theCallback refers to the callback argument received by this function.
-   * See {@link #doRequest} for details.
-   * @param {Ext.data.Request} request The Request object.
-   * @param {Ext.data.Operation} operation The Operation being executed.
-   * @param {Function} callback The callback function to be called when the request completes. This is usually the callback
-   * passed to doRequest.
-   * @param {Object} scope The scope in which to execute the callback function.
-   * @return {Function} The callback function.
-   */
-  createRequestCallback: function (request, operation, callback, scope) {
-    var me = this;
-
-    return function (success, response, errorType) {
-      delete me.lastRequest;
-      me.processResponse(success, operation, request, response, callback, scope);
-    };
-  },
-
-  // @inheritdoc
-  setException: function (operation, response) {
-    operation.setException(operation.getRequest().getJsonP().errorType);
-  },
-
-
-  /**
-   * Generates a url based on a given Ext.data.Request object. Adds the params and callback function name to the url
-   * @param {Ext.data.Request} request The request object.
-   * @return {String} The url.
-   */
-  buildUrl: function (request) {
-    var me = this,
-      url = me.callParent(arguments),
-      params = Ext.apply({}, request.getParams()),
-      filters = params.filters,
-      records,
-      filter, i, value;
-
-    delete params.filters;
-
-    if (me.getAutoAppendParams()) {
-      url = Ext.urlAppend(url, Ext.Object.toQueryString(params));
-    }
-
-    if (filters && filters.length) {
-      for (i = 0; i < filters.length; i++) {
-        filter = filters[i];
-        value = filter.getValue();
-        if (value) {
-          url = Ext.urlAppend(url, filter.getProperty() + "=" + value);
+    doRequest: function(operation, callback, scope) {
+        // <debug>
+        var action = operation.getAction();
+        if (action !== 'read') {
+            Ext.Logger.error('JsonP proxies can only be used to read data.');
         }
-      }
+        // </debug>
+
+        //generate the unique IDs for this request
+        var me      = this,
+            request = me.buildRequest(operation),
+            params  = request.getParams();
+
+        // apply JsonP proxy-specific attributes to the Request
+        request.setConfig({
+            callbackKey: me.getCallbackKey(),
+            timeout: me.getTimeout(),
+            scope: me,
+            callback: me.createRequestCallback(request, operation, callback, scope)
+        });
+
+        // Prevent doubling up because the params are already added to the url in buildUrl
+        if (me.getAutoAppendParams()) {
+            request.setParams({});
+        }
+
+        request.setJsonP(Ext.data.JsonP.request(request.getCurrentConfig()));
+
+        // Set the params back once we have made the request though
+        request.setParams(params);
+
+        operation.setStarted();
+
+        me.lastRequest = request;
+
+        return request;
+    },
+
+    /**
+     * @private
+     * Creates and returns the function that is called when the request has completed. The returned function
+     * should accept a Response object, which contains the response to be read by the configured Reader.
+     * The third argument is the callback that should be called after the request has been completed and the Reader has decoded
+     * the response. This callback will typically be the callback passed by a store, e.g. in proxy.read(operation, theCallback, scope)
+     * theCallback refers to the callback argument received by this function.
+     * See {@link #doRequest} for details.
+     * @param {Ext.data.Request} request The Request object.
+     * @param {Ext.data.Operation} operation The Operation being executed.
+     * @param {Function} callback The callback function to be called when the request completes. This is usually the callback
+     * passed to doRequest.
+     * @param {Object} scope The scope in which to execute the callback function.
+     * @return {Function} The callback function.
+     */
+    createRequestCallback: function(request, operation, callback, scope) {
+        var me = this;
+
+        return function(success, response, errorType) {
+            delete me.lastRequest;
+            me.processResponse(success, operation, request, response, callback, scope);
+        };
+    },
+
+    // @inheritdoc
+    setException: function(operation, response) {
+        operation.setException(operation.getRequest().getJsonP().errorType);
+    },
+
+
+    /**
+     * Generates a url based on a given Ext.data.Request object. Adds the params and callback function name to the url
+     * @param {Ext.data.Request} request The request object.
+     * @return {String} The url.
+     */
+    buildUrl: function(request) {
+        var me      = this,
+            url     = me.callParent(arguments),
+            params  = Ext.apply({}, request.getParams()),
+            filters = params.filters,
+            records,
+            filter, i, value;
+
+        delete params.filters;
+
+        if (me.getAutoAppendParams()) {
+            url = Ext.urlAppend(url, Ext.Object.toQueryString(params));
+        }
+
+        if (filters && filters.length) {
+            for (i = 0; i < filters.length; i++) {
+                filter = filters[i];
+                value = filter.getValue();
+                if (value) {
+                    url = Ext.urlAppend(url, filter.getProperty() + "=" + value);
+                }
+            }
+        }
+
+        return url;
+    },
+
+    /**
+     * @inheritdoc
+     */
+    destroy: function() {
+        this.abort();
+        this.callParent(arguments);
+    },
+
+    /**
+     * Aborts the current server request if one is currently running.
+     */
+    abort: function() {
+        var lastRequest = this.lastRequest;
+        if (lastRequest) {
+            Ext.data.JsonP.abort(lastRequest.getJsonP());
+        }
     }
-
-    return url;
-  },
-
-  /**
-   * @inheritdoc
-   */
-  destroy: function () {
-    this.abort();
-    this.callParent(arguments);
-  },
-
-  /**
-   * Aborts the current server request if one is currently running.
-   */
-  abort: function () {
-    var lastRequest = this.lastRequest;
-    if (lastRequest) {
-      Ext.data.JsonP.abort(lastRequest.getJsonP());
-    }
-  }
 });

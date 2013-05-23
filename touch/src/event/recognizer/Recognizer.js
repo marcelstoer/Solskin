@@ -24,37 +24,37 @@
  * @private
  */
 Ext.define('Ext.event.recognizer.Recognizer', {
-  mixins: ['Ext.mixin.Identifiable'],
+    mixins: ['Ext.mixin.Identifiable'],
 
-  handledEvents: [],
+    handledEvents: [],
 
-  config: {
-    onRecognized: Ext.emptyFn,
-    onFailed: Ext.emptyFn,
-    callbackScope: null
-  },
+    config: {
+        onRecognized: Ext.emptyFn,
+        onFailed: Ext.emptyFn,
+        callbackScope: null
+    },
 
-  constructor: function (config) {
-    this.initConfig(config);
+    constructor: function(config) {
+        this.initConfig(config);
 
-    return this;
-  },
+        return this;
+    },
 
-  getHandledEvents: function () {
-    return this.handledEvents;
-  },
+    getHandledEvents: function() {
+        return this.handledEvents;
+    },
 
-  onStart: Ext.emptyFn,
+    onStart: Ext.emptyFn,
 
-  onEnd: Ext.emptyFn,
+    onEnd: Ext.emptyFn,
 
-  fail: function () {
-    this.getOnFailed().apply(this.getCallbackScope(), arguments);
+    fail: function() {
+        this.getOnFailed().apply(this.getCallbackScope(), arguments);
 
-    return false;
-  },
+        return false;
+    },
 
-  fire: function () {
-    this.getOnRecognized().apply(this.getCallbackScope(), arguments);
-  }
+    fire: function() {
+        this.getOnRecognized().apply(this.getCallbackScope(), arguments);
+    }
 });

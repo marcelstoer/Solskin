@@ -6,78 +6,78 @@
  * @private
  */
 Ext.define('Ext.mixin.Identifiable', {
-  statics: {
-    uniqueIds: {}
-  },
+    statics: {
+        uniqueIds: {}
+    },
 
-  isIdentifiable: true,
+    isIdentifiable: true,
 
-  mixinId: 'identifiable',
+    mixinId: 'identifiable',
 
-  idCleanRegex: /\.|[^\w\-]/g,
+    idCleanRegex: /\.|[^\w\-]/g,
 
-  defaultIdPrefix: 'ext-',
+    defaultIdPrefix: 'ext-',
 
-  defaultIdSeparator: '-',
+    defaultIdSeparator: '-',
 
-  getOptimizedId: function () {
-    return this.id;
-  },
+    getOptimizedId: function() {
+        return this.id;
+    },
 
-  getUniqueId: function () {
-    var id = this.id,
-      prototype, separator, xtype, uniqueIds, prefix;
+    getUniqueId: function() {
+        var id = this.id,
+            prototype, separator, xtype, uniqueIds, prefix;
 
-    if (!id) {
-      prototype = this.self.prototype;
-      separator = this.defaultIdSeparator;
+        if (!id) {
+            prototype = this.self.prototype;
+            separator = this.defaultIdSeparator;
 
-      uniqueIds = Ext.mixin.Identifiable.uniqueIds;
+            uniqueIds = Ext.mixin.Identifiable.uniqueIds;
 
-      if (!prototype.hasOwnProperty('identifiablePrefix')) {
-        xtype = this.xtype;
+            if (!prototype.hasOwnProperty('identifiablePrefix')) {
+                xtype = this.xtype;
 
-        if (xtype) {
-          prefix = this.defaultIdPrefix + xtype + separator;
+                if (xtype) {
+                    prefix = this.defaultIdPrefix + xtype + separator;
+                }
+                else {
+                    prefix = prototype.$className.replace(this.idCleanRegex, separator).toLowerCase() + separator;
+                }
+
+                prototype.identifiablePrefix = prefix;
+            }
+
+            prefix = this.identifiablePrefix;
+
+            if (!uniqueIds.hasOwnProperty(prefix)) {
+                uniqueIds[prefix] = 0;
+            }
+
+            id = this.id = prefix + (++uniqueIds[prefix]);
         }
-        else {
-          prefix = prototype.$className.replace(this.idCleanRegex, separator).toLowerCase() + separator;
+
+        this.getUniqueId = this.getOptimizedId;
+
+        return id;
+    },
+
+    setId: function(id) {
+        this.id = id;
+    },
+
+    /**
+     * Retrieves the id of this component. Will autogenerate an id if one has not already been set.
+     * @return {String} id
+     */
+    getId: function() {
+        var id = this.id;
+
+        if (!id) {
+            id = this.getUniqueId();
         }
 
-        prototype.identifiablePrefix = prefix;
-      }
+        this.getId = this.getOptimizedId;
 
-      prefix = this.identifiablePrefix;
-
-      if (!uniqueIds.hasOwnProperty(prefix)) {
-        uniqueIds[prefix] = 0;
-      }
-
-      id = this.id = prefix + (++uniqueIds[prefix]);
+        return id;
     }
-
-    this.getUniqueId = this.getOptimizedId;
-
-    return id;
-  },
-
-  setId: function (id) {
-    this.id = id;
-  },
-
-  /**
-   * Retrieves the id of this component. Will autogenerate an id if one has not already been set.
-   * @return {String} id
-   */
-  getId: function () {
-    var id = this.id;
-
-    if (!id) {
-      id = this.getUniqueId();
-    }
-
-    this.getId = this.getOptimizedId;
-
-    return id;
-  }
 });

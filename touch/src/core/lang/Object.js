@@ -12,25 +12,24 @@
  * @singleton
  */
 
-(function () {
+(function() {
 
 // The "constructor" for chain:
-  var TemplateClass = function () {
-  };
+var TemplateClass = function(){};
 
-  var ExtObject = Ext.Object = {
+var ExtObject = Ext.Object = {
 
     /**
      * Returns a new object with the given object as the prototype chain.
      * @param {Object} object The prototype chain for the new object.
      */
-    chain: ('create' in Object) ? function (object) {
-      return Object.create(object);
+    chain: ('create' in Object) ? function(object){
+        return Object.create(object);
     } : function (object) {
-      TemplateClass.prototype = object;
-      var result = new TemplateClass();
-      TemplateClass.prototype = null;
-      return result;
+        TemplateClass.prototype = object;
+        var result = new TemplateClass();
+        TemplateClass.prototype = null;
+        return result;
     },
 
     /**
@@ -74,47 +73,47 @@
      * @param {Boolean} [recursive=false] `true` to recursively encode any sub-objects.
      * @return {Object[]} Array of objects with `name` and `value` fields.
      */
-    toQueryObjects: function (name, value, recursive) {
-      var self = ExtObject.toQueryObjects,
-        objects = [],
-        i, ln;
+    toQueryObjects: function(name, value, recursive) {
+        var self = ExtObject.toQueryObjects,
+            objects = [],
+            i, ln;
 
-      if (Ext.isArray(value)) {
-        for (i = 0, ln = value.length; i < ln; i++) {
-          if (recursive) {
-            objects = objects.concat(self(name + '[' + i + ']', value[i], true));
-          }
-          else {
+        if (Ext.isArray(value)) {
+            for (i = 0, ln = value.length; i < ln; i++) {
+                if (recursive) {
+                    objects = objects.concat(self(name + '[' + i + ']', value[i], true));
+                }
+                else {
+                    objects.push({
+                        name: name,
+                        value: value[i]
+                    });
+                }
+            }
+        }
+        else if (Ext.isObject(value)) {
+            for (i in value) {
+                if (value.hasOwnProperty(i)) {
+                    if (recursive) {
+                        objects = objects.concat(self(name + '[' + i + ']', value[i], true));
+                    }
+                    else {
+                        objects.push({
+                            name: name,
+                            value: value[i]
+                        });
+                    }
+                }
+            }
+        }
+        else {
             objects.push({
-              name: name,
-              value: value[i]
-            });
-          }
-        }
-      }
-      else if (Ext.isObject(value)) {
-        for (i in value) {
-          if (value.hasOwnProperty(i)) {
-            if (recursive) {
-              objects = objects.concat(self(name + '[' + i + ']', value[i], true));
-            }
-            else {
-              objects.push({
                 name: name,
-                value: value[i]
-              });
-            }
-          }
+                value: value
+            });
         }
-      }
-      else {
-        objects.push({
-          name: name,
-          value: value
-        });
-      }
 
-      return objects;
+        return objects;
     },
 
     /**
@@ -150,32 +149,32 @@
      * (PHP / Ruby on Rails servers and similar).
      * @return {String} queryString
      */
-    toQueryString: function (object, recursive) {
-      var paramObjects = [],
-        params = [],
-        i, j, ln, paramObject, value;
+    toQueryString: function(object, recursive) {
+        var paramObjects = [],
+            params = [],
+            i, j, ln, paramObject, value;
 
-      for (i in object) {
-        if (object.hasOwnProperty(i)) {
-          paramObjects = paramObjects.concat(ExtObject.toQueryObjects(i, object[i], recursive));
-        }
-      }
-
-      for (j = 0, ln = paramObjects.length; j < ln; j++) {
-        paramObject = paramObjects[j];
-        value = paramObject.value;
-
-        if (Ext.isEmpty(value)) {
-          value = '';
-        }
-        else if (Ext.isDate(value)) {
-          value = Ext.Date.toString(value);
+        for (i in object) {
+            if (object.hasOwnProperty(i)) {
+                paramObjects = paramObjects.concat(ExtObject.toQueryObjects(i, object[i], recursive));
+            }
         }
 
-        params.push(encodeURIComponent(paramObject.name) + '=' + encodeURIComponent(String(value)));
-      }
+        for (j = 0, ln = paramObjects.length; j < ln; j++) {
+            paramObject = paramObjects[j];
+            value = paramObject.value;
 
-      return params.join('&');
+            if (Ext.isEmpty(value)) {
+                value = '';
+            }
+            else if (Ext.isDate(value)) {
+                value = Ext.Date.toString(value);
+            }
+
+            params.push(encodeURIComponent(paramObject.name) + '=' + encodeURIComponent(String(value)));
+        }
+
+        return params.join('&');
     },
 
     /**
@@ -208,87 +207,87 @@
      * PHP / Ruby on Rails servers and similar.
      * @return {Object}
      */
-    fromQueryString: function (queryString, recursive) {
-      var parts = queryString.replace(/^\?/, '').split('&'),
-        object = {},
-        temp, components, name, value, i, ln,
-        part, j, subLn, matchedKeys, matchedName,
-        keys, key, nextKey;
+    fromQueryString: function(queryString, recursive) {
+        var parts = queryString.replace(/^\?/, '').split('&'),
+            object = {},
+            temp, components, name, value, i, ln,
+            part, j, subLn, matchedKeys, matchedName,
+            keys, key, nextKey;
 
-      for (i = 0, ln = parts.length; i < ln; i++) {
-        part = parts[i];
+        for (i = 0, ln = parts.length; i < ln; i++) {
+            part = parts[i];
 
-        if (part.length > 0) {
-          components = part.split('=');
-          name = decodeURIComponent(components[0]);
-          value = (components[1] !== undefined) ? decodeURIComponent(components[1]) : '';
+            if (part.length > 0) {
+                components = part.split('=');
+                name = decodeURIComponent(components[0]);
+                value = (components[1] !== undefined) ? decodeURIComponent(components[1]) : '';
 
-          if (!recursive) {
-            if (object.hasOwnProperty(name)) {
-              if (!Ext.isArray(object[name])) {
-                object[name] = [object[name]];
-              }
+                if (!recursive) {
+                    if (object.hasOwnProperty(name)) {
+                        if (!Ext.isArray(object[name])) {
+                            object[name] = [object[name]];
+                        }
 
-              object[name].push(value);
-            }
-            else {
-              object[name] = value;
-            }
-          }
-          else {
-            matchedKeys = name.match(/(\[):?([^\]]*)\]/g);
-            matchedName = name.match(/^([^\[]+)/);
-
-            //<debug error>
-            if (!matchedName) {
-              throw new Error('[Ext.Object.fromQueryString] Malformed query string given, failed parsing name from "' + part + '"');
-            }
-            //</debug>
-
-            name = matchedName[0];
-            keys = [];
-
-            if (matchedKeys === null) {
-              object[name] = value;
-              continue;
-            }
-
-            for (j = 0, subLn = matchedKeys.length; j < subLn; j++) {
-              key = matchedKeys[j];
-              key = (key.length === 2) ? '' : key.substring(1, key.length - 1);
-              keys.push(key);
-            }
-
-            keys.unshift(name);
-
-            temp = object;
-
-            for (j = 0, subLn = keys.length; j < subLn; j++) {
-              key = keys[j];
-
-              if (j === subLn - 1) {
-                if (Ext.isArray(temp) && key === '') {
-                  temp.push(value);
+                        object[name].push(value);
+                    }
+                    else {
+                        object[name] = value;
+                    }
                 }
                 else {
-                  temp[key] = value;
-                }
-              }
-              else {
-                if (temp[key] === undefined || typeof temp[key] === 'string') {
-                  nextKey = keys[j + 1];
+                    matchedKeys = name.match(/(\[):?([^\]]*)\]/g);
+                    matchedName = name.match(/^([^\[]+)/);
 
-                  temp[key] = (Ext.isNumeric(nextKey) || nextKey === '') ? [] : {};
-                }
+                    //<debug error>
+                    if (!matchedName) {
+                        throw new Error('[Ext.Object.fromQueryString] Malformed query string given, failed parsing name from "' + part + '"');
+                    }
+                    //</debug>
 
-                temp = temp[key];
-              }
+                    name = matchedName[0];
+                    keys = [];
+
+                    if (matchedKeys === null) {
+                        object[name] = value;
+                        continue;
+                    }
+
+                    for (j = 0, subLn = matchedKeys.length; j < subLn; j++) {
+                        key = matchedKeys[j];
+                        key = (key.length === 2) ? '' : key.substring(1, key.length - 1);
+                        keys.push(key);
+                    }
+
+                    keys.unshift(name);
+
+                    temp = object;
+
+                    for (j = 0, subLn = keys.length; j < subLn; j++) {
+                        key = keys[j];
+
+                        if (j === subLn - 1) {
+                            if (Ext.isArray(temp) && key === '') {
+                                temp.push(value);
+                            }
+                            else {
+                                temp[key] = value;
+                            }
+                        }
+                        else {
+                            if (temp[key] === undefined || typeof temp[key] === 'string') {
+                                nextKey = keys[j+1];
+
+                                temp[key] = (Ext.isNumeric(nextKey) || nextKey === '') ? [] : {};
+                            }
+
+                            temp = temp[key];
+                        }
+                    }
+                }
             }
-          }
         }
-      }
 
-      return object;
+        return object;
     },
 
     /**
@@ -316,14 +315,14 @@
      * @param {Object} fn.object The object itself
      * @param {Object} [scope] The execution scope (`this`) of the callback function
      */
-    each: function (object, fn, scope) {
-      for (var property in object) {
-        if (object.hasOwnProperty(property)) {
-          if (fn.call(scope || object, property, object[property], object) === false) {
-            return;
-          }
+    each: function(object, fn, scope) {
+        for (var property in object) {
+            if (object.hasOwnProperty(property)) {
+                if (fn.call(scope || object, property, object[property], object) === false) {
+                    return;
+                }
+            }
         }
-      }
     },
 
     /**
@@ -367,64 +366,64 @@
      * @param {Object...} objs One or more objects to be merged into the first.
      * @return {Object} The object that is created as a result of merging all the objects passed in.
      */
-    merge: function (source) {
-      var i = 1,
-        ln = arguments.length,
-        mergeFn = ExtObject.merge,
-        cloneFn = Ext.clone,
-        object, key, value, sourceKey;
+    merge: function(source) {
+        var i = 1,
+            ln = arguments.length,
+            mergeFn = ExtObject.merge,
+            cloneFn = Ext.clone,
+            object, key, value, sourceKey;
 
-      for (; i < ln; i++) {
-        object = arguments[i];
+        for (; i < ln; i++) {
+            object = arguments[i];
 
-        for (key in object) {
-          value = object[key];
-          if (value && value.constructor === Object) {
-            sourceKey = source[key];
-            if (sourceKey && sourceKey.constructor === Object) {
-              mergeFn(sourceKey, value);
+            for (key in object) {
+                value = object[key];
+                if (value && value.constructor === Object) {
+                    sourceKey = source[key];
+                    if (sourceKey && sourceKey.constructor === Object) {
+                        mergeFn(sourceKey, value);
+                    }
+                    else {
+                        source[key] = cloneFn(value);
+                    }
+                }
+                else {
+                    source[key] = value;
+                }
             }
-            else {
-              source[key] = cloneFn(value);
-            }
-          }
-          else {
-            source[key] = value;
-          }
         }
-      }
 
-      return source;
+        return source;
     },
 
     /**
      * @private
      * @param source
      */
-    mergeIf: function (source) {
-      var i = 1,
-        ln = arguments.length,
-        cloneFn = Ext.clone,
-        object, key, value;
+    mergeIf: function(source) {
+        var i = 1,
+            ln = arguments.length,
+            cloneFn = Ext.clone,
+            object, key, value;
 
-      for (; i < ln; i++) {
-        object = arguments[i];
+        for (; i < ln; i++) {
+            object = arguments[i];
 
-        for (key in object) {
-          if (!(key in source)) {
-            value = object[key];
+            for (key in object) {
+                if (!(key in source)) {
+                    value = object[key];
 
-            if (value && value.constructor === Object) {
-              source[key] = cloneFn(value);
+                    if (value && value.constructor === Object) {
+                        source[key] = cloneFn(value);
+                    }
+                    else {
+                        source[key] = value;
+                    }
+                }
             }
-            else {
-              source[key] = value;
-            }
-          }
         }
-      }
 
-      return source;
+        return source;
     },
 
     /**
@@ -441,14 +440,14 @@
      * @param {Object} object
      * @param {Object} value The value to find
      */
-    getKey: function (object, value) {
-      for (var property in object) {
-        if (object.hasOwnProperty(property) && object[property] === value) {
-          return property;
+    getKey: function(object, value) {
+        for (var property in object) {
+            if (object.hasOwnProperty(property) && object[property] === value) {
+                return property;
+            }
         }
-      }
 
-      return null;
+        return null;
     },
 
     /**
@@ -462,17 +461,17 @@
      * @param {Object} object
      * @return {Array} An array of values from the object.
      */
-    getValues: function (object) {
-      var values = [],
-        property;
+    getValues: function(object) {
+        var values = [],
+            property;
 
-      for (property in object) {
-        if (object.hasOwnProperty(property)) {
-          values.push(object[property]);
+        for (property in object) {
+            if (object.hasOwnProperty(property)) {
+                values.push(object[property]);
+            }
         }
-      }
 
-      return values;
+        return values;
     },
 
     /**
@@ -487,17 +486,17 @@
      * @return {String[]} An array of keys from the object.
      * @method
      */
-    getKeys: ('keys' in Object) ? Object.keys : function (object) {
-      var keys = [],
-        property;
+    getKeys: ('keys' in Object) ? Object.keys : function(object) {
+        var keys = [],
+            property;
 
-      for (property in object) {
-        if (object.hasOwnProperty(property)) {
-          keys.push(property);
+        for (property in object) {
+            if (object.hasOwnProperty(property)) {
+                keys.push(property);
+            }
         }
-      }
 
-      return keys;
+        return keys;
     },
 
     /**
@@ -511,121 +510,121 @@
      * @param {Object} object
      * @return {Number} size
      */
-    getSize: function (object) {
-      var size = 0,
-        property;
+    getSize: function(object) {
+        var size = 0,
+            property;
 
-      for (property in object) {
-        if (object.hasOwnProperty(property)) {
-          size++;
+        for (property in object) {
+            if (object.hasOwnProperty(property)) {
+                size++;
+            }
         }
-      }
 
-      return size;
+        return size;
     },
 
     /**
      * @private
      */
-    classify: function (object) {
-      var objectProperties = [],
-        arrayProperties = [],
-        propertyClassesMap = {},
-        objectClass = function () {
-          var i = 0,
-            ln = objectProperties.length,
-            property;
+    classify: function(object) {
+        var objectProperties = [],
+            arrayProperties = [],
+            propertyClassesMap = {},
+            objectClass = function() {
+                var i = 0,
+                    ln = objectProperties.length,
+                    property;
 
-          for (; i < ln; i++) {
-            property = objectProperties[i];
-            this[property] = new propertyClassesMap[property];
-          }
+                for (; i < ln; i++) {
+                    property = objectProperties[i];
+                    this[property] = new propertyClassesMap[property];
+                }
 
-          ln = arrayProperties.length;
+                ln = arrayProperties.length;
 
-          for (i = 0; i < ln; i++) {
-            property = arrayProperties[i];
-            this[property] = object[property].slice();
-          }
-        },
-        key, value, constructor;
+                for (i = 0; i < ln; i++) {
+                    property = arrayProperties[i];
+                    this[property] = object[property].slice();
+                }
+            },
+            key, value, constructor;
 
-      for (key in object) {
-        if (object.hasOwnProperty(key)) {
-          value = object[key];
+        for (key in object) {
+            if (object.hasOwnProperty(key)) {
+                value = object[key];
 
-          if (value) {
-            constructor = value.constructor;
+                if (value) {
+                    constructor = value.constructor;
 
-            if (constructor === Object) {
-              objectProperties.push(key);
-              propertyClassesMap[key] = ExtObject.classify(value);
+                    if (constructor === Object) {
+                        objectProperties.push(key);
+                        propertyClassesMap[key] = ExtObject.classify(value);
+                    }
+                    else if (constructor === Array) {
+                        arrayProperties.push(key);
+                    }
+                }
             }
-            else if (constructor === Array) {
-              arrayProperties.push(key);
-            }
-          }
         }
-      }
 
-      objectClass.prototype = object;
+        objectClass.prototype = object;
 
-      return objectClass;
+        return objectClass;
     },
 
-    defineProperty: ('defineProperty' in Object) ? Object.defineProperty : function (object, name, descriptor) {
-      if (descriptor.get) {
-        object.__defineGetter__(name, descriptor.get);
-      }
+    defineProperty: ('defineProperty' in Object) ? Object.defineProperty : function(object, name, descriptor) {
+        if (descriptor.get) {
+            object.__defineGetter__(name, descriptor.get);
+        }
 
-      if (descriptor.set) {
-        object.__defineSetter__(name, descriptor.set);
-      }
+        if (descriptor.set) {
+            object.__defineSetter__(name, descriptor.set);
+        }
     }
-  };
+};
 
-  /**
-   * A convenient alias method for {@link Ext.Object#merge}.
-   *
-   * @member Ext
-   * @method merge
-   */
-  Ext.merge = Ext.Object.merge;
+/**
+ * A convenient alias method for {@link Ext.Object#merge}.
+ *
+ * @member Ext
+ * @method merge
+ */
+Ext.merge = Ext.Object.merge;
 
-  /**
-   * @private
-   */
-  Ext.mergeIf = Ext.Object.mergeIf;
+/**
+ * @private
+ */
+Ext.mergeIf = Ext.Object.mergeIf;
 
-  /**
-   * A convenient alias method for {@link Ext.Object#toQueryString}.
-   *
-   * @member Ext
-   * @method urlEncode
-   * @deprecated 4.0.0 Please use `{@link Ext.Object#toQueryString Ext.Object.toQueryString}` instead
-   */
-  Ext.urlEncode = function () {
+/**
+ * A convenient alias method for {@link Ext.Object#toQueryString}.
+ *
+ * @member Ext
+ * @method urlEncode
+ * @deprecated 4.0.0 Please use `{@link Ext.Object#toQueryString Ext.Object.toQueryString}` instead
+ */
+Ext.urlEncode = function() {
     var args = Ext.Array.from(arguments),
-      prefix = '';
+        prefix = '';
 
     // Support for the old `pre` argument
     if ((typeof args[1] === 'string')) {
-      prefix = args[1] + '&';
-      args[1] = false;
+        prefix = args[1] + '&';
+        args[1] = false;
     }
 
     return prefix + ExtObject.toQueryString.apply(ExtObject, args);
-  };
+};
 
-  /**
-   * A convenient alias method for {@link Ext.Object#fromQueryString}.
-   *
-   * @member Ext
-   * @method urlDecode
-   * @deprecated 4.0.0 Please use {@link Ext.Object#fromQueryString Ext.Object.fromQueryString} instead
-   */
-  Ext.urlDecode = function () {
+/**
+ * A convenient alias method for {@link Ext.Object#fromQueryString}.
+ *
+ * @member Ext
+ * @method urlDecode
+ * @deprecated 4.0.0 Please use {@link Ext.Object#fromQueryString Ext.Object.fromQueryString} instead
+ */
+Ext.urlDecode = function() {
     return ExtObject.fromQueryString.apply(ExtObject, arguments);
-  };
+};
 
 })();

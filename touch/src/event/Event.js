@@ -48,39 +48,39 @@
  * For a full list of default recognizers, and more information, please view the {@link Ext.event.recognizer.Recognizer} documentation.
  */
 Ext.define('Ext.event.Event', {
-  alternateClassName: 'Ext.EventObject',
-  isStopped: false,
+    alternateClassName: 'Ext.EventObject',
+    isStopped: false,
 
-  set: function (name, value) {
-    if (arguments.length === 1 && typeof name != 'string') {
-      var info = name;
+    set: function(name, value) {
+        if (arguments.length === 1 && typeof name != 'string') {
+            var info = name;
 
-      for (name in info) {
-        if (info.hasOwnProperty(name)) {
-          this[name] = info[name];
+            for (name in info) {
+                if (info.hasOwnProperty(name)) {
+                    this[name] = info[name];
+                }
+            }
         }
-      }
+        else {
+            this[name] = info[name];
+        }
+    },
+
+    /**
+     * Stop the event (`preventDefault` and `{@link #stopPropagation}`).
+     * @chainable
+     */
+    stopEvent: function() {
+        return this.stopPropagation();
+    },
+
+    /**
+     * Cancels bubbling of the event.
+     * @chainable
+     */
+    stopPropagation: function() {
+        this.isStopped = true;
+
+        return this;
     }
-    else {
-      this[name] = info[name];
-    }
-  },
-
-  /**
-   * Stop the event (`preventDefault` and `{@link #stopPropagation}`).
-   * @chainable
-   */
-  stopEvent: function () {
-    return this.stopPropagation();
-  },
-
-  /**
-   * Cancels bubbling of the event.
-   * @chainable
-   */
-  stopPropagation: function () {
-    this.isStopped = true;
-
-    return this;
-  }
 });

@@ -24,90 +24,90 @@
  *     });
  */
 Ext.define('Ext.bb.CrossCut', {
-  extend: 'Ext.Sheet',
-  xtype: 'crosscut',
+    extend: 'Ext.Sheet',
+    xtype: 'crosscut',
 
-  requires: [
-    'Ext.Button'
-  ],
+    requires: [
+        'Ext.Button'
+    ],
 
-  config: {
-    /**
-     * @hide
-     */
-    top: 0,
+    config: {
+        /**
+         * @hide
+         */
+        top: 0,
 
-    /**
-     * @hide
-     */
-    right: 0,
+        /**
+         * @hide
+         */
+        right: 0,
 
-    /**
-     * @hide
-     */
-    bottom: 0,
+        /**
+         * @hide
+         */
+        bottom: 0,
 
-    /**
-     * @hide
-     */
-    left: null,
+        /**
+         * @hide
+         */
+        left: null,
 
-    /**
-     * @hide
-     */
-    enter: 'right',
+        /**
+         * @hide
+         */
+        enter: 'right',
 
-    /**
-     * @hide
-     */
-    exit: 'right',
+        /**
+         * @hide
+         */
+        exit: 'right',
 
-    /**
-     * @hide
-     */
-    hideOnMaskTap: true,
+        /**
+         * @hide
+         */
+        hideOnMaskTap: true,
 
-    /**
-     * @hide
-     */
-    baseCls: 'bb-crosscut',
+        /**
+         * @hide
+         */
+        baseCls: 'bb-crosscut',
 
-    /**
-     * @hide
-     */
-    scrollable: true,
+        /**
+         * @hide
+         */
+        scrollable: true,
 
-    /**
-     * @hide
-     */
-    layout: {
-      type: 'vbox',
-      pack: 'middle'
-    },
+        /**
+         * @hide
+         */
+        layout: {
+            type: 'vbox',
+            pack: 'middle'
+        },
 
-    /**
-     * @hide
-     */
-    defaultType: 'button',
+        /**
+         * @hide
+         */
+        defaultType: 'button',
 
-    /**
-     * @hide
-     */
-    showAnimation: {
-      preserveEndState: true,
-      to: {
-        width: 250
-      }
-    },
+        /**
+         * @hide
+         */
+        showAnimation: {
+            preserveEndState: true,
+            to: {
+                width: 250
+            }
+        },
 
-    /**
-     * @hide
-     */
-    hideAnimation: {
-      preserveEndState: true,
-      to: {
-        width: 68
-      }
+        /**
+         * @hide
+         */
+        hideAnimation: {
+            preserveEndState: true,
+            to: {
+                width: 68
+            }
+        }
     }
-  }
 });

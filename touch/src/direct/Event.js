@@ -6,37 +6,37 @@
  * to hold a Direct response.
  */
 Ext.define('Ext.direct.Event', {
-  alias: 'direct.event',
+    alias: 'direct.event',
 
-  requires: ['Ext.direct.Manager'],
+    requires: ['Ext.direct.Manager'],
 
-  config: {
-    status: true,
+    config: {
+        status: true,
 
-    /**
-     * @cfg {Object} data The raw data for this event.
-     * @accessor
-     */
-    data: null,
+        /**
+         * @cfg {Object} data The raw data for this event.
+         * @accessor
+         */
+        data: null,
 
-    /**
-     * @cfg {String} name The name of this Event.
-     * @accessor
-     */
-    name: 'event',
+        /**
+         * @cfg {String} name The name of this Event.
+         * @accessor
+         */
+        name: 'event',
 
-    xhr: null,
+        xhr: null,
 
-    code: null,
+        code: null,
 
-    message: '',
+        message: '',
 
-    result: null,
+        result: null,
 
-    transaction: null
-  },
+        transaction: null
+    },
 
-  constructor: function (config) {
-    this.initConfig(config)
-  }
+    constructor: function(config) {
+        this.initConfig(config)
+    }
 });

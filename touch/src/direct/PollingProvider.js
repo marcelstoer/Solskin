@@ -28,119 +28,119 @@
  *     var pollB = Ext.direct.Manager.getProvider('pollB-provider');
  */
 Ext.define('Ext.direct.PollingProvider', {
-  extend: 'Ext.direct.JsonProvider',
-  alias: 'direct.pollingprovider',
+    extend: 'Ext.direct.JsonProvider',
+    alias: 'direct.pollingprovider',
 
-  uses: ['Ext.direct.ExceptionEvent'],
+    uses: ['Ext.direct.ExceptionEvent'],
 
-  requires: ['Ext.Ajax', 'Ext.util.DelayedTask'],
+    requires: ['Ext.Ajax', 'Ext.util.DelayedTask'],
 
-  config: {
+    config: {
+        /**
+         * @cfg {Number} interval
+         * How often to poll the server-side, in milliseconds.
+         */
+        interval: 3000,
+
+        /**
+         * @cfg {Object} baseParams
+         * An object containing properties which are to be sent as parameters on every polling request.
+         */
+        baseParams: null,
+
+        /**
+         * @cfg {String/Function} url
+         * The url which the PollingProvider should contact with each request. This can also be
+         * an imported {@link Ext.Direct} method which will accept the `{@link #baseParams}` as its only argument.
+         */
+        url: null
+    },
+
     /**
-     * @cfg {Number} interval
-     * How often to poll the server-side, in milliseconds.
+     * @event beforepoll
+     * Fired immediately before a poll takes place, an event handler can return `false`
+     * in order to cancel the poll.
+     * @param {Ext.direct.PollingProvider} this
      */
-    interval: 3000,
 
     /**
-     * @cfg {Object} baseParams
-     * An object containing properties which are to be sent as parameters on every polling request.
+     * @event poll
+     * This event has not yet been implemented.
+     * @param {Ext.direct.PollingProvider} this
      */
-    baseParams: null,
 
     /**
-     * @cfg {String/Function} url
-     * The url which the PollingProvider should contact with each request. This can also be
-     * an imported {@link Ext.Direct} method which will accept the `{@link #baseParams}` as its only argument.
+     * @inheritdoc
      */
-    url: null
-  },
+    isConnected: function() {
+        return !!this.pollTask;
+    },
 
-  /**
-   * @event beforepoll
-   * Fired immediately before a poll takes place, an event handler can return `false`
-   * in order to cancel the poll.
-   * @param {Ext.direct.PollingProvider} this
-   */
+    /**
+     * Connect to the server-side and begin the polling process. To handle each
+     * response subscribe to the `data` event.
+     */
+    connect: function() {
+        var me = this,
+            url = me.getUrl(),
+            baseParams = me.getBaseParams();
 
-  /**
-   * @event poll
-   * This event has not yet been implemented.
-   * @param {Ext.direct.PollingProvider} this
-   */
-
-  /**
-   * @inheritdoc
-   */
-  isConnected: function () {
-    return !!this.pollTask;
-  },
-
-  /**
-   * Connect to the server-side and begin the polling process. To handle each
-   * response subscribe to the `data` event.
-   */
-  connect: function () {
-    var me = this,
-      url = me.getUrl(),
-      baseParams = me.getBaseParams();
-
-    if (url && !me.pollTask) {
-      me.pollTask = setInterval(function () {
-        if (me.fireEvent('beforepoll', me) !== false) {
-          if (Ext.isFunction(url)) {
-            url(baseParams);
-          } else {
-            Ext.Ajax.request({
-              url: url,
-              callback: me.onData,
-              scope: me,
-              params: baseParams
-            });
-          }
+        if (url && !me.pollTask) {
+            me.pollTask = setInterval(function() {
+                if (me.fireEvent('beforepoll', me) !== false) {
+                    if (Ext.isFunction(url)) {
+                        url(baseParams);
+                    } else {
+                        Ext.Ajax.request({
+                            url: url,
+                            callback: me.onData,
+                            scope: me,
+                            params: baseParams
+                        });
+                    }
+                }
+            }, me.getInterval());
+            me.fireEvent('connect', me);
+        } else if (!url) {
+            //<debug>
+            Ext.Error.raise('Error initializing PollingProvider, no url configured.');
+            //</debug>
         }
-      }, me.getInterval());
-      me.fireEvent('connect', me);
-    } else if (!url) {
-      //<debug>
-      Ext.Error.raise('Error initializing PollingProvider, no url configured.');
-      //</debug>
+    },
+
+    /**
+     * Disconnect from the server-side and stop the polling process. The `disconnect`
+     * event will be fired on a successful disconnect.
+     */
+    disconnect: function() {
+        var me = this;
+
+        if (me.pollTask) {
+            clearInterval(me.pollTask);
+            delete me.pollTask;
+            me.fireEvent('disconnect', me);
+        }
+    },
+
+    // @private
+    onData: function(opt, success, response) {
+        var me = this,
+            i = 0,
+            len,
+            events;
+
+        if (success) {
+            events = me.createEvents(response);
+            for (len = events.length; i < len; ++i) {
+                me.fireEvent('data', me, events[i]);
+            }
+        } else {
+            me.fireEvent('data', me, Ext.create('Ext.direct.ExceptionEvent', {
+                data: null,
+                code: Ext.direct.Manager.exceptions.TRANSPORT,
+                message: 'Unable to connect to the server.',
+                xhr: response
+            }));
+        }
     }
-  },
-
-  /**
-   * Disconnect from the server-side and stop the polling process. The `disconnect`
-   * event will be fired on a successful disconnect.
-   */
-  disconnect: function () {
-    var me = this;
-
-    if (me.pollTask) {
-      clearInterval(me.pollTask);
-      delete me.pollTask;
-      me.fireEvent('disconnect', me);
-    }
-  },
-
-  // @private
-  onData: function (opt, success, response) {
-    var me = this,
-      i = 0,
-      len,
-      events;
-
-    if (success) {
-      events = me.createEvents(response);
-      for (len = events.length; i < len; ++i) {
-        me.fireEvent('data', me, events[i]);
-      }
-    } else {
-      me.fireEvent('data', me, Ext.create('Ext.direct.ExceptionEvent', {
-        data: null,
-        code: Ext.direct.Manager.exceptions.TRANSPORT,
-        message: 'Unable to connect to the server.',
-        xhr: response
-      }));
-    }
-  }
 });

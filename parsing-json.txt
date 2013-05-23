@@ -1,4 +1,15 @@
 - replace first '{' by '['
 - replace last '}' by ']'
 - remove all pseudo keys
-  ("\d{5}"\:)(\{) -> $2
+  "\d{5}"\:\{ -> {
+
+
+curl http://www.meteotest.ch/de/wetterprognosen/aktuelles_wetter/messstationen // add --socks4a localhost:9150 to use it with tor
+| grep -Po 'smn = \K[^;]*' // look for line with "smn = [^;]*", grep does not support back references to extract capturing groups
+| sed 's/{/[/'             // replace first '{' with '['
+| sed 's/}$/]/'            // replace last '}' with ']'
+| sed 's/"[0-9]*":{/{/g'   // replace '"[0-9]*":{' with '{' globally to turn the JSON structure into a proper array
+ > data-$(date +%Y-%m-%d-%H%M%S).json
+
+
+curl --socks4a localhost:9150 http://www.meteotest.ch/de/wetterprognosen/aktuelles_wetter/messstationen | grep -Po 'smn = \K[^;]*' | sed 's/{/[/' | sed 's/}$/]/' | sed 's/"[0-9]*":{/{/g' > data-$(date +%Y-%m-%d-%H%M%S).json

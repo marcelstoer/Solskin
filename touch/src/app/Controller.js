@@ -209,16 +209,16 @@
  * and customizing for different devices.
  */
 Ext.define('Ext.app.Controller', {
-  mixins: {
-    observable: "Ext.mixin.Observable"
-  },
+    mixins: {
+        observable: "Ext.mixin.Observable"
+    },
 
-  config: {
-    /**
-     * @cfg {Object} refs A collection of named {@link Ext.ComponentQuery ComponentQuery} selectors that makes it
-     * easy to get references to key Components on your page. Example usage:
-     *
-     *     refs: {
+    config: {
+        /**
+         * @cfg {Object} refs A collection of named {@link Ext.ComponentQuery ComponentQuery} selectors that makes it
+         * easy to get references to key Components on your page. Example usage:
+         *
+         *     refs: {
          *         main: '#mainTabPanel',
          *         loginButton: '#loginWindow button[action=login]',
          *
@@ -228,44 +228,44 @@ Ext.define('Ext.app.Controller', {
          *             autoCreate: true
          *         }
          *     }
-     *
-     * The first two are simple ComponentQuery selectors, the third (infoPanel) also passes in the autoCreate and
-     * xtype options, which will first run the ComponentQuery to see if a Component matching that selector exists
-     * on the page. If not, it will automatically create one using the xtype provided:
-     *
-     *     someControllerFunction: function() {
+         *
+         * The first two are simple ComponentQuery selectors, the third (infoPanel) also passes in the autoCreate and
+         * xtype options, which will first run the ComponentQuery to see if a Component matching that selector exists
+         * on the page. If not, it will automatically create one using the xtype provided:
+         *
+         *     someControllerFunction: function() {
          *         //if the info panel didn't exist before, calling its getter will instantiate
          *         //it automatically and return the new instance
          *         this.getInfoPanel().show();
          *     }
-     *
-     * @accessor
-     */
-    refs: {},
+         *
+         * @accessor
+         */
+        refs: {},
 
-    /**
-     * @cfg {Object} routes Provides a mapping of urls to Controller actions. Whenever the specified url is matched
-     * in the address bar, the specified Controller action is called. Example usage:
-     *
-     *     routes: {
+        /**
+         * @cfg {Object} routes Provides a mapping of urls to Controller actions. Whenever the specified url is matched
+         * in the address bar, the specified Controller action is called. Example usage:
+         *
+         *     routes: {
          *         'login': 'showLogin',
          *         'users/:id': 'showUserById'
          *     }
-     *
-     * The first route will match against http://myapp.com/#login and call the Controller's showLogin function. The
-     * second route contains a wildcard (':id') and will match all urls like http://myapp.com/#users/123, calling
-     * the showUserById function with the matched ID as the first argument.
-     *
-     * @accessor
-     */
-    routes: {},
+         *
+         * The first route will match against http://myapp.com/#login and call the Controller's showLogin function. The
+         * second route contains a wildcard (':id') and will match all urls like http://myapp.com/#users/123, calling
+         * the showUserById function with the matched ID as the first argument.
+         *
+         * @accessor
+         */
+        routes: {},
 
-    /**
-     * @cfg {Object} control Provides a mapping of Controller functions that should be called whenever certain
-     * Component events are fired. The Components can be specified using {@link Ext.ComponentQuery ComponentQuery}
-     * selectors or {@link #refs}. Example usage:
-     *
-     *     control: {
+        /**
+         * @cfg {Object} control Provides a mapping of Controller functions that should be called whenever certain
+         * Component events are fired. The Components can be specified using {@link Ext.ComponentQuery ComponentQuery}
+         * selectors or {@link #refs}. Example usage:
+         *
+         *     control: {
          *         'button[action=logout]': {
          *             tap: 'doLogout'
          *         },
@@ -273,22 +273,22 @@ Ext.define('Ext.app.Controller', {
          *             activeitemchange: 'doUpdate'
          *         }
          *     }
-     *
-     * The first item uses a ComponentQuery selector to run the Controller's doLogout function whenever any Button
-     * with action=logout is tapped on. The second calls the Controller's doUpdate function whenever the
-     * activeitemchange event is fired by the Component referenced by our 'main' ref. In this case main is a tab
-     * panel (see {@link #refs} for how to set that reference up).
-     *
-     * @accessor
-     */
-    control: {},
+         *
+         * The first item uses a ComponentQuery selector to run the Controller's doLogout function whenever any Button
+         * with action=logout is tapped on. The second calls the Controller's doUpdate function whenever the
+         * activeitemchange event is fired by the Component referenced by our 'main' ref. In this case main is a tab
+         * panel (see {@link #refs} for how to set that reference up).
+         *
+         * @accessor
+         */
+        control: {},
 
-    /**
-     * @cfg {Object} before Provides a mapping of Controller functions to filter functions that are run before them
-     * when dispatched to from a route. These are usually used to run pre-processing functions like authentication
-     * before a certain function is executed. They are only called when dispatching from a route. Example usage:
-     *
-     *     Ext.define('MyApp.controller.Products', {
+        /**
+         * @cfg {Object} before Provides a mapping of Controller functions to filter functions that are run before them
+         * when dispatched to from a route. These are usually used to run pre-processing functions like authentication
+         * before a certain function is executed. They are only called when dispatching from a route. Example usage:
+         *
+         *     Ext.define('MyApp.controller.Products', {
          *         config: {
          *             before: {
          *                 editProduct: 'authenticate'
@@ -316,432 +316,432 @@ Ext.define('Ext.app.Controller', {
          *             });
          *         }
          *     });
-     *
-     * @accessor
-     */
-    before: {},
+         *
+         * @accessor
+         */
+        before: {},
+
+        /**
+         * @cfg {Ext.app.Application} application The Application instance this Controller is attached to. This is
+         * automatically provided when using the MVC architecture so should rarely need to be set directly.
+         * @accessor
+         */
+        application: {},
+
+        /**
+         * @cfg {String[]} stores The set of stores to load for this Application. Each store is expected to
+         * exist inside the *app/store* directory and define a class following the convention
+         * AppName.store.StoreName. For example, in the code below, the *AppName.store.Users* class will be loaded.
+         * Note that we are able to specify either the full class name (as with *AppName.store.Groups*) or just the
+         * final part of the class name and leave Application to automatically prepend *AppName.store.'* to each:
+         *
+         *     stores: [
+         *         'Users',
+         *         'AppName.store.Groups',
+         *         'SomeCustomNamespace.store.Orders'
+         *     ]
+         * @accessor
+         */
+        stores: [],
+
+        /**
+         * @cfg {String[]} models The set of models to load for this Application. Each model is expected to exist inside the
+         * *app/model* directory and define a class following the convention AppName.model.ModelName. For example, in the
+         * code below, the classes *AppName.model.User*, *AppName.model.Group* and *AppName.model.Product* will be loaded.
+         * Note that we are able to specify either the full class name (as with *AppName.model.Product*) or just the
+         * final part of the class name and leave Application to automatically prepend *AppName.model.* to each:
+         *
+         *     models: [
+         *         'User',
+         *         'Group',
+         *         'AppName.model.Product',
+         *         'SomeCustomNamespace.model.Order'
+         *     ]
+         * @accessor
+         */
+        models: [],
+
+        /**
+         * @cfg {Array} views The set of views to load for this Application. Each view is expected to exist inside the
+         * *app/view* directory and define a class following the convention AppName.view.ViewName. For example, in the
+         * code below, the classes *AppName.view.Users*, *AppName.view.Groups* and *AppName.view.Products* will be loaded.
+         * Note that we are able to specify either the full class name (as with *AppName.view.Products*) or just the
+         * final part of the class name and leave Application to automatically prepend *AppName.view.* to each:
+         *
+         *     views: [
+         *         'Users',
+         *         'Groups',
+         *         'AppName.view.Products',
+         *         'SomeCustomNamespace.view.Orders'
+         *     ]
+         * @accessor
+         */
+        views: []
+    },
 
     /**
-     * @cfg {Ext.app.Application} application The Application instance this Controller is attached to. This is
-     * automatically provided when using the MVC architecture so should rarely need to be set directly.
-     * @accessor
+     * Constructs a new Controller instance
      */
-    application: {},
+    constructor: function(config) {
+        this.initConfig(config);
+
+        this.mixins.observable.constructor.call(this, config);
+    },
 
     /**
-     * @cfg {String[]} stores The set of stores to load for this Application. Each store is expected to
-     * exist inside the *app/store* directory and define a class following the convention
-     * AppName.store.StoreName. For example, in the code below, the *AppName.store.Users* class will be loaded.
-     * Note that we are able to specify either the full class name (as with *AppName.store.Groups*) or just the
-     * final part of the class name and leave Application to automatically prepend *AppName.store.'* to each:
-     *
-     *     stores: [
-     *         'Users',
-     *         'AppName.store.Groups',
-     *         'SomeCustomNamespace.store.Orders'
-     *     ]
-     * @accessor
+     * @cfg
+     * Called by the Controller's {@link #application} to initialize the Controller. This is always called before the
+     * {@link Ext.app.Application Application} launches, giving the Controller a chance to run any pre-launch logic.
+     * See also {@link #launch}, which is called after the {@link Ext.app.Application#launch Application's launch function}
      */
-    stores: [],
+    init: Ext.emptyFn,
 
     /**
-     * @cfg {String[]} models The set of models to load for this Application. Each model is expected to exist inside the
-     * *app/model* directory and define a class following the convention AppName.model.ModelName. For example, in the
-     * code below, the classes *AppName.model.User*, *AppName.model.Group* and *AppName.model.Product* will be loaded.
-     * Note that we are able to specify either the full class name (as with *AppName.model.Product*) or just the
-     * final part of the class name and leave Application to automatically prepend *AppName.model.* to each:
-     *
-     *     models: [
-     *         'User',
-     *         'Group',
-     *         'AppName.model.Product',
-     *         'SomeCustomNamespace.model.Order'
-     *     ]
-     * @accessor
+     * @cfg
+     * Called by the Controller's {@link #application} immediately after the Application's own
+     * {@link Ext.app.Application#launch launch function} has been called. This is usually a good place to run any
+     * logic that has to run after the app UI is initialized. See also {@link #init}, which is called before the
+     * {@link Ext.app.Application#launch Application's launch function}.
      */
-    models: [],
+    launch: Ext.emptyFn,
 
     /**
-     * @cfg {Array} views The set of views to load for this Application. Each view is expected to exist inside the
-     * *app/view* directory and define a class following the convention AppName.view.ViewName. For example, in the
-     * code below, the classes *AppName.view.Users*, *AppName.view.Groups* and *AppName.view.Products* will be loaded.
-     * Note that we are able to specify either the full class name (as with *AppName.view.Products*) or just the
-     * final part of the class name and leave Application to automatically prepend *AppName.view.* to each:
-     *
-     *     views: [
-     *         'Users',
-     *         'Groups',
-     *         'AppName.view.Products',
-     *         'SomeCustomNamespace.view.Orders'
-     *     ]
-     * @accessor
+     * Convenient way to redirect to a new url. See {@link Ext.app.Application#redirectTo} for full usage information.
+     * @return {Object}
      */
-    views: []
-  },
+    redirectTo: function(place) {
+        return this.getApplication().redirectTo(place);
+    },
 
-  /**
-   * Constructs a new Controller instance
-   */
-  constructor: function (config) {
-    this.initConfig(config);
+    /**
+     * @private
+     * Executes an Ext.app.Action by giving it the correct before filters and kicking off execution
+     */
+    execute: function(action, skipFilters) {
+        action.setBeforeFilters(this.getBefore()[action.getAction()]);
+        action.execute();
+    },
 
-    this.mixins.observable.constructor.call(this, config);
-  },
+    /**
+     * @private
+     * Massages the before filters into an array of function references for each controller action
+     */
+    applyBefore: function(before) {
+        var filters, name, length, i;
 
-  /**
-   * @cfg
-   * Called by the Controller's {@link #application} to initialize the Controller. This is always called before the
-   * {@link Ext.app.Application Application} launches, giving the Controller a chance to run any pre-launch logic.
-   * See also {@link #launch}, which is called after the {@link Ext.app.Application#launch Application's launch function}
-   */
-  init: Ext.emptyFn,
+        for (name in before) {
+            filters = Ext.Array.from(before[name]);
+            length  = filters.length;
 
-  /**
-   * @cfg
-   * Called by the Controller's {@link #application} immediately after the Application's own
-   * {@link Ext.app.Application#launch launch function} has been called. This is usually a good place to run any
-   * logic that has to run after the app UI is initialized. See also {@link #init}, which is called before the
-   * {@link Ext.app.Application#launch Application's launch function}.
-   */
-  launch: Ext.emptyFn,
+            for (i = 0; i < length; i++) {
+                filters[i] = this[filters[i]];
+            }
 
-  /**
-   * Convenient way to redirect to a new url. See {@link Ext.app.Application#redirectTo} for full usage information.
-   * @return {Object}
-   */
-  redirectTo: function (place) {
-    return this.getApplication().redirectTo(place);
-  },
-
-  /**
-   * @private
-   * Executes an Ext.app.Action by giving it the correct before filters and kicking off execution
-   */
-  execute: function (action, skipFilters) {
-    action.setBeforeFilters(this.getBefore()[action.getAction()]);
-    action.execute();
-  },
-
-  /**
-   * @private
-   * Massages the before filters into an array of function references for each controller action
-   */
-  applyBefore: function (before) {
-    var filters, name, length, i;
-
-    for (name in before) {
-      filters = Ext.Array.from(before[name]);
-      length = filters.length;
-
-      for (i = 0; i < length; i++) {
-        filters[i] = this[filters[i]];
-      }
-
-      before[name] = filters;
-    }
-
-    return before;
-  },
-
-  /**
-   * @private
-   */
-  applyControl: function (config) {
-    this.control(config, this);
-
-    return config;
-  },
-
-  /**
-   * @private
-   */
-  applyRefs: function (refs) {
-    //<debug>
-    if (Ext.isArray(refs)) {
-      Ext.Logger.deprecate("In Sencha Touch 2 the refs config accepts an object but you have passed it an array.");
-    }
-    //</debug>
-
-    this.ref(refs);
-
-    return refs;
-  },
-
-  /**
-   * @private
-   * Adds any routes specified in this Controller to the global Application router
-   */
-  applyRoutes: function (routes) {
-    var app = this instanceof Ext.app.Application ? this : this.getApplication(),
-      router = app.getRouter(),
-      route, url, config;
-
-    for (url in routes) {
-      route = routes[url];
-
-      config = {
-        controller: this.$className
-      };
-
-      if (Ext.isString(route)) {
-        config.action = route;
-      } else {
-        Ext.apply(config, route);
-      }
-
-      router.connect(url, config);
-    }
-
-    return routes;
-  },
-
-  /**
-   * @private
-   * As a convenience developers can locally qualify store names (e.g. 'MyStore' vs
-   * 'MyApp.store.MyStore'). This just makes sure everything ends up fully qualified
-   */
-  applyStores: function (stores) {
-    return this.getFullyQualified(stores, 'store');
-  },
-
-  /**
-   * @private
-   * As a convenience developers can locally qualify model names (e.g. 'MyModel' vs
-   * 'MyApp.model.MyModel'). This just makes sure everything ends up fully qualified
-   */
-  applyModels: function (models) {
-    return this.getFullyQualified(models, 'model');
-  },
-
-  /**
-   * @private
-   * As a convenience developers can locally qualify view names (e.g. 'MyView' vs
-   * 'MyApp.view.MyView'). This just makes sure everything ends up fully qualified
-   */
-  applyViews: function (views) {
-    return this.getFullyQualified(views, 'view');
-  },
-
-  /**
-   * @private
-   * Returns the fully qualified name for any class name variant. This is used to find the FQ name for the model,
-   * view, controller, store and profiles listed in a Controller or Application.
-   * @param {String[]} items The array of strings to get the FQ name for
-   * @param {String} namespace If the name happens to be an application class, add it to this namespace
-   * @return {String} The fully-qualified name of the class
-   */
-  getFullyQualified: function (items, namespace) {
-    var length = items.length,
-      appName = this.getApplication().getName(),
-      name, i;
-
-    for (i = 0; i < length; i++) {
-      name = items[i];
-
-      //we check name === appName to allow MyApp.profile.MyApp to exist
-      if (Ext.isString(name) && (Ext.Loader.getPrefix(name) === "" || name === appName)) {
-        items[i] = appName + '.' + namespace + '.' + name;
-      }
-    }
-
-    return items;
-  },
-
-  /**
-   * @private
-   */
-  control: function (selectors) {
-    this.getApplication().control(selectors, this);
-  },
-
-  /**
-   * @private
-   * 1.x-inspired ref implementation
-   */
-  ref: function (refs) {
-    var me = this,
-      refName, getterName, selector, info;
-
-    for (refName in refs) {
-      selector = refs[refName];
-      getterName = "get" + Ext.String.capitalize(refName);
-
-      if (!this[getterName]) {
-        if (Ext.isString(refs[refName])) {
-          info = {
-            ref: refName,
-            selector: selector
-          };
-        } else {
-          info = refs[refName];
+            before[name] = filters;
         }
 
-        this[getterName] = function (refName, info) {
-          var args = [refName, info];
-          return function () {
-            return me.getRef.apply(me, args.concat.apply(args, arguments));
-          };
-        }(refName, info);
-      }
+        return before;
+    },
 
-      this.references = this.references || [];
-      this.references.push(refName.toLowerCase());
+    /**
+     * @private
+     */
+    applyControl: function(config) {
+        this.control(config, this);
+
+        return config;
+    },
+
+    /**
+     * @private
+     */
+    applyRefs: function(refs) {
+        //<debug>
+        if (Ext.isArray(refs)) {
+            Ext.Logger.deprecate("In Sencha Touch 2 the refs config accepts an object but you have passed it an array.");
+        }
+        //</debug>
+
+        this.ref(refs);
+
+        return refs;
+    },
+
+    /**
+     * @private
+     * Adds any routes specified in this Controller to the global Application router
+     */
+    applyRoutes: function(routes) {
+        var app    = this instanceof Ext.app.Application ? this : this.getApplication(),
+            router = app.getRouter(),
+            route, url, config;
+
+        for (url in routes) {
+            route = routes[url];
+
+            config = {
+                controller: this.$className
+            };
+
+            if (Ext.isString(route)) {
+                config.action = route;
+            } else {
+                Ext.apply(config, route);
+            }
+
+            router.connect(url, config);
+        }
+
+        return routes;
+    },
+
+    /**
+     * @private
+     * As a convenience developers can locally qualify store names (e.g. 'MyStore' vs
+     * 'MyApp.store.MyStore'). This just makes sure everything ends up fully qualified
+     */
+    applyStores: function(stores) {
+        return this.getFullyQualified(stores, 'store');
+    },
+
+    /**
+     * @private
+     * As a convenience developers can locally qualify model names (e.g. 'MyModel' vs
+     * 'MyApp.model.MyModel'). This just makes sure everything ends up fully qualified
+     */
+    applyModels: function(models) {
+        return this.getFullyQualified(models, 'model');
+    },
+
+    /**
+     * @private
+     * As a convenience developers can locally qualify view names (e.g. 'MyView' vs
+     * 'MyApp.view.MyView'). This just makes sure everything ends up fully qualified
+     */
+    applyViews: function(views) {
+        return this.getFullyQualified(views, 'view');
+    },
+
+    /**
+     * @private
+     * Returns the fully qualified name for any class name variant. This is used to find the FQ name for the model,
+     * view, controller, store and profiles listed in a Controller or Application.
+     * @param {String[]} items The array of strings to get the FQ name for
+     * @param {String} namespace If the name happens to be an application class, add it to this namespace
+     * @return {String} The fully-qualified name of the class
+     */
+    getFullyQualified: function(items, namespace) {
+        var length  = items.length,
+            appName = this.getApplication().getName(),
+            name, i;
+
+        for (i = 0; i < length; i++) {
+            name = items[i];
+
+            //we check name === appName to allow MyApp.profile.MyApp to exist
+            if (Ext.isString(name) && (Ext.Loader.getPrefix(name) === "" || name === appName)) {
+                items[i] = appName + '.' + namespace + '.' + name;
+            }
+        }
+
+        return items;
+    },
+
+    /**
+     * @private
+     */
+    control: function(selectors) {
+        this.getApplication().control(selectors, this);
+    },
+
+    /**
+     * @private
+     * 1.x-inspired ref implementation
+     */
+    ref: function(refs) {
+        var me = this,
+            refName, getterName, selector, info;
+
+        for (refName in refs) {
+            selector = refs[refName];
+            getterName = "get" + Ext.String.capitalize(refName);
+
+            if (!this[getterName]) {
+                if (Ext.isString(refs[refName])) {
+                    info = {
+                        ref: refName,
+                        selector: selector
+                    };
+                } else {
+                    info = refs[refName];
+                }
+
+                this[getterName] = function(refName, info) {
+                    var args = [refName, info];
+                    return function() {
+                        return me.getRef.apply(me, args.concat.apply(args, arguments));
+                    };
+                }(refName, info);
+            }
+
+            this.references = this.references || [];
+            this.references.push(refName.toLowerCase());
+        }
+    },
+
+    /**
+     * @private
+     */
+    getRef: function(ref, info, config) {
+        this.refCache = this.refCache || {};
+        info = info || {};
+        config = config || {};
+
+        Ext.apply(info, config);
+
+        if (info.forceCreate) {
+            return Ext.ComponentManager.create(info, 'component');
+        }
+
+        var me = this,
+            cached = me.refCache[ref];
+
+        if (!cached) {
+            me.refCache[ref] = cached = Ext.ComponentQuery.query(info.selector)[0];
+            if (!cached && info.autoCreate) {
+                me.refCache[ref] = cached = Ext.ComponentManager.create(info, 'component');
+            }
+            if (cached) {
+                cached.on('destroy', function() {
+                    me.refCache[ref] = null;
+                });
+            }
+        }
+
+        return cached;
+    },
+
+    /**
+     * @private
+     */
+    hasRef: function(ref) {
+        return this.references && this.references.indexOf(ref.toLowerCase()) !== -1;
     }
-  },
 
-  /**
-   * @private
-   */
-  getRef: function (ref, info, config) {
-    this.refCache = this.refCache || {};
-    info = info || {};
-    config = config || {};
+    // <deprecated product=touch since=2.0>
+    ,onClassExtended: function(cls, members) {
+        var prototype = this.prototype,
+            defaultConfig = prototype.config,
+            config = members.config || {},
+            arrayRefs = members.refs,
+            objectRefs = {},
+            stores = members.stores,
+            views = members.views,
+            format = Ext.String.format,
+            refItem, key, length, i, functionName;
 
-    Ext.apply(info, config);
+        // Convert deprecated properties in application into a config object
+        for (key in defaultConfig) {
+            if (key in members && key != "control") {
+                if (key == "refs") {
+                    //we need to convert refs from the 1.x array-style to 2.x object-style
+                    for (i = 0; i < arrayRefs.length; i++) {
+                        refItem = arrayRefs[i];
 
-    if (info.forceCreate) {
-      return Ext.ComponentManager.create(info, 'component');
+                        objectRefs[refItem.ref] = refItem;
+                    }
+
+                    config.refs = objectRefs;
+                } else {
+                    config[key] = members[key];
+                }
+
+                delete members[key];
+                // <debug warn>
+                Ext.Logger.deprecate(key + ' is deprecated as a property directly on the ' + this.$className + ' prototype. Please put it inside the config object.');
+                // </debug>
+            }
+        }
+
+        if (stores) {
+            length = stores.length;
+            config.stores = stores;
+            for (i = 0; i < length; i++) {
+                functionName = format("get{0}Store", Ext.String.capitalize(stores[i]));
+
+                prototype[functionName] = function(name) {
+                    return function() {
+                        return Ext.StoreManager.lookup(name);
+                    };
+                }(stores[i]);
+            }
+        }
+
+        if (views) {
+            length = views.length;
+            config.views = views;
+            for (i = 0; i < length; i++) {
+                functionName = format("get{0}View", views[i]);
+
+                prototype[functionName] = function(name) {
+                    return function() {
+                        return Ext.ClassManager.classes[format("{0}.view.{1}", this.getApplication().getName(), name)];
+                    };
+                }(views[i]);
+            }
+        }
+
+        members.config = config;
+    },
+
+    /**
+     * Returns a reference to a Model.
+     * @param modelName
+     * @return {Object}
+     * @deprecated 2.0.0 Considered bad practice - please just use the Model name instead
+     * (e.g. `MyApp.model.User` vs `this.getModel('User')`).
+     */
+    getModel: function(modelName) {
+        //<debug warn>
+        Ext.Logger.deprecate("getModel() is deprecated and considered bad practice - please just use the Model " +
+            "name instead (e.g. MyApp.model.User vs this.getModel('User'))");
+        //</debug>
+
+        var appName = this.getApplication().getName(),
+            classes = Ext.ClassManager.classes;
+
+        return classes[appName + '.model.' + modelName];
+    },
+
+    /**
+     * Returns a reference to another Controller.
+     * @param controllerName
+     * @param profile
+     * @return {Object}
+     * @deprecated 2.0.0 Considered bad practice - if you need to do this
+     * please use this.getApplication().getController() instead
+     */
+    getController: function(controllerName, profile) {
+        //<debug warn>
+        Ext.Logger.deprecate("Ext.app.Controller#getController is deprecated and considered bad practice - " +
+            "please use this.getApplication().getController('someController') instead");
+        //</debug>
+
+        return this.getApplication().getController(controllerName, profile);
     }
-
-    var me = this,
-      cached = me.refCache[ref];
-
-    if (!cached) {
-      me.refCache[ref] = cached = Ext.ComponentQuery.query(info.selector)[0];
-      if (!cached && info.autoCreate) {
-        me.refCache[ref] = cached = Ext.ComponentManager.create(info, 'component');
-      }
-      if (cached) {
-        cached.on('destroy', function () {
-          me.refCache[ref] = null;
+    // </deprecated>
+}, function() {
+    // <deprecated product=touch since=2.0>
+    Ext.regController = function(name, config) {
+        Ext.apply(config, {
+            extend: 'Ext.app.Controller'
         });
-      }
-    }
 
-    return cached;
-  },
-
-  /**
-   * @private
-   */
-  hasRef: function (ref) {
-    return this.references && this.references.indexOf(ref.toLowerCase()) !== -1;
-  }
-
-  // <deprecated product=touch since=2.0>
-  , onClassExtended: function (cls, members) {
-    var prototype = this.prototype,
-      defaultConfig = prototype.config,
-      config = members.config || {},
-      arrayRefs = members.refs,
-      objectRefs = {},
-      stores = members.stores,
-      views = members.views,
-      format = Ext.String.format,
-      refItem, key, length, i, functionName;
-
-    // Convert deprecated properties in application into a config object
-    for (key in defaultConfig) {
-      if (key in members && key != "control") {
-        if (key == "refs") {
-          //we need to convert refs from the 1.x array-style to 2.x object-style
-          for (i = 0; i < arrayRefs.length; i++) {
-            refItem = arrayRefs[i];
-
-            objectRefs[refItem.ref] = refItem;
-          }
-
-          config.refs = objectRefs;
-        } else {
-          config[key] = members[key];
-        }
-
-        delete members[key];
-        // <debug warn>
-        Ext.Logger.deprecate(key + ' is deprecated as a property directly on the ' + this.$className + ' prototype. Please put it inside the config object.');
-        // </debug>
-      }
-    }
-
-    if (stores) {
-      length = stores.length;
-      config.stores = stores;
-      for (i = 0; i < length; i++) {
-        functionName = format("get{0}Store", Ext.String.capitalize(stores[i]));
-
-        prototype[functionName] = function (name) {
-          return function () {
-            return Ext.StoreManager.lookup(name);
-          };
-        }(stores[i]);
-      }
-    }
-
-    if (views) {
-      length = views.length;
-      config.views = views;
-      for (i = 0; i < length; i++) {
-        functionName = format("get{0}View", views[i]);
-
-        prototype[functionName] = function (name) {
-          return function () {
-            return Ext.ClassManager.classes[format("{0}.view.{1}", this.getApplication().getName(), name)];
-          };
-        }(views[i]);
-      }
-    }
-
-    members.config = config;
-  },
-
-  /**
-   * Returns a reference to a Model.
-   * @param modelName
-   * @return {Object}
-   * @deprecated 2.0.0 Considered bad practice - please just use the Model name instead
-   * (e.g. `MyApp.model.User` vs `this.getModel('User')`).
-   */
-  getModel: function (modelName) {
-    //<debug warn>
-    Ext.Logger.deprecate("getModel() is deprecated and considered bad practice - please just use the Model " +
-      "name instead (e.g. MyApp.model.User vs this.getModel('User'))");
-    //</debug>
-
-    var appName = this.getApplication().getName(),
-      classes = Ext.ClassManager.classes;
-
-    return classes[appName + '.model.' + modelName];
-  },
-
-  /**
-   * Returns a reference to another Controller.
-   * @param controllerName
-   * @param profile
-   * @return {Object}
-   * @deprecated 2.0.0 Considered bad practice - if you need to do this
-   * please use this.getApplication().getController() instead
-   */
-  getController: function (controllerName, profile) {
-    //<debug warn>
-    Ext.Logger.deprecate("Ext.app.Controller#getController is deprecated and considered bad practice - " +
-      "please use this.getApplication().getController('someController') instead");
-    //</debug>
-
-    return this.getApplication().getController(controllerName, profile);
-  }
-  // </deprecated>
-}, function () {
-  // <deprecated product=touch since=2.0>
-  Ext.regController = function (name, config) {
-    Ext.apply(config, {
-      extend: 'Ext.app.Controller'
-    });
-
-    Ext.Logger.deprecate(
-      '[Ext.app.Controller] Ext.regController is deprecated, please use Ext.define to define a Controller as ' +
-        'with any other class. For more information see the Touch 1.x -> 2.x migration guide'
-    );
-    Ext.define('controller.' + name, config);
-  };
-  // </deprecated>
+        Ext.Logger.deprecate(
+            '[Ext.app.Controller] Ext.regController is deprecated, please use Ext.define to define a Controller as ' +
+            'with any other class. For more information see the Touch 1.x -> 2.x migration guide'
+        );
+        Ext.define('controller.' + name, config);
+    };
+    // </deprecated>
 });

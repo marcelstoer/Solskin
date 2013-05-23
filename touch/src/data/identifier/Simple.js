@@ -18,21 +18,21 @@
  *
  */
 Ext.define('Ext.data.identifier.Simple', {
-  alias: 'data.identifier.simple',
+    alias: 'data.identifier.simple',
+    
+    statics: {
+        AUTO_ID: 1
+    },
 
-  statics: {
-    AUTO_ID: 1
-  },
+    config: {
+        prefix: 'ext-record-'
+    },
 
-  config: {
-    prefix: 'ext-record-'
-  },
+    constructor: function(config) {
+        this.initConfig(config);
+    },
 
-  constructor: function (config) {
-    this.initConfig(config);
-  },
-
-  generate: function (record) {
-    return this._prefix + this.self.AUTO_ID++;
-  }
+    generate: function(record) {
+        return this._prefix + this.self.AUTO_ID++;
+    }
 });

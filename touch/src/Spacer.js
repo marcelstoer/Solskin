@@ -1,12 +1,12 @@
 /**
- The {@link Ext.Spacer} component is generally used to put space between items in {@link Ext.Toolbar} components.
+The {@link Ext.Spacer} component is generally used to put space between items in {@link Ext.Toolbar} components.
 
- ## Examples
+## Examples
 
- By default the {@link #flex} configuration is set to 1:
+By default the {@link #flex} configuration is set to 1:
 
- @example miniphone preview
- Ext.create('Ext.Container', {
+    @example miniphone preview
+    Ext.create('Ext.Container', {
         fullscreen: true,
         items: [
             {
@@ -29,10 +29,10 @@
         ]
     });
 
- Alternatively you can just set the {@link #width} configuration which will get the {@link Ext.Spacer} a fixed width:
+Alternatively you can just set the {@link #width} configuration which will get the {@link Ext.Spacer} a fixed width:
 
- @example preview
- Ext.create('Ext.Container', {
+    @example preview
+    Ext.create('Ext.Container', {
         fullscreen: true,
         layout: {
             type: 'vbox',
@@ -79,10 +79,10 @@
         ]
     });
 
- You can also insert multiple {@link Ext.Spacer}'s:
+You can also insert multiple {@link Ext.Spacer}'s:
 
- @example preview
- Ext.create('Ext.Container', {
+    @example preview
+    Ext.create('Ext.Container', {
         fullscreen: true,
         items: [
             {
@@ -114,31 +114,31 @@
     });
  */
 Ext.define('Ext.Spacer', {
-  extend: 'Ext.Component',
-  alias: 'widget.spacer',
+    extend: 'Ext.Component',
+    alias : 'widget.spacer',
 
-  config: {
-    /**
-     * @cfg {Number} flex
-     * The flex value of this spacer. This defaults to 1, if no width has been set.
-     * @accessor
-     */
+    config: {
+        /**
+         * @cfg {Number} flex
+         * The flex value of this spacer. This defaults to 1, if no width has been set.
+         * @accessor
+         */
+        
+        /**
+         * @cfg {Number} width
+         * The width of this spacer. If this is set, the value of {@link #flex} will be ignored.
+         * @accessor
+         */
+    },
 
-    /**
-     * @cfg {Number} width
-     * The width of this spacer. If this is set, the value of {@link #flex} will be ignored.
-     * @accessor
-     */
-  },
+    // @private
+    constructor: function(config) {
+        config = config || {};
 
-  // @private
-  constructor: function (config) {
-    config = config || {};
+        if (!config.width) {
+            config.flex = 1;
+        }
 
-    if (!config.width) {
-      config.flex = 1;
+        this.callParent([config]);
     }
-
-    this.callParent([config]);
-  }
 });

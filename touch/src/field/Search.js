@@ -39,23 +39,23 @@
  * functionality available.
  */
 Ext.define('Ext.field.Search', {
-  extend: 'Ext.field.Text',
-  xtype: 'searchfield',
-  alternateClassName: 'Ext.form.Search',
+    extend: 'Ext.field.Text',
+    xtype: 'searchfield',
+    alternateClassName: 'Ext.form.Search',
 
-  config: {
-    /**
-     * @cfg
-     * @inheritdoc
-     */
-    component: {
-      type: 'search'
-    },
+    config: {
+        /**
+         * @cfg
+         * @inheritdoc
+         */
+        component: {
+	        type: 'search'
+	    },
 
-    /**
-     * @cfg
-     * @inheritdoc
-     */
-    ui: 'search'
-  }
+        /**
+         * @cfg
+         * @inheritdoc
+         */
+	    ui: 'search'
+    }
 });

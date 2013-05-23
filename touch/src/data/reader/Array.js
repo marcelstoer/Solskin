@@ -33,36 +33,36 @@
  * @param {Object} meta Metadata configuration options.
  */
 Ext.define('Ext.data.reader.Array', {
-  extend: 'Ext.data.reader.Json',
-  alternateClassName: 'Ext.data.ArrayReader',
-  alias: 'reader.array',
+    extend: 'Ext.data.reader.Json',
+    alternateClassName: 'Ext.data.ArrayReader',
+    alias : 'reader.array',
 
-  // For Array Reader, methods in the base which use these properties must not see the defaults
-  config: {
-    totalProperty: undefined,
-    successProperty: undefined
-  },
+    // For Array Reader, methods in the base which use these properties must not see the defaults
+    config: {
+        totalProperty: undefined,
+        successProperty: undefined
+    },
 
-  /**
-   * @private
-   * Returns an accessor expression for the passed Field from an Array using either the Field's mapping, or
-   * its ordinal position in the fields collection as the index.
-   * This is used by buildExtractors to create optimized on extractor function which converts raw data into model instances.
-   */
-  createFieldAccessExpression: function (field, fieldVarName, dataName) {
-    var me = this,
-      mapping = field.getMapping(),
-      index = (mapping == null) ? me.getModel().getFields().indexOf(field) : mapping,
-      result;
+    /**
+     * @private
+     * Returns an accessor expression for the passed Field from an Array using either the Field's mapping, or
+     * its ordinal position in the fields collection as the index.
+     * This is used by buildExtractors to create optimized on extractor function which converts raw data into model instances.
+     */
+    createFieldAccessExpression: function(field, fieldVarName, dataName) {
+        var me     = this,
+            mapping = field.getMapping(),
+            index  = (mapping == null) ? me.getModel().getFields().indexOf(field) : mapping,
+            result;
 
-    if (typeof index === 'function') {
-      result = fieldVarName + '.getMapping()(' + dataName + ', this)';
-    } else {
-      if (isNaN(index)) {
-        index = '"' + index + '"';
-      }
-      result = dataName + "[" + index + "]";
+        if (typeof index === 'function') {
+            result = fieldVarName + '.getMapping()(' + dataName + ', this)';
+        } else {
+            if (isNaN(index)) {
+                index = '"' + index + '"';
+            }
+            result = dataName + "[" + index + "]";
+        }
+        return result;
     }
-    return result;
-  }
 });

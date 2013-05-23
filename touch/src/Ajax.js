@@ -35,12 +35,12 @@
  * requests in the application.
  */
 Ext.define('Ext.Ajax', {
-  extend: 'Ext.data.Connection',
-  singleton: true,
+    extend: 'Ext.data.Connection',
+    singleton: true,
 
-  /**
-   * @property {Boolean} autoAbort
-   * Whether a new request should abort any pending requests.
-   */
-  autoAbort: false
+    /**
+     * @property {Boolean} autoAbort
+     * Whether a new request should abort any pending requests.
+     */
+    autoAbort : false
 });

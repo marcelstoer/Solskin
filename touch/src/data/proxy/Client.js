@@ -6,16 +6,16 @@
  * @private
  */
 Ext.define('Ext.data.proxy.Client', {
-  extend: 'Ext.data.proxy.Proxy',
-  alternateClassName: 'Ext.proxy.ClientProxy',
+    extend: 'Ext.data.proxy.Proxy',
+    alternateClassName: 'Ext.proxy.ClientProxy',
 
-  /**
-   * Abstract function that must be implemented by each ClientProxy subclass. This should purge all record data
-   * from the client side storage, as well as removing any supporting data (such as lists of record IDs)
-   */
-  clear: function () {
-    //<debug>
-    Ext.Logger.error("The Ext.data.proxy.Client subclass that you are using has not defined a 'clear' function. See src/data/ClientProxy.js for details.");
-    //</debug>
-  }
+    /**
+     * Abstract function that must be implemented by each ClientProxy subclass. This should purge all record data
+     * from the client side storage, as well as removing any supporting data (such as lists of record IDs)
+     */
+    clear: function() {
+        //<debug>
+        Ext.Logger.error("The Ext.data.proxy.Client subclass that you are using has not defined a 'clear' function. See src/data/ClientProxy.js for details.");
+        //</debug>
+    }
 });

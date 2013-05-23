@@ -16,7 +16,7 @@
 //<deprecated product=touch since=2.0>
 Ext.ns('Ext.core');
 Ext.core.EventManager =
-  Ext.EventManager = {
+Ext.EventManager = {
     /**
      * Appends an event handler to an element.  The shorthand version {@link #on} is equivalent.  Typically you will
      * use {@link Ext.Element#addListener} directly on an Element in favor of calling this version.
@@ -47,11 +47,11 @@ Ext.core.EventManager =
      * See {@link Ext.Element#addListener} for examples of how to use these options.
      * @deprecated 2.0.0 Please use {@link Ext.dom.Element#addListener addListener} on an instance of Ext.Element instead.
      */
-    addListener: function (element, eventName, fn, scope, options) {
-      //<debug warn>
-      Ext.Logger.deprecate("Ext.EventManager.addListener is deprecated, use addListener() directly from an instance of Ext.Element instead", 2);
-      //</debug>
-      element.on(eventName, fn, scope, options);
+    addListener: function(element, eventName, fn, scope, options) {
+        //<debug warn>
+        Ext.Logger.deprecate("Ext.EventManager.addListener is deprecated, use addListener() directly from an instance of Ext.Element instead", 2);
+        //</debug>
+        element.on(eventName, fn, scope, options);
     },
 
     /**
@@ -64,11 +64,11 @@ Ext.core.EventManager =
      * then this must refer to the same object.
      * @deprecated 2.0.0 Please use {@link Ext.dom.Element#removeListener removeListener} on an instance of Ext.Element instead.
      */
-    removeListener: function (element, eventName, fn, scope) {
-      //<debug warn>
-      Ext.Logger.deprecate("Ext.EventManager.removeListener is deprecated, use removeListener() directly from an instance of Ext.Element instead", 2);
-      //</debug>
-      element.un(eventName, fn, scope);
+    removeListener: function(element, eventName, fn, scope) {
+        //<debug warn>
+        Ext.Logger.deprecate("Ext.EventManager.removeListener is deprecated, use removeListener() directly from an instance of Ext.Element instead", 2);
+        //</debug>
+        element.un(eventName, fn, scope);
     },
 
     /**
@@ -77,21 +77,21 @@ Ext.core.EventManager =
      * @param {String/HTMLElement} el The id or html element from which to remove all event handlers.
      * @deprecated 2.0.0 Please use {@link Ext.dom.Element#clearListeners clearListeners} on an instance of Ext.Element instead.
      */
-    removeAll: function (element) {
-      //<debug warn>
-      Ext.Logger.deprecate("Ext.EventManager.removeAll is deprecated, use clearListeners() directly from an instance of Ext.Element instead", 3);
-      //</debug>
-      Ext.get(element).clearListeners();
+    removeAll: function(element){
+        //<debug warn>
+        Ext.Logger.deprecate("Ext.EventManager.removeAll is deprecated, use clearListeners() directly from an instance of Ext.Element instead", 3);
+        //</debug>
+        Ext.get(element).clearListeners();
     },
 
     /**
      * Adds a listener to be notified when the document is ready (before `onload` and before images are loaded).
      * @removed 2.0.0 Please use {@link Ext#onReady onReady}
      */
-    onDocumentReady: function () {
-      //<debug warn>
-      Ext.Logger.deprecate("Ext.EventManager.onDocumentReady has been removed, please use Ext.onReady instead", 3);
-      //</debug>
+    onDocumentReady: function() {
+        //<debug warn>
+        Ext.Logger.deprecate("Ext.EventManager.onDocumentReady has been removed, please use Ext.onReady instead", 3);
+        //</debug>
     },
 
     /**
@@ -102,39 +102,39 @@ Ext.core.EventManager =
      * @param {Boolean}  options Options object as passed to {@link Ext.Element#addListener}
      * @deprecated 2.0.0 Please listen to the {@link Ext.Viewport#event-resize resize} on Ext.Viewport instead.
      */
-    onWindowResize: function (fn, scope, options) {
-      //<debug warn>
-      Ext.Logger.deprecate("Ext.EventManager.onWindowResize is deprecated, attach listener to Ext.Viewport instead, i.e: Ext.Viewport.on('resize', ...)", 2);
-      //</debug>
-      Ext.Viewport.on('resize', fn, scope, options);
+    onWindowResize: function(fn, scope, options) {
+        //<debug warn>
+        Ext.Logger.deprecate("Ext.EventManager.onWindowResize is deprecated, attach listener to Ext.Viewport instead, i.e: Ext.Viewport.on('resize', ...)", 2);
+        //</debug>
+        Ext.Viewport.on('resize', fn, scope, options);
     },
 
-    onOrientationChange: function (fn, scope, options) {
-      //<debug warn>
-      Ext.Logger.deprecate("Ext.EventManager.onOrientationChange is deprecated, attach listener to Ext.Viewport instead, i.e: Ext.Viewport.on('orientationchange', ...)", 2);
-      //</debug>
-      Ext.Viewport.on('orientationchange', fn, scope, options);
+    onOrientationChange: function(fn, scope, options) {
+        //<debug warn>
+        Ext.Logger.deprecate("Ext.EventManager.onOrientationChange is deprecated, attach listener to Ext.Viewport instead, i.e: Ext.Viewport.on('orientationchange', ...)", 2);
+        //</debug>
+        Ext.Viewport.on('orientationchange', fn, scope, options);
     },
 
-    unOrientationChange: function (fn, scope, options) {
-      //<debug warn>
-      Ext.Logger.deprecate("Ext.EventManager.unOrientationChange is deprecated, remove listener from Ext.Viewport instead, i.e: Ext.Viewport.un('orientationchange', ...)", 2);
-      //</debug>
-      Ext.Viewport.un('orientationchange', fn, scope, options);
+    unOrientationChange: function(fn, scope, options) {
+        //<debug warn>
+        Ext.Logger.deprecate("Ext.EventManager.unOrientationChange is deprecated, remove listener from Ext.Viewport instead, i.e: Ext.Viewport.un('orientationchange', ...)", 2);
+        //</debug>
+        Ext.Viewport.un('orientationchange', fn, scope, options);
     }
-  };
+};
 
 /**
- * Appends an event handler to an element.  Shorthand for {@link #addListener}.
- * @param {String/HTMLElement} el The html element or id to assign the event handler to.
- * @param {String} eventName The name of the event to listen for.
- * @param {Function} handler The handler function the event invokes.
- * @param {Object} scope (optional) (`this` reference) in which the handler function executes. __Defaults to the Element__.
- * @param {Object} options (optional) An object containing standard {@link #addListener} options
- * @member Ext.EventManager
- * @method on
- * @deprecated 2.0.0 Please use {@link Ext.dom.Element#addListener addListener} on an instance of Ext.Element instead.
- */
+* Appends an event handler to an element.  Shorthand for {@link #addListener}.
+* @param {String/HTMLElement} el The html element or id to assign the event handler to.
+* @param {String} eventName The name of the event to listen for.
+* @param {Function} handler The handler function the event invokes.
+* @param {Object} scope (optional) (`this` reference) in which the handler function executes. __Defaults to the Element__.
+* @param {Object} options (optional) An object containing standard {@link #addListener} options
+* @member Ext.EventManager
+* @method on
+* @deprecated 2.0.0 Please use {@link Ext.dom.Element#addListener addListener} on an instance of Ext.Element instead.
+*/
 Ext.EventManager.on = Ext.EventManager.addListener;
 
 /**

@@ -121,282 +121,281 @@
  * with our own settings. Usually this will not be needed.
  */
 Ext.define('Ext.data.association.BelongsTo', {
-  extend: 'Ext.data.association.Association',
-  alternateClassName: 'Ext.data.BelongsToAssociation',
-  alias: 'association.belongsto',
+    extend: 'Ext.data.association.Association',
+    alternateClassName: 'Ext.data.BelongsToAssociation',
+    alias: 'association.belongsto',
 
-  config: {
-    /**
-     * @cfg {String} foreignKey The name of the foreign key on the owner model that links it to the associated
-     * model. Defaults to the lowercased name of the associated model plus "_id", e.g. an association with a
-     * model called Product would set up a product_id foreign key.
-     *
-     *     Ext.define('Order', {
+    config: {
+        /**
+         * @cfg {String} foreignKey The name of the foreign key on the owner model that links it to the associated
+         * model. Defaults to the lowercased name of the associated model plus "_id", e.g. an association with a
+         * model called Product would set up a product_id foreign key.
+         *
+         *     Ext.define('Order', {
          *         extend: 'Ext.data.Model',
          *         fields: ['id', 'date'],
          *         hasMany: 'Product'
          *     });
-     *
-     *     Ext.define('Product', {
+         *
+         *     Ext.define('Product', {
          *         extend: 'Ext.data.Model',
          *         fields: ['id', 'name', 'order_id'], // refers to the id of the order that this product belongs to
          *         belongsTo: 'Group'
          *     });
-     *     var product = new Product({
+         *     var product = new Product({
          *         id: 1,
          *         name: 'Product 1',
          *         order_id: 22
          *     }, 1);
-     *     product.getOrder(); // Will make a call to the server asking for order_id 22
-     *
-     */
-    foreignKey: undefined,
+         *     product.getOrder(); // Will make a call to the server asking for order_id 22
+         *
+         */
+        foreignKey: undefined,
+
+        /**
+         * @cfg {String} getterName The name of the getter function that will be added to the local model's prototype.
+         * Defaults to 'get' + the name of the foreign model, e.g. getCategory
+         */
+        getterName: undefined,
+
+        /**
+         * @cfg {String} setterName The name of the setter function that will be added to the local model's prototype.
+         * Defaults to 'set' + the name of the foreign model, e.g. setCategory
+         */
+        setterName: undefined,
+
+        instanceName: undefined
+    },
+
+    applyForeignKey: function(foreignKey) {
+        if (!foreignKey) {
+            foreignKey = this.getAssociatedName().toLowerCase() + '_id';
+        }
+        return foreignKey;
+    },
+
+    updateForeignKey: function(foreignKey, oldForeignKey) {
+        var fields = this.getOwnerModel().getFields(),
+            field = fields.get(foreignKey);
+
+        if (!field) {
+            field = new Ext.data.Field({
+                name: foreignKey
+            });
+            fields.add(field);
+            fields.isDirty = true;
+        }
+
+        if (oldForeignKey) {
+            field = fields.get(oldForeignKey);
+            if (field) {
+                fields.isDirty = true;
+                fields.remove(field);
+            }
+        }
+    },
+
+    applyInstanceName: function(instanceName) {
+        if (!instanceName) {
+            instanceName = this.getAssociatedName() + 'BelongsToInstance';
+        }
+        return instanceName;
+    },
+
+    applyAssociationKey: function(associationKey) {
+        if (!associationKey) {
+            var associatedName = this.getAssociatedName();
+            associationKey = associatedName[0].toLowerCase() + associatedName.slice(1);
+        }
+        return associationKey;
+    },
+
+    applyGetterName: function(getterName) {
+        if (!getterName) {
+            var associatedName = this.getAssociatedName();
+            getterName = 'get' + associatedName[0].toUpperCase() + associatedName.slice(1);
+        }
+        return getterName;
+    },
+
+    applySetterName: function(setterName) {
+        if (!setterName) {
+            var associatedName = this.getAssociatedName();
+            setterName = 'set' + associatedName[0].toUpperCase() + associatedName.slice(1);
+        }
+        return setterName;
+    },
+
+    updateGetterName: function(getterName, oldGetterName) {
+        var ownerProto = this.getOwnerModel().prototype;
+        if (oldGetterName) {
+            delete ownerProto[oldGetterName];
+        }
+        if (getterName) {
+            ownerProto[getterName] = this.createGetter();
+        }
+    },
+
+    updateSetterName: function(setterName, oldSetterName) {
+        var ownerProto = this.getOwnerModel().prototype;
+        if (oldSetterName) {
+            delete ownerProto[oldSetterName];
+        }
+        if (setterName) {
+            ownerProto[setterName] = this.createSetter();
+        }
+    },
 
     /**
-     * @cfg {String} getterName The name of the getter function that will be added to the local model's prototype.
-     * Defaults to 'get' + the name of the foreign model, e.g. getCategory
+     * @private
+     * Returns a setter function to be placed on the owner model's prototype
+     * @return {Function} The setter function
      */
-    getterName: undefined,
+    createSetter: function() {
+        var me = this,
+            foreignKey = me.getForeignKey(),
+            associatedModel = me.getAssociatedModel(),
+            currentOwner, newOwner, store;
+
+        //'this' refers to the Model instance inside this function
+        return function(value, options, scope) {
+            var inverse = me.getInverseAssociation(),
+                record = this;
+
+            // If we pass in an instance, pull the id out
+            if (value && value.isModel) {
+                value = value.getId();
+            }
+
+            if (Ext.isFunction(options)) {
+                options = {
+                    callback: options,
+                    scope: scope || record
+                };
+            }
+
+            // Remove the current belongsToInstance
+            delete record[me.getInstanceName()];
+
+            currentOwner = Ext.data.Model.cache[Ext.data.Model.generateCacheId(associatedModel.modelName, this.get(foreignKey))];
+            newOwner     = Ext.data.Model.cache[Ext.data.Model.generateCacheId(associatedModel.modelName, value)];
+
+            record.set(foreignKey, value);
+
+            if (inverse) {
+                // We first add it to the new owner so that the record wouldnt be destroyed if it was the last store it was in
+                if (newOwner) {
+                    if (inverse.getType().toLowerCase() === 'hasmany') {
+                        store = newOwner[inverse.getName()]();
+                        store.add(record);
+                    } else {
+                        newOwner[inverse.getInstanceName()] = record;
+                    }
+                }
+
+                if (currentOwner) {
+                    if (inverse.getType().toLowerCase() === 'hasmany') {
+                        store = currentOwner[inverse.getName()]();
+                        store.remove(record);
+                    } else {
+                        delete value[inverse.getInstanceName()];
+                    }
+                }
+            }
+
+            if (newOwner) {
+                record[me.getInstanceName()] = newOwner;
+            }
+
+            if (Ext.isObject(options)) {
+                return record.save(options);
+            }
+
+            return record;
+        };
+    },
 
     /**
-     * @cfg {String} setterName The name of the setter function that will be added to the local model's prototype.
-     * Defaults to 'set' + the name of the foreign model, e.g. setCategory
+     * @private
+     * Returns a getter function to be placed on the owner model's prototype. We cache the loaded instance
+     * the first time it is loaded so that subsequent calls to the getter always receive the same reference.
+     * @return {Function} The getter function
      */
-    setterName: undefined,
+    createGetter: function() {
+        var me              = this,
+            associatedModel = me.getAssociatedModel(),
+            foreignKey      = me.getForeignKey(),
+            instanceName    = me.getInstanceName();
 
-    instanceName: undefined
-  },
+        //'this' refers to the Model instance inside this function
+        return function(options, scope) {
+            options = options || {};
 
-  applyForeignKey: function (foreignKey) {
-    if (!foreignKey) {
-      foreignKey = this.getAssociatedName().toLowerCase() + '_id';
-    }
-    return foreignKey;
-  },
+            var model = this,
+                foreignKeyId = model.get(foreignKey),
+                success,
+                instance,
+                args;
 
-  updateForeignKey: function (foreignKey, oldForeignKey) {
-    var fields = this.getOwnerModel().getFields(),
-      field = fields.get(foreignKey);
+            instance = model[instanceName];
 
-    if (!field) {
-      field = new Ext.data.Field({
-        name: foreignKey
-      });
-      fields.add(field);
-      fields.isDirty = true;
-    }
+            if (!instance) {
+                instance = Ext.data.Model.cache[Ext.data.Model.generateCacheId(associatedModel.modelName, foreignKeyId)];
+                if (instance) {
+                    model[instanceName] = instance;
+                }
+            }
 
-    if (oldForeignKey) {
-      field = fields.get(oldForeignKey);
-      if (field) {
-        fields.isDirty = true;
-        fields.remove(field);
-      }
-    }
-  },
+            if (options.reload === true || instance === undefined) {
+                if (typeof options == 'function') {
+                    options = {
+                        callback: options,
+                        scope: scope || model
+                    };
+                }
 
-  applyInstanceName: function (instanceName) {
-    if (!instanceName) {
-      instanceName = this.getAssociatedName() + 'BelongsToInstance';
-    }
-    return instanceName;
-  },
+                // Overwrite the success handler so we can assign the current instance
+                success = options.success;
+                options.success = function(rec) {
+                    model[instanceName] = rec;
+                    if (success) {
+                        success.apply(this, arguments);
+                    }
+                };
 
-  applyAssociationKey: function (associationKey) {
-    if (!associationKey) {
-      var associatedName = this.getAssociatedName();
-      associationKey = associatedName[0].toLowerCase() + associatedName.slice(1);
-    }
-    return associationKey;
-  },
+                associatedModel.load(foreignKeyId, options);
+            } else {
+                args = [instance];
+                scope = scope || model;
 
-  applyGetterName: function (getterName) {
-    if (!getterName) {
-      var associatedName = this.getAssociatedName();
-      getterName = 'get' + associatedName[0].toUpperCase() + associatedName.slice(1);
-    }
-    return getterName;
-  },
+                Ext.callback(options, scope, args);
+                Ext.callback(options.success, scope, args);
+                Ext.callback(options.failure, scope, args);
+                Ext.callback(options.callback, scope, args);
 
-  applySetterName: function (setterName) {
-    if (!setterName) {
-      var associatedName = this.getAssociatedName();
-      setterName = 'set' + associatedName[0].toUpperCase() + associatedName.slice(1);
-    }
-    return setterName;
-  },
-
-  updateGetterName: function (getterName, oldGetterName) {
-    var ownerProto = this.getOwnerModel().prototype;
-    if (oldGetterName) {
-      delete ownerProto[oldGetterName];
-    }
-    if (getterName) {
-      ownerProto[getterName] = this.createGetter();
-    }
-  },
-
-  updateSetterName: function (setterName, oldSetterName) {
-    var ownerProto = this.getOwnerModel().prototype;
-    if (oldSetterName) {
-      delete ownerProto[oldSetterName];
-    }
-    if (setterName) {
-      ownerProto[setterName] = this.createSetter();
-    }
-  },
-
-  /**
-   * @private
-   * Returns a setter function to be placed on the owner model's prototype
-   * @return {Function} The setter function
-   */
-  createSetter: function () {
-    var me = this,
-      foreignKey = me.getForeignKey(),
-      associatedModel = me.getAssociatedModel(),
-      currentOwner, newOwner, store;
-
-    //'this' refers to the Model instance inside this function
-    return function (value, options, scope) {
-      var inverse = me.getInverseAssociation(),
-        record = this;
-
-      // If we pass in an instance, pull the id out
-      if (value && value.isModel) {
-        value = value.getId();
-      }
-
-      if (Ext.isFunction(options)) {
-        options = {
-          callback: options,
-          scope: scope || record
+                return instance;
+            }
         };
-      }
+    },
 
-      // Remove the current belongsToInstance
-      delete record[me.getInstanceName()];
+    /**
+     * Read associated data
+     * @private
+     * @param {Ext.data.Model} record The record we're writing to
+     * @param {Ext.data.reader.Reader} reader The reader for the associated model
+     * @param {Object} associationData The raw associated data
+     */
+    read: function(record, reader, associationData){
+        record[this.getInstanceName()] = reader.read([associationData]).getRecords()[0];
+    },
 
-      currentOwner =
-        Ext.data.Model.cache[Ext.data.Model.generateCacheId(associatedModel.modelName, this.get(foreignKey))];
-      newOwner = Ext.data.Model.cache[Ext.data.Model.generateCacheId(associatedModel.modelName, value)];
+    getInverseAssociation: function() {
+        var ownerName = this.getOwnerModel().modelName,
+            foreignKey = this.getForeignKey();
 
-      record.set(foreignKey, value);
-
-      if (inverse) {
-        // We first add it to the new owner so that the record wouldnt be destroyed if it was the last store it was in
-        if (newOwner) {
-          if (inverse.getType().toLowerCase() === 'hasmany') {
-            store = newOwner[inverse.getName()]();
-            store.add(record);
-          } else {
-            newOwner[inverse.getInstanceName()] = record;
-          }
-        }
-
-        if (currentOwner) {
-          if (inverse.getType().toLowerCase() === 'hasmany') {
-            store = currentOwner[inverse.getName()]();
-            store.remove(record);
-          } else {
-            delete value[inverse.getInstanceName()];
-          }
-        }
-      }
-
-      if (newOwner) {
-        record[me.getInstanceName()] = newOwner;
-      }
-
-      if (Ext.isObject(options)) {
-        return record.save(options);
-      }
-
-      return record;
-    };
-  },
-
-  /**
-   * @private
-   * Returns a getter function to be placed on the owner model's prototype. We cache the loaded instance
-   * the first time it is loaded so that subsequent calls to the getter always receive the same reference.
-   * @return {Function} The getter function
-   */
-  createGetter: function () {
-    var me = this,
-      associatedModel = me.getAssociatedModel(),
-      foreignKey = me.getForeignKey(),
-      instanceName = me.getInstanceName();
-
-    //'this' refers to the Model instance inside this function
-    return function (options, scope) {
-      options = options || {};
-
-      var model = this,
-        foreignKeyId = model.get(foreignKey),
-        success,
-        instance,
-        args;
-
-      instance = model[instanceName];
-
-      if (!instance) {
-        instance = Ext.data.Model.cache[Ext.data.Model.generateCacheId(associatedModel.modelName, foreignKeyId)];
-        if (instance) {
-          model[instanceName] = instance;
-        }
-      }
-
-      if (options.reload === true || instance === undefined) {
-        if (typeof options == 'function') {
-          options = {
-            callback: options,
-            scope: scope || model
-          };
-        }
-
-        // Overwrite the success handler so we can assign the current instance
-        success = options.success;
-        options.success = function (rec) {
-          model[instanceName] = rec;
-          if (success) {
-            success.apply(this, arguments);
-          }
-        };
-
-        associatedModel.load(foreignKeyId, options);
-      } else {
-        args = [instance];
-        scope = scope || model;
-
-        Ext.callback(options, scope, args);
-        Ext.callback(options.success, scope, args);
-        Ext.callback(options.failure, scope, args);
-        Ext.callback(options.callback, scope, args);
-
-        return instance;
-      }
-    };
-  },
-
-  /**
-   * Read associated data
-   * @private
-   * @param {Ext.data.Model} record The record we're writing to
-   * @param {Ext.data.reader.Reader} reader The reader for the associated model
-   * @param {Object} associationData The raw associated data
-   */
-  read: function (record, reader, associationData) {
-    record[this.getInstanceName()] = reader.read([associationData]).getRecords()[0];
-  },
-
-  getInverseAssociation: function () {
-    var ownerName = this.getOwnerModel().modelName,
-      foreignKey = this.getForeignKey();
-
-    return this.getAssociatedModel().associations.findBy(function (assoc) {
-      var type = assoc.getType().toLowerCase();
-      return (type === 'hasmany' || type === 'hasone') && assoc.getAssociatedModel().modelName === ownerName && assoc.getForeignKey() === foreignKey;
-    });
-  }
+        return this.getAssociatedModel().associations.findBy(function(assoc) {
+            var type = assoc.getType().toLowerCase();
+            return (type === 'hasmany' || type === 'hasone') && assoc.getAssociatedModel().modelName === ownerName && assoc.getForeignKey() === foreignKey;
+        });
+    }
 });

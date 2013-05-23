@@ -180,201 +180,201 @@
  *     }
  */
 Ext.define('Ext.data.reader.Json', {
-  extend: 'Ext.data.reader.Reader',
-  alternateClassName: 'Ext.data.JsonReader',
-  alias: 'reader.json',
+    extend: 'Ext.data.reader.Reader',
+    alternateClassName: 'Ext.data.JsonReader',
+    alias : 'reader.json',
 
-  config: {
-    /**
-     * @cfg {String} [record=null]
-     * The optional location within the JSON response that the record data itself can be found at. See the
-     * JsonReader intro docs for more details. This is not often needed.
-     */
-    record: null,
+    config: {
+        /**
+         * @cfg {String} [record=null]
+         * The optional location within the JSON response that the record data itself can be found at. See the
+         * JsonReader intro docs for more details. This is not often needed.
+         */
+        record: null,
 
-    /**
-     * @cfg {Boolean} [useSimpleAccessors=false]
-     * `true` to ensure that field names/mappings are treated as literals when reading values. For
-     * example, by default, using the mapping "foo.bar.baz" will try and read a property foo from the root, then a
-     * property bar from foo, then a property baz from bar. Setting the simple accessors to `true` will read the
-     * property with the name "foo.bar.baz" direct from the root object.
-     */
-    useSimpleAccessors: false
-  },
+        /**
+         * @cfg {Boolean} [useSimpleAccessors=false]
+         * `true` to ensure that field names/mappings are treated as literals when reading values. For
+         * example, by default, using the mapping "foo.bar.baz" will try and read a property foo from the root, then a
+         * property bar from foo, then a property baz from bar. Setting the simple accessors to `true` will read the
+         * property with the name "foo.bar.baz" direct from the root object.
+         */
+        useSimpleAccessors: false
+    },
 
-  objectRe: /[\[\.]/,
+    objectRe: /[\[\.]/,
 
-  // @inheritdoc
-  getResponseData: function (response) {
-    var responseText = response;
+    // @inheritdoc
+    getResponseData: function(response) {
+        var responseText = response;
 
-    // Handle an XMLHttpRequest object
-    if (response && response.responseText) {
-      responseText = response.responseText;
-    }
-
-    // Handle the case where data has already been decoded
-    if (typeof responseText !== 'string') {
-      return responseText;
-    }
-
-    var data;
-    try {
-      data = Ext.decode(responseText);
-    }
-    catch (ex) {
-      /**
-       * @event exception Fires whenever the reader is unable to parse a response.
-       * @param {Ext.data.reader.Xml} reader A reference to this reader.
-       * @param {XMLHttpRequest} response The XMLHttpRequest response object.
-       * @param {String} error The error message.
-       */
-      this.fireEvent('exception', this, response, 'Unable to parse the JSON returned by the server: ' + ex.toString());
-      Ext.Logger.warn('Unable to parse the JSON returned by the server: ' + ex.toString());
-    }
-    //<debug>
-    if (!data) {
-      this.fireEvent('exception', this, response, 'JSON object not found');
-
-      Ext.Logger.error('JSON object not found');
-    }
-    //</debug>
-
-    return data;
-  },
-
-  // @inheritdoc
-  buildExtractors: function () {
-    var me = this,
-      root = me.getRootProperty();
-
-    me.callParent(arguments);
-
-    if (root) {
-      me.rootAccessor = me.createAccessor(root);
-    } else {
-      delete me.rootAccessor;
-    }
-  },
-
-  /**
-   * We create this method because `root` is now a config so `getRoot` is already defined, but in the old
-   * data package `getRoot` was passed a data argument and it would return the data inside of the `root`
-   * property. This method handles both cases.
-   * @param data (Optional)
-   * @return {String/Object} Returns the config root value if this method was called without passing
-   * data. Else it returns the object in the data bound to the root.
-   * @private
-   */
-  getRoot: function (data) {
-    var fieldsCollection = this.getModel().getFields();
-
-    /*
-     * We check here whether the fields are dirty since the last read.
-     * This works around an issue when a Model is used for both a Tree and another
-     * source, because the tree decorates the model with extra fields and it causes
-     * issues because the readers aren't notified.
-     */
-    if (fieldsCollection.isDirty) {
-      this.buildExtractors(true);
-      delete fieldsCollection.isDirty;
-    }
-
-    if (this.rootAccessor) {
-      return this.rootAccessor.call(this, data);
-    } else {
-      return data;
-    }
-  },
-
-  /**
-   * @private
-   * We're just preparing the data for the superclass by pulling out the record objects we want. If a {@link #record}
-   * was specified we have to pull those out of the larger JSON object, which is most of what this function is doing
-   * @param {Object} root The JSON root node
-   * @return {Ext.data.Model[]} The records
-   */
-  extractData: function (root) {
-    var recordName = this.getRecord(),
-      data = [],
-      length, i;
-
-    if (recordName) {
-      length = root.length;
-
-      if (!length && Ext.isObject(root)) {
-        length = 1;
-        root = [root];
-      }
-
-      for (i = 0; i < length; i++) {
-        data[i] = root[i][recordName];
-      }
-    } else {
-      data = root;
-    }
-    return this.callParent([data]);
-  },
-
-  /**
-   * @private
-   * Returns an accessor function for the given property string. Gives support for properties such as the following:
-   * 'someProperty'
-   * 'some.property'
-   * 'some["property"]'
-   * This is used by buildExtractors to create optimized extractor functions when casting raw data into model instances.
-   */
-  createAccessor: function () {
-    var re = /[\[\.]/;
-
-    return function (expr) {
-      if (Ext.isEmpty(expr)) {
-        return Ext.emptyFn;
-      }
-      if (Ext.isFunction(expr)) {
-        return expr;
-      }
-      if (this.getUseSimpleAccessors() !== true) {
-        var i = String(expr).search(re);
-        if (i >= 0) {
-          return Ext.functionFactory('obj', 'var value; try {value = obj' + (i > 0 ? '.' : '') + expr + '} catch(e) {}; return value;');
+        // Handle an XMLHttpRequest object
+        if (response && response.responseText) {
+            responseText = response.responseText;
         }
-      }
-      return function (obj) {
-        return obj[expr];
-      };
-    };
-  }(),
 
-  /**
-   * @private
-   * Returns an accessor expression for the passed Field. Gives support for properties such as the following:
-   * 'someProperty'
-   * 'some.property'
-   * 'some["property"]'
-   * This is used by buildExtractors to create optimized on extractor function which converts raw data into model instances.
-   */
-  createFieldAccessExpression: function (field, fieldVarName, dataName) {
-    var me = this,
-      re = me.objectRe,
-      hasMap = (field.getMapping() !== null),
-      map = hasMap ? field.getMapping() : field.getName(),
-      result, operatorSearch;
+        // Handle the case where data has already been decoded
+        if (typeof responseText !== 'string') {
+            return responseText;
+        }
 
-    if (typeof map === 'function') {
-      result = fieldVarName + '.getMapping()(' + dataName + ', this)';
-    }
-    else if (me.getUseSimpleAccessors() === true || ((operatorSearch = String(map).search(re)) < 0)) {
-      if (!hasMap || isNaN(map)) {
-        // If we don't provide a mapping, we may have a field name that is numeric
-        map = '"' + map + '"';
-      }
-      result = dataName + "[" + map + "]";
-    }
-    else {
-      result = dataName + (operatorSearch > 0 ? '.' : '') + map;
-    }
+        var data;
+        try {
+            data = Ext.decode(responseText);
+        }
+        catch (ex) {
+            /**
+             * @event exception Fires whenever the reader is unable to parse a response.
+             * @param {Ext.data.reader.Xml} reader A reference to this reader.
+             * @param {XMLHttpRequest} response The XMLHttpRequest response object.
+             * @param {String} error The error message.
+             */
+            this.fireEvent('exception', this, response, 'Unable to parse the JSON returned by the server: ' + ex.toString());
+            Ext.Logger.warn('Unable to parse the JSON returned by the server: ' + ex.toString());
+        }
+        //<debug>
+        if (!data) {
+            this.fireEvent('exception', this, response, 'JSON object not found');
 
-    return result;
-  }
+            Ext.Logger.error('JSON object not found');
+        }
+        //</debug>
+
+        return data;
+    },
+
+    // @inheritdoc
+    buildExtractors: function() {
+        var me = this,
+            root = me.getRootProperty();
+
+        me.callParent(arguments);
+
+        if (root) {
+            me.rootAccessor = me.createAccessor(root);
+        } else {
+            delete me.rootAccessor;
+        }
+    },
+
+    /**
+     * We create this method because `root` is now a config so `getRoot` is already defined, but in the old
+     * data package `getRoot` was passed a data argument and it would return the data inside of the `root`
+     * property. This method handles both cases.
+     * @param data (Optional)
+     * @return {String/Object} Returns the config root value if this method was called without passing
+     * data. Else it returns the object in the data bound to the root.
+     * @private
+     */
+    getRoot: function(data) {
+        var fieldsCollection = this.getModel().getFields();
+
+        /*
+         * We check here whether the fields are dirty since the last read.
+         * This works around an issue when a Model is used for both a Tree and another
+         * source, because the tree decorates the model with extra fields and it causes
+         * issues because the readers aren't notified.
+         */
+        if (fieldsCollection.isDirty) {
+            this.buildExtractors(true);
+            delete fieldsCollection.isDirty;
+        }
+
+        if (this.rootAccessor) {
+            return this.rootAccessor.call(this, data);
+        } else {
+            return data;
+        }
+    },
+
+    /**
+     * @private
+     * We're just preparing the data for the superclass by pulling out the record objects we want. If a {@link #record}
+     * was specified we have to pull those out of the larger JSON object, which is most of what this function is doing
+     * @param {Object} root The JSON root node
+     * @return {Ext.data.Model[]} The records
+     */
+    extractData: function(root) {
+        var recordName = this.getRecord(),
+            data = [],
+            length, i;
+
+        if (recordName) {
+            length = root.length;
+
+            if (!length && Ext.isObject(root)) {
+                length = 1;
+                root = [root];
+            }
+
+            for (i = 0; i < length; i++) {
+                data[i] = root[i][recordName];
+            }
+        } else {
+            data = root;
+        }
+        return this.callParent([data]);
+    },
+
+    /**
+     * @private
+     * Returns an accessor function for the given property string. Gives support for properties such as the following:
+     * 'someProperty'
+     * 'some.property'
+     * 'some["property"]'
+     * This is used by buildExtractors to create optimized extractor functions when casting raw data into model instances.
+     */
+    createAccessor: function() {
+        var re = /[\[\.]/;
+
+        return function(expr) {
+            if (Ext.isEmpty(expr)) {
+                return Ext.emptyFn;
+            }
+            if (Ext.isFunction(expr)) {
+                return expr;
+            }
+            if (this.getUseSimpleAccessors() !== true) {
+                var i = String(expr).search(re);
+                if (i >= 0) {
+                    return Ext.functionFactory('obj', 'var value; try {value = obj' + (i > 0 ? '.' : '') + expr + '} catch(e) {}; return value;');
+                }
+            }
+            return function(obj) {
+                return obj[expr];
+            };
+        };
+    }(),
+
+    /**
+     * @private
+     * Returns an accessor expression for the passed Field. Gives support for properties such as the following:
+     * 'someProperty'
+     * 'some.property'
+     * 'some["property"]'
+     * This is used by buildExtractors to create optimized on extractor function which converts raw data into model instances.
+     */
+    createFieldAccessExpression: function(field, fieldVarName, dataName) {
+        var me     = this,
+            re     = me.objectRe,
+            hasMap = (field.getMapping() !== null),
+            map    = hasMap ? field.getMapping() : field.getName(),
+            result, operatorSearch;
+
+        if (typeof map === 'function') {
+            result = fieldVarName + '.getMapping()(' + dataName + ', this)';
+        }
+        else if (me.getUseSimpleAccessors() === true || ((operatorSearch = String(map).search(re)) < 0)) {
+            if (!hasMap || isNaN(map)) {
+                // If we don't provide a mapping, we may have a field name that is numeric
+                map = '"' + map + '"';
+            }
+            result = dataName + "[" + map + "]";
+        }
+        else {
+            result = dataName + (operatorSearch > 0 ? '.' : '') + map;
+        }
+
+        return result;
+    }
 });

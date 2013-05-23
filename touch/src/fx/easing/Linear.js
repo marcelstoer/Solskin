@@ -3,33 +3,33 @@
  */
 Ext.define('Ext.fx.easing.Linear', {
 
-  extend: 'Ext.fx.easing.Abstract',
+    extend: 'Ext.fx.easing.Abstract',
 
-  alias: 'easing.linear',
+    alias: 'easing.linear',
 
-  config: {
-    duration: 0,
-    endValue: 0
-  },
+    config: {
+        duration: 0,
+        endValue: 0
+    },
 
-  updateStartValue: function (startValue) {
-    this.distance = this.getEndValue() - startValue;
-  },
+    updateStartValue: function(startValue) {
+        this.distance = this.getEndValue() - startValue;
+    },
 
-  updateEndValue: function (endValue) {
-    this.distance = endValue - this.getStartValue();
-  },
+    updateEndValue: function(endValue) {
+        this.distance = endValue - this.getStartValue();
+    },
 
-  getValue: function () {
-    var deltaTime = Ext.Date.now() - this.getStartTime(),
-      duration = this.getDuration();
+    getValue: function() {
+        var deltaTime = Ext.Date.now() - this.getStartTime(),
+            duration = this.getDuration();
 
-    if (deltaTime > duration) {
-      this.isEnded = true;
-      return this.getEndValue();
+        if (deltaTime > duration) {
+            this.isEnded = true;
+            return this.getEndValue();
+        }
+        else {
+            return this.getStartValue() + ((deltaTime / duration) * this.distance);
+        }
     }
-    else {
-      return this.getStartValue() + ((deltaTime / duration) * this.distance);
-    }
-  }
 });

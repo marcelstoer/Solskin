@@ -30,39 +30,39 @@
  * - {@link Ext.device.Connection#CELL_3G CELL_3G} - Cell 3G connection
  * - {@link Ext.device.Connection#CELL_4G CELL_4G} - Cell 4G connection
  * - {@link Ext.device.Connection#NONE NONE} - No network connection
- *
+ * 
  * @mixins Ext.device.connection.Abstract
  *
  * @aside guide native_apis
  */
 Ext.define('Ext.device.Connection', {
-  singleton: true,
+    singleton: true,
 
-  requires: [
-    'Ext.device.Communicator',
-    'Ext.device.connection.Sencha',
-    'Ext.device.connection.PhoneGap',
-    'Ext.device.connection.Simulator'
-  ],
+    requires: [
+        'Ext.device.Communicator',
+        'Ext.device.connection.Sencha',
+        'Ext.device.connection.PhoneGap',
+        'Ext.device.connection.Simulator'
+    ],
+    
+    /**
+     * @event onlinechange
+     * @inheritdoc Ext.device.connection.Sencha#onlinechange
+     */
 
-  /**
-   * @event onlinechange
-   * @inheritdoc Ext.device.connection.Sencha#onlinechange
-   */
+    constructor: function() {
+        var browserEnv = Ext.browser.is;
 
-  constructor: function () {
-    var browserEnv = Ext.browser.is;
-
-    if (browserEnv.WebView) {
-      if (browserEnv.PhoneGap) {
-        return Ext.create('Ext.device.connection.PhoneGap');
-      }
-      else {
-        return Ext.create('Ext.device.connection.Sencha');
-      }
+        if (browserEnv.WebView) {
+            if (browserEnv.PhoneGap) {
+                return Ext.create('Ext.device.connection.PhoneGap');
+            }
+            else {
+                return Ext.create('Ext.device.connection.Sencha');
+            }
+        }
+        else {
+            return Ext.create('Ext.device.connection.Simulator');
+        }
     }
-    else {
-      return Ext.create('Ext.device.connection.Simulator');
-    }
-  }
 });

@@ -2,11 +2,11 @@
  *
  */
 Ext.define('Ext.layout.VBox', {
-  extend: 'Ext.layout.FlexBox',
+    extend: 'Ext.layout.FlexBox',
 
-  alias: 'layout.vbox',
+    alias: 'layout.vbox',
 
-  config: {
-    orient: 'vertical'
-  }
+    config: {
+        orient: 'vertical'
+    }
 });

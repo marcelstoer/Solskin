@@ -2,40 +2,33 @@
  *
  */
 Ext.define('Ext.layout.Abstract', {
-  mixins: ['Ext.mixin.Observable'],
+    mixins: ['Ext.mixin.Observable'],
+    
+    isLayout: true,
 
-  isLayout: true,
+    constructor: function(config) {
+        this.initialConfig = config;
+    },
 
-  constructor: function (config) {
-    this.initialConfig = config;
-  },
+    setContainer: function(container) {
+        this.container = container;
 
-  setContainer: function (container) {
-    this.container = container;
+        this.initConfig(this.initialConfig);
 
-    this.initConfig(this.initialConfig);
+        return this;
+    },
 
-    return this;
-  },
+    onItemAdd: function() {},
 
-  onItemAdd: function () {
-  },
+    onItemRemove: function() {},
 
-  onItemRemove: function () {
-  },
+    onItemMove: function() {},
 
-  onItemMove: function () {
-  },
+    onItemCenteredChange: function() {},
 
-  onItemCenteredChange: function () {
-  },
+    onItemFloatingChange: function() {},
 
-  onItemFloatingChange: function () {
-  },
+    onItemDockedChange: function() {},
 
-  onItemDockedChange: function () {
-  },
-
-  onItemInnerStateChange: function () {
-  }
+    onItemInnerStateChange: function() {}
 });

@@ -3,15 +3,15 @@
  */
 Ext.define('Ext.util.paintmonitor.CssAnimation', {
 
-  extend: 'Ext.util.paintmonitor.Abstract',
+    extend: 'Ext.util.paintmonitor.Abstract',
 
-  eventName: 'webkitAnimationEnd',
+    eventName: 'webkitAnimationEnd',
 
-  monitorClass: 'cssanimation',
+    monitorClass: 'cssanimation',
 
-  onElementPainted: function (e) {
-    if (e.animationName === 'x-paint-monitor-helper') {
-      this.getCallback().apply(this.getScope(), this.getArgs());
+    onElementPainted: function(e) {
+        if (e.animationName === 'x-paint-monitor-helper') {
+            this.getCallback().apply(this.getScope(), this.getArgs());
+        }
     }
-  }
 });

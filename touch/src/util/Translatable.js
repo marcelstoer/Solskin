@@ -5,35 +5,35 @@
  * @private
  */
 Ext.define('Ext.util.Translatable', {
-  requires: [
-    'Ext.util.translatable.CssTransform',
-    'Ext.util.translatable.ScrollPosition'
-  ],
+    requires: [
+        'Ext.util.translatable.CssTransform',
+        'Ext.util.translatable.ScrollPosition'
+    ],
 
-  constructor: function (config) {
-    var namespace = Ext.util.translatable,
-      CssTransform = namespace.CssTransform,
-      ScrollPosition = namespace.ScrollPosition,
-      classReference;
+    constructor: function(config) {
+        var namespace = Ext.util.translatable,
+            CssTransform = namespace.CssTransform,
+            ScrollPosition = namespace.ScrollPosition,
+            classReference;
 
-    if (typeof config == 'object' && 'translationMethod' in config) {
-      if (config.translationMethod === 'scrollposition') {
-        classReference = ScrollPosition;
-      }
-      else if (config.translationMethod === 'csstransform') {
-        classReference = CssTransform;
-      }
+        if (typeof config == 'object' && 'translationMethod' in config) {
+            if (config.translationMethod === 'scrollposition') {
+                classReference = ScrollPosition;
+            }
+            else if (config.translationMethod === 'csstransform') {
+                classReference = CssTransform;
+            }
+        }
+
+        if (!classReference) {
+            if (Ext.os.is.Android2) {
+                classReference = ScrollPosition;
+            }
+            else {
+                classReference = CssTransform;
+            }
+        }
+
+        return new classReference(config);
     }
-
-    if (!classReference) {
-      if (Ext.os.is.Android2) {
-        classReference = ScrollPosition;
-      }
-      else {
-        classReference = CssTransform;
-      }
-    }
-
-    return new classReference(config);
-  }
 });

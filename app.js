@@ -13,222 +13,113 @@
 // DO NOT DELETE - this directive is required for Sencha Cmd packages to work.
 //@require @packageOverrides
 
-(function () {
-  "use strict";
-
 //<debug>
-  Ext.Loader.setPath({
-    'Ext': 'touch/src',
-    'SunApp': 'app'
-  });
+Ext.Loader.setPath({
+  'Ext': 'touch/src',
+  'SunApp': 'app'
+});
 //</debug>
 
-  var allStationData, tabPanel, myPlace, place;
+Ext.Loader.setConfig({
+  // avoids '_dc' cache-busting query string param for all the .js files (model, store, etc.)
+  disableCaching: true
+});
 
-  // http://www.movable-type.co.uk/scripts/latlong.html
-  if (Number.prototype.toRad === undefined) {
-    Number.prototype.toRad = function () {
-      return this * Math.PI / 180;
-    };
-  }
-  place = function (lat, lon, name) {
-    var R = 6371; // km
-    return {
-      distanceTo: function (other) {
-        var dLat, dLon, lat1, lat2, a, c;
-        dLat = (other.lat - lat).toRad();
-        dLon = (other.lon - lon).toRad();
-        lat1 = lat.toRad();
-        lat2 = other.lat.toRad();
+Ext.application({
+  name: 'SunApp',
+  currentLocation: null,
 
-        a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-          Math.sin(dLon / 2) * Math.sin(dLon / 2) * Math.cos(lat1) * Math.cos(lat2);
-        c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-        return Math.round(R * c * 10) / 10; // distance
-      },
-      setName: function (newname) {
-        this.name = newname;
-      },
-      lat: lat,
-      lon: lon,
-      name: name
-    };
-  };
+  requires: [
+    'Ext.MessageBox', 'SunApp.Location'
+  ],
 
-  Ext.define('StationData', {
-    extend: 'Ext.data.Model',
-    config: {
-      fields: [
-        {name: 'wmo', type: 'int'},
-        {name: 'name', type: 'string'},
-        {name: 'lat', type: 'float'},
-        {name: 'lon', type: 'float'},
-        {name: 'ss', type: 'int'},
-        {name: 'sunLevel', type: 'int'},
-        {name: 'distance', type: 'float', defaultValue: '0.0'}
-      ]
-    }
-  });
+  models: ['Station'],
+  stores: ['Stations'],
+  views: ['Main'],
+  controllers: ['Application'],
 
-  allStationData = [];
+  icon: {
+    '57': 'resources/icons/Icon.png',
+    '72': 'resources/icons/Icon~ipad.png',
+    '114': 'resources/icons/Icon@2x.png',
+    '144': 'resources/icons/Icon~ipad@2x.png'
+  },
 
-  tabPanel = Ext.create("Ext.tab.Panel", {
-    requires: [
-      'Ext.TitleBar'
-    ],
-    fullscreen: true,
-    tabBarPosition: 'bottom',
-    items: [
-      {
-        docked: 'top',
-        xtype: 'titlebar',
-        title: 'SunApp'
-      },
-      {
-        title: 'Home',
-        iconCls: 'brightness1',
-        cls: 'home',
-        html: [
-          "<h1>Wait, there's more....</h1>",
-          '<p>Stay tuned while we do some number crunching in the ',
-          'background for you.</p>'
-        ].join("")
+  isIconPrecomposed: true,
+
+  startupImage: {
+    '320x460': 'resources/startup/320x460.jpg',
+    '640x920': 'resources/startup/640x920.png',
+    '768x1004': 'resources/startup/768x1004.png',
+    '748x1024': 'resources/startup/748x1024.png',
+    '1536x2008': 'resources/startup/1536x2008.png',
+    '1496x2048': 'resources/startup/1496x2048.png'
+  },
+
+  launch: function () {
+    Ext.create('Ext.util.Geolocation', {
+      autoUpdate: false,
+      maximumAge: 0,
+      listeners: {
+        locationupdate: function (geo) {
+          SunApp.app.setCurrentLocation(Ext.create('SunApp.Location', {
+              lat: geo.getLatitude(),
+              long: geo.getLongitude()
+            }
+          ));
+          Ext.Ajax.setUseDefaultXhrHeader(false);
+          Ext.Ajax.request({
+//            url: '../transport/api.php/v1/locations',
+            url: 'http://transport.opendata.ch/v1/locations',
+            method: 'GET',
+            params: {
+              x: geo.getLatitude(),
+              y: geo.getLongitude()
+            },
+            success: function (response) {
+              var mainView;
+              var station = Ext.JSON.decode(response.responseText).stations[0];
+              SunApp.app.getCurrentLocation().setClosestStation(station.name);
+              Ext.getStore('Stations').load();
+              Ext.fly('appLoadingIndicator').destroy();
+              mainView = Ext.create('SunApp.view.Main');
+              mainView.getNavigationBar().setTitle(station.name);
+              Ext.Viewport.add(mainView);
+            },
+            failure: function (response, opts) {
+              SunApp.app.displayError('Error finding the closest public transport station: ' + response.status);
+            }
+          });
+        },
+        locationerror: function (geo, bTimeout, bPermissionDenied, bLocationUnavailable, message) {
+          SunApp.app.displayError("Error determining geo location: " + message);
+        }
       }
-    ]
-  });
+    }).updateLocation();
+  },
 
-  Ext.application({
-    name: 'SunApp',
+  displayError: function (htmlMsg) {
+    Ext.fly('appLoadingIndicator').destroy();
+    Ext.Viewport.add(Ext.create('SunApp.view.Error', {html: msg}));
+  },
 
-    requires: [
-      'Ext.MessageBox'
-    ],
-
-    icon: {
-      57: 'resources/images/glasses.svg'
-    },
-    launch: function () {
-      var stationStore, stationItemTemplate;
-      stationStore = Ext.create('Ext.data.Store', {
-        model: 'StationData',
-        autoLoad: true,
-        proxy: {
-          type: 'ajax',
-          url: 'data.json',
-          reader: {
-            type: 'json'
-          }
+  onUpdated: function () {
+    Ext.Msg.confirm(
+      "Application Update",
+      "This application has just successfully been updated to the latest version. Reload now?",
+      function (buttonId) {
+        if (buttonId === 'yes') {
+          window.location.reload();
         }
-      });
-      stationStore.on('load', function (storeRef, records, successful) {
-        allStationData = records;
-      }, this);
-      stationItemTemplate = new Ext.XTemplate(
-        '<tpl for=".">',
-        '<div class="stationList sunLevel{sunLevel}">{name}: <span class="distance">{distance}km</span></div>',
-        '</tpl>'
-      );
+      }
+    );
+  },
 
-      Ext.create('Ext.util.Geolocation', {
-        requires: [
-          'Ext.TitleBar'
-        ],
-        autoUpdate: false,
-        listeners: {
-          locationupdate: function (geo) {
-            var stationList;
-            myPlace = place(geo.getLatitude(), geo.getLongitude());
-
-            Ext.Ajax.request({
-              url: '../transport/api.php/v1/locations',
-              method: 'GET',
-              params: {
-                x: myPlace.lat,
-                y: myPlace.lon
-              },
-              success: function (response) {
-                var station = Ext.JSON.decode(response.responseText).stations[0];
-                myPlace.setName(station.name);
-                Ext.Msg.show({
-                  title: myPlace.name,
-                  msg: 'We believe your nearest station is ' + myPlace.name,
-                  buttons: Ext.Msg.OK,
-                  icon: Ext.Msg.INFO
-                });
-              }
-            });
-
-            stationStore.filterBy(function (record, id) {
-              var sunLevel, sunshineMinutes, recordPlace;
-              sunshineMinutes = record.get('ss');
-
-              if (sunshineMinutes < 5) {         // 0-4
-                sunLevel = 0;
-              } else if (sunshineMinutes < 50) { // 5 - 49
-                sunLevel = 1;
-              } else if (sunshineMinutes < 60) { // 50 - 59
-                sunLevel = 2;
-              } else {                          // 60
-                sunLevel = 3;
-              }
-
-              record.data.sunLevel = sunLevel;
-
-              if (sunLevel >= 2) {
-                if (record.get('distance') === 0.0) {
-                  recordPlace = place(record.get('lat'), record.get('lon'));
-                  record.data.distance = recordPlace.distanceTo(myPlace);
-                }
-                return true;
-              } else {
-                return false;
-              }
-            });
-            stationStore.sort([
-              {
-                property: 'distance',
-                direction: 'ASC'
-              }
-            ]);
-            stationList = Ext.create('Ext.dataview.List', {
-              title: 'Station List',
-              iconCls: 'brightness1',
-              store: stationStore,
-              itemTpl: stationItemTemplate
-            });
-            tabPanel.setItems([
-              {
-                docked: 'top',
-                xtype: 'titlebar',
-                title: 'Bern'
-              },
-              stationList
-            ]);
-          },
-          locationerror: function (geo, bTimeout, bPermissionDenied, bLocationUnavailable, message) {
-            tabPanel.setItems([
-              {
-                docked: 'top',
-                xtype: 'titlebar',
-                title: 'Sorry'
-              },
-              {
-                title: 'Home',
-                iconCls: 'brightness1',
-                cls: 'home',
-                html: [
-                  '<img width="12.5%" src="http://staging.sencha.com/img/sencha.png" />',
-                  "<h1>Ouchh!</h1>",
-                  "<p>We're really sorry but your device didn't ",
-                  'allow us to detect your location or it failed ',
-                  'to do so. Pity.</p>'
-                ].join("")
-              }
-            ]);
-          }
-        }
-      }).updateLocation();
-      tabPanel.show();
-    }
-  });
-}());
+  setCurrentLocation: function (currentLocation) {
+    console.log('setting current location: ' + currentLocation.getLat() + '/' + currentLocation.getLong());
+    this.currentLocation = currentLocation
+  },
+  getCurrentLocation: function () {
+    return this.currentLocation;
+  }
+});

@@ -30,34 +30,34 @@
  * To make the device vibrate:
  *
  *     Ext.device.Notification.vibrate();
- *
+ * 
  * @mixins Ext.device.notification.Abstract
  *
  * @aside guide native_apis
  */
 Ext.define('Ext.device.Notification', {
-  singleton: true,
+    singleton: true,
 
-  requires: [
-    'Ext.device.Communicator',
-    'Ext.device.notification.PhoneGap',
-    'Ext.device.notification.Sencha',
-    'Ext.device.notification.Simulator'
-  ],
+    requires: [
+        'Ext.device.Communicator',
+        'Ext.device.notification.PhoneGap',
+        'Ext.device.notification.Sencha',
+        'Ext.device.notification.Simulator'
+    ],
 
-  constructor: function () {
-    var browserEnv = Ext.browser.is;
+    constructor: function() {
+        var browserEnv = Ext.browser.is;
 
-    if (browserEnv.WebView) {
-      if (browserEnv.PhoneGap) {
-        return Ext.create('Ext.device.notification.PhoneGap');
-      }
-      else {
-        return Ext.create('Ext.device.notification.Sencha');
-      }
+        if (browserEnv.WebView) {
+            if (browserEnv.PhoneGap) {
+                return Ext.create('Ext.device.notification.PhoneGap');
+            }
+            else {
+                return Ext.create('Ext.device.notification.Sencha');
+            }
+        }
+        else {
+            return Ext.create('Ext.device.notification.Simulator');
+        }
     }
-    else {
-      return Ext.create('Ext.device.notification.Simulator');
-    }
-  }
 });

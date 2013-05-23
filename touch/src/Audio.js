@@ -84,57 +84,55 @@
  * @aside example audio
  */
 Ext.define('Ext.Audio', {
-  extend: 'Ext.Media',
-  xtype: 'audio',
+    extend: 'Ext.Media',
+    xtype : 'audio',
 
-  config: {
-    /**
-     * @cfg
-     * @inheritdoc
-     */
-    cls: Ext.baseCSSPrefix + 'audio'
+    config: {
+        /**
+         * @cfg
+         * @inheritdoc
+         */
+        cls: Ext.baseCSSPrefix + 'audio'
 
-    /**
-     * @cfg {String} url
-     * The location of the audio to play.
-     *
-     * ### Recommended file types are:
-     * * Uncompressed WAV and AIF audio
-     * * MP3 audio
-     * * AAC-LC
-     * * HE-AAC audio
-     * @accessor
-     */
-  },
+        /**
+         * @cfg {String} url
+         * The location of the audio to play.
+         *
+         * ### Recommended file types are:
+         * * Uncompressed WAV and AIF audio
+         * * MP3 audio
+         * * AAC-LC
+         * * HE-AAC audio
+         * @accessor
+         */
+    },
 
-  // @private
-  onActivate: function () {
-    var me = this;
+    // @private
+    onActivate: function() {
+        var me = this;
 
-    me.callParent();
+        me.callParent();
 
-    if (Ext.os.is.Phone) {
-      me.element.show();
-    }
-  },
+        if (Ext.os.is.Phone) {
+            me.element.show();
+        }
+    },
 
-  // @private
-  onDeactivate: function () {
-    var me = this;
+    // @private
+    onDeactivate: function() {
+        var me = this;
 
-    me.callParent();
+        me.callParent();
 
-    if (Ext.os.is.Phone) {
-      me.element.hide();
-    }
-  },
+        if (Ext.os.is.Phone) {
+            me.element.hide();
+        }
+    },
 
-  template: [
-    {
-      reference: 'media',
-      preload: 'auto',
-      tag: 'audio',
-      cls: Ext.baseCSSPrefix + 'component'
-    }
-  ]
+    template: [{
+        reference: 'media',
+        preload: 'auto',
+        tag: 'audio',
+        cls: Ext.baseCSSPrefix + 'component'
+    }]
 });

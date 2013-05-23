@@ -3,11 +3,11 @@
  */
 Ext.define('Ext.event.recognizer.Touch', {
 
-  extend: 'Ext.event.recognizer.Recognizer',
+    extend: 'Ext.event.recognizer.Recognizer',
 
-  onTouchStart: Ext.emptyFn,
+    onTouchStart: Ext.emptyFn,
 
-  onTouchMove: Ext.emptyFn,
+    onTouchMove: Ext.emptyFn,
 
-  onTouchEnd: Ext.emptyFn
+    onTouchEnd: Ext.emptyFn
 });

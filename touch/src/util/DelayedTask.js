@@ -59,81 +59,81 @@
  * @param {Array} args The default Array of arguments.
  */
 Ext.define('Ext.util.DelayedTask', {
-  config: {
-    interval: null,
-    delay: null,
-    fn: null,
-    scope: null,
-    args: null
-  },
+    config: {
+        interval: null,
+        delay: null,
+        fn: null,
+        scope: null,
+        args: null
+    },
 
-  constructor: function (fn, scope, args) {
-    var config = {
-      fn: fn,
-      scope: scope,
-      args: args
-    };
+    constructor: function(fn, scope, args) {
+        var config = {
+            fn: fn,
+            scope: scope,
+            args: args
+        };
 
-    this.initConfig(config);
-  },
+        this.initConfig(config);
+    },
 
-  /**
-   * Cancels any pending timeout and queues a new one.
-   * @param {Number} delay The milliseconds to delay
-   * @param {Function} newFn Overrides the original function passed when instantiated.
-   * @param {Object} newScope Overrides the original `scope` passed when instantiated. Remember that if no scope
-   * is specified, `this` will refer to the browser window.
-   * @param {Array} newArgs Overrides the original `args` passed when instantiated.
-   */
-  delay: function (delay, newFn, newScope, newArgs) {
-    var me = this;
+    /**
+     * Cancels any pending timeout and queues a new one.
+     * @param {Number} delay The milliseconds to delay
+     * @param {Function} newFn Overrides the original function passed when instantiated.
+     * @param {Object} newScope Overrides the original `scope` passed when instantiated. Remember that if no scope
+     * is specified, `this` will refer to the browser window.
+     * @param {Array} newArgs Overrides the original `args` passed when instantiated.
+     */
+    delay: function(delay, newFn, newScope, newArgs) {
+        var me = this;
 
-    //cancel any existing queued functions
-    me.cancel();
+        //cancel any existing queued functions
+        me.cancel();
+            
+        //set all the new configurations
+        me.setConfig({
+            delay: delay,
+            fn: newFn,
+            scope: newScope,
+            args: newArgs
+        });
 
-    //set all the new configurations
-    me.setConfig({
-      delay: delay,
-      fn: newFn,
-      scope: newScope,
-      args: newArgs
-    });
+        //create the callback method for this delayed task
+        var call = function() {
+            me.getFn().apply(me.getScope(), me.getArgs() || []);
+            me.cancel();
+        };
 
-    //create the callback method for this delayed task
-    var call = function () {
-      me.getFn().apply(me.getScope(), me.getArgs() || []);
-      me.cancel();
-    };
+        me.setInterval(setInterval(call, me.getDelay()));
+    },
 
-    me.setInterval(setInterval(call, me.getDelay()));
-  },
+    /**
+     * Cancel the last queued timeout
+     */
+    cancel: function() {
+        this.setInterval(null);
+    },
 
-  /**
-   * Cancel the last queued timeout
-   */
-  cancel: function () {
-    this.setInterval(null);
-  },
+    /**
+     * @private
+     * Clears the old interval
+     */
+    updateInterval: function(newInterval, oldInterval) {
+        if (oldInterval) {
+            clearInterval(oldInterval);
+        }
+    },
 
-  /**
-   * @private
-   * Clears the old interval
-   */
-  updateInterval: function (newInterval, oldInterval) {
-    if (oldInterval) {
-      clearInterval(oldInterval);
+    /**
+     * @private
+     * Changes the value into an array if it isn't one.
+     */
+    applyArgs: function(config) {
+        if (!Ext.isArray(config)) {
+            config = [config];
+        }
+
+        return config;
     }
-  },
-
-  /**
-   * @private
-   * Changes the value into an array if it isn't one.
-   */
-  applyArgs: function (config) {
-    if (!Ext.isArray(config)) {
-      config = [config];
-    }
-
-    return config;
-  }
 });

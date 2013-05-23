@@ -2,21 +2,21 @@
  * @private
  */
 Ext.define('Ext.util.translatable.Dom', {
-  extend: 'Ext.util.translatable.Abstract',
+    extend: 'Ext.util.translatable.Abstract',
 
-  config: {
-    element: null
-  },
+    config: {
+        element: null
+    },
 
-  applyElement: function (element) {
-    if (!element) {
-      return;
+    applyElement: function(element) {
+        if (!element) {
+            return;
+        }
+
+        return Ext.get(element);
+    },
+
+    updateElement: function() {
+        this.refresh();
     }
-
-    return Ext.get(element);
-  },
-
-  updateElement: function () {
-    this.refresh();
-  }
 });

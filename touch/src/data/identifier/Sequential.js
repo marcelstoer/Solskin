@@ -27,38 +27,38 @@
  *
  */
 Ext.define('Ext.data.identifier.Sequential', {
-  extend: 'Ext.data.identifier.Simple',
-  alias: 'data.identifier.sequential',
+    extend: 'Ext.data.identifier.Simple',
+    alias: 'data.identifier.sequential',
 
-  config: {
-    /**
-     * @cfg {String} prefix
-     * The string to place in front of the sequential number for each generated id. The
-     * default is blank.
-     */
-    prefix: '',
+    config: {
+        /**
+         * @cfg {String} prefix
+         * The string to place in front of the sequential number for each generated id. The
+         * default is blank.
+         */
+        prefix: '',
 
-    /**
-     * @cfg {Number} seed
-     * The number at which to start generating sequential id's. The default is 1.
-     */
-    seed: 1
-  },
+        /**
+         * @cfg {Number} seed
+         * The number at which to start generating sequential id's. The default is 1.
+         */
+        seed: 1
+    },
 
-  constructor: function () {
-    var me = this;
-    me.callParent(arguments);
-    me.parts = [me.getPrefix(), ''];
-  },
+    constructor: function() {
+        var me = this;
+        me.callParent(arguments);
+        me.parts = [me.getPrefix(), ''];
+    },
 
-  generate: function (record) {
-    var me = this,
-      parts = me.parts,
-      seed = me.getSeed() + 1;
+    generate: function(record) {
+        var me = this,
+            parts = me.parts,
+            seed = me.getSeed() + 1;
 
-    me.setSeed(seed);
-    parts[1] = seed;
+        me.setSeed(seed);
+        parts[1] = seed;
 
-    return parts.join('');
-  }
+        return parts.join('');
+    }
 });

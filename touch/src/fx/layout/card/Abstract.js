@@ -2,63 +2,63 @@
  * @private
  */
 Ext.define('Ext.fx.layout.card.Abstract', {
-  extend: 'Ext.Evented',
-  isAnimation: true,
+    extend: 'Ext.Evented',
+    isAnimation: true,
 
-  config: {
-    direction: 'left',
+    config: {
+        direction: 'left',
 
-    duration: null,
+        duration: null,
 
-    reverse: null,
+        reverse: null,
 
-    layout: null
-  },
+        layout: null
+    },
 
-  updateLayout: function () {
-    this.enable();
-  },
+    updateLayout: function() {
+        this.enable();
+    },
 
-  enable: function () {
-    var layout = this.getLayout();
+    enable: function() {
+        var layout = this.getLayout();
 
-    if (layout) {
-      layout.onBefore('activeitemchange', 'onActiveItemChange', this);
-    }
-  },
+        if (layout) {
+            layout.onBefore('activeitemchange', 'onActiveItemChange', this);
+        }
+    },
 
-  disable: function () {
-    var layout = this.getLayout();
+    disable: function() {
+        var layout = this.getLayout();
 
-    if (this.isAnimating) {
-      this.stopAnimation();
-    }
+        if (this.isAnimating) {
+            this.stopAnimation();
+        }
 
-    if (layout) {
-      layout.unBefore('activeitemchange', 'onActiveItemChange', this);
-    }
-  },
+        if (layout) {
+            layout.unBefore('activeitemchange', 'onActiveItemChange', this);
+        }
+    },
 
-  onActiveItemChange: Ext.emptyFn,
+    onActiveItemChange: Ext.emptyFn,
 
-  destroy: function () {
-    var layout = this.getLayout();
+    destroy: function() {
+        var layout = this.getLayout();
 
-    if (this.isAnimating) {
-      this.stopAnimation();
-    }
+        if (this.isAnimating) {
+            this.stopAnimation();
+        }
 
-    if (layout) {
-      layout.unBefore('activeitemchange', 'onActiveItemChange', this);
-    }
-    this.setLayout(null);
+        if (layout) {
+            layout.unBefore('activeitemchange', 'onActiveItemChange', this);
+        }
+        this.setLayout(null);
 
-    if (this.observableId) {
-      this.fireEvent('destroy', this);
-      this.clearListeners();
-      this.clearManagedListeners();
-    }
+        if (this.observableId) {
+            this.fireEvent('destroy', this);
+            this.clearListeners();
+            this.clearManagedListeners();
+        }
 
 //        this.callSuper(arguments);
-  }
+    }
 });

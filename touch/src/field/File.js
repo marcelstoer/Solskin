@@ -2,33 +2,33 @@
  * @private
  */
 Ext.define('Ext.field.File', {
-  extend: 'Ext.field.Input',
-  xtype: 'file',
+    extend: 'Ext.field.Input',
+    xtype : 'file',
 
-  cachedConfig: {
-    type: 'file'
-  },
-
-  // @private
-  getTemplate: function () {
-    var items = [
-      {
-        reference: 'input',
-        tag: this.tag,
+    cachedConfig: {
         type: 'file'
-      }
-    ];
+    },
 
-    items.push({
-      reference: 'mask',
-      classList: [this.config.maskCls]
-    });
+    // @private
+    getTemplate: function() {
+        var items = [
+            {
+                reference: 'input',
+                tag: this.tag,
+                type: 'file'
+            }
+        ];
 
-    return items;
-  },
+        items.push({
+            reference: 'mask',
+            classList: [this.config.maskCls]
+        });
 
-  updateType: function (newType, oldType) {
-    var prefix = Ext.baseCSSPrefix + 'input-';
-    this.input.replaceCls(prefix + oldType, prefix + newType);
-  }
+        return items;
+    },
+
+    updateType: function(newType, oldType) {
+        var prefix = Ext.baseCSSPrefix + 'input-';
+        this.input.replaceCls(prefix + oldType, prefix + newType);
+    }
 });

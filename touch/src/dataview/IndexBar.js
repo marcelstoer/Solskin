@@ -53,202 +53,202 @@
  *        hideOnMaskTap: false
  *     });
  *
- */
+*/
 Ext.define('Ext.dataview.IndexBar', {
-  extend: 'Ext.Component',
-  alternateClassName: 'Ext.IndexBar',
-
-  /**
-   * @event index
-   * Fires when an item in the index bar display has been tapped.
-   * @param {Ext.dataview.IndexBar} this The IndexBar instance
-   * @param {String} html The HTML inside the tapped node.
-   * @param {Ext.dom.Element} target The node on the indexbar that has been tapped.
-   */
-
-  config: {
-    baseCls: Ext.baseCSSPrefix + 'indexbar',
+    extend: 'Ext.Component',
+    alternateClassName: 'Ext.IndexBar',
 
     /**
-     * @cfg {String} direction
-     * Layout direction, can be either 'vertical' or 'horizontal'
-     * @accessor
+     * @event index
+     * Fires when an item in the index bar display has been tapped.
+     * @param {Ext.dataview.IndexBar} this The IndexBar instance
+     * @param {String} html The HTML inside the tapped node.
+     * @param {Ext.dom.Element} target The node on the indexbar that has been tapped.
      */
-    direction: 'vertical',
 
-    /**
-     * @cfg {Array} letters
-     * The letters to show on the index bar.
-     * @accessor
-     */
-    letters: ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'],
+    config: {
+        baseCls: Ext.baseCSSPrefix + 'indexbar',
 
-    ui: 'alphabet',
+        /**
+         * @cfg {String} direction
+         * Layout direction, can be either 'vertical' or 'horizontal'
+         * @accessor
+         */
+        direction: 'vertical',
 
-    /**
-     * @cfg {String} listPrefix
-     * The prefix string to be used at the beginning of the list.
-     * E.g: useful to add a "#" prefix before numbers.
-     * @accessor
-     */
-    listPrefix: null
-  },
+        /**
+         * @cfg {Array} letters
+         * The letters to show on the index bar.
+         * @accessor
+         */
+        letters: ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'],
 
-  // @private
-  itemCls: Ext.baseCSSPrefix + '',
+        ui: 'alphabet',
 
-  updateDirection: function (newDirection, oldDirection) {
-    var baseCls = this.getBaseCls();
+        /**
+         * @cfg {String} listPrefix
+         * The prefix string to be used at the beginning of the list.
+         * E.g: useful to add a "#" prefix before numbers.
+         * @accessor
+         */
+        listPrefix: null
+    },
 
-    this.element.replaceCls(baseCls + '-' + oldDirection, baseCls + '-' + newDirection);
-  },
+    // @private
+    itemCls: Ext.baseCSSPrefix + '',
 
-  getElementConfig: function () {
-    return {
-      reference: 'wrapper',
-      classList: ['x-centered', 'x-indexbar-wrapper'],
-      children: [this.callParent()]
-    };
-  },
+    updateDirection: function(newDirection, oldDirection) {
+        var baseCls = this.getBaseCls();
 
-  updateLetters: function (letters) {
-    this.innerElement.setHtml('');
+        this.element.replaceCls(baseCls + '-' + oldDirection, baseCls + '-' + newDirection);
+    },
 
-    if (letters) {
-      var ln = letters.length,
-        i;
+    getElementConfig: function() {
+        return {
+            reference: 'wrapper',
+            classList: ['x-centered', 'x-indexbar-wrapper'],
+            children: [this.callParent()]
+        };
+    },
 
-      for (i = 0; i < ln; i++) {
-        this.innerElement.createChild({
-          html: letters[i]
+    updateLetters: function(letters) {
+        this.innerElement.setHtml('');
+
+        if (letters) {
+            var ln = letters.length,
+                i;
+
+            for (i = 0; i < ln; i++) {
+                this.innerElement.createChild({
+                    html: letters[i]
+                });
+            }
+        }
+    },
+
+    updateListPrefix: function(listPrefix) {
+        if (listPrefix && listPrefix.length) {
+            this.innerElement.createChild({
+                html: listPrefix
+            }, 0);
+        }
+    },
+
+    // @private
+    initialize: function() {
+        this.callParent();
+
+        this.innerElement.on({
+            touchstart: this.onTouchStart,
+            touchend: this.onTouchEnd,
+            touchmove: this.onTouchMove,
+            scope: this
         });
-      }
-    }
-  },
+    },
 
-  updateListPrefix: function (listPrefix) {
-    if (listPrefix && listPrefix.length) {
-      this.innerElement.createChild({
-        html: listPrefix
-      }, 0);
-    }
-  },
+    // @private
+    onTouchStart: function(e, t) {
+        e.stopPropagation();
+        this.innerElement.addCls(this.getBaseCls() + '-pressed');
+        this.pageBox = this.innerElement.getPageBox();
+        this.onTouchMove(e);
+    },
 
-  // @private
-  initialize: function () {
-    this.callParent();
+    // @private
+    onTouchEnd: function(e, t) {
+        this.innerElement.removeCls(this.getBaseCls() + '-pressed');
+    },
 
-    this.innerElement.on({
-      touchstart: this.onTouchStart,
-      touchend: this.onTouchEnd,
-      touchmove: this.onTouchMove,
-      scope: this
-    });
-  },
+    // @private
+    onTouchMove: function(e) {
+        var point = Ext.util.Point.fromEvent(e),
+            target,
+            pageBox = this.pageBox;
 
-  // @private
-  onTouchStart: function (e, t) {
-    e.stopPropagation();
-    this.innerElement.addCls(this.getBaseCls() + '-pressed');
-    this.pageBox = this.innerElement.getPageBox();
-    this.onTouchMove(e);
-  },
+        if (!pageBox) {
+            pageBox = this.pageBox = this.el.getPageBox();
+        }
 
-  // @private
-  onTouchEnd: function (e, t) {
-    this.innerElement.removeCls(this.getBaseCls() + '-pressed');
-  },
+        if (this.getDirection() === 'vertical') {
+            if (point.y > pageBox.bottom || point.y < pageBox.top) {
+                return;
+            }
+            target = Ext.Element.fromPoint(pageBox.left + (pageBox.width / 2), point.y);
+        }
+        else {
+            if (point.x > pageBox.right || point.x < pageBox.left) {
+                return;
+            }
+            target = Ext.Element.fromPoint(point.x, pageBox.top + (pageBox.height / 2));
+        }
 
-  // @private
-  onTouchMove: function (e) {
-    var point = Ext.util.Point.fromEvent(e),
-      target,
-      pageBox = this.pageBox;
+        if (target) {
+            this.fireEvent('index', this, target.dom.innerHTML, target);
+        }
+    },
 
-    if (!pageBox) {
-      pageBox = this.pageBox = this.el.getPageBox();
-    }
+    destroy: function() {
+        var me = this,
+            elements = Array.prototype.slice.call(me.innerElement.dom.childNodes),
+            ln = elements.length,
+            i = 0;
 
-    if (this.getDirection() === 'vertical') {
-      if (point.y > pageBox.bottom || point.y < pageBox.top) {
-        return;
-      }
-      target = Ext.Element.fromPoint(pageBox.left + (pageBox.width / 2), point.y);
-    }
-    else {
-      if (point.x > pageBox.right || point.x < pageBox.left) {
-        return;
-      }
-      target = Ext.Element.fromPoint(point.x, pageBox.top + (pageBox.height / 2));
+        for (; i < ln; i++) {
+            Ext.removeNode(elements[i]);
+        }
+        this.callParent();
     }
 
-    if (target) {
-      this.fireEvent('index', this, target.dom.innerHTML, target);
-    }
-  },
+}, function() {
+    //<deprecated product=touch since=2.0>
 
-  destroy: function () {
-    var me = this,
-      elements = Array.prototype.slice.call(me.innerElement.dom.childNodes),
-      ln = elements.length,
-      i = 0;
+    /**
+     * @member Ext.dataview.IndexBar
+     * @method isHorizontal
+     * Returns `true` when direction is horizontal.
+     * @removed 2.0.0
+     */
+    Ext.deprecateMethod(this, 'isHorizontal', null, "Ext.dataview.IndexBar.isHorizontal() has been removed");
 
-    for (; i < ln; i++) {
-      Ext.removeNode(elements[i]);
-    }
-    this.callParent();
-  }
+    /**
+     * @member Ext.dataview.IndexBar
+     * @method isVertical
+     * Returns `true` when direction is vertical.
+     * @removed 2.0.0
+     */
+    Ext.deprecateMethod(this, 'isVertical', null, "Ext.dataview.IndexBar.isVertical() has been removed");
 
-}, function () {
-  //<deprecated product=touch since=2.0>
+    /**
+     * @member Ext.dataview.IndexBar
+     * @method refresh
+     * Refreshes the view by reloading the data from the store and re-rendering the template.
+     * @removed 2.0.0
+     */
+    Ext.deprecateMethod(this, 'refresh', null, "Ext.dataview.IndexBar.refresh() has been removed");
 
-  /**
-   * @member Ext.dataview.IndexBar
-   * @method isHorizontal
-   * Returns `true` when direction is horizontal.
-   * @removed 2.0.0
-   */
-  Ext.deprecateMethod(this, 'isHorizontal', null, "Ext.dataview.IndexBar.isHorizontal() has been removed");
+    /**
+     * @member Ext.dataview.IndexBar
+     * @cfg {Boolean} alphabet
+     * `true` to use the letters property to show a list of the alphabet.
+     * @removed 2.0.0
+     */
+    Ext.deprecateProperty(this, 'alphabet', null, "Ext.dataview.IndexBar.alphabet has been removed");
 
-  /**
-   * @member Ext.dataview.IndexBar
-   * @method isVertical
-   * Returns `true` when direction is vertical.
-   * @removed 2.0.0
-   */
-  Ext.deprecateMethod(this, 'isVertical', null, "Ext.dataview.IndexBar.isVertical() has been removed");
+    /**
+     * @member Ext.dataview.IndexBar
+     * @cfg {Boolean} itemSelector
+     * A simple CSS selector for items.
+     * @removed 2.0.0
+     */
+    Ext.deprecateProperty(this, 'itemSelector', null, "Ext.dataview.IndexBar.itemSelector has been removed");
 
-  /**
-   * @member Ext.dataview.IndexBar
-   * @method refresh
-   * Refreshes the view by reloading the data from the store and re-rendering the template.
-   * @removed 2.0.0
-   */
-  Ext.deprecateMethod(this, 'refresh', null, "Ext.dataview.IndexBar.refresh() has been removed");
+    /**
+     * @member Ext.dataview.IndexBar
+     * @cfg {Boolean} store
+     * The store to be used for displaying data on the index bar.
+     * @removed 2.0.0
+     */
+    Ext.deprecateProperty(this, 'store', null, "Ext.dataview.IndexBar.store has been removed");
 
-  /**
-   * @member Ext.dataview.IndexBar
-   * @cfg {Boolean} alphabet
-   * `true` to use the letters property to show a list of the alphabet.
-   * @removed 2.0.0
-   */
-  Ext.deprecateProperty(this, 'alphabet', null, "Ext.dataview.IndexBar.alphabet has been removed");
-
-  /**
-   * @member Ext.dataview.IndexBar
-   * @cfg {Boolean} itemSelector
-   * A simple CSS selector for items.
-   * @removed 2.0.0
-   */
-  Ext.deprecateProperty(this, 'itemSelector', null, "Ext.dataview.IndexBar.itemSelector has been removed");
-
-  /**
-   * @member Ext.dataview.IndexBar
-   * @cfg {Boolean} store
-   * The store to be used for displaying data on the index bar.
-   * @removed 2.0.0
-   */
-  Ext.deprecateProperty(this, 'store', null, "Ext.dataview.IndexBar.store has been removed");
-
-  //</deprecated>
+    //</deprecated>
 });

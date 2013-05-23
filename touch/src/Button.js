@@ -221,575 +221,575 @@
  *
  */
 Ext.define('Ext.Button', {
-  extend: 'Ext.Component',
+    extend: 'Ext.Component',
 
-  xtype: 'button',
-
-  /**
-   * @event tap
-   * @preventable doTap
-   * Fires whenever a button is tapped.
-   * @param {Ext.Button} this The item added to the Container.
-   * @param {Ext.EventObject} e The event object.
-   */
-
-  /**
-   * @event release
-   * @preventable doRelease
-   * Fires whenever the button is released.
-   * @param {Ext.Button} this The item added to the Container.
-   * @param {Ext.EventObject} e The event object.
-   */
-
-  cachedConfig: {
-    /**
-     * @cfg {String} pressedCls
-     * The CSS class to add to the Button when it is pressed.
-     * @accessor
-     */
-    pressedCls: Ext.baseCSSPrefix + 'button-pressing',
+    xtype: 'button',
 
     /**
-     * @cfg {String} badgeCls
-     * The CSS class to add to the Button's badge, if it has one.
-     * @accessor
-     */
-    badgeCls: Ext.baseCSSPrefix + 'badge',
-
-    /**
-     * @cfg {String} hasBadgeCls
-     * The CSS class to add to the Button if it has a badge (note that this goes on the
-     * Button element itself, not on the badge element).
-     * @private
-     * @accessor
-     */
-    hasBadgeCls: Ext.baseCSSPrefix + 'hasbadge',
-
-    /**
-     * @cfg {String} labelCls
-     * The CSS class to add to the field's label element.
-     * @accessor
-     */
-    labelCls: Ext.baseCSSPrefix + 'button-label',
-
-    /**
-     * @cfg {String} iconMaskCls
-     * @private
-     * The CSS class to add to the icon element as allowed by {@link #iconMask}.
-     * @accessor
-     */
-    iconMaskCls: Ext.baseCSSPrefix + 'icon-mask',
-
-    /**
-     * @cfg {String} iconCls
-     * Optional CSS class to add to the icon element. This is useful if you want to use a CSS
-     * background image to create your Button icon.
-     * @accessor
-     */
-    iconCls: null
-  },
-
-  config: {
-    /**
-     * @cfg {String} badgeText
-     * Optional badge text.
-     * @accessor
-     */
-    badgeText: null,
-
-    /**
-     * @cfg {String} text
-     * The Button text.
-     * @accessor
-     */
-    text: null,
-
-    /**
-     * @cfg {String} icon
-     * Url to the icon image to use if you want an icon to appear on your button.
-     * @accessor
-     */
-    icon: null,
-
-    /**
-     * @cfg {String} iconAlign
-     * The position within the Button to render the icon Options are: `top`, `right`, `bottom`, `left` and `center` (when you have
-     * no {@link #text} set).
-     * @accessor
-     */
-    iconAlign: 'left',
-
-    /**
-     * @cfg {Number/Boolean} pressedDelay
-     * The amount of delay between the `tapstart` and the moment we add the `pressedCls` (in milliseconds).
-     * Settings this to `true` defaults to 100ms.
-     */
-    pressedDelay: 0,
-
-    /**
-     * @cfg {Boolean} iconMask
-     * Whether or not to mask the icon with the `iconMask` configuration.
-     * This is needed if you want to use any of the bundled pictos icons in the Sencha Touch Sass.
-     * @accessor
-     */
-    iconMask: null,
-
-    /**
-     * @cfg {Function} handler
-     * The handler function to run when the Button is tapped on.
-     * @accessor
-     */
-    handler: null,
-
-    /**
-     * @cfg {Object} scope
-     * The scope to fire the configured {@link #handler} in.
-     * @accessor
-     */
-    scope: null,
-
-    /**
-     * @cfg {String} autoEvent
-     * Optional event name that will be fired instead of `tap` when the Button is tapped on.
-     * @accessor
-     */
-    autoEvent: null,
-
-    /**
-     * @cfg {String} ui
-     * The ui style to render this button with. The valid default options are:
-     *
-     * - `'normal'` - a basic gray button (default).
-     * - `'back'` - a back button.
-     * - `'forward'` - a forward button.
-     * - `'round'` - a round button.
-     * - `'plain'`
-     * - `'action'` - shaded using the {@link Global_CSS#$active-color $active-color} (dark blue by default).
-     * - `'decline'` - shaded using the {@link Global_CSS#$alert-color $alert-color} (red by default).
-     * - `'confirm'` - shaded using the {@link Global_CSS#$confirm-color $confirm-color} (green by default).
-     *
-     * You can also append `-round` to each of the last three UI's to give it a round shape:
-     *
-     * - **action-round**
-     * - **decline-round**
-     * - **confirm-round**
-     *
-     * @accessor
-     */
-    ui: 'normal',
-
-    /**
-     * @cfg {String} html The HTML to put in this button.
-     *
-     * If you want to just add text, please use the {@link #text} configuration.
+     * @event tap
+     * @preventable doTap
+     * Fires whenever a button is tapped.
+     * @param {Ext.Button} this The item added to the Container.
+     * @param {Ext.EventObject} e The event object.
      */
 
     /**
-     * @cfg
-     * @inheritdoc
+     * @event release
+     * @preventable doRelease
+     * Fires whenever the button is released.
+     * @param {Ext.Button} this The item added to the Container.
+     * @param {Ext.EventObject} e The event object.
      */
-    baseCls: Ext.baseCSSPrefix + 'button'
-  },
 
-  template: [
-    {
-      tag: 'span',
-      reference: 'badgeElement',
-      hidden: true
-    },
-    {
-      tag: 'span',
-      className: Ext.baseCSSPrefix + 'button-icon',
-      reference: 'iconElement',
-      hidden: true
-    },
-    {
-      tag: 'span',
-      reference: 'textElement',
-      hidden: true
-    }
-  ],
-
-  initialize: function () {
-    this.callParent();
-
-    this.element.on({
-      scope: this,
-      tap: 'onTap',
-      touchstart: 'onPress',
-      touchend: 'onRelease'
-    });
-  },
-
-  /**
-   * @private
-   */
-  updateBadgeText: function (badgeText) {
-    var element = this.element,
-      badgeElement = this.badgeElement;
-
-    if (badgeText) {
-      badgeElement.show();
-      badgeElement.setText(badgeText);
-    }
-    else {
-      badgeElement.hide();
-    }
-
-    element[(badgeText) ? 'addCls' : 'removeCls'](this.getHasBadgeCls());
-  },
-
-  /**
-   * @private
-   */
-  updateText: function (text) {
-    var textElement = this.textElement;
-    if (textElement) {
-      if (text) {
-        textElement.show();
-        textElement.setHtml(text);
-      }
-      else {
-        textElement.hide();
-      }
-    }
-  },
-
-  /**
-   * @private
-   */
-  updateHtml: function (html) {
-    var textElement = this.textElement;
-
-    if (html) {
-      textElement.show();
-      textElement.setHtml(html);
-    }
-    else {
-      textElement.hide();
-    }
-  },
-
-  /**
-   * @private
-   */
-  updateBadgeCls: function (badgeCls, oldBadgeCls) {
-    this.badgeElement.replaceCls(oldBadgeCls, badgeCls);
-  },
-
-  /**
-   * @private
-   */
-  updateHasBadgeCls: function (hasBadgeCls, oldHasBadgeCls) {
-    var element = this.element;
-
-    if (element.hasCls(oldHasBadgeCls)) {
-      element.replaceCls(oldHasBadgeCls, hasBadgeCls);
-    }
-  },
-
-  /**
-   * @private
-   */
-  updateLabelCls: function (labelCls, oldLabelCls) {
-    this.textElement.replaceCls(oldLabelCls, labelCls);
-  },
-
-  /**
-   * @private
-   */
-  updatePressedCls: function (pressedCls, oldPressedCls) {
-    var element = this.element;
-
-    if (element.hasCls(oldPressedCls)) {
-      element.replaceCls(oldPressedCls, pressedCls);
-    }
-  },
-
-  /**
-   * @private
-   */
-  updateIcon: function (icon) {
-    var me = this,
-      element = me.iconElement;
-
-    if (icon) {
-      me.showIconElement();
-      element.setStyle('background-image', 'url(' + icon + ')');
-      me.refreshIconAlign();
-      me.refreshIconMask();
-    }
-    else {
-      element.setStyle('background-image', '');
-      me.hideIconElement();
-      me.setIconAlign(false);
-    }
-  },
-
-  /**
-   * @private
-   */
-  updateIconCls: function (iconCls, oldIconCls) {
-    var me = this,
-      element = me.iconElement;
-
-    if (iconCls) {
-      me.showIconElement();
-      element.replaceCls(oldIconCls, iconCls);
-      me.refreshIconAlign();
-      me.refreshIconMask();
-    }
-    else {
-      element.removeCls(oldIconCls);
-      me.hideIconElement();
-      me.setIconAlign(false);
-    }
-  },
-
-  /**
-   * @private
-   */
-  updateIconAlign: function (alignment, oldAlignment) {
-    var element = this.element,
-      baseCls = Ext.baseCSSPrefix + 'iconalign-';
-
-    if (!this.getText()) {
-      alignment = "center";
-    }
-
-    element.removeCls(baseCls + "center");
-    element.removeCls(baseCls + oldAlignment);
-    if (this.getIcon() || this.getIconCls()) {
-      element.addCls(baseCls + alignment);
-    }
-  },
-
-  refreshIconAlign: function () {
-    this.updateIconAlign(this.getIconAlign());
-  },
-
-  /**
-   * @private
-   */
-  updateIconMaskCls: function (iconMaskCls, oldIconMaskCls) {
-    var element = this.iconElement;
-
-    if (this.getIconMask()) {
-      element.replaceCls(oldIconMaskCls, iconMaskCls);
-    }
-  },
-
-  /**
-   * @private
-   */
-  updateIconMask: function (iconMask) {
-    this.iconElement[iconMask ? "addCls" : "removeCls"](this.getIconMaskCls());
-  },
-
-  refreshIconMask: function () {
-    this.updateIconMask(this.getIconMask());
-  },
-
-  applyAutoEvent: function (autoEvent) {
-    var me = this;
-
-    if (typeof autoEvent == 'string') {
-      autoEvent = {
-        name: autoEvent,
-        scope: me.scope || me
-      };
-    }
-
-    return autoEvent;
-  },
-
-  /**
-   * @private
-   */
-  updateAutoEvent: function (autoEvent) {
-    var name = autoEvent.name,
-      scope = autoEvent.scope;
-
-    this.setHandler(function () {
-      scope.fireEvent(name, scope, this);
-    });
-
-    this.setScope(scope);
-  },
-
-  /**
-   * Used by `icon` and `iconCls` configurations to hide the icon element.
-   * We do this because Tab needs to change the visibility of the icon, not make
-   * it `display:none;`.
-   * @private
-   */
-  hideIconElement: function () {
-    this.iconElement.hide();
-  },
-
-  /**
-   * Used by `icon` and `iconCls` configurations to show the icon element.
-   * We do this because Tab needs to change the visibility of the icon, not make
-   * it `display:node;`.
-   * @private
-   */
-  showIconElement: function () {
-    this.iconElement.show();
-  },
-
-  /**
-   * We override this to check for '{ui}-back'. This is because if you have a UI of back, you need to actually add two class names.
-   * The ui class, and the back class:
-   *
-   * `ui: 'action-back'` would turn into:
-   *
-   * `class="x-button-action x-button-back"`
-   *
-   * But `ui: 'action'` would turn into:
-   *
-   * `class="x-button-action"`
-   *
-   * So we just split it up into an array and add both of them as a UI, when it has `back`.
-   * @private
-   */
-  applyUi: function (config) {
-    if (config && Ext.isString(config)) {
-      var array = config.split('-');
-      if (array && (array[1] == "back" || array[1] == "forward")) {
-        return array;
-      }
-    }
-
-    return config;
-  },
-
-  getUi: function () {
-    //Now that the UI can sometimes be an array, we need to check if it an array and return the proper value.
-    var ui = this._ui;
-    if (Ext.isArray(ui)) {
-      return ui.join('-');
-    }
-    return ui;
-  },
-
-  applyPressedDelay: function (delay) {
-    if (Ext.isNumber(delay)) {
-      return delay;
-    }
-    return (delay) ? 100 : 0;
-  },
-
-  // @private
-  onPress: function () {
-    var me = this,
-      element = me.element,
-      pressedDelay = me.getPressedDelay(),
-      pressedCls = me.getPressedCls();
-
-    if (!me.getDisabled()) {
-      if (pressedDelay > 0) {
-        me.pressedTimeout = setTimeout(function () {
-          delete me.pressedTimeout;
-          if (element) {
-            element.addCls(pressedCls);
-          }
-        }, pressedDelay);
-      }
-      else {
-        element.addCls(pressedCls);
-      }
-    }
-  },
-
-  // @private
-  onRelease: function (e) {
-    this.fireAction('release', [this, e], 'doRelease');
-  },
-
-  // @private
-  doRelease: function (me, e) {
-    if (!me.getDisabled()) {
-      if (me.hasOwnProperty('pressedTimeout')) {
-        clearTimeout(me.pressedTimeout);
-        delete me.pressedTimeout;
-      }
-      else {
-        me.element.removeCls(me.getPressedCls());
-      }
-    }
-  },
-
-  // @private
-  onTap: function (e) {
-    if (this.getDisabled()) {
-      return false;
-    }
-
-    this.fireAction('tap', [this, e], 'doTap');
-  },
-
-  /**
-   * @private
-   */
-  doTap: function (me, e) {
-    var handler = me.getHandler(),
-      scope = me.getScope() || me;
-
-    if (!handler) {
-      return;
-    }
-
-    if (typeof handler == 'string') {
-      handler = scope[handler];
-    }
-
-    //this is done so if you hide the button in the handler, the tap event will not fire on the new element
-    //where the button was.
-    if (e && e.preventDefault) {
-      e.preventDefault();
-    }
-
-    handler.apply(scope, arguments);
-  }
-}, function () {
-  //<deprecated product=touch since=2.0>
-
-  /**
-   * Updates the badge text.
-   * @method setBadge
-   * @param {String} text
-   * @deprecated 2.0.0 Please use {@link #setBadgeText} instead.
-   */
-  Ext.deprecateClassMethod(this, 'setBadge', 'setBadgeText');
-
-  /**
-   * Updates the icon class
-   * @method setIconClass
-   * @param {String} iconClass
-   * @deprecated 2.0.0 Please use {@link #setIconCls} instead.
-   */
-  Ext.deprecateClassMethod(this, 'setIconClass', 'setIconCls');
-
-  this.override({
-    constructor: function (config) {
-      if (config) {
+    cachedConfig: {
         /**
-         * @cfg {String} badge
-         * Optional badge text.
-         * @deprecated 2.0.0 Please use {@link #badgeText} instead
+         * @cfg {String} pressedCls
+         * The CSS class to add to the Button when it is pressed.
+         * @accessor
          */
-        if (config.hasOwnProperty('badge')) {
-          //<debug warn>
-          Ext.Logger.deprecate("'badge' config is deprecated, please use 'badgeText' config instead", this);
-          //</debug>
-          config.badgeText = config.badge;
-          delete config.badge;
+        pressedCls: Ext.baseCSSPrefix + 'button-pressing',
+
+        /**
+         * @cfg {String} badgeCls
+         * The CSS class to add to the Button's badge, if it has one.
+         * @accessor
+         */
+        badgeCls: Ext.baseCSSPrefix + 'badge',
+
+        /**
+         * @cfg {String} hasBadgeCls
+         * The CSS class to add to the Button if it has a badge (note that this goes on the
+         * Button element itself, not on the badge element).
+         * @private
+         * @accessor
+         */
+        hasBadgeCls: Ext.baseCSSPrefix + 'hasbadge',
+
+        /**
+         * @cfg {String} labelCls
+         * The CSS class to add to the field's label element.
+         * @accessor
+         */
+        labelCls: Ext.baseCSSPrefix + 'button-label',
+
+        /**
+         * @cfg {String} iconMaskCls
+         * @private
+         * The CSS class to add to the icon element as allowed by {@link #iconMask}.
+         * @accessor
+         */
+        iconMaskCls: Ext.baseCSSPrefix + 'icon-mask',
+
+        /**
+         * @cfg {String} iconCls
+         * Optional CSS class to add to the icon element. This is useful if you want to use a CSS
+         * background image to create your Button icon.
+         * @accessor
+         */
+        iconCls: null
+    },
+
+    config: {
+        /**
+         * @cfg {String} badgeText
+         * Optional badge text.
+         * @accessor
+         */
+        badgeText: null,
+
+        /**
+         * @cfg {String} text
+         * The Button text.
+         * @accessor
+         */
+        text: null,
+
+        /**
+         * @cfg {String} icon
+         * Url to the icon image to use if you want an icon to appear on your button.
+         * @accessor
+         */
+        icon: null,
+
+        /**
+         * @cfg {String} iconAlign
+         * The position within the Button to render the icon Options are: `top`, `right`, `bottom`, `left` and `center` (when you have
+         * no {@link #text} set).
+         * @accessor
+         */
+        iconAlign: 'left',
+
+        /**
+         * @cfg {Number/Boolean} pressedDelay
+         * The amount of delay between the `tapstart` and the moment we add the `pressedCls` (in milliseconds).
+         * Settings this to `true` defaults to 100ms.
+         */
+        pressedDelay: 0,
+
+        /**
+         * @cfg {Boolean} iconMask
+         * Whether or not to mask the icon with the `iconMask` configuration.
+         * This is needed if you want to use any of the bundled pictos icons in the Sencha Touch Sass.
+         * @accessor
+         */
+        iconMask: null,
+
+        /**
+         * @cfg {Function} handler
+         * The handler function to run when the Button is tapped on.
+         * @accessor
+         */
+        handler: null,
+
+        /**
+         * @cfg {Object} scope
+         * The scope to fire the configured {@link #handler} in.
+         * @accessor
+         */
+        scope: null,
+
+        /**
+         * @cfg {String} autoEvent
+         * Optional event name that will be fired instead of `tap` when the Button is tapped on.
+         * @accessor
+         */
+        autoEvent: null,
+
+        /**
+         * @cfg {String} ui
+         * The ui style to render this button with. The valid default options are:
+         *
+         * - `'normal'` - a basic gray button (default).
+         * - `'back'` - a back button.
+         * - `'forward'` - a forward button.
+         * - `'round'` - a round button.
+         * - `'plain'`
+         * - `'action'` - shaded using the {@link Global_CSS#$active-color $active-color} (dark blue by default).
+         * - `'decline'` - shaded using the {@link Global_CSS#$alert-color $alert-color} (red by default).
+         * - `'confirm'` - shaded using the {@link Global_CSS#$confirm-color $confirm-color} (green by default).
+         *
+         * You can also append `-round` to each of the last three UI's to give it a round shape:
+         *
+         * - **action-round**
+         * - **decline-round**
+         * - **confirm-round**
+         *
+         * @accessor
+         */
+        ui: 'normal',
+
+        /**
+         * @cfg {String} html The HTML to put in this button.
+         *
+         * If you want to just add text, please use the {@link #text} configuration.
+         */
+
+        /**
+         * @cfg
+         * @inheritdoc
+         */
+        baseCls: Ext.baseCSSPrefix + 'button'
+    },
+
+    template: [
+        {
+            tag: 'span',
+            reference: 'badgeElement',
+            hidden: true
+        },
+        {
+            tag: 'span',
+            className: Ext.baseCSSPrefix + 'button-icon',
+            reference: 'iconElement',
+            hidden: true
+        },
+        {
+            tag: 'span',
+            reference: 'textElement',
+            hidden: true
         }
-      }
+    ],
 
-      this.callParent([config]);
+    initialize: function() {
+        this.callParent();
+
+        this.element.on({
+            scope      : this,
+            tap        : 'onTap',
+            touchstart : 'onPress',
+            touchend   : 'onRelease'
+        });
+    },
+
+    /**
+     * @private
+     */
+    updateBadgeText: function(badgeText) {
+        var element = this.element,
+            badgeElement = this.badgeElement;
+
+        if (badgeText) {
+            badgeElement.show();
+            badgeElement.setText(badgeText);
+        }
+        else {
+            badgeElement.hide();
+        }
+
+        element[(badgeText) ? 'addCls' : 'removeCls'](this.getHasBadgeCls());
+    },
+
+    /**
+     * @private
+     */
+    updateText: function(text) {
+        var textElement = this.textElement;
+        if (textElement) {
+            if (text) {
+                textElement.show();
+                textElement.setHtml(text);
+            }
+            else {
+                textElement.hide();
+            }
+        }
+    },
+
+    /**
+     * @private
+     */
+    updateHtml: function(html) {
+        var textElement = this.textElement;
+
+        if (html) {
+            textElement.show();
+            textElement.setHtml(html);
+        }
+        else {
+            textElement.hide();
+        }
+    },
+
+    /**
+     * @private
+     */
+    updateBadgeCls: function(badgeCls, oldBadgeCls) {
+        this.badgeElement.replaceCls(oldBadgeCls, badgeCls);
+    },
+
+    /**
+     * @private
+     */
+    updateHasBadgeCls: function(hasBadgeCls, oldHasBadgeCls) {
+        var element = this.element;
+
+        if (element.hasCls(oldHasBadgeCls)) {
+            element.replaceCls(oldHasBadgeCls, hasBadgeCls);
+        }
+    },
+
+    /**
+     * @private
+     */
+    updateLabelCls: function(labelCls, oldLabelCls) {
+        this.textElement.replaceCls(oldLabelCls, labelCls);
+    },
+
+    /**
+     * @private
+     */
+    updatePressedCls: function(pressedCls, oldPressedCls) {
+        var element = this.element;
+
+        if (element.hasCls(oldPressedCls)) {
+            element.replaceCls(oldPressedCls, pressedCls);
+        }
+    },
+
+    /**
+     * @private
+     */
+    updateIcon: function(icon) {
+        var me = this,
+            element = me.iconElement;
+
+        if (icon) {
+            me.showIconElement();
+            element.setStyle('background-image', 'url(' + icon + ')');
+            me.refreshIconAlign();
+            me.refreshIconMask();
+        }
+        else {
+        	element.setStyle('background-image', '');
+            me.hideIconElement();
+            me.setIconAlign(false);
+        }
+    },
+
+    /**
+     * @private
+     */
+    updateIconCls: function(iconCls, oldIconCls) {
+        var me = this,
+            element = me.iconElement;
+
+        if (iconCls) {
+            me.showIconElement();
+            element.replaceCls(oldIconCls, iconCls);
+            me.refreshIconAlign();
+            me.refreshIconMask();
+        }
+        else {
+			element.removeCls(oldIconCls);
+            me.hideIconElement();
+            me.setIconAlign(false);
+        }
+    },
+
+    /**
+     * @private
+     */
+    updateIconAlign: function(alignment, oldAlignment) {
+        var element = this.element,
+            baseCls = Ext.baseCSSPrefix + 'iconalign-';
+
+        if (!this.getText()) {
+            alignment = "center";
+        }
+
+        element.removeCls(baseCls + "center");
+        element.removeCls(baseCls + oldAlignment);
+        if (this.getIcon() || this.getIconCls()) {
+            element.addCls(baseCls + alignment);
+        }
+    },
+
+    refreshIconAlign: function() {
+        this.updateIconAlign(this.getIconAlign());
+    },
+
+    /**
+     * @private
+     */
+    updateIconMaskCls: function(iconMaskCls, oldIconMaskCls) {
+        var element = this.iconElement;
+
+        if (this.getIconMask()) {
+            element.replaceCls(oldIconMaskCls, iconMaskCls);
+        }
+    },
+
+    /**
+     * @private
+     */
+    updateIconMask: function(iconMask) {
+        this.iconElement[iconMask ? "addCls" : "removeCls"](this.getIconMaskCls());
+    },
+
+    refreshIconMask: function() {
+        this.updateIconMask(this.getIconMask());
+    },
+
+    applyAutoEvent: function(autoEvent) {
+        var me = this;
+
+        if (typeof autoEvent == 'string') {
+            autoEvent = {
+                name : autoEvent,
+                scope: me.scope || me
+            };
+        }
+
+        return autoEvent;
+    },
+
+    /**
+     * @private
+     */
+    updateAutoEvent: function(autoEvent) {
+        var name  = autoEvent.name,
+            scope = autoEvent.scope;
+
+        this.setHandler(function() {
+            scope.fireEvent(name, scope, this);
+        });
+
+        this.setScope(scope);
+    },
+
+    /**
+     * Used by `icon` and `iconCls` configurations to hide the icon element.
+     * We do this because Tab needs to change the visibility of the icon, not make
+     * it `display:none;`.
+     * @private
+     */
+    hideIconElement: function() {
+        this.iconElement.hide();
+    },
+
+    /**
+     * Used by `icon` and `iconCls` configurations to show the icon element.
+     * We do this because Tab needs to change the visibility of the icon, not make
+     * it `display:node;`.
+     * @private
+     */
+    showIconElement: function() {
+        this.iconElement.show();
+    },
+
+    /**
+     * We override this to check for '{ui}-back'. This is because if you have a UI of back, you need to actually add two class names.
+     * The ui class, and the back class:
+     *
+     * `ui: 'action-back'` would turn into:
+     *
+     * `class="x-button-action x-button-back"`
+     *
+     * But `ui: 'action'` would turn into:
+     *
+     * `class="x-button-action"`
+     *
+     * So we just split it up into an array and add both of them as a UI, when it has `back`.
+     * @private
+     */
+    applyUi: function(config) {
+        if (config && Ext.isString(config)) {
+            var array  = config.split('-');
+            if (array && (array[1] == "back" || array[1] == "forward")) {
+                return array;
+            }
+        }
+
+        return config;
+    },
+
+    getUi: function() {
+        //Now that the UI can sometimes be an array, we need to check if it an array and return the proper value.
+        var ui = this._ui;
+        if (Ext.isArray(ui)) {
+            return ui.join('-');
+        }
+        return ui;
+    },
+
+    applyPressedDelay: function(delay) {
+        if (Ext.isNumber(delay)) {
+            return delay;
+        }
+        return (delay) ? 100 : 0;
+    },
+
+    // @private
+    onPress: function() {
+        var me = this,
+            element = me.element,
+            pressedDelay = me.getPressedDelay(),
+            pressedCls = me.getPressedCls();
+
+        if (!me.getDisabled()) {
+            if (pressedDelay > 0) {
+                me.pressedTimeout = setTimeout(function() {
+                    delete me.pressedTimeout;
+                    if (element) {
+                        element.addCls(pressedCls);
+                    }
+                }, pressedDelay);
+            }
+            else {
+                element.addCls(pressedCls);
+            }
+        }
+    },
+
+    // @private
+    onRelease: function(e) {
+        this.fireAction('release', [this, e], 'doRelease');
+    },
+
+    // @private
+    doRelease: function(me, e) {
+        if (!me.getDisabled()) {
+            if (me.hasOwnProperty('pressedTimeout')) {
+                clearTimeout(me.pressedTimeout);
+                delete me.pressedTimeout;
+            }
+            else {
+                me.element.removeCls(me.getPressedCls());
+            }
+        }
+    },
+
+    // @private
+    onTap: function(e) {
+        if (this.getDisabled()) {
+            return false;
+        }
+
+        this.fireAction('tap', [this, e], 'doTap');
+    },
+
+    /**
+     * @private
+     */
+    doTap: function(me, e) {
+        var handler = me.getHandler(),
+            scope = me.getScope() || me;
+
+        if (!handler) {
+            return;
+        }
+
+        if (typeof handler == 'string') {
+            handler = scope[handler];
+        }
+
+        //this is done so if you hide the button in the handler, the tap event will not fire on the new element
+        //where the button was.
+        if (e && e.preventDefault) {
+            e.preventDefault();
+        }
+
+        handler.apply(scope, arguments);
     }
-  });
+}, function() {
+    //<deprecated product=touch since=2.0>
 
-  //</deprecated>
+    /**
+     * Updates the badge text.
+     * @method setBadge
+     * @param {String} text
+     * @deprecated 2.0.0 Please use {@link #setBadgeText} instead.
+     */
+    Ext.deprecateClassMethod(this, 'setBadge', 'setBadgeText');
+
+    /**
+     * Updates the icon class
+     * @method setIconClass
+     * @param {String} iconClass
+     * @deprecated 2.0.0 Please use {@link #setIconCls} instead.
+     */
+    Ext.deprecateClassMethod(this, 'setIconClass', 'setIconCls');
+
+    this.override({
+        constructor: function(config) {
+            if (config) {
+                /**
+                 * @cfg {String} badge
+                 * Optional badge text.
+                 * @deprecated 2.0.0 Please use {@link #badgeText} instead
+                 */
+                if (config.hasOwnProperty('badge')) {
+                    //<debug warn>
+                    Ext.Logger.deprecate("'badge' config is deprecated, please use 'badgeText' config instead", this);
+                    //</debug>
+                    config.badgeText = config.badge;
+                    delete config.badge;
+                }
+            }
+
+            this.callParent([config]);
+        }
+    });
+
+    //</deprecated>
 });

@@ -39,128 +39,128 @@
  * automatically generated. These methods all proxy to the same method names that exist within the Component instance.
  */
 Ext.define('Ext.Decorator', {
-  extend: 'Ext.Component',
+    extend: 'Ext.Component',
 
-  isDecorator: true,
+    isDecorator: true,
 
-  config: {
-    /**
-     * @cfg {Object} component The config object to factory the Component that this Decorator wraps around
-     */
-    component: {}
-  },
-
-  statics: {
-    generateProxySetter: function (name) {
-      return function (value) {
-        var component = this.getComponent();
-        component[name].call(component, value);
-
-        return this;
-      }
+    config: {
+        /**
+         * @cfg {Object} component The config object to factory the Component that this Decorator wraps around
+         */
+        component: {}
     },
-    generateProxyGetter: function (name) {
-      return function () {
-        var component = this.getComponent();
-        return component[name].call(component);
-      }
+
+    statics: {
+        generateProxySetter: function(name) {
+            return function(value) {
+                var component = this.getComponent();
+                component[name].call(component, value);
+
+                return this;
+            }
+        },
+        generateProxyGetter: function(name) {
+            return function() {
+                var component = this.getComponent();
+                return component[name].call(component);
+            }
+        }
+    },
+
+    onClassExtended: function(Class, members) {
+        if (!members.hasOwnProperty('proxyConfig')) {
+            return;
+        }
+
+        var ExtClass = Ext.Class,
+            proxyConfig = members.proxyConfig,
+            config = members.config;
+
+        members.config = (config) ? Ext.applyIf(config, proxyConfig) : proxyConfig;
+
+        var name, nameMap, setName, getName;
+
+        for (name in proxyConfig) {
+            if (proxyConfig.hasOwnProperty(name)) {
+                nameMap = ExtClass.getConfigNameMap(name);
+                setName = nameMap.set;
+                getName = nameMap.get;
+
+                members[setName] = this.generateProxySetter(setName);
+                members[getName] = this.generateProxyGetter(getName);
+            }
+        }
+    },
+
+    // @private
+    applyComponent: function(config) {
+        return Ext.factory(config, Ext.Component);
+    },
+
+    // @private
+    updateComponent: function(newComponent, oldComponent) {
+        if (oldComponent) {
+            if (this.isRendered() && oldComponent.setRendered(false)) {
+                oldComponent.fireAction('renderedchange', [this, oldComponent, false],
+                    'doUnsetComponent', this, { args: [oldComponent] });
+            }
+            else {
+                this.doUnsetComponent(oldComponent);
+            }
+        }
+
+        if (newComponent) {
+            if (this.isRendered() && newComponent.setRendered(true)) {
+                newComponent.fireAction('renderedchange', [this, newComponent, true],
+                    'doSetComponent', this, { args: [newComponent] });
+            }
+            else {
+                this.doSetComponent(newComponent);
+            }
+        }
+    },
+
+    // @private
+    doUnsetComponent: function(component) {
+        if (component.renderElement.dom) {
+            component.setLayoutSizeFlags(0);
+            this.innerElement.dom.removeChild(component.renderElement.dom);
+        }
+    },
+
+    // @private
+    doSetComponent: function(component) {
+        if (component.renderElement.dom) {
+            component.setLayoutSizeFlags(this.getSizeFlags());
+            this.innerElement.dom.appendChild(component.renderElement.dom);
+        }
+    },
+
+    // @private
+    setRendered: function(rendered) {
+        var component;
+
+        if (this.callParent(arguments)) {
+            component = this.getComponent();
+
+            if (component) {
+                component.setRendered(rendered);
+            }
+
+            return true;
+        }
+
+        return false;
+    },
+
+    // @private
+    setDisabled: function(disabled) {
+        this.callParent(arguments);
+        this.getComponent().setDisabled(disabled);
+    },
+
+    destroy: function() {
+        Ext.destroy(this.getComponent());
+        this.callParent();
     }
-  },
-
-  onClassExtended: function (Class, members) {
-    if (!members.hasOwnProperty('proxyConfig')) {
-      return;
-    }
-
-    var ExtClass = Ext.Class,
-      proxyConfig = members.proxyConfig,
-      config = members.config;
-
-    members.config = (config) ? Ext.applyIf(config, proxyConfig) : proxyConfig;
-
-    var name, nameMap, setName, getName;
-
-    for (name in proxyConfig) {
-      if (proxyConfig.hasOwnProperty(name)) {
-        nameMap = ExtClass.getConfigNameMap(name);
-        setName = nameMap.set;
-        getName = nameMap.get;
-
-        members[setName] = this.generateProxySetter(setName);
-        members[getName] = this.generateProxyGetter(getName);
-      }
-    }
-  },
-
-  // @private
-  applyComponent: function (config) {
-    return Ext.factory(config, Ext.Component);
-  },
-
-  // @private
-  updateComponent: function (newComponent, oldComponent) {
-    if (oldComponent) {
-      if (this.isRendered() && oldComponent.setRendered(false)) {
-        oldComponent.fireAction('renderedchange', [this, oldComponent, false],
-          'doUnsetComponent', this, { args: [oldComponent] });
-      }
-      else {
-        this.doUnsetComponent(oldComponent);
-      }
-    }
-
-    if (newComponent) {
-      if (this.isRendered() && newComponent.setRendered(true)) {
-        newComponent.fireAction('renderedchange', [this, newComponent, true],
-          'doSetComponent', this, { args: [newComponent] });
-      }
-      else {
-        this.doSetComponent(newComponent);
-      }
-    }
-  },
-
-  // @private
-  doUnsetComponent: function (component) {
-    if (component.renderElement.dom) {
-      component.setLayoutSizeFlags(0);
-      this.innerElement.dom.removeChild(component.renderElement.dom);
-    }
-  },
-
-  // @private
-  doSetComponent: function (component) {
-    if (component.renderElement.dom) {
-      component.setLayoutSizeFlags(this.getSizeFlags());
-      this.innerElement.dom.appendChild(component.renderElement.dom);
-    }
-  },
-
-  // @private
-  setRendered: function (rendered) {
-    var component;
-
-    if (this.callParent(arguments)) {
-      component = this.getComponent();
-
-      if (component) {
-        component.setRendered(rendered);
-      }
-
-      return true;
-    }
-
-    return false;
-  },
-
-  // @private
-  setDisabled: function (disabled) {
-    this.callParent(arguments);
-    this.getComponent().setDisabled(disabled);
-  },
-
-  destroy: function () {
-    Ext.destroy(this.getComponent());
-    this.callParent();
-  }
 });

@@ -42,83 +42,83 @@
  * @docauthor Evan Trimboli <evan@sencha.com>
  */
 Ext.define('Ext.data.SortTypes', {
-  singleton: true,
+    singleton: true,
 
-  /**
-   * The regular expression used to strip tags.
-   * @type {RegExp}
-   * @property
-   */
-  stripTagsRE: /<\/?[^>]+>/gi,
+    /**
+     * The regular expression used to strip tags.
+     * @type {RegExp}
+     * @property
+     */
+    stripTagsRE : /<\/?[^>]+>/gi,
 
-  /**
-   * Default sort that does nothing.
-   * @param {Object} value The value being converted.
-   * @return {Object} The comparison value.
-   */
-  none: function (value) {
-    return value;
-  },
+    /**
+     * Default sort that does nothing.
+     * @param {Object} value The value being converted.
+     * @return {Object} The comparison value.
+     */
+    none : function(value) {
+        return value;
+    },
 
-  /**
-   * Strips all HTML tags to sort on text only.
-   * @param {Object} value The value being converted.
-   * @return {String} The comparison value.
-   */
-  asText: function (value) {
-    return String(value).replace(this.stripTagsRE, "");
-  },
+    /**
+     * Strips all HTML tags to sort on text only.
+     * @param {Object} value The value being converted.
+     * @return {String} The comparison value.
+     */
+    asText : function(value) {
+        return String(value).replace(this.stripTagsRE, "");
+    },
 
-  /**
-   * Strips all HTML tags to sort on text only - case insensitive.
-   * @param {Object} value The value being converted.
-   * @return {String} The comparison value.
-   */
-  asUCText: function (value) {
-    return String(value).toUpperCase().replace(this.stripTagsRE, "");
-  },
+    /**
+     * Strips all HTML tags to sort on text only - case insensitive.
+     * @param {Object} value The value being converted.
+     * @return {String} The comparison value.
+     */
+    asUCText : function(value) {
+        return String(value).toUpperCase().replace(this.stripTagsRE, "");
+    },
 
-  /**
-   * Case insensitive string.
-   * @param {Object} value The value being converted.
-   * @return {String} The comparison value.
-   */
-  asUCString: function (value) {
-    return String(value).toUpperCase();
-  },
+    /**
+     * Case insensitive string.
+     * @param {Object} value The value being converted.
+     * @return {String} The comparison value.
+     */
+    asUCString : function(value) {
+        return String(value).toUpperCase();
+    },
 
-  /**
-   * Date sorting.
-   * @param {Object} value The value being converted.
-   * @return {Number} The comparison value.
-   */
-  asDate: function (value) {
-    if (!value) {
-      return 0;
+    /**
+     * Date sorting.
+     * @param {Object} value The value being converted.
+     * @return {Number} The comparison value.
+     */
+    asDate : function(value) {
+        if (!value) {
+            return 0;
+        }
+        if (Ext.isDate(value)) {
+            return value.getTime();
+        }
+        return Date.parse(String(value));
+    },
+
+    /**
+     * Float sorting.
+     * @param {Object} value The value being converted.
+     * @return {Number} The comparison value.
+     */
+    asFloat : function(value) {
+        value = parseFloat(String(value).replace(/,/g, ""));
+        return isNaN(value) ? 0 : value;
+    },
+
+    /**
+     * Integer sorting.
+     * @param {Object} value The value being converted.
+     * @return {Number} The comparison value.
+     */
+    asInt : function(value) {
+        value = parseInt(String(value).replace(/,/g, ""), 10);
+        return isNaN(value) ? 0 : value;
     }
-    if (Ext.isDate(value)) {
-      return value.getTime();
-    }
-    return Date.parse(String(value));
-  },
-
-  /**
-   * Float sorting.
-   * @param {Object} value The value being converted.
-   * @return {Number} The comparison value.
-   */
-  asFloat: function (value) {
-    value = parseFloat(String(value).replace(/,/g, ""));
-    return isNaN(value) ? 0 : value;
-  },
-
-  /**
-   * Integer sorting.
-   * @param {Object} value The value being converted.
-   * @return {Number} The comparison value.
-   */
-  asInt: function (value) {
-    value = parseInt(String(value).replace(/,/g, ""), 10);
-    return isNaN(value) ? 0 : value;
-  }
 });

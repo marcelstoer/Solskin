@@ -70,81 +70,81 @@
  * available.
  */
 Ext.define('Ext.field.Number', {
-  extend: 'Ext.field.Text',
-  xtype: 'numberfield',
-  alternateClassName: 'Ext.form.Number',
+    extend: 'Ext.field.Text',
+    xtype: 'numberfield',
+    alternateClassName: 'Ext.form.Number',
 
-  config: {
-    /**
-     * @cfg
-     * @inheritdoc
-     */
-    component: {
-      type: 'number'
+    config: {
+        /**
+         * @cfg
+         * @inheritdoc
+         */
+        component: {
+            type: 'number'
+        },
+
+        /**
+         * @cfg
+         * @inheritdoc
+         */
+        ui: 'number'
     },
 
-    /**
-     * @cfg
-     * @inheritdoc
-     */
-    ui: 'number'
-  },
+    proxyConfig: {
+        /**
+         * @cfg {Number} minValue The minimum value that this Number field can accept
+         * @accessor
+         */
+        minValue: null,
 
-  proxyConfig: {
-    /**
-     * @cfg {Number} minValue The minimum value that this Number field can accept
-     * @accessor
-     */
-    minValue: null,
+        /**
+         * @cfg {Number} maxValue The maximum value that this Number field can accept
+         * @accessor
+         */
+        maxValue: null,
 
-    /**
-     * @cfg {Number} maxValue The maximum value that this Number field can accept
-     * @accessor
-     */
-    maxValue: null,
+        /**
+         * @cfg {Number} stepValue The amount by which the field is incremented or decremented each time the spinner is tapped.
+         * Defaults to undefined, which means that the field goes up or down by 1 each time the spinner is tapped
+         * @accessor
+         */
+        stepValue: null
+    },
 
-    /**
-     * @cfg {Number} stepValue The amount by which the field is incremented or decremented each time the spinner is tapped.
-     * Defaults to undefined, which means that the field goes up or down by 1 each time the spinner is tapped
-     * @accessor
-     */
-    stepValue: null
-  },
+    doInitValue : function() {
+        var value = this.getInitialConfig().value;
 
-  doInitValue: function () {
-    var value = this.getInitialConfig().value;
+        if (value) {
+            value = this.applyValue(value);
+        }
 
-    if (value) {
-      value = this.applyValue(value);
+        this.originalValue = value;
+    },
+
+    applyValue: function(value) {
+        var minValue = this.getMinValue(),
+            maxValue = this.getMaxValue();
+
+        if (Ext.isNumber(minValue)) {
+            value = Math.max(value, minValue);
+        }
+
+        if (Ext.isNumber(maxValue)) {
+            value = Math.min(value, maxValue);
+        }
+
+        value = parseFloat(value);
+        return (isNaN(value)) ? '' : value;
+    },
+
+    getValue: function() {
+        var value = parseFloat(this.callParent(), 10);
+        return (isNaN(value)) ? null : value;
+    },
+
+    doClearIconTap: function(me, e) {
+        me.getComponent().setValue('');
+        me.getValue();
+        me.hideClearIcon();
     }
-
-    this.originalValue = value;
-  },
-
-  applyValue: function (value) {
-    var minValue = this.getMinValue(),
-      maxValue = this.getMaxValue();
-
-    if (Ext.isNumber(minValue)) {
-      value = Math.max(value, minValue);
-    }
-
-    if (Ext.isNumber(maxValue)) {
-      value = Math.min(value, maxValue);
-    }
-
-    value = parseFloat(value);
-    return (isNaN(value)) ? '' : value;
-  },
-
-  getValue: function () {
-    var value = parseFloat(this.callParent(), 10);
-    return (isNaN(value)) ? null : value;
-  },
-
-  doClearIconTap: function (me, e) {
-    me.getComponent().setValue('');
-    me.getValue();
-    me.hideClearIcon();
-  }
 });

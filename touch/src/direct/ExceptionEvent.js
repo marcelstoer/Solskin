@@ -4,13 +4,13 @@
  */
 Ext.define('Ext.direct.ExceptionEvent', {
 
-  extend: 'Ext.direct.RemotingEvent',
+    extend: 'Ext.direct.RemotingEvent',
 
-  alias: 'direct.exception',
+    alias: 'direct.exception',
 
-  config: {
-    status: false,
-    name: 'exception',
-    error: null
-  }
+    config: {
+        status: false,
+        name: 'exception',
+        error: null
+    }
 });
