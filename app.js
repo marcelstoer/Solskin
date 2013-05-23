@@ -22,7 +22,7 @@ Ext.Loader.setPath({
 
 Ext.Loader.setConfig({
   // avoids '_dc' cache-busting query string param for all the .js files (model, store, etc.) if false
-  disableCaching: false
+  disableCaching: true
 });
 
 Ext.application({

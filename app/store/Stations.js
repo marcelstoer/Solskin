@@ -30,9 +30,17 @@ Ext.define('SunApp.store.Stations', {
   },
 
   reduceToRelevant: function (records) {
+    var tmpArray;
     var sunlevelToRecordsMap = this.buildSunlevelToRecordsMap(records);
+    var transportApi = Ext.create('SunApp.TransportApi');
     if (sunlevelToRecordsMap[4].length >= 3) {
       console.log('there are at least 3 level-4 records - excellent');
+      tmpArray = sunlevelToRecordsMap[4].slice(0, 5); // get items 0-4
+      console.log(tmpArray);
+      transportApi.getConnectionTo(tmpArray[0].data.name, function (connection) {
+        console.log('departure: ' + connection.from.station.name + ' at ' + connection.from.departure);
+        console.log('arrival: ' + connection.to.station.name + ' at ' + connection.to.arrival);
+      });
     }
     return records;
   },
@@ -49,7 +57,7 @@ Ext.define('SunApp.store.Stations', {
       }
       recordsForLevel.push(record);
     }
-    for(i = 0; i < map.length; i++){
+    for (i = 0; i < map.length; i++) {
       map[i] = this.sortByDistanceAsc(map[i]);
     }
     return map;
