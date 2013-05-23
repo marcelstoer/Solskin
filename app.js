@@ -67,6 +67,7 @@ Ext.application({
               long: geo.getLongitude()
             }
           ));
+          // Required because Transport API got CORS wrong: http://bit.ly/18k4O6H
           Ext.Ajax.setUseDefaultXhrHeader(false);
           Ext.Ajax.request({
 //            url: '../transport/api.php/v1/locations',
