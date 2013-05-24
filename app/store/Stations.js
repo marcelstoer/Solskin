@@ -39,6 +39,8 @@ Ext.define('SunApp.store.Stations', {
       transportApi.getConnectionTo(tmpArray[0].data.name, function (connection) {
         console.log('departure: ' + connection.from.station.name + ' at ' + connection.from.departure);
         console.log('arrival: ' + connection.to.station.name + ' at ' + connection.to.arrival);
+        tmpArray[0].data.departure = connection.from.departure;
+        tmpArray[0].data.arrival = connection.to.arrival;
         store.setData(tmpArray[0]);
         store.fireEvent('storeFiltered');
       });
