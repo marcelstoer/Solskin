@@ -7,11 +7,8 @@ Ext.define('SunApp.store.Stations', {
     autoLoad: false, // 'load' called manually from app.js
     sorters: [
       {
-        property: 'sunLevel',
-        direction: 'DESC'
-      },
-      {
-        property: 'linearDistance'
+        property: 'arrival',
+        direction: 'ASC'
       }
     ],
     listeners: {
@@ -30,20 +27,27 @@ Ext.define('SunApp.store.Stations', {
   },
 
   reduceToRelevant: function (store, records) {
-    var tmpArray;
-    var sunLevelToRecordsMap = this.buildSunLevelToRecordsMap(records);
-    var transportApi = Ext.create('SunApp.TransportApi');
+    var tmpStationsArray = [],
+      places = [],
+      sunLevelToRecordsMap = this.buildSunLevelToRecordsMap(records),
+      transportApi = Ext.create('SunApp.TransportApi');
+
     if (sunLevelToRecordsMap[4].length >= 3) {
       console.log('there are at least 3 level-4 records - excellent');
-      tmpArray = sunLevelToRecordsMap[4].slice(0, 5); // get items 0-4
-      console.log(tmpArray);
-      transportApi.getConnectionTo(tmpArray[0].data.name, function (connection) {
-        console.log('departure: ' + connection.from.station.name + ' at ' + connection.from.departure);
-        console.log('arrival: ' + connection.to.station.name + ' at ' + connection.to.arrival);
-        tmpArray[0].data.departure = connection.from.departure;
-        tmpArray[0].data.arrival = connection.to.arrival;
-        store.setData(tmpArray[0]);
+      tmpStationsArray = sunLevelToRecordsMap[4].slice(0, 5); // get items 0-4
+      places = this.extractNames(tmpStationsArray);
+
+      transportApi.getConnectionsTo(places, function (connections) {
+        for (var k = 0; k < tmpStationsArray.length; k++) {
+          console.log('departure: ' + connections[k].from.station.name + ' at ' + connections[k].from.departure);
+          console.log('arrival: ' + connections[k].to.station.name + ' at ' + connections[k].to.arrival);
+          tmpStationsArray[k].data.arrival = connections[k].to.arrival;
+          tmpStationsArray[k].data.departure = connections[k].from.departure;
+        }
+        store.setData(tmpStationsArray);
         store.fireEvent('storeFiltered');
+      }, function () {
+        console.log('Bummer...');
       });
     }
   },
@@ -70,5 +74,13 @@ Ext.define('SunApp.store.Stations', {
     return records.sort(function (a, b) {
       return a.data.linearDistance - b.data.linearDistance
     });
+  },
+
+  extractNames: function (stations) {
+    var names = [];
+    for (var i = 0; i < stations.length; i++) {
+      names[i] = stations[i].data.name;
+    }
+    return names;
   }
 });

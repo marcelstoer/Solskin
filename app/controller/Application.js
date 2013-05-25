@@ -81,13 +81,13 @@ Ext.define('SunApp.controller.Application', {
   },
 
   onClosestStationDetermined: function (station) {
-    var mainView, launchingView;
+    var launchingView;
 
     launchingView = Ext.Viewport.getComponent(0);
     launchingView.updateMessageForClosestStationFound(station.name);
 
     SunApp.app.getCurrentLocation().setClosestStation(station.name);
-    Ext.Viewport.getComponent(0).updateMessageForLoadingAllStations();
+    launchingView.updateMessageForLoadingAllStations();
     Ext.getStore('Stations').load();
   },
 
@@ -98,8 +98,8 @@ Ext.define('SunApp.controller.Application', {
   onStoreFiltered: function () {
     var mainView = Ext.create('SunApp.view.Main');
     mainView.getNavigationBar().setTitle(SunApp.app.getCurrentLocation().getClosestStation());
-//    Ext.Viewport.removeAll(true, true);
-//    Ext.Viewport.add(mainView);
+    Ext.Viewport.removeAll(true, true);
+    Ext.Viewport.add(mainView);
   },
 
   displayError: function (htmlMsg) {
