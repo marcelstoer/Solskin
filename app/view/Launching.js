@@ -7,14 +7,33 @@ Ext.define('SunApp.view.Launching', {
   },
 
   updateMessageForGeoLocationFound: function (lat, long) {
-    this.setHtml(this.getHtml().concat(lat, '/', long));
+    this.concatHtmlWith(lat, '/', long);
   },
 
   updateMessageForClosestStationStart: function () {
-    this.setHtml(this.getHtml().concat('<br>', 'Detecting the closest public transport station...'));
+    this.concatHtmlWith('<br>', 'Detecting the closest public transport station...');
+  },
+  updateMessageForClosestStationFound: function (stationName) {
+    this.concatHtmlWith(stationName);
   },
 
-  updateMessageForClosestStationFound: function (stationName) {
-    this.setHtml(this.getHtml().concat(stationName));
+  updateMessageForLoadingAllStations: function() {
+    this.concatHtmlWith('<br>', 'Loading weather data...');
+  },
+  updateMessageForLoadingAllStationsDone: function(numberOfRecords) {
+    this.concatHtmlWith('got ' + numberOfRecords + ' records');
+    this.concatHtmlWith('<br>', 'Filtering data to find most relevant for you...');
+  },
+
+  updateMessageForFilteringDone: function() {
+    this.concatHtmlWith('done');
+  },
+
+  concatHtmlWith: function() {
+    var i = 0, newHtml = this.getHtml();
+    for (; i < arguments.length; i++) {
+      newHtml += arguments[i];
+    }
+    this.setHtml(newHtml);
   }
 });

@@ -16,6 +16,7 @@ Ext.define('SunApp.store.Stations', {
     ],
     listeners: {
       load: function (store, records, success, eOpts) {
+        store.fireEvent('storeLoaded', records.length);
         this.reduceToRelevant(store, records);
       }
     },

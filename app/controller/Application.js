@@ -25,6 +25,7 @@ Ext.define('SunApp.controller.Application', {
 
   init: function () {
     Ext.getStore('Stations').on({ storeFiltered: this.onStoreFiltered, scope: this });
+    Ext.getStore('Stations').on({ storeLoaded: this.onStoreLoaded, scope: this });
     SunApp.app.on({launching: this.onLaunching, scope: this});
   },
 
@@ -86,14 +87,19 @@ Ext.define('SunApp.controller.Application', {
     launchingView.updateMessageForClosestStationFound(station.name);
 
     SunApp.app.getCurrentLocation().setClosestStation(station.name);
+    Ext.Viewport.getComponent(0).updateMessageForLoadingAllStations();
     Ext.getStore('Stations').load();
+  },
+
+  onStoreLoaded: function (numberOfRecords) {
+    Ext.Viewport.getComponent(0).updateMessageForLoadingAllStationsDone(numberOfRecords);
   },
 
   onStoreFiltered: function () {
     var mainView = Ext.create('SunApp.view.Main');
     mainView.getNavigationBar().setTitle(SunApp.app.getCurrentLocation().getClosestStation());
-    Ext.Viewport.removeAll(true, true);
-    Ext.Viewport.add(mainView);
+//    Ext.Viewport.removeAll(true, true);
+//    Ext.Viewport.add(mainView);
   },
 
   displayError: function (htmlMsg) {
