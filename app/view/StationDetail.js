@@ -15,7 +15,7 @@ Ext.define('SunApp.view.StationDetail', {
         id: 'content',
         tpl: [
           '<div class="top">',
-          '<div class="headshot" style="background-image:url(resources/images/sun/level{sunlevel}.svg);"></div>',
+          '<div class="headshot" style="background-image:url(resources/images/sun/level{sunLevel}.svg);"></div>',
           '<div class="name">{name}</div>',
           '</div>'
         ].join('')

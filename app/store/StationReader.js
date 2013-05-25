@@ -27,21 +27,21 @@ Ext.define('SunApp.store.StationReader', {
   },
 
   addSunlevelTo: function (record) {
-    var sunlevel, sunshine;
+    var sunLevel, sunshine;
     sunshine = record['ss'];
 
     if (sunshine < 5) {         // 0-4
-      sunlevel = 0;
+      sunLevel = 0;
     } else if (sunshine < 30) { // 5 - 29
-      sunlevel = 1;
+      sunLevel = 1;
     } else if (sunshine < 50) { // 30 - 49
-      sunlevel = 2;
+      sunLevel = 2;
     } else if (sunshine < 60) { // 50 - 59
-      sunlevel = 3;
+      sunLevel = 3;
     } else {                    // 60
-      sunlevel = 4;
+      sunLevel = 4;
     }
-    record['sunlevel'] = sunlevel;
+    record['sunLevel'] = sunLevel;
   },
 
   addDistanceTo: function (record) {
