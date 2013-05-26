@@ -4,7 +4,7 @@ Ext.define('SunApp.store.Stations', {
 
   config: {
     model: 'SunApp.model.Station',
-    autoLoad: false, // 'load' called manually from app.js
+    autoLoad: false, // 'load' called manually
     sorters: [
       {
         property: 'arrival',
