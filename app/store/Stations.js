@@ -5,12 +5,7 @@ Ext.define('SunApp.store.Stations', {
   config: {
     model: 'SunApp.model.Station',
     autoLoad: false, // 'load' called manually
-    sorters: [
-      {
-        property: 'arrival',
-        direction: 'ASC'
-      }
-    ],
+    sorters: [{property: 'arrival', direction: 'ASC'}],
     listeners: {
       load: function (store, records, success, eOpts) {
         store.fireEvent('storeLoaded', records.length);
@@ -41,8 +36,8 @@ Ext.define('SunApp.store.Stations', {
         for (var k = 0; k < tmpStationsArray.length; k++) {
           console.log('departure: ' + connections[k].from.station.name + ' at ' + connections[k].from.departure);
           console.log('arrival: ' + connections[k].to.station.name + ' at ' + connections[k].to.arrival);
-          tmpStationsArray[k].data.arrival = connections[k].to.arrival;
-          tmpStationsArray[k].data.departure = connections[k].from.departure;
+          tmpStationsArray[k].data.arrival = Date.parseIso8601(connections[k].to.arrival);
+          tmpStationsArray[k].data.departure = Date.parseIso8601(connections[k].from.departure);
         }
         store.setData(tmpStationsArray);
         store.fireEvent('storeFiltered');

@@ -13,6 +13,16 @@
 // DO NOT DELETE - this directive is required for Sencha Cmd packages to work.
 //@require @packageOverrides
 
+// http://stackoverflow.com/questions/6228302/javascript-date-iso8601
+// http://dev.enekoalonso.com/2010/09/21/date-from-iso-8601-string/
+// http://en.wikipedia.org/wiki/ISO_8601#Time_offsets_from_UTC
+if (Date.parseIso8601 === undefined) {
+  Date.parseIso8601 = function (isoString) {
+    var parts = isoString.match(/\d+/g);
+    return new Date(parts[0], parts[1] - 1, parts[2], parts[3], parts[4], parts[5]);
+  };
+}
+
 //<debug>
 Ext.Loader.setPath({
   'Ext': 'touch/src',
