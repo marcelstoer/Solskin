@@ -1,0 +1,130 @@
+connection to "Basel / Binningen" :none found
+connection to "Neuchatel" :Neuchâtel
+connection to "Delémont" :Delémont
+connection to "Chasseral" :Chasseral, Hôtel
+connection to "Cressier" :Cressier NE
+connection to "St. Chrischona" :Bettingen, St. Chrischona
+connection to "Le Moléson" :Le Moléson
+connection to "Bullet / La Frétaz" :none found
+connection to "Schaffhausen" :Schaffhausen
+connection to "La Chaux-de-Fonds" :La Chaux-de-Fonds
+connection to "Fahy" :Fahy, douane
+connection to "Gösgen" :none found
+connection to "La Brévine" :La Brévine, poste
+connection to "Payerne" :Payerne
+connection to "Plaffeien" :Plaffeien, Dorf
+connection to "Mathod" :Mathod, Bras d'Or
+connection to "Bern / Zollikofen" :Zollikofen, Webergutstrasse
+connection to "Buchs / Aarau" :none found
+connection to "Bantiger" :none found
+connection to "Mühleberg / Stockeren" :Mühleberg, Dällenbach
+connection to "Napf" :none found
+connection to "Wynau" :Roggwil-Wynau
+connection to "Grenchen" :Grenchen Süd
+connection to "Mühleberg" :Mühleberg, Dorf
+connection to "Möhlin" :Möhlin
+connection to "Güttingen" :Güttingen
+connection to "Egolzwil" :none found
+connection to "Mosen" :Mosen
+connection to "Döttingen" :Döttingen
+connection to "Luzern" :Luzern
+connection to "Rünenberg" :Rünenberg, Unterdorf
+connection to "PSI Würenlingen" :Würenlingen, Post
+connection to "Schüpfheim" :Schüpfheim
+connection to "Zürich / Fluntern" :Zürich, Kirche Fluntern
+connection to "Brienz" :Brienz
+connection to "Zürich / Kloten" :none found
+connection to "Zürich / Affoltern" :Zürich, Zehntenhausplatz
+connection to "Engelberg" :Engelberg
+connection to "Leibstadt" :Leibstadt, Milchhüsli
+connection to "Steckborn" :Steckborn
+connection to "Pilatus" :Pilatus Kulm
+connection to "Altdorf" :Altdorf
+connection to "Wädenswil" :Wädenswil
+connection to "Cham" :Cham
+connection to "Aadorf / Tänikon" :none found
+connection to "Uetliberg" :Uetliberg
+connection to "Säntis" :Säntis
+connection to "St. Gallen" :St. Gallen
+connection to "Oberägeri" :Oberägeri AeS
+connection to "Crap Masegn" :none found
+connection to "Hörnli" :none found
+connection to "Lägern" :Kloten, Lägernstrasse
+connection to "Schmerikon" :Schmerikon
+connection to "Le Chenit" :none found
+connection to "La Dôle" :none found
+connection to "Altenrhein" :Altenrhein, Dorf
+connection to "Quinten" :Quinten
+connection to "Nyon / Changins" :none found
+connection to "Glarus" :Glarus
+connection to "Genève-Cointrin" :Genève, Saint-Antoine
+connection to "Bière" :Bière
+connection to "Pully" :Pully
+connection to "Aigle" :Aigle
+connection to "Bouveret" :Bouveret CGN
+connection to "St-Prex" :St-Prex
+connection to "Oron" :Oron-le-Châtel, gare
+connection to "Les Diablerets" :Les Diablerets
+connection to "Sion" :Sion
+connection to "Evionnaz" :Evionnaz
+connection to "Col du Grand St-Bernard" :none found
+connection to "Les Attelas" :none found
+connection to "Evolène / Villa" :Evolène, Village
+connection to "Visp" :Visp
+connection to "Interlaken" :Interlaken Ost
+connection to "Boltigen" :Boltigen
+connection to "Jungfraujoch" :Jungfraujoch
+connection to "Eggishorn" :none found
+connection to "Grimsel Hospiz" :none found
+connection to "Männlichen" :Männlichen LWM
+connection to "Titlis" :Zürich, Klosbach
+connection to "Adelboden" :Adelboden, Post
+connection to "Gütsch ob Andermatt" :none found
+connection to "Robiei" :none found
+connection to "Zermatt" :Zermatt
+connection to "Gornergrat" :Gornergrat
+connection to "Cevio" :Cevio, Centro
+connection to "Lodrino" :Lodrino, Sud
+connection to "Piotta" :Piotta, Nord
+connection to "Aquarossa / Comprovasco" :Acquarossa-Comprovasco
+connection to "Montana" :none found
+connection to "Locarno / Monti" :Locarno, Via Monteguzzo
+connection to "Cimetta" :Cimetta
+connection to "Magadino / Cadenazzo" :Magadino, Debarcadero
+connection to "Monte Generoso" :none found
+connection to "Lugano" :Lugano
+connection to "Weissfluhjoch" :none found
+connection to "Disentis / Sedrun" :none found
+connection to "Buffalora" :Buffalora P10
+connection to "Davos" :Davos Platz
+connection to "Stabio" :Stabio, Bagni
+connection to "S. Bernardino" :S. Bernardino, Posta
+connection to "Chur" :Chur
+connection to "Valbella" :Valbella, Post
+connection to "Samedan" :Samedan
+connection to "Andeer" :Andeer, Tgavugl
+connection to "Matro" failed : http://transport.opendata.ch/v1/connections?_dc=1369595525367&from=Wallenwil%2C%20WAWI&to=Matro Failed to load resource: the server responded with a status of 500 (Internal Server Error)
+connection to "Ulrichen" :Ulrichen
+connection to "Scuol" :Scuol-Tarasp
+connection to "Piz Martegnas" :Ferrera, Punt Martegn
+connection to "Naluns / Schlivera" :none found
+connection to "Monte Rosa-Plattje" :none found
+connection to "Bischofszell" :Bischofszell Nord
+connection to "Piz Corvatsch" :none found
+connection to "Vaduz" :Vaduz, Au
+connection to "Ebnat-Kappel" :Ebnat-Kappel, Bahnhof
+connection to "Salen-Reutenen" :Speicher, Reutenen
+connection to "Giswil" :Giswil
+connection to "Langnau i.E." :Langnau i.E.
+connection to "Elm" :Elm, Sportbahnen
+connection to "Poschiavo / Robbia" :Poschiavo, Scuole
+connection to "Einsiedeln" :Einsiedeln
+connection to "Hallau" :Hallau, Post
+connection to "Meiringen" :Meiringen
+connection to "Fribourg/Posieux" :Fribourg, Vieux-Chênes
+connection to "Koppigen" :Koppigen, Post
+connection to "Bad Ragaz" :Bad Ragaz
+connection to "Thun" :Thun
+connection to "Chateau-d'Oex" :Château-d'Oex
+connection to "Grono" :Grono, Nord
+connection to "Vicosoprano" :Vicosoprano, Zocca
