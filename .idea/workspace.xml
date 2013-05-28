@@ -7,7 +7,7 @@
     <ignored path="SunApp.iws" />
     <ignored path=".idea/workspace.xml" />
     <file path="/Dummy.txt" changelist="22cd0136-cbe4-408f-952b-557e2517cc6e" time="1369396767620" ignored="false" />
-    <file path="/README.md" changelist="22cd0136-cbe4-408f-952b-557e2517cc6e" time="1369691413655" ignored="false" />
+    <file path="/README.md" changelist="22cd0136-cbe4-408f-952b-557e2517cc6e" time="1369742524176" ignored="false" />
     <file path="$APPLICATION_HOME_DIR$/plugins/JavaEE/lib/javaee-impl.jar!/standardSchemas/ejb-jar_3_0.xsd" changelist="22cd0136-cbe4-408f-952b-557e2517cc6e" time="1367954036965" ignored="false" />
     <file path="$APPLICATION_HOME_DIR$/plugins/JavaEE/lib/javaee-impl.jar!/standardSchemas/ejb-jar_2_1.xsd" changelist="22cd0136-cbe4-408f-952b-557e2517cc6e" time="1367954036965" ignored="false" />
     <file path="$APPLICATION_HOME_DIR$/plugins/JavaEE/lib/javaee-impl.jar!/standardSchemas/javaee_5.xsd" changelist="22cd0136-cbe4-408f-952b-557e2517cc6e" time="1367954036965" ignored="false" />
@@ -243,7 +243,7 @@
     <file path="/TransportApi.js" changelist="22cd0136-cbe4-408f-952b-557e2517cc6e" time="1369518663672" ignored="false" />
     <file path="/Launching.js" changelist="22cd0136-cbe4-408f-952b-557e2517cc6e" time="1369507895329" ignored="false" />
     <file path="/connections-to-stations.txt" changelist="22cd0136-cbe4-408f-952b-557e2517cc6e" time="1369596101269" ignored="false" />
-    <file path="$PROJECT_DIR$/.idea/workspace.xml" changelist="22cd0136-cbe4-408f-952b-557e2517cc6e" time="1369691415261" ignored="false" />
+    <file path="$PROJECT_DIR$/.idea/workspace.xml" changelist="22cd0136-cbe4-408f-952b-557e2517cc6e" time="1369742587413" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -307,7 +307,7 @@
       <file leaf-file-name="Stations.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/store/Stations.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="23" column="47" selection-start="622" selection-end="622" vertical-scroll-proportion="0.0">
+            <state line="42" column="39" selection-start="1662" selection-end="1677" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -340,19 +340,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Application.js" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="Application.js" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/controller/Application.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="48" column="40" selection-start="1338" selection-end="1338" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="README.md" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/README.md">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="23" column="17" selection-start="923" selection-end="923" vertical-scroll-proportion="0.5493631">
+            <state line="97" column="17" selection-start="3131" selection-end="3146" vertical-scroll-proportion="0.5493631">
               <folding />
             </state>
           </provider>
@@ -904,20 +895,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/store/Stations.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="23" column="47" selection-start="622" selection-end="622" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/controller/Application.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="48" column="40" selection-start="1338" selection-end="1338" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app.js">
       <provider selected="true" editor-type-id="text-editor">
         <state line="19" column="7" selection-start="936" selection-end="936" vertical-scroll-proportion="0.0">
@@ -925,9 +902,23 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/store/Stations.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="42" column="39" selection-start="1662" selection-end="1677" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="23" column="17" selection-start="923" selection-end="923" vertical-scroll-proportion="0.5493631">
+        <state line="27" column="14" selection-start="1287" selection-end="1287" vertical-scroll-proportion="0.64490443">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controller/Application.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="97" column="17" selection-start="3131" selection-end="3146" vertical-scroll-proportion="0.5493631">
           <folding />
         </state>
       </provider>
