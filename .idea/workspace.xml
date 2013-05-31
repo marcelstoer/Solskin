@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="22cd0136-cbe4-408f-952b-557e2517cc6e" name="Default" comment="Some markdown.">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controller/Application.js" afterPath="$PROJECT_DIR$/app/controller/Application.js" />
     </list>
     <ignored path="SunApp.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -220,7 +220,7 @@
     <file path="$PROJECT_DIR$/../SunAppReloaded/app/view/Main.js" changelist="22cd0136-cbe4-408f-952b-557e2517cc6e" time="1368605440655" ignored="false" />
     <file path="$PROJECT_DIR$/../SunAppReloaded/build.xml" changelist="22cd0136-cbe4-408f-952b-557e2517cc6e" time="1368022172082" ignored="false" />
     <file path="$PROJECT_DIR$/../SunAppReloaded/index.html" changelist="22cd0136-cbe4-408f-952b-557e2517cc6e" time="1368446924013" ignored="false" />
-    <file path="/Application.js" changelist="22cd0136-cbe4-408f-952b-557e2517cc6e" time="1369514052646" ignored="false" />
+    <file path="/Application.js" changelist="22cd0136-cbe4-408f-952b-557e2517cc6e" time="1370036014948" ignored="false" />
     <file path="/Show.js" changelist="22cd0136-cbe4-408f-952b-557e2517cc6e" time="1368444287023" ignored="false" />
     <file path="/Contacts.js" changelist="22cd0136-cbe4-408f-952b-557e2517cc6e" time="1368046276240" ignored="false" />
     <file path="$PROJECT_DIR$/../SunAppReloaded/app/store/Stations.js" changelist="22cd0136-cbe4-408f-952b-557e2517cc6e" time="1368562259216" ignored="false" />
@@ -243,7 +243,7 @@
     <file path="/TransportApi.js" changelist="22cd0136-cbe4-408f-952b-557e2517cc6e" time="1369518663672" ignored="false" />
     <file path="/Launching.js" changelist="22cd0136-cbe4-408f-952b-557e2517cc6e" time="1369507895329" ignored="false" />
     <file path="/connections-to-stations.txt" changelist="22cd0136-cbe4-408f-952b-557e2517cc6e" time="1369596101269" ignored="false" />
-    <file path="$PROJECT_DIR$/.idea/workspace.xml" changelist="22cd0136-cbe4-408f-952b-557e2517cc6e" time="1369742587413" ignored="false" />
+    <file path="$PROJECT_DIR$/.idea/workspace.xml" changelist="22cd0136-cbe4-408f-952b-557e2517cc6e" time="1370036494729" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -343,8 +343,19 @@
       <file leaf-file-name="Application.js" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/controller/Application.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="97" column="17" selection-start="3131" selection-end="3146" vertical-scroll-proportion="0.5493631">
+            <state line="48" column="0" selection-start="1324" selection-end="1324" vertical-scroll-proportion="0.30732483">
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="StationDetail.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/view/StationDetail.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="0" column="37" selection-start="37" selection-end="37" vertical-scroll-proportion="0.0">
+              <folding>
+                <marker date="1369510606000" expanded="false" signature="324:387" placeholder="..." />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -379,11 +390,11 @@
         <option value="$PROJECT_DIR$/app/store/StationReader.js" />
         <option value="$PROJECT_DIR$/data.json" />
         <option value="$PROJECT_DIR$/app/TransportApi.js" />
-        <option value="$PROJECT_DIR$/app/controller/Application.js" />
         <option value="$PROJECT_DIR$/app.js" />
         <option value="$PROJECT_DIR$/app/store/Stations.js" />
         <option value="$PROJECT_DIR$/connections-to-stations.txt" />
         <option value="$PROJECT_DIR$/README.md" />
+        <option value="$PROJECT_DIR$/app/controller/Application.js" />
       </list>
     </option>
   </component>
@@ -727,12 +738,12 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32874617" sideWeight="0.5" order="11" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3262195" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32874617" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3277439" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24959481" sideWeight="0.42682928" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.19448946" sideWeight="0.6753049" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.19448946" sideWeight="0.6722561" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -828,15 +839,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/view/StationDetail.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="37" selection-start="37" selection-end="37" vertical-scroll-proportion="0.0">
-          <folding>
-            <marker date="1369510606000" expanded="false" signature="-1:-1" placeholder="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/model/Station.js">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="472" vertical-scroll-proportion="0.0">
@@ -916,9 +918,18 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/view/StationDetail.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="37" selection-start="37" selection-end="37" vertical-scroll-proportion="0.0">
+          <folding>
+            <marker date="1369510606000" expanded="false" signature="324:387" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/controller/Application.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="97" column="17" selection-start="3131" selection-end="3146" vertical-scroll-proportion="0.5493631">
+        <state line="48" column="0" selection-start="1324" selection-end="1324" vertical-scroll-proportion="0.30732483">
           <folding />
         </state>
       </provider>

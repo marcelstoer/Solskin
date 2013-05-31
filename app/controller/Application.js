@@ -2,7 +2,7 @@ Ext.define('SunApp.controller.Application', {
   extend: 'Ext.app.Controller',
 
   requires: [
-    'SunApp.Location', 'SunApp.TransportApi'
+    'SunApp.Location', 'SunApp.TransportApi', 'Ext.device.Geolocation'
   ],
 
   config: {
@@ -46,22 +46,18 @@ Ext.define('SunApp.controller.Application', {
   onLaunching: function () {
     Ext.fly('appLoadingIndicator').destroy();
     Ext.Viewport.add(Ext.create('SunApp.view.Launching'));
-    Ext.create('Ext.util.Geolocation', {
-      autoUpdate: false,
-      maximumAge: 0,
-      listeners: {
-        locationupdate: function (geo) {
-          var lat = geo.getLatitude();
-          var long = geo.getLongitude();
+    Ext.device.Geolocation.getCurrentPosition({
+      success: function (position) {
+        var lat = position.coords.latitude;
+        var long = position.coords.longitude;
 //    var lat = 47.46342478;
 //    var long = 8.95429439;
-          SunApp.app.getController('Application').onGeoLocationDetermined(lat, long);
-        },
-        locationerror: function (geo, timeout, permissionDenied, locationUnavailable, message) {
-          SunApp.app.getController('Application').displayError("Error determining geo location: " + message);
-        }
+        SunApp.app.getController('Application').onGeoLocationDetermined(lat, long);
+      },
+      failure: function () {
+        SunApp.app.getController('Application').displayError("Error determining geo location. No more details, sorry.");
       }
-    }).updateLocation();
+    });
   },
 
   onGeoLocationDetermined: function (lat, long) {
