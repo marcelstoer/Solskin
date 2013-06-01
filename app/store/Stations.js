@@ -5,11 +5,15 @@ Ext.define('SunApp.store.Stations', {
   config: {
     model: 'SunApp.model.Station',
     autoLoad: false, // 'load' called manually
-    sorters: [{property: 'arrival', direction: 'ASC'}],
+    sorters: [
+      {property: 'arrival', direction: 'ASC'}
+    ],
     listeners: {
       load: function (store, records, success, eOpts) {
         store.fireEvent('storeLoaded', records.length);
-        this.reduceToRelevant(store, records);
+        if (records.length > 0) {
+          this.reduceToRelevant(store, records);
+        }
       }
     },
     proxy: {
@@ -24,6 +28,8 @@ Ext.define('SunApp.store.Stations', {
   reduceToRelevant: function (store, records) {
     var tmpStationsArray = [],
       places = [],
+      getConnectionsSuccessFunc,
+      getConnectionsFailureFunc,
       sunLevelToRecordsMap = this.buildSunLevelToRecordsMap(records),
       transportApi = Ext.create('SunApp.TransportApi');
 
@@ -32,18 +38,31 @@ Ext.define('SunApp.store.Stations', {
       tmpStationsArray = sunLevelToRecordsMap[4].slice(0, 5); // get items 0-4
       places = this.extractNames(tmpStationsArray);
 
-      transportApi.getConnectionsTo(places, function (connections) {
+      getConnectionsSuccessFunc = function (connections) {
         for (var k = 0; k < tmpStationsArray.length; k++) {
-          console.log('departure: ' + connections[k].from.station.name + ' at ' + connections[k].from.departure);
-          console.log('arrival: ' + connections[k].to.station.name + ' at ' + connections[k].to.arrival);
           tmpStationsArray[k].data.arrival = Date.parseIso8601(connections[k].to.arrival);
           tmpStationsArray[k].data.departure = Date.parseIso8601(connections[k].from.departure);
         }
         store.setData(tmpStationsArray);
         store.fireEvent('storeFiltered');
-      }, function () {
-        console.log('Bummer...');
-      });
+      };
+      getConnectionsFailureFunc  = function (connections, failedConnectionIndexes) {
+        var successfulStations = [];
+        console.log("Failed to get connection to '" + places[failedConnectionIndexes] + "'.");
+        for (var k = 0; k < connections.length; k++) {
+          if (connections[k] !== undefined) {
+            tmpStationsArray[k].data.arrival = Date.parseIso8601(connections[k].to.arrival);
+            tmpStationsArray[k].data.departure = Date.parseIso8601(connections[k].from.departure);
+            successfulStations.push(tmpStationsArray[k]);
+          }
+        }
+        store.setData(successfulStations);
+        store.fireEvent('storeFiltered');
+      };
+      transportApi.getConnectionsTo(places, getConnectionsSuccessFunc, getConnectionsFailureFunc);
+    } else {
+      store.setData([]);
+      store.fireEvent('storeFiltered');
     }
   },
 

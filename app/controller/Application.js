@@ -55,25 +55,37 @@ Ext.define('SunApp.controller.Application', {
         SunApp.app.getController('Application').onGeoLocationDetermined(lat, long);
       },
       failure: function () {
-        SunApp.app.getController('Application').displayError("Error determining geo location. No more details, sorry.");
+        var noGeoMsg = [
+          'Error detecting your geo location, no more details, sorry. ',
+          'The option to select your location manually is still missing. Again, sorry.'
+        ].join('');
+        SunApp.app.getController('Application').displayError(noGeoMsg);
       }
     });
   },
 
   onGeoLocationDetermined: function (lat, long) {
-    var launchingView, transportApi, transportApiError;
+    var launchingView, transportApi, transportApiErrorFunc;
 
     launchingView = Ext.Viewport.getComponent(0);
     launchingView.updateMessageForGeoLocationFound(lat, long);
     launchingView.updateMessageForClosestStationStart();
 
     transportApi = Ext.create('SunApp.TransportApi');
-    transportApiError = function (response, opts) {
-      this.displayError('Error finding the closest public transport station: ' + response.status);
+    transportApiErrorFunc = function (response, opts) {
+      var transportApiErrorMsg = [
+        '<p>Error finding the closest public transport station: ',
+        response.statusText,
+        ' (',
+        response.status,
+        ').</p>',
+        'The option to select the closest station manually is still missing. Again, sorry.'
+      ].join('');
+      SunApp.app.getController('Application').displayError(transportApiErrorMsg);
     };
 
     SunApp.app.setCurrentLocation(Ext.create('SunApp.Location', { lat: lat, long: long }));
-    transportApi.getClosestStation(lat, long, this.onClosestStationDetermined, transportApiError);
+    transportApi.getClosestStation(lat, long, this.onClosestStationDetermined, transportApiErrorFunc);
   },
 
   onClosestStationDetermined: function (station) {
@@ -88,14 +100,25 @@ Ext.define('SunApp.controller.Application', {
   },
 
   onStoreLoaded: function (numberOfRecords) {
-    Ext.Viewport.getComponent(0).updateMessageForLoadingAllStationsDone(numberOfRecords);
+    if (numberOfRecords > 0) {
+      Ext.Viewport.getComponent(0).updateMessageForLoadingAllStationsDone(numberOfRecords);
+    } else {
+      SunApp.app.getController('Application').displayError('No data weather data available due to technical errors, sorry.');
+    }
   },
 
   onStoreFiltered: function () {
-    var mainView = Ext.create('SunApp.view.Main');
-    mainView.getNavigationBar().setTitle(SunApp.app.getCurrentLocation().getClosestStation());
-    Ext.Viewport.removeAll(true, true);
-    Ext.Viewport.add(mainView);
+    var mainView;
+    var storeSize = Ext.getStore('Stations').getData().length;
+
+    if (storeSize > 0) {
+      mainView = Ext.create('SunApp.view.Main');
+      mainView.getNavigationBar().setTitle(SunApp.app.getCurrentLocation().getClosestStation());
+      Ext.Viewport.removeAll(true, true);
+      Ext.Viewport.add(mainView);
+    } else {
+      this.displayError('Sorry, according to our data there really isn\'t any sun at the moment in Switzerland.');
+    }
   },
 
   displayError: function (htmlMsg) {

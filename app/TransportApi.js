@@ -46,28 +46,30 @@ Ext.define('SunApp.TransportApi', {
   getConnectionsTo: function (places, successFunc, failureFunc) {
     var connections = [],
       requestComplete = 0,
-      failureCount = 0,
+      failedConnectionIndexes = [],
       onAjaxResponse = function (requestIndex, connection, response) {
         requestComplete++;
-        if(connection) {
+        if (connection) {
           connections[requestIndex] = connection;
         } else {
-          console.log('Failed to get connection to "' + places[requestIndex] + '": ' + response);
-          failureCount++;
+          console.log("Failed to get connection to '" + places[requestIndex] + "': " + response);
+          failedConnectionIndexes.push(requestIndex);
         }
 
-        if (requestComplete >= places.length && failureCount === 0) {
-          successFunc(connections);
-        } else if (failureCount > 0) {
-          failureFunc();
+        if (requestComplete >= places.length) {
+          if (failedConnectionIndexes.length === 0) {
+            successFunc(connections);
+          } else {
+            failureFunc(connections, failedConnectionIndexes);
+          }
         }
       },
-      createSuccessFunction = function(index){
+      createSuccessFunction = function (index) {
         return function (connection) {
           onAjaxResponse(index, connection, null)
         };
       },
-      createFailureFunction = function(index) {
+      createFailureFunction = function (index) {
         return function (response) {
           onAjaxResponse(index, null, response)
         }
