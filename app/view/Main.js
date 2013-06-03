@@ -13,14 +13,16 @@ Ext.define('SunApp.view.Main', {
     navigationBar: {
       items: [
         {
+          id: 'back',
           xtype: 'image',
           src: 'resources/images/shades.svg',
           cls: 'appImg',
           align: 'left'
         },
         {
-          xtype: 'button',
-          text: 'foo',
+          xtype: 'image',
+          src: 'resources/images/menu.svg',
+          cls: 'menuImg',
           align: 'right'
         }
       ]

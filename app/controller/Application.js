@@ -30,9 +30,11 @@ Ext.define('SunApp.controller.Application', {
   },
 
   onMainPush: function (view, item) {
-  },
+     this.getMain().getNavigationBar().down('#back').setHidden(true);
+   },
 
   onMainPop: function (view, item) {
+	this.getMain().getNavigationBar().down('#back').setHidden(false);
     this.getMain().getNavigationBar().setTitle(SunApp.app.getCurrentLocation().getClosestStation());
     this.stationDetail.destroy();
   },

@@ -8,10 +8,9 @@ Ext.define('SunApp.view.Stations', {
 
     store: 'Stations',
     itemTpl: [
-      '<div class="headshot" style="background-image:url(resources/images/sun/level{sunLevel}.svg);"></div>',
-      '{name}',
-      '<span>{lat}/{long} - {linearDistance}</span>',
-      '<span>{departure:date("H:i")} -> {arrival:date("H:i")}</span>'
+            '<div class="stationList sunLevel{sunLevel}">',
+            '    <p class="stationName">{name}</p><p class="arrivalTime">{arrival:date("H:i")}</p>',
+            '</div>'
     ].join('')
   }
 });

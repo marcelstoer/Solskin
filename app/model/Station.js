@@ -3,7 +3,7 @@ Ext.define('SunApp.model.Station', {
 
   config: {
     fields: [
-      'name',
+      'origin', 'name',
       {name: 'sunshine', type: 'int', mapping: 'ss'},
       {name: 'sunLevel', type: 'int'},
       {name: 'linearDistance', type: 'float'},
