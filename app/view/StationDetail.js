@@ -8,14 +8,14 @@ Ext.define('SunApp.view.StationDetail', {
 
   config: {
     layout: {
-        pack: 'center',
+        pack: 'start',
         type: 'vbox'
     },
 
 						items : [
 								{
 									xtype : 'container',
-									height : 100,
+									height : 200,
 									id : 'weather',
 									layout : {
 										type : 'hbox'
@@ -23,6 +23,7 @@ Ext.define('SunApp.view.StationDetail', {
 									items : [
 											{
 												xtype : 'container',
+												flex: 1,
 												id : 'weatherNow',
 												padding : 10,
 												tpl : [
@@ -33,18 +34,19 @@ Ext.define('SunApp.view.StationDetail', {
 											},
 											{
 												xtype : 'container',
+												flex: 1,
 												id : 'weatherForecast',
 												padding : 10,
 												tpl : [
-														'<div class="stationDetail sunLevel{sunLevel}">', // TODO '"forecastSunLevel}">',
-														'    <p class="time">{arrival:date("H")}:00</p>', // TODO '{forecastTime}</p>',
-														'    <p class="temperature">{temperature}&deg;</p>', // TODO '{forecastTemperature}&deg;</p>',
+														'<div class="stationDetail sunLevel{sunLevel}">', // TODO MKE '"forecastSunLevel}">',
+														'    <p class="time">{arrival:date("H")}:00</p>', // TODO MKE '{forecastTime}</p>',
+														'    <p class="temperature">{temperature}&deg;</p>', // TODO MKE '{forecastTemperature}&deg;</p>',
 														'</div>' ]
 											} ]
 								},
 								{
 									xtype : 'container',
-									height : 100,
+									height : 120,
 									id : 'connection',
 									layout : {
 										type : 'hbox'
@@ -52,20 +54,22 @@ Ext.define('SunApp.view.StationDetail', {
 									items : [
 											{
 												xtype : 'container',
+												flex: 1,
 												id : 'connectionDeparture',
 												padding : 10,
 												tpl : [
-														'    <div class="departure">',
+														'    <div class="connection departure">',
 														'        <p class="departureStation">{origin}</p>',
 														'        <p class="departureTime">{departure:date("H:i")}</p>',
 														'    </div>' ]
 											},
 											{
 												xtype : 'container',
+												flex: 1,
 												id : 'connectionArrival',
 												padding : 10,
 												tpl : [
-														'    <div class="arrival">',
+														'    <div class="connection arrival">',
 														'        <p class="arrivalStation">{name}</p>',
 														'        <p class="arrivalTime">{arrival:date("H:i")}</p>',
 														'    </div>' ]

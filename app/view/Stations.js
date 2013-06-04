@@ -4,7 +4,6 @@ Ext.define('SunApp.view.Stations', {
 
   config: {
     title: '',
-    cls: 'x-contacts',
 
     store: 'Stations',
     itemTpl: [

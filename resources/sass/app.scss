@@ -1,6 +1,9 @@
 @import url(http://fonts.googleapis.com/css?family=Voltaire);
 
-$font-family: Arial;
+$font-size-big:4em;
+$font-size-medium:1.7em;
+$font-size-small:1em;
+$font-family: Voltaire,Helvetica;
 $base-gradient: matte;
 $list-pressed-color: mix(#08679F, #fff, 10);
 $list-active-color: mix(#043F62, #fff, 0);
@@ -26,22 +29,11 @@ $list-active-color: mix(#043F62, #fff, 0);
     }
 }
 
-
-.x-title {
-    font-family:Voltaire,Helvetica;
-    font-weight:normal;
-    font-size:1.7em;
-    line-height:1.7em;
-    letter-spacing:0.05em}
-
-
 .x-list-normal .x-list-item.x-item-selected.x-list-item-tpl {
   background-image: none;
   background-color: #f7f7f7;
   border-top: 1px solid #dedede;
   border-bottom: 1px solid #dedede}
-
-
 .x-toolbar {
     height:2.6em;
     padding:0 0.2em;
@@ -54,14 +46,16 @@ $list-active-color: mix(#043F62, #fff, 0);
 .x-toolbar.x-docked-bottom {
     border-top:.1em solid}
 .x-title {
+    font-family:Voltaire,Helvetica;
+    font-weight:normal;
+    //font-size:$font-size-medium;
     line-height:2.1em;
-    font-size:1.2em;
     text-align:center;
-    font-weight:bold;
     white-space:nowrap;
     overflow:hidden;
     text-overflow:ellipsis;
-    margin:0 0.3em}
+    margin:0 0.3em
+    }
 .x-toolbar-dark {
     background-color:#4d4d4d;
     background-image:-webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #737373), color-stop(50%, #595959), color-stop(51%, #4d4d4d), color-stop(100%, #404040));
@@ -109,9 +103,8 @@ $list-active-color: mix(#043F62, #fff, 0);
 .stationDetail {
     background-size:contain;
     background-repeat:no-repeat;
-    background-position:75% 50%;
-    min-height: 90px;
-    min-width: 150px;
+    background-position:50% 50%;
+    min-width: 250px;
 }
 
 .stationList.sunLevel4, .stationDetail.sunLevel4  {
@@ -135,26 +128,26 @@ $list-active-color: mix(#043F62, #fff, 0);
 }
 
 .stationDetail>.time, .departure>.departureStation , .arrival>.arrivalStation {
-    font-size:0.7em;
+    font-size:$font-size-medium; // small
 }
 
-.departure>.departureStation , .arrival>.arrivalStation {
-    min-width: 150px;
+.departure>.departureStation, .arrival>.arrivalStation, .connection  {
+    min-width: 250px;
 }
 
 .departure>.departureTime, .arrival>.arrivalTime {
-    font-size:2.5em;
+    font-size:$font-size-big;
 }
 
 .stationDetail>.temperature, .stationList>.stationName {
-    font-size:1.1em;
+    font-size:$font-size-medium;
 }
 
 .stationDetail>.temperature {
-    padding-top: 45px;
+    padding-top:85px;
 }
 
 .stationList>.arrivalTime {
-    font-size:2.5em;
+    font-size:$font-size-big;
     text-align:right;
 }

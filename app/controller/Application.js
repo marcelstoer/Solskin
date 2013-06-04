@@ -30,7 +30,7 @@ Ext.define('SunApp.controller.Application', {
   },
 
   onMainPush: function (view, item) {
-     this.getMain().getNavigationBar().down('#back').setHidden(true);
+    this.getMain().getNavigationBar().down('#back').setHidden(true);
    },
 
   onMainPop: function (view, item) {
@@ -110,12 +110,14 @@ Ext.define('SunApp.controller.Application', {
   },
 
   onStoreFiltered: function () {
-    var mainView;
+    var mainView, containerView;
     var storeSize = Ext.getStore('Stations').getData().length;
 
     if (storeSize > 0) {
+     // containerView = Ext.create('SunApp.view.Container');
       mainView = Ext.create('SunApp.view.Main');
       mainView.getNavigationBar().setTitle(SunApp.app.getCurrentLocation().getClosestStation());
+     // mainView.add(containerView);
       Ext.Viewport.removeAll(true, true);
       Ext.Viewport.add(mainView);
     } else {
