@@ -2,7 +2,7 @@ Ext.define('SunApp.controller.Application', {
   extend: 'Ext.app.Controller',
 
   requires: [
-    'SunApp.Location', 'SunApp.TransportApi', 'Ext.device.Geolocation'
+    'SunApp.Location', 'SunApp.TransportApi'
   ],
 
   config: {
@@ -48,22 +48,27 @@ Ext.define('SunApp.controller.Application', {
   onLaunching: function () {
     Ext.fly('appLoadingIndicator').destroy();
     Ext.Viewport.add(Ext.create('SunApp.view.Launching'));
-    Ext.device.Geolocation.getCurrentPosition({
-      success: function (position) {
-        var lat = position.coords.latitude;
-        var long = position.coords.longitude;
+
+    Ext.create('Ext.util.Geolocation', {
+      autoUpdate: false,
+      maximumAge: 0,
+      listeners: {
+        locationupdate: function (geo) {
+          var lat = geo.getLatitude();
+          var long = geo.getLongitude();
 //    var lat = 47.46342478;
 //    var long = 8.95429439;
-        SunApp.app.getController('Application').onGeoLocationDetermined(lat, long);
-      },
-      failure: function () {
-        var noGeoMsg = [
-          'Error detecting your geo location, no more details, sorry. ',
-          'The option to select your location manually is still missing. Again, sorry.'
-        ].join('');
-        SunApp.app.getController('Application').displayError(noGeoMsg);
+          SunApp.app.getController('Application').onGeoLocationDetermined(lat, long);
+        },
+        locationerror: function () {
+            var noGeoMsg = [
+              'Error detecting your geo location, no more details, sorry. ',
+              'The option to select your location manually is still missing. Again, sorry.'
+            ].join('');
+            SunApp.app.getController('Application').displayError(noGeoMsg);
+          }
       }
-    });
+    }).updateLocation();
   },
 
   onGeoLocationDetermined: function (lat, long) {
