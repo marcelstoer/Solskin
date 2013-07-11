@@ -35,3 +35,7 @@ to find candidates and to pick the relevant ones for the user. It calls the Tran
 (async/parallel), sets the store data when done, and fires the 'storeFiltered' event right after.
 - The event is processed by the controller's `onStoreFiltered()` function. It takes down the launching view and
 displays the main navigation view with the stations list instead.
+
+Build Android:
+- run "sencha app package build packager.json" in C:\Users\mkessler\git\sun\SunApp
+- run "sencha app package run packager.json" in C:\Users\mkessler\git\sun\SunApp

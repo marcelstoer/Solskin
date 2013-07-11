@@ -4,8 +4,10 @@ Ext.define('SunApp.view.Main', {
 
   requires: [
     'Ext.Img',
+    'SunApp.view.Overview',
     'SunApp.view.Stations',
-    'SunApp.view.StationDetail'
+    'SunApp.view.StationDetail',
+    'SunApp.view.Meteotest'
   ],
 
   config: {
@@ -29,7 +31,7 @@ Ext.define('SunApp.view.Main', {
     },
 
     items: [
-      { xtype: 'stations' }
+      { xtype: 'overview' }
     ]
   }
 });

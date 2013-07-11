@@ -8,6 +8,7 @@ Ext.define('SunApp.controller.Application', {
   config: {
     refs: {
       main: 'mainview',
+      overview: 'overview',
       stations: 'stations',
       stationDetail: 'stationDetail'
     },

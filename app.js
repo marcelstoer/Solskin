@@ -41,7 +41,7 @@ Ext.application({
 
   models: ['Station'],
   stores: ['Stations'],
-  views: ['Launching', 'Main', 'Error', 'Stations', 'StationDetail'],
+  views: ['Launching', 'Main', 'Error', 'Overview', 'Meteotest', 'Stations', 'StationDetail'],
   controllers: ['Application'],
 
   icon: {
