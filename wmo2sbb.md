@@ -17,14 +17,14 @@
 | 66210 | Güttingen | 47.6017 | 9.27939 | 008506121 | Romanshorn | http://transport.opendata.ch/v1/locations?x=47.6017&y=9.27939 |
 | 66260 | Gösgen | 47.363 | 7.97366 | 008502112 | Schönenwerd | http://transport.opendata.ch/v1/locations?x=47.363&y=7.97366 |
 | 66280 | Plaffeien | 46.7477 | 7.266 | 008504868 | Plaffeien | http://transport.opendata.ch/v1/locations?x=46.7477&y=7.266 |
-| 66290 | Mühleberg / Stockeren | 46.9521 | 7.28297 |  |  | http://transport.opendata.ch/v1/locations?x=46.9521&y=7.28297 |
-| 66310 | Bern / Zollikofen | 46.9907 | 7.464 |  |  | http://transport.opendata.ch/v1/locations?x=46.9907&y=7.464 |
-| 66320 | Grenchen | 47.1791 | 7.41423 |  |  | http://transport.opendata.ch/v1/locations?x=47.1791&y=7.41423 |
-| 66330 | Buchs / Aarau | 47.3843 | 8.07945 |  |  | http://transport.opendata.ch/v1/locations?x=47.3843&y=8.07945 |
-| 66340 | Bantiger | 46.9778 | 7.52866 |  |  | http://transport.opendata.ch/v1/locations?x=46.9778&y=7.52866 |
-| 66360 | Mühleberg | 46.9733 | 7.27815 |  |  | http://transport.opendata.ch/v1/locations?x=46.9733&y=7.27815 |
-| 66390 | Napf | 47.0047 | 7.94006 |  |  | http://transport.opendata.ch/v1/locations?x=47.0047&y=7.94006 |
-| 66410 | Möhlin | 47.5722 | 7.87786 |  |  | http://transport.opendata.ch/v1/locations?x=47.5722&y=7.87786 |
+| 66290 | Mühleberg / Stockeren | 46.9521 | 7.28297 | 008504487 | Rosshäusern | http://transport.opendata.ch/v1/locations?x=46.9521&y=7.28297 |
+| 66310 | Bern / Zollikofen | 46.9907 | 7.464 | 008504410 | Zollikofen | http://transport.opendata.ch/v1/locations?x=46.9907&y=7.464 |
+| 66320 | Grenchen | 47.1791 | 7.41423 | 000000985 | Grenchen | http://transport.opendata.ch/v1/locations?x=47.1791&y=7.41423 |
+| 66330 | Buchs / Aarau | 47.3843 | 8.07945 | 008502103 | Suhr | http://transport.opendata.ch/v1/locations?x=47.3843&y=8.07945 |
+| 66340 | Bantiger | 46.9778 | 7.52866 | 008507068 | Bolligen | http://transport.opendata.ch/v1/locations?x=46.9778&y=7.52866 |
+| 66360 | Mühleberg | 46.9733 | 7.27815 | 008571459 | Fuchsenried, Mühlebergwerk | http://transport.opendata.ch/v1/locations?x=46.9733&y=7.27815 |
+| 66390 | Napf | 47.0047 | 7.94006 | 008508660 | Luthern Bad | http://transport.opendata.ch/v1/locations?x=47.0047&y=7.94006 |
+| 66410 | Möhlin | 47.5722 | 7.87786 | 008500302 | Möhlin | http://transport.opendata.ch/v1/locations?x=47.5722&y=7.87786 |
 | 66430 | Wynau | 47.255 | 7.7874 |  |  | http://transport.opendata.ch/v1/locations?x=47.255&y=7.7874 |
 | 66440 | Mosen | 47.2447 | 8.23445 |  |  | http://transport.opendata.ch/v1/locations?x=47.2447&y=8.23445 |
 | 66450 | Rünenberg | 47.4346 | 7.87932 |  |  | http://transport.opendata.ch/v1/locations?x=47.4346&y=7.87932 |
