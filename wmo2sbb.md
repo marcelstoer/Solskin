@@ -116,16 +116,16 @@
 | 69900 | Vaduz | 47.1275 | 9.51752 |  |  | http://transport.opendata.ch/v1/locations?x=47.1275&y=9.51752 |
 | 67470 | Monte Rosa-Plattje | 45.9563 | 7.81488 |  |  | http://transport.opendata.ch/v1/locations?x=45.9563&y=7.81488 |
 | 66780 | Bischofszell | 47.497 | 9.23416 |  |  | http://transport.opendata.ch/v1/locations?x=47.497&y=9.23416 |
-| 66930 | Ebnat-Kappel | 47.2735 | 9.10833 |  |  | http://transport.opendata.ch/v1/locations?x=47.2735&y=9.10833 |
-| 66230 | Salen-Reutenen | 47.6498 | 9.02117 |  |  | http://transport.opendata.ch/v1/locations?x=47.6498&y=9.02117 |
-| 66380 | Langnau i.E. | 46.94 | 7.80729 |  |  | http://transport.opendata.ch/v1/locations?x=46.94&y=7.80729 |
-| 66820 | Elm | 46.9236 | 9.17533 |  |  | http://transport.opendata.ch/v1/locations?x=46.9236&y=9.17533 |
-| 66860 | Bad Ragaz | 47.0165 | 9.5025 |  |  | http://transport.opendata.ch/v1/locations?x=47.0165&y=9.5025 |
-| 66370 | Meiringen | 46.7322 | 8.16916 |  |  | http://transport.opendata.ch/v1/locations?x=46.7322&y=8.16916 |
-| 66750 | Einsiedeln | 47.133 | 8.7565 |  |  | http://transport.opendata.ch/v1/locations?x=47.133&y=8.7565 |
-| 66250 | Fribourg/Posieux | 46.7713 | 7.11367 |  |  | http://transport.opendata.ch/v1/locations?x=46.7713&y=7.11367 |
+| 66930 | Ebnat-Kappel | 47.2735 | 9.10833 | 008506297 | Ebnat-Kappel | http://transport.opendata.ch/v1/locations?x=47.2735&y=9.10833 |
+| 66230 | Salen-Reutenen | 47.6498 | 9.02117 | 008506135 | Berlingen | http://transport.opendata.ch/v1/locations?x=47.6498&y=9.02117 |
+| 66380 | Langnau i.E. | 46.94 | 7.80729 | 008508207 | Langnau i.E. | http://transport.opendata.ch/v1/locations?x=46.94&y=7.80729 |
+| 66820 | Elm | 46.9236 | 9.17533 | 008503233 | Schwanden GL | http://transport.opendata.ch/v1/locations?x=46.9236&y=9.17533 |
+| 66860 | Bad Ragaz | 47.0165 | 9.5025 | 008509004 | Bad Ragaz | http://transport.opendata.ch/v1/locations?x=47.0165&y=9.5025 |
+| 66370 | Meiringen | 46.7322 | 8.16916 | 008508308 | Meiringen | http://transport.opendata.ch/v1/locations?x=46.7322&y=8.16916 |
+| 66750 | Einsiedeln | 47.133 | 8.7565 | 008503283 | Einsiedeln | http://transport.opendata.ch/v1/locations?x=47.133&y=8.7565 |
+| 66250 | Fribourg/Posieux | 46.7713 | 7.11367 | 008504100 | Fribourg | http://transport.opendata.ch/v1/locations?x=46.7713&y=7.11367 |
 | 66350 | Koppigen | 47.1188 | 7.6055 | 008508084 | Kirchberg-Alchenflüh | http://transport.opendata.ch/v1/locations?x=47.1188&y=7.6055 |
-| 66240 | Hallau | 47.6973 | 8.4705 | 008503424 | Schaffhausen | http://transport.opendata.ch/v1/locations?x=47.6973&y=8.4705 |
+| 66240 | Hallau | 47.6973 | 8.4705 | 008014482	| Wilchingen-Hallau | http://transport.opendata.ch/v1/locations?x=47.6973&y=8.4705 |
 | 66270 | Chateau-d'Oex | 46.4797 | 7.13967 | 008501394 | Château-d'Oex | http://transport.opendata.ch/v1/locations?x=46.4797&y=7.13967 |
 | 67580 | Grono | 46.255 | 9.16372 | 008505213 | Bellinzona | http://transport.opendata.ch/v1/locations?x=46.255&y=9.16372 |
 | 67310 | Thun | 46.7498 | 7.58525 | 008507100 | Thun | http://transport.opendata.ch/v1/locations?x=46.7498&y=7.58525 |
