@@ -25,8 +25,8 @@
 | 66360 | Mühleberg | 46.9733 | 7.27815 | 008571459 | Fuchsenried, Mühlebergwerk | http://transport.opendata.ch/v1/locations?x=46.9733&y=7.27815 |
 | 66390 | Napf | 47.0047 | 7.94006 | 008508660 | Luthern Bad | http://transport.opendata.ch/v1/locations?x=47.0047&y=7.94006 |
 | 66410 | Möhlin | 47.5722 | 7.87786 | 008500302 | Möhlin | http://transport.opendata.ch/v1/locations?x=47.5722&y=7.87786 |
-| 66430 | Wynau | 47.255 | 7.7874 |  |  | http://transport.opendata.ch/v1/locations?x=47.255&y=7.7874 |
-| 66440 | Mosen | 47.2447 | 8.23445 |  |  | http://transport.opendata.ch/v1/locations?x=47.2447&y=8.23445 |
+| 66430 | Wynau | 47.255 | 7.7874 | 008508100 | Langenthal | http://transport.opendata.ch/v1/locations?x=47.255&y=7.7874 |
+| 66440 | Mosen | 47.2447 | 8.23445 | 008502019 | Ermensee | http://transport.opendata.ch/v1/locations?x=47.2447&y=8.23445 |
 | 66450 | Rünenberg | 47.4346 | 7.87932 |  |  | http://transport.opendata.ch/v1/locations?x=47.4346&y=7.87932 |
 | 66460 | Beznau | 47.5572 | 8.23325 |  |  | http://transport.opendata.ch/v1/locations?x=47.5572&y=8.23325 |
 | 66470 | PSI Würenlingen | 47.5384 | 8.22941 |  |  | http://transport.opendata.ch/v1/locations?x=47.5384&y=8.22941 |
