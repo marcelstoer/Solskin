@@ -27,17 +27,17 @@
 | 66410 | Möhlin | 47.5722 | 7.87786 | 008500302 | Möhlin | http://transport.opendata.ch/v1/locations?x=47.5722&y=7.87786 |
 | 66430 | Wynau | 47.255 | 7.7874 | 008508100 | Langenthal | http://transport.opendata.ch/v1/locations?x=47.255&y=7.7874 |
 | 66440 | Mosen | 47.2447 | 8.23445 | 008502019 | Ermensee | http://transport.opendata.ch/v1/locations?x=47.2447&y=8.23445 |
-| 66450 | Rünenberg | 47.4346 | 7.87932 |  |  | http://transport.opendata.ch/v1/locations?x=47.4346&y=7.87932 |
-| 66460 | Beznau | 47.5572 | 8.23325 |  |  | http://transport.opendata.ch/v1/locations?x=47.5572&y=8.23325 |
-| 66470 | PSI Würenlingen | 47.5384 | 8.22941 |  |  | http://transport.opendata.ch/v1/locations?x=47.5384&y=8.22941 |
-| 66480 | Egolzwil | 47.1795 | 8.00459 |  |  | http://transport.opendata.ch/v1/locations?x=47.1795&y=8.00459 |
-| 66500 | Luzern | 47.0364 | 8.30096 |  |  | http://transport.opendata.ch/v1/locations?x=47.0364&y=8.30096 |
-| 66510 | Schüpfheim | 46.9471 | 8.01291 |  |  | http://transport.opendata.ch/v1/locations?x=46.9471&y=8.01291 |
-| 66550 | Engelberg | 46.8219 | 8.41046 |  |  | http://transport.opendata.ch/v1/locations?x=46.8219&y=8.41046 |
-| 66560 | Brienz | 46.743 | 8.06007 |  |  | http://transport.opendata.ch/v1/locations?x=46.743&y=8.06007 |
-| 66590 | Pilatus | 46.9789 | 8.25233 |  |  | http://transport.opendata.ch/v1/locations?x=46.9789&y=8.25233 |
-| 66600 | Zürich / Fluntern | 47.3779 | 8.56573 |  |  | http://transport.opendata.ch/v1/locations?x=47.3779&y=8.56573 |
-| 66640 | Zürich / Affoltern | 47.4277 | 8.51789 |  |  | http://transport.opendata.ch/v1/locations?x=47.4277&y=8.51789 |
+| 66450 | Rünenberg | 47.4346 | 7.87932 | 008500027 | Gelterkinden | http://transport.opendata.ch/v1/locations?x=47.4346&y=7.87932 |
+| 66460 | Beznau | 47.5572 | 8.23325 | 008503501 | Döttingen | http://transport.opendata.ch/v1/locations?x=47.5572&y=8.23325 |
+| 66470 | PSI Würenlingen | 47.5384 | 8.22941 | 008503502 | Siggenthal-Würenlingen | http://transport.opendata.ch/v1/locations?x=47.5384&y=8.22941 |
+| 66480 | Egolzwil | 47.1795 | 8.00459 | 008502006 | Wauwil | http://transport.opendata.ch/v1/locations?x=47.1795&y=8.00459 |
+| 66500 | Luzern | 47.0364 | 8.30096 | 008505000 | Luzern | http://transport.opendata.ch/v1/locations?x=47.0364&y=8.30096 |
+| 66510 | Schüpfheim | 46.9471 | 8.01291 | 008508211 | Schüpfheim | http://transport.opendata.ch/v1/locations?x=46.9471&y=8.01291 |
+| 66550 | Engelberg | 46.8219 | 8.41046 | 008508399 | Engelberg | http://transport.opendata.ch/v1/locations?x=46.8219&y=8.41046 |
+| 66560 | Brienz | 46.743 | 8.06007 | 008508305 | Brienz | http://transport.opendata.ch/v1/locations?x=46.743&y=8.06007 |
+| 66590 | Pilatus | 46.9789 | 8.25233 | 008508456 | Pilatus Kulm | http://transport.opendata.ch/v1/locations?x=46.9789&y=8.25233 |
+| 66600 | Zürich / Fluntern | 47.3779 | 8.56573 | 008591442 | Zürich, Zoo | http://transport.opendata.ch/v1/locations?x=47.3779&y=8.56573 |
+| 66640 | Zürich / Affoltern | 47.4277 | 8.51789 | 008503008 | Zürich Affoltern | http://transport.opendata.ch/v1/locations?x=47.4277&y=8.51789 |
 | 66660 | Leibstadt | 47.5973 | 8.18826 |  |  | http://transport.opendata.ch/v1/locations?x=47.5973&y=8.18826 |
 | 66690 | Lägern | 47.4819 | 8.39721 |  |  | http://transport.opendata.ch/v1/locations?x=47.4819&y=8.39721 |
 | 66700 | Zürich / Kloten | 47.4796 | 8.53608 |  |  | http://transport.opendata.ch/v1/locations?x=47.4796&y=8.53608 |
