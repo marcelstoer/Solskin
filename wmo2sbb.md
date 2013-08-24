@@ -38,29 +38,29 @@
 | 66590 | Pilatus | 46.9789 | 8.25233 | 008508456 | Pilatus Kulm | http://transport.opendata.ch/v1/locations?x=46.9789&y=8.25233 |
 | 66600 | Zürich / Fluntern | 47.3779 | 8.56573 | 008591442 | Zürich, Zoo | http://transport.opendata.ch/v1/locations?x=47.3779&y=8.56573 |
 | 66640 | Zürich / Affoltern | 47.4277 | 8.51789 | 008503008 | Zürich Affoltern | http://transport.opendata.ch/v1/locations?x=47.4277&y=8.51789 |
-| 66660 | Leibstadt | 47.5973 | 8.18826 |  |  | http://transport.opendata.ch/v1/locations?x=47.5973&y=8.18826 |
-| 66690 | Lägern | 47.4819 | 8.39721 |  |  | http://transport.opendata.ch/v1/locations?x=47.4819&y=8.39721 |
-| 66700 | Zürich / Kloten | 47.4796 | 8.53608 |  |  | http://transport.opendata.ch/v1/locations?x=47.4796&y=8.53608 |
-| 66710 | Steckborn | 47.6687 | 8.98148 |  |  | http://transport.opendata.ch/v1/locations?x=47.6687&y=8.98148 |
-| 66720 | Altdorf | 46.8702 | 8.63175 |  |  | http://transport.opendata.ch/v1/locations?x=46.8702&y=8.63175 |
-| 66730 | Wädenswil | 47.2213 | 8.67668 |  |  | http://transport.opendata.ch/v1/locations?x=47.2213&y=8.67668 |
-| 66740 | Cham | 47.1883 | 8.46551 |  |  | http://transport.opendata.ch/v1/locations?x=47.1883&y=8.46551 |
-| 66760 | Oberägeri | 47.1336 | 8.60808 |  |  | http://transport.opendata.ch/v1/locations?x=47.1336&y=8.60808 |
-| 66770 | Uetliberg | 47.3515 | 8.49016 |  |  | http://transport.opendata.ch/v1/locations?x=47.3515&y=8.49016 |
-| 66790 | Aadorf / Tänikon | 47.4799 | 8.90488 |  |  | http://transport.opendata.ch/v1/locations?x=47.4799&y=8.90488 |
-| 66800 | Säntis | 47.2494 | 9.34363 |  |  | http://transport.opendata.ch/v1/locations?x=47.2494&y=9.34363 |
-| 66810 | St. Gallen | 47.4255 | 9.39846 |  |  | http://transport.opendata.ch/v1/locations?x=47.4255&y=9.39846 |
-| 66830 | Schmerikon | 47.2246 | 8.94021 |  |  | http://transport.opendata.ch/v1/locations?x=47.2246&y=8.94021 |
-| 66850 | Glarus | 47.0346 | 9.0669 |  |  | http://transport.opendata.ch/v1/locations?x=47.0346&y=9.0669 |
-| 66870 | Quinten | 47.1288 | 9.21607 |  |  | http://transport.opendata.ch/v1/locations?x=47.1288&y=9.21607 |
-| 66880 | Crap Masegn | 46.8423 | 9.17999 |  |  | http://transport.opendata.ch/v1/locations?x=46.8423&y=9.17999 |
-| 66890 | Hörnli | 47.3708 | 8.94181 |  |  | http://transport.opendata.ch/v1/locations?x=47.3708&y=8.94181 |
-| 66900 | Altenrhein | 47.4836 | 9.56636 |  |  | http://transport.opendata.ch/v1/locations?x=47.4836&y=9.56636 |
-| 67000 | Genève-Cointrin | 46.2447 | 6.1236 |  |  | http://transport.opendata.ch/v1/locations?x=46.2447&y=6.1236 |
-| 67010 | Le Chenit | 46.5941 | 6.22017 |  |  | http://transport.opendata.ch/v1/locations?x=46.5941&y=6.22017 |
-| 67020 | La Dôle | 46.4247 | 6.09948 |  |  | http://transport.opendata.ch/v1/locations?x=46.4247&y=6.09948 |
-| 67040 | Bière | 46.525 | 6.34222 |  |  | http://transport.opendata.ch/v1/locations?x=46.525&y=6.34222 |
-| 67050 | Nyon / Changins | 46.4011 | 6.22775 |  |  | http://transport.opendata.ch/v1/locations?x=46.4011&y=6.22775 |
+| 66660 | Leibstadt | 47.5973 | 8.18826 | 008500329 | Koblenz | http://transport.opendata.ch/v1/locations?x=47.5973&y=8.18826 |
+| 66690 | Lägern | 47.4819 | 8.39721 | 008503315 | Dielsdorf | http://transport.opendata.ch/v1/locations?x=47.4819&y=8.39721 |
+| 66700 | Zürich / Kloten | 47.4796 | 8.53608 | 008503016 | Zürich Flughafen | http://transport.opendata.ch/v1/locations?x=47.4796&y=8.53608 |
+| 66710 | Steckborn | 47.6687 | 8.98148 | 008506136 | Steckborn | http://transport.opendata.ch/v1/locations?x=47.6687&y=8.98148 |
+| 66720 | Altdorf | 46.8702 | 8.63175 | 008505113 | Altdorf | http://transport.opendata.ch/v1/locations?x=46.8702&y=8.63175 |
+| 66730 | Wädenswil | 47.2213 | 8.67668 | 008503206 | Wädenswil | http://transport.opendata.ch/v1/locations?x=47.2213&y=8.67668 |
+| 66740 | Cham | 47.1883 | 8.46551 | 008502204 | Zug | http://transport.opendata.ch/v1/locations?x=47.1883&y=8.46551 |
+| 66760 | Oberägeri | 47.1336 | 8.60808 | 008502287 | Oberägeri, Station | http://transport.opendata.ch/v1/locations?x=47.1336&y=8.60808 |
+| 66770 | Uetliberg | 47.3515 | 8.49016 | 008503057 | Uetliberg | http://transport.opendata.ch/v1/locations?x=47.3515&y=8.49016 |
+| 66790 | Aadorf / Tänikon | 47.4799 | 8.90488 | 008506013 | Aadorf | http://transport.opendata.ch/v1/locations?x=47.4799&y=8.90488 |
+| 66800 | Säntis | 47.2494 | 9.34363 | 008506269 | Säntis | http://transport.opendata.ch/v1/locations?x=47.2494&y=9.34363 |
+| 66810 | St. Gallen | 47.4255 | 9.39846 | 008506302 | St. Gallen | http://transport.opendata.ch/v1/locations?x=47.4255&y=9.39846 |
+| 66830 | Schmerikon | 47.2246 | 8.94021 | 008503115 | Schmerikon | http://transport.opendata.ch/v1/locations?x=47.2246&y=8.94021 |
+| 66850 | Glarus | 47.0346 | 9.0669 | 008503230 | Glarus | http://transport.opendata.ch/v1/locations?x=47.0346&y=9.0669 |
+| 66870 | Quinten | 47.1288 | 9.21607 | 008509414 | Walenstadt | http://transport.opendata.ch/v1/locations?x=47.1288&y=9.21607 |
+| 66880 | --Crap Masegn-- | --46.8423-- | --9.17999-- |  |  | --http://transport.opendata.ch/v1/locations?x=46.8423&y=9.17999-- |
+| 66890 | --Hörnli-- | --47.3708-- | --8.94181-- |  |  | --http://transport.opendata.ch/v1/locations?x=47.3708&y=8.94181-- |
+| 66900 | Altenrhein | 47.4836 | 9.56636 | 008506311 | Rorschach | http://transport.opendata.ch/v1/locations?x=47.4836&y=9.56636 |
+| 67000 | Genève-Cointrin | 46.2447 | 6.1236 | 008501008 | Genève | http://transport.opendata.ch/v1/locations?x=46.2447&y=6.1236 |
+| 67010 | Le Chenit | 46.5941 | 6.22017 | 008501158 | Chez-le-Maître | http://transport.opendata.ch/v1/locations?x=46.5941&y=6.22017 |
+| 67020 | --La Dôle-- | --46.4247-- | --6.09948-- |  |  | --http://transport.opendata.ch/v1/locations?x=46.4247&y=6.09948-- |
+| 67040 | Bière | 46.525 | 6.34222 | 008501096 | Bière | http://transport.opendata.ch/v1/locations?x=46.525&y=6.34222 |
+| 67050 | Nyon / Changins | 46.4011 | 6.22775 | 008501030 | Nyon | http://transport.opendata.ch/v1/locations?x=46.4011&y=6.22775 |
 | 67060 | St-Prex | 46.4837 | 6.44302 |  |  | http://transport.opendata.ch/v1/locations?x=46.4837&y=6.44302 |
 | 67080 | Oron | 46.5722 | 6.85817 |  |  | http://transport.opendata.ch/v1/locations?x=46.5722&y=6.85817 |
 | 67090 | Bouveret | 46.3934 | 6.85696 |  |  | http://transport.opendata.ch/v1/locations?x=46.3934&y=6.85696 |
