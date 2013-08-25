@@ -61,20 +61,20 @@
 | 67020 | ~~La Dôle~~ | ~~46.4247~~ | ~~6.09948~~ |  |  | ~~http://transport.opendata.ch/v1/locations?x=46.4247&y=6.09948~~ |
 | 67040 | Bière | 46.525 | 6.34222 | 008501096 | Bière | http://transport.opendata.ch/v1/locations?x=46.525&y=6.34222 |
 | 67050 | Nyon / Changins | 46.4011 | 6.22775 | 008501030 | Nyon | http://transport.opendata.ch/v1/locations?x=46.4011&y=6.22775 |
-| 67060 | St-Prex | 46.4837 | 6.44302 |  |  | http://transport.opendata.ch/v1/locations?x=46.4837&y=6.44302 |
-| 67080 | Oron | 46.5722 | 6.85817 |  |  | http://transport.opendata.ch/v1/locations?x=46.5722&y=6.85817 |
-| 67090 | Bouveret | 46.3934 | 6.85696 |  |  | http://transport.opendata.ch/v1/locations?x=46.3934&y=6.85696 |
-| 67110 | Pully | 46.5123 | 6.66741 |  |  | http://transport.opendata.ch/v1/locations?x=46.5123&y=6.66741 |
-| 67120 | Aigle | 46.3266 | 6.92443 |  |  | http://transport.opendata.ch/v1/locations?x=46.3266&y=6.92443 |
-| 67140 | Les Diablerets | 46.3268 | 7.20386 |  |  | http://transport.opendata.ch/v1/locations?x=46.3268&y=7.20386 |
-| 67150 | Evionnaz | 46.183 | 7.02667 |  |  | http://transport.opendata.ch/v1/locations?x=46.183&y=7.02667 |
-| 67170 | Col du Grand St-Bernard | 45.8688 | 7.1708 |  |  | http://transport.opendata.ch/v1/locations?x=45.8688&y=7.1708 |
-| 67200 | Sion | 46.2186 | 7.33017 |  |  | http://transport.opendata.ch/v1/locations?x=46.2186&y=7.33017 |
-| 67220 | Evolène / Villa | 46.1121 | 7.50868 |  |  | http://transport.opendata.ch/v1/locations?x=46.1121&y=7.50868 |
-| 67230 | Les Attelas | 46.0992 | 7.26859 |  |  | http://transport.opendata.ch/v1/locations?x=46.0992&y=7.26859 |
-| 67240 | Montana | 46.3138 | 7.48537 |  |  | http://transport.opendata.ch/v1/locations?x=46.3138&y=7.48537 |
-| 67270 | Visp | 46.3029 | 7.84295 |  |  | http://transport.opendata.ch/v1/locations?x=46.3029&y=7.84295 |
-| 67300 | Jungfraujoch | 46.5474 | 7.98533 |  |  | http://transport.opendata.ch/v1/locations?x=46.5474&y=7.98533 |
+| 67060 | St-Prex | 46.4837 | 6.44302 | 008501036 | St-Prex | http://transport.opendata.ch/v1/locations?x=46.4837&y=6.44302 |
+| 67080 | Oron | 46.5722 | 6.85817 | 008504014 | Palézieux | http://transport.opendata.ch/v1/locations?x=46.5722&y=6.85817 |
+| 67090 | Bouveret | 46.3934 | 6.85696 | 008501300 | Montreux | http://transport.opendata.ch/v1/locations?x=46.3934&y=6.85696 |
+| 67110 | Pully | 46.5123 | 6.66741 | 008501120 | Lausanne | http://transport.opendata.ch/v1/locations?x=46.5123&y=6.66741 |
+| 67120 | Aigle | 46.3266 | 6.92443 | 008501400 | Aigle | http://transport.opendata.ch/v1/locations?x=46.3266&y=6.92443 |
+| 67140 | Les Diablerets | 46.3268 | 7.20386 | 008501354 | Glacier-des-Diablerets | http://transport.opendata.ch/v1/locations?x=46.3268&y=7.20386 |
+| 67150 | Evionnaz | 46.183 | 7.02667 | 008501500 | Martigny | http://transport.opendata.ch/v1/locations?x=46.183&y=7.02667 |
+| 67170 | Col du Grand St-Bernard | 45.8688 | 7.1708 | 008501885 | Le Grand-St-Bernard, Hospice | http://transport.opendata.ch/v1/locations?x=45.8688&y=7.1708 |
+| 67200 | Sion | 46.2186 | 7.33017 | 008501506 | Sion | http://transport.opendata.ch/v1/locations?x=46.2186&y=7.33017 |
+| 67220 | Evolène / Villa | 46.1121 | 7.50868 | 008582967 | Evolène, Village | http://transport.opendata.ch/v1/locations?x=46.1121&y=7.50868 |
+| 67230 | ~~Les Attelas~~ | ~~46.0992~~ | ~~7.26859~~ |  |  | ~~http://transport.opendata.ch/v1/locations?x=46.0992&y=7.26859~~ |
+| 67240 | Montana | 46.3138 | 7.48537 | 008501596 | Montana Gare | http://transport.opendata.ch/v1/locations?x=46.3138&y=7.48537 |
+| 67270 | Visp | 46.3029 | 7.84295 | 008501605 | Visp | http://transport.opendata.ch/v1/locations?x=46.3029&y=7.84295 |
+| 67300 | Jungfraujoch | 46.5474 | 7.98533 | 008507364 | Jungfraujoch | http://transport.opendata.ch/v1/locations?x=46.5474&y=7.98533 |
 | 67330 | Boltigen | 46.6235 | 7.38419 |  |  | http://transport.opendata.ch/v1/locations?x=46.6235&y=7.38419 |
 | 67340 | Interlaken | 46.6722 | 7.87014 |  |  | http://transport.opendata.ch/v1/locations?x=46.6722&y=7.87014 |
 | 67350 | Adelboden | 46.492 | 7.56107 |  |  | http://transport.opendata.ch/v1/locations?x=46.492&y=7.56107 |
