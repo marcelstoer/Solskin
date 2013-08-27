@@ -110,12 +110,12 @@
 | 67930 | Valbella | 46.7556 | 9.55399 |  |  | http://transport.opendata.ch/v1/locations?x=46.7556&y=9.55399 |
 | 67940 | Poschiavo / Robbia | 46.3466 | 10.0611 |  |  | http://transport.opendata.ch/v1/locations?x=46.3466&y=10.0611 |
 | 67950 | Piz Martegnas | 46.5772 | 9.52939 |  |  | http://transport.opendata.ch/v1/locations?x=46.5772&y=9.52939 |
-| 67980 | Scuol | 46.7933 | 10.2832 |  |  | http://transport.opendata.ch/v1/locations?x=46.7933&y=10.2832 |
-| 67990 | Naluns / Schlivera | 46.8175 | 10.2615 |  |  | http://transport.opendata.ch/v1/locations?x=46.8175&y=10.2615 |
-| 69570 | Giswil | 46.8495 | 8.19019 |  |  | http://transport.opendata.ch/v1/locations?x=46.8495&y=8.19019 |
-| 69900 | Vaduz | 47.1275 | 9.51752 |  |  | http://transport.opendata.ch/v1/locations?x=47.1275&y=9.51752 |
-| 67470 | Monte Rosa-Plattje | 45.9563 | 7.81488 |  |  | http://transport.opendata.ch/v1/locations?x=45.9563&y=7.81488 |
-| 66780 | Bischofszell | 47.497 | 9.23416 |  |  | http://transport.opendata.ch/v1/locations?x=47.497&y=9.23416 |
+| 67980 | Scuol | 46.7933 | 10.2832 | 008509268 | Scuol-Tarasp | http://transport.opendata.ch/v1/locations?x=46.7933&y=10.2832 |
+| 67990 | Naluns / Schlivera | 46.8175 | 10.2615 | 008509281 | Motta Naluns | http://transport.opendata.ch/v1/locations?x=46.8175&y=10.2615 |
+| 69570 | Giswil | 46.8495 | 8.19019 | 008508312 | Giswil | http://transport.opendata.ch/v1/locations?x=46.8495&y=8.19019 |
+| 69900 | Vaduz | 47.1275 | 9.51752 | 008509985 | Vaduz, Post | http://transport.opendata.ch/v1/locations?x=47.1275&y=9.51752 |
+| 67470 | Monte Rosa-Plattje | 45.9563 | 7.81488 | 00008501694 | Gornergrat | http://transport.opendata.ch/v1/locations?x=45.9563&y=7.81488 |
+| 66780 | Bischofszell | 47.497 | 9.23416 |008506213 | Bischofszell Stadt | http://transport.opendata.ch/v1/locations?x=47.497&y=9.23416 |
 | 66930 | Ebnat-Kappel | 47.2735 | 9.10833 | 008506297 | Ebnat-Kappel | http://transport.opendata.ch/v1/locations?x=47.2735&y=9.10833 |
 | 66230 | Salen-Reutenen | 47.6498 | 9.02117 | 008506135 | Berlingen | http://transport.opendata.ch/v1/locations?x=47.6498&y=9.02117 |
 | 66380 | Langnau i.E. | 46.94 | 7.80729 | 008508207 | Langnau i.E. | http://transport.opendata.ch/v1/locations?x=46.94&y=7.80729 |
