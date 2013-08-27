@@ -105,11 +105,11 @@
 | 67840 | Davos | 46.813 | 9.84349 |  |  | http://transport.opendata.ch/v1/locations?x=46.813&y=9.84349 |
 | 67860 | Chur | 46.8704 | 9.53057 |  |  | http://transport.opendata.ch/v1/locations?x=46.8704&y=9.53057 |
 | 67870 | Andeer | 46.6101 | 9.43191 |  |  | http://transport.opendata.ch/v1/locations?x=46.6101&y=9.43191 |
-| 67910 | Piz Corvatsch | 46.418 | 9.82136 |  |  | http://transport.opendata.ch/v1/locations?x=46.418&y=9.82136 |
-| 67920 | Samedan | 46.5264 | 9.87894 |  |  | http://transport.opendata.ch/v1/locations?x=46.5264&y=9.87894 |
-| 67930 | Valbella | 46.7556 | 9.55399 |  |  | http://transport.opendata.ch/v1/locations?x=46.7556&y=9.55399 |
-| 67940 | Poschiavo / Robbia | 46.3466 | 10.0611 |  |  | http://transport.opendata.ch/v1/locations?x=46.3466&y=10.0611 |
-| 67950 | Piz Martegnas | 46.5772 | 9.52939 |  |  | http://transport.opendata.ch/v1/locations?x=46.5772&y=9.52939 |
+| 67910 | Piz Corvatsch | 46.418 | 9.82136 | 008509382 | Corvatsch | http://transport.opendata.ch/v1/locations?x=46.418&y=9.82136 |
+| 67920 | Samedan | 46.5264 | 9.87894 | 008509251 | Samedan | http://transport.opendata.ch/v1/locations?x=46.5264&y=9.87894 |
+| 67930 | Valbella | 46.7556 | 9.55399 | 008509950 | Valbella, Post | http://transport.opendata.ch/v1/locations?x=46.7556&y=9.55399 |
+| 67940 | Poschiavo / Robbia | 46.3466 | 10.0611 | 008509361 | Poschiavo | http://transport.opendata.ch/v1/locations?x=46.3466&y=10.0611 |
+| 67950 | Piz Martegnas | 46.5772 | 9.52939 | 008509874 | Savognin, posta | http://transport.opendata.ch/v1/locations?x=46.5772&y=9.52939 |
 | 67980 | Scuol | 46.7933 | 10.2832 | 008509268 | Scuol-Tarasp | http://transport.opendata.ch/v1/locations?x=46.7933&y=10.2832 |
 | 67990 | Naluns / Schlivera | 46.8175 | 10.2615 | 008509281 | Motta Naluns | http://transport.opendata.ch/v1/locations?x=46.8175&y=10.2615 |
 | 69570 | Giswil | 46.8495 | 8.19019 | 008508312 | Giswil | http://transport.opendata.ch/v1/locations?x=46.8495&y=8.19019 |
