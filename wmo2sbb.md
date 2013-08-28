@@ -84,7 +84,7 @@
 | 67440 | Grimsel Hospiz | 46.5716 | 8.33321 | 008508762 | Grimsel Passhöhe | http://transport.opendata.ch/v1/locations?x=46.5716&y=8.33321 |
 | 67450 | Ulrichen | 46.5048 | 8.30814 |  |  | http://transport.opendata.ch/v1/locations?x=46.5048&y=8.30814 |
 | 67480 | Zermatt | 46.0292 | 7.75311 |  |  | http://transport.opendata.ch/v1/locations?x=46.0292&y=7.75311 |
-| 67490 | Gornergrat | 45.9832 | 7.78446 |  |  | http://transport.opendata.ch/v1/locations?x=45.9832&y=7.78446 |
+| 67490 | Gornergrat | 45.9832 | 7.78446 | 008501694 | Gornergrat | http://transport.opendata.ch/v1/locations?x=45.9832&y=7.78446 |
 | 67500 | Gütsch ob Andermatt | 46.6535 | 8.61624 |  |  | http://transport.opendata.ch/v1/locations?x=46.6535&y=8.61624 |
 | 67510 | Robiei | 46.4431 | 8.51339 |  |  | http://transport.opendata.ch/v1/locations?x=46.4431&y=8.51339 |
 | 67520 | Cevio | 46.3204 | 8.60332 |  |  | http://transport.opendata.ch/v1/locations?x=46.3204&y=8.60332 |
@@ -93,28 +93,28 @@
 | 67560 | Aquarossa / Comprovasco | 46.4594 | 8.93565 |  |  | http://transport.opendata.ch/v1/locations?x=46.4594&y=8.93565 |
 | 67570 | Lodrino | 46.2973 | 8.98768 |  |  | http://transport.opendata.ch/v1/locations?x=46.2973&y=8.98768 |
 | 67590 | Cimetta | 46.201 | 8.79084 |  |  | http://transport.opendata.ch/v1/locations?x=46.201&y=8.79084 |
-| 67600 | Locarno / Monti | 46.1726 | 8.78742 |  |  | http://transport.opendata.ch/v1/locations?x=46.1726&y=8.78742 |
-| 67620 | Magadino / Cadenazzo | 46.16 | 8.9336 |  |  | http://transport.opendata.ch/v1/locations?x=46.16&y=8.9336 |
-| 67700 | Lugano | 46.0042 | 8.96032 |  |  | http://transport.opendata.ch/v1/locations?x=46.0042&y=8.96032 |
-| 67710 | Stabio | 45.8434 | 8.93225 |  |  | http://transport.opendata.ch/v1/locations?x=45.8434&y=8.93225 |
-| 67720 | Monte Generoso | 45.9262 | 9.01457 |  |  | http://transport.opendata.ch/v1/locations?x=45.9262&y=9.01457 |
-| 67780 | Buffalora | 46.6484 | 10.2673 |  |  | http://transport.opendata.ch/v1/locations?x=46.6484&y=10.2673 |
-| 67800 | Weissfluhjoch | 46.8333 | 9.80639 |  |  | http://transport.opendata.ch/v1/locations?x=46.8333&y=9.80639 |
-| 67820 | Disentis / Sedrun | 46.7065 | 8.85345 |  |  | http://transport.opendata.ch/v1/locations?x=46.7065&y=8.85345 |
-| 67830 | S. Bernardino | 46.4636 | 9.18464 |  |  | http://transport.opendata.ch/v1/locations?x=46.4636&y=9.18464 |
-| 67840 | Davos | 46.813 | 9.84349 |  |  | http://transport.opendata.ch/v1/locations?x=46.813&y=9.84349 |
-| 67860 | Chur | 46.8704 | 9.53057 |  |  | http://transport.opendata.ch/v1/locations?x=46.8704&y=9.53057 |
-| 67870 | Andeer | 46.6101 | 9.43191 |  |  | http://transport.opendata.ch/v1/locations?x=46.6101&y=9.43191 |
+| 67600 | Locarno / Monti | 46.1726 | 8.78742 | 008505400 | Locarno | http://transport.opendata.ch/v1/locations?x=46.1726&y=8.78742 |
+| 67620 | Magadino / Cadenazzo | 46.16 | 8.9336 | 008505404 | Cadenazzo | http://transport.opendata.ch/v1/locations?x=46.16&y=8.9336 |
+| 67700 | Lugano | 46.0042 | 8.96032 | 008505300 | Lugano | http://transport.opendata.ch/v1/locations?x=46.0042&y=8.96032 |
+| 67710 | Stabio | 45.8434 | 8.93225 | 008505305 | Mendrisio | http://transport.opendata.ch/v1/locations?x=45.8434&y=8.93225 |
+| 67720 | Monte Generoso | 45.9262 | 9.01457 | 008505374 | Generoso Vetta | http://transport.opendata.ch/v1/locations?x=45.9262&y=9.01457 |
+| 67780 | Buffalora | 46.6484 | 10.2673 | 008509759 | Buffalora P10 | http://transport.opendata.ch/v1/locations?x=46.6484&y=10.2673 |
+| 67800 | Weissfluhjoch | 46.8333 | 9.80639 | 008509085 | Weissfluhjoch DKB | http://transport.opendata.ch/v1/locations?x=46.8333&y=9.80639 |
+| 67820 | Disentis / Sedrun | 46.7065 | 8.85345 | 008505176 | Sedrun | http://transport.opendata.ch/v1/locations?x=46.7065&y=8.85345 |
+| 67830 | S. Bernardino | 46.4636 | 9.18464 | 00008509867 | S. Bernardino, Posta | http://transport.opendata.ch/v1/locations?x=46.4636&y=9.18464 |
+| 67840 | Davos | 46.813 | 9.84349 | 008574848 | Davos Dorf, Bahnhof | http://transport.opendata.ch/v1/locations?x=46.813&y=9.84349 |
+| 67860 | Chur | 46.8704 | 9.53057 | 008509000 | Chur | http://transport.opendata.ch/v1/locations?x=46.8704&y=9.53057 |
+| 67870 | Andeer | 46.6101 | 9.43191 | 008509752 | Andeer, posta | http://transport.opendata.ch/v1/locations?x=46.6101&y=9.43191 |
 | 67910 | Piz Corvatsch | 46.418 | 9.82136 | 008509382 | Corvatsch | http://transport.opendata.ch/v1/locations?x=46.418&y=9.82136 |
 | 67920 | Samedan | 46.5264 | 9.87894 | 008509251 | Samedan | http://transport.opendata.ch/v1/locations?x=46.5264&y=9.87894 |
 | 67930 | Valbella | 46.7556 | 9.55399 | 008509950 | Valbella, Post | http://transport.opendata.ch/v1/locations?x=46.7556&y=9.55399 |
 | 67940 | Poschiavo / Robbia | 46.3466 | 10.0611 | 008509361 | Poschiavo | http://transport.opendata.ch/v1/locations?x=46.3466&y=10.0611 |
-| 67950 | Piz Martegnas | 46.5772 | 9.52939 | 008509874 | Savognin, posta | http://transport.opendata.ch/v1/locations?x=46.5772&y=9.52939 |
+| 67950 | ~~Piz Martegnas~~ | ~~46.5772~~ | ~~9.52939~~ |  |  | ~~http://transport.opendata.ch/v1/locations?x=46.5772&y=9.52939~~ |
 | 67980 | Scuol | 46.7933 | 10.2832 | 008509268 | Scuol-Tarasp | http://transport.opendata.ch/v1/locations?x=46.7933&y=10.2832 |
 | 67990 | Naluns / Schlivera | 46.8175 | 10.2615 | 008509281 | Motta Naluns | http://transport.opendata.ch/v1/locations?x=46.8175&y=10.2615 |
 | 69570 | Giswil | 46.8495 | 8.19019 | 008508312 | Giswil | http://transport.opendata.ch/v1/locations?x=46.8495&y=8.19019 |
 | 69900 | Vaduz | 47.1275 | 9.51752 | 008509985 | Vaduz, Post | http://transport.opendata.ch/v1/locations?x=47.1275&y=9.51752 |
-| 67470 | Monte Rosa-Plattje | 45.9563 | 7.81488 | 00008501694 | Gornergrat | http://transport.opendata.ch/v1/locations?x=45.9563&y=7.81488 |
+| 67470 | ~~Monte Rosa-Plattje~~ | ~~45.9563~~ | ~~7.81488~~ |  |  | ~~http://transport.opendata.ch/v1/locations?x=45.9563&y=7.81488~~ |
 | 66780 | Bischofszell | 47.497 | 9.23416 |008506213 | Bischofszell Stadt | http://transport.opendata.ch/v1/locations?x=47.497&y=9.23416 |
 | 66930 | Ebnat-Kappel | 47.2735 | 9.10833 | 008506297 | Ebnat-Kappel | http://transport.opendata.ch/v1/locations?x=47.2735&y=9.10833 |
 | 66230 | Salen-Reutenen | 47.6498 | 9.02117 | 008506135 | Berlingen | http://transport.opendata.ch/v1/locations?x=47.6498&y=9.02117 |
