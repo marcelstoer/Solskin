@@ -75,13 +75,13 @@
 | 67240 | Montana | 46.3138 | 7.48537 | 008501596 | Montana Gare | http://transport.opendata.ch/v1/locations?x=46.3138&y=7.48537 |
 | 67270 | Visp | 46.3029 | 7.84295 | 008501605 | Visp | http://transport.opendata.ch/v1/locations?x=46.3029&y=7.84295 |
 | 67300 | Jungfraujoch | 46.5474 | 7.98533 | 008507364 | Jungfraujoch | http://transport.opendata.ch/v1/locations?x=46.5474&y=7.98533 |
-| 67330 | Boltigen | 46.6235 | 7.38419 |  |  | http://transport.opendata.ch/v1/locations?x=46.6235&y=7.38419 |
-| 67340 | Interlaken | 46.6722 | 7.87014 |  |  | http://transport.opendata.ch/v1/locations?x=46.6722&y=7.87014 |
-| 67350 | Adelboden | 46.492 | 7.56107 |  |  | http://transport.opendata.ch/v1/locations?x=46.492&y=7.56107 |
-| 67360 | Männlichen | 46.6131 | 7.94096 |  |  | http://transport.opendata.ch/v1/locations?x=46.6131&y=7.94096 |
-| 67390 | Eggishorn | 46.4266 | 8.09274 |  |  | http://transport.opendata.ch/v1/locations?x=46.4266&y=8.09274 |
-| 67400 | Titlis | 46.7705 | 8.42581 |  |  | http://transport.opendata.ch/v1/locations?x=46.7705&y=8.42581 |
-| 67440 | Grimsel Hospiz | 46.5716 | 8.33321 |  |  | http://transport.opendata.ch/v1/locations?x=46.5716&y=8.33321 |
+| 67330 | Boltigen | 46.6235 | 7.38419 | 008507292 | Boltigen | http://transport.opendata.ch/v1/locations?x=46.6235&y=7.38419 |
+| 67340 | Interlaken | 46.6722 | 7.87014 | 008507492 | Interlaken | http://transport.opendata.ch/v1/locations?x=46.6722&y=7.87014 |
+| 67350 | Adelboden | 46.492 | 7.56107 | 008507851 | Adelboden, Post | http://transport.opendata.ch/v1/locations?x=46.492&y=7.56107 |
+| 67360 | Männlichen | 46.6131 | 7.94096 | 008507357 | Männlichen LWM | http://transport.opendata.ch/v1/locations?x=46.6131&y=7.94096 |
+| 67390 | ~~Eggishorn~~ | ~~46.4266~~ | ~~8.09274~~ |  |  | ~~http://transport.opendata.ch/v1/locations?x=46.4266&y=8.09274~~ |
+| 67400 | Titlis | 46.7705 | 8.42581 | 008508493 | Kleintitlis | http://transport.opendata.ch/v1/locations?x=46.7705&y=8.42581 |
+| 67440 | Grimsel Hospiz | 46.5716 | 8.33321 | 008508762 | Grimsel Passhöhe | http://transport.opendata.ch/v1/locations?x=46.5716&y=8.33321 |
 | 67450 | Ulrichen | 46.5048 | 8.30814 |  |  | http://transport.opendata.ch/v1/locations?x=46.5048&y=8.30814 |
 | 67480 | Zermatt | 46.0292 | 7.75311 |  |  | http://transport.opendata.ch/v1/locations?x=46.0292&y=7.75311 |
 | 67490 | Gornergrat | 45.9832 | 7.78446 |  |  | http://transport.opendata.ch/v1/locations?x=45.9832&y=7.78446 |
