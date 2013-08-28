@@ -101,7 +101,7 @@
 | 67780 | Buffalora | 46.6484 | 10.2673 | 008509759 | Buffalora P10 | http://transport.opendata.ch/v1/locations?x=46.6484&y=10.2673 |
 | 67800 | Weissfluhjoch | 46.8333 | 9.80639 | 008509085 | Weissfluhjoch DKB | http://transport.opendata.ch/v1/locations?x=46.8333&y=9.80639 |
 | 67820 | Disentis / Sedrun | 46.7065 | 8.85345 | 008505176 | Sedrun | http://transport.opendata.ch/v1/locations?x=46.7065&y=8.85345 |
-| 67830 | S. Bernardino | 46.4636 | 9.18464 | 00008509867 | S. Bernardino, Posta | http://transport.opendata.ch/v1/locations?x=46.4636&y=9.18464 |
+| 67830 | S. Bernardino | 46.4636 | 9.18464 | 008509867 | S. Bernardino, Posta | http://transport.opendata.ch/v1/locations?x=46.4636&y=9.18464 |
 | 67840 | Davos | 46.813 | 9.84349 | 008574848 | Davos Dorf, Bahnhof | http://transport.opendata.ch/v1/locations?x=46.813&y=9.84349 |
 | 67860 | Chur | 46.8704 | 9.53057 | 008509000 | Chur | http://transport.opendata.ch/v1/locations?x=46.8704&y=9.53057 |
 | 67870 | Andeer | 46.6101 | 9.43191 | 008509752 | Andeer, posta | http://transport.opendata.ch/v1/locations?x=46.6101&y=9.43191 |
