@@ -82,17 +82,17 @@
 | 67390 | ~~Eggishorn~~ | ~~46.4266~~ | ~~8.09274~~ |  |  | ~~http://transport.opendata.ch/v1/locations?x=46.4266&y=8.09274~~ |
 | 67400 | Titlis | 46.7705 | 8.42581 | 008508493 | Kleintitlis | http://transport.opendata.ch/v1/locations?x=46.7705&y=8.42581 |
 | 67440 | Grimsel Hospiz | 46.5716 | 8.33321 | 008508762 | Grimsel Passhöhe | http://transport.opendata.ch/v1/locations?x=46.5716&y=8.33321 |
-| 67450 | Ulrichen | 46.5048 | 8.30814 |  |  | http://transport.opendata.ch/v1/locations?x=46.5048&y=8.30814 |
-| 67480 | Zermatt | 46.0292 | 7.75311 |  |  | http://transport.opendata.ch/v1/locations?x=46.0292&y=7.75311 |
+| 67450 | Ulrichen | 46.5048 | 8.30814 | 008501663 | Ulrichen | http://transport.opendata.ch/v1/locations?x=46.5048&y=8.30814 |
+| 67480 | Zermatt | 46.0292 | 7.75311 | 008501689 | Zermatt | http://transport.opendata.ch/v1/locations?x=46.0292&y=7.75311 |
 | 67490 | Gornergrat | 45.9832 | 7.78446 | 008501694 | Gornergrat | http://transport.opendata.ch/v1/locations?x=45.9832&y=7.78446 |
-| 67500 | Gütsch ob Andermatt | 46.6535 | 8.61624 |  |  | http://transport.opendata.ch/v1/locations?x=46.6535&y=8.61624 |
-| 67510 | Robiei | 46.4431 | 8.51339 |  |  | http://transport.opendata.ch/v1/locations?x=46.4431&y=8.51339 |
-| 67520 | Cevio | 46.3204 | 8.60332 |  |  | http://transport.opendata.ch/v1/locations?x=46.3204&y=8.60332 |
-| 67530 | Piotta | 46.5171 | 8.6757 |  |  | http://transport.opendata.ch/v1/locations?x=46.5171&y=8.6757 |
-| 67540 | Matro | 46.4101 | 8.92469 |  |  | http://transport.opendata.ch/v1/locations?x=46.4101&y=8.92469 |
-| 67560 | Aquarossa / Comprovasco | 46.4594 | 8.93565 |  |  | http://transport.opendata.ch/v1/locations?x=46.4594&y=8.93565 |
-| 67570 | Lodrino | 46.2973 | 8.98768 |  |  | http://transport.opendata.ch/v1/locations?x=46.2973&y=8.98768 |
-| 67590 | Cimetta | 46.201 | 8.79084 |  |  | http://transport.opendata.ch/v1/locations?x=46.201&y=8.79084 |
+| 67500 | Gütsch ob Andermatt | 46.6535 | 8.61624 | 008505170 | Andermatt Nätschen | http://transport.opendata.ch/v1/locations?x=46.6535&y=8.61624 |
+| 67510 | Robiei | 46.4431 | 8.51339 | 008530458 | Robiei | http://transport.opendata.ch/v1/locations?x=46.4431&y=8.51339 |
+| 67520 | Cevio | 46.3204 | 8.60332 | 008578904 | Cevio, centro scolastico | http://transport.opendata.ch/v1/locations?x=46.3204&y=8.60332 |
+| 67530 | Piotta | 46.5171 | 8.6757 | 008505202 | Ambrì-Piotta | http://transport.opendata.ch/v1/locations?x=46.5171&y=8.6757 |
+| 67540 | Matro | 46.4101 | 8.92469 | 008575742 | Sobrio, Paese | http://transport.opendata.ch/v1/locations?x=46.4101&y=8.92469 |
+| 67560 | Aquarossa / Comprovasco | 46.4594 | 8.93565 | 008505257 | Acquarossa-Comprovasco | http://transport.opendata.ch/v1/locations?x=46.4594&y=8.93565 |
+| 67570 | Lodrino | 46.2973 | 8.98768 | 008505213 | Bellinzona | http://transport.opendata.ch/v1/locations?x=46.2973&y=8.98768 |
+| 67590 | Cimetta | 46.201 | 8.79084 | 008530454 | Cimetta | http://transport.opendata.ch/v1/locations?x=46.201&y=8.79084 |
 | 67600 | Locarno / Monti | 46.1726 | 8.78742 | 008505400 | Locarno | http://transport.opendata.ch/v1/locations?x=46.1726&y=8.78742 |
 | 67620 | Magadino / Cadenazzo | 46.16 | 8.9336 | 008505404 | Cadenazzo | http://transport.opendata.ch/v1/locations?x=46.16&y=8.9336 |
 | 67700 | Lugano | 46.0042 | 8.96032 | 008505300 | Lugano | http://transport.opendata.ch/v1/locations?x=46.0042&y=8.96032 |
