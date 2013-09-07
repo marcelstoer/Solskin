@@ -5,7 +5,7 @@ Ext.define('SunApp.view.Stations', {
 
   config: {
     title: '',
-
+    cls: 'stations',
     store: 'Stations',
     itemTpl: [
             '<div class="stationList sunLevel{sunLevel}">',

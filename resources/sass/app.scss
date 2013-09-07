@@ -159,6 +159,10 @@ $list-active-color: mix(#043F62, #fff, 0);
     vertical-align:bottom;  // of no use yet
 }
 
+.stations {
+    position: initial;  // TODO MKE: this displays it also in chrome, but does not seem sustainable solution
+}
+
 .meteofon-box {
     background-color: rgba(0,0,0,.02);
     padding: .3em 1em;

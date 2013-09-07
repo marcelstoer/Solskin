@@ -65,6 +65,7 @@ Ext.define('SunApp.controller.Application', {
 //              'The option to select your location manually is still missing. Again, sorry.'
 //            ].join('');
 //            SunApp.app.getController('Application').displayError(noGeoMsg);
+
             var lat = 47.46342478;
             var long = 8.95429439;
             SunApp.app.getController('Application').onGeoLocationDetermined(lat, long);
