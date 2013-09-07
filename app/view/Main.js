@@ -4,6 +4,7 @@ Ext.define('SunApp.view.Main', {
 
   requires: [
     'Ext.Img',
+    'SunApp.view.MyBackButton',
     'SunApp.view.Overview',
     'SunApp.view.Stations',
     'SunApp.view.StationDetail',
@@ -13,19 +14,23 @@ Ext.define('SunApp.view.Main', {
   config: {
     autoDestroy: false,
     navigationBar: {
+      backButton: {
+        xtype: 'myBackButton'
+      },
       items: [
-        {
-          id: 'back',
-          xtype: 'image',
-          src: 'resources/images/shades.svg',
-          cls: 'appImg',
-          align: 'left'
-        },
+//        {
+//          id: 'back',
+//          xtype: 'backButton',
+////          src: 'resources/images/shades.svg',
+////          cls: 'appImg',
+//          align: 'left'
+//        },
         {
           xtype: 'image',
           src: 'resources/images/menu.svg',
           cls: 'menuImg',
-          align: 'right'
+          align: 'right',
+          onClick: 'onMenuClicked'
         }
       ]
     },
