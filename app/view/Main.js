@@ -8,7 +8,7 @@ Ext.define('SunApp.view.Main', {
     'SunApp.view.Overview',
     'SunApp.view.Stations',
     'SunApp.view.StationDetail',
-    'SunApp.view.Meteotest'
+    'SunApp.view.Meteotest',
   ],
 
   config: {
@@ -27,10 +27,10 @@ Ext.define('SunApp.view.Main', {
 //        },
         {
           xtype: 'image',
+          id: 'menu',
           src: 'resources/images/menu.svg',
           cls: 'menuImg',
           align: 'right',
-          onClick: 'onMenuClicked'
         }
       ]
     },
