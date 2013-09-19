@@ -1,6 +1,6 @@
 | WMO | Name | Lat | Long | Station ID | Name | OpenDate link |
 | --- | ---- | --- | ---- | ---------- | ---- | ------------- |
-| 66000 | St. Chrischona | 47.5716 | 7.68715 | 008500010 | Basel SBB | http://transport.opendata.ch/v1/locations?x=47.5716&y=7.68715 |
+| 66000 | St. Chrischona | 47.5716 | 7.68715 | 008589391 | Bettingen, St. Chrischona | http://transport.opendata.ch/v1/locations?x=47.5716&y=7.68715 |
 | 66010 | Basel / Binningen | 47.5412 | 7.58275 | 008500010 | Basel SBB | http://transport.opendata.ch/v1/locations?x=47.5412&y=7.58275 |
 | 66020 | Delémont | 47.3643 | 7.33062 | 008500109 | Delémont | http://transport.opendata.ch/v1/locations?x=47.3643&y=7.33062 |
 | 66040 | Neuchatel | 47.0004 | 6.95412 | 008504221 | Neuchâtel | http://transport.opendata.ch/v1/locations?x=47.0004&y=6.95412 |
