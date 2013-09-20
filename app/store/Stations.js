@@ -40,8 +40,8 @@ Ext.define('SunApp.store.Stations', {
 
       getConnectionsSuccessFunc = function (connections) {
         for (var k = 0; k < tmpStationsArray.length; k++) {
-          tmpStationsArray[k].data.arrival = Date.parseIso8601(connections[k].to.arrival);
-          tmpStationsArray[k].data.departure = Date.parseIso8601(connections[k].from.departure);
+          tmpStationsArray[k].set('arrival', Date.parseIso8601(connections[k].to.arrival));
+          tmpStationsArray[k].set('departure', Date.parseIso8601(connections[k].from.departure));
         }
         store.setData(tmpStationsArray);
         store.fireEvent('storeFiltered');
@@ -51,8 +51,8 @@ Ext.define('SunApp.store.Stations', {
         console.log("Failed to get connection to '" + publicTransportIds[failedConnectionIndexes] + "'.");
         for (var k = 0; k < connections.length; k++) {
           if (connections[k] !== undefined) {
-            tmpStationsArray[k].data.arrival = Date.parseIso8601(connections[k].to.arrival);
-            tmpStationsArray[k].data.departure = Date.parseIso8601(connections[k].from.departure);
+            tmpStationsArray[k].set('arrival', Date.parseIso8601(connections[k].to.arrival));
+            tmpStationsArray[k].set('departure', Date.parseIso8601(connections[k].from.departure));
             successfulStations.push(tmpStationsArray[k]);
           }
         }
@@ -71,10 +71,10 @@ Ext.define('SunApp.store.Stations', {
     map = [];
     for (i = 0; i < records.length; i++) {
       record = records[i];
-      recordsForLevel = map[record.data.sunLevel];
+      recordsForLevel = map[record.get('sunLevel')];
       if (recordsForLevel === undefined) {
         recordsForLevel = [];
-        map[record.data.sunLevel] = recordsForLevel;
+        map[record.get('sunLevel')] = recordsForLevel;
       }
       recordsForLevel.push(record);
     }
@@ -86,14 +86,14 @@ Ext.define('SunApp.store.Stations', {
 
   sortByDistanceAsc: function (records) {
     return records.sort(function (a, b) {
-      return a.data.linearDistance - b.data.linearDistance
+      return a.get('linearDistance') - b.get('linearDistance');
     });
   },
 
   extractPublicTransportIds: function (stations) {
     var ids = [];
     for (var i = 0; i < stations.length; i++) {
-      ids[i] = stations[i].data.publicTransportId;
+      ids[i] = stations[i].get('publicTransportId');
     }
     return ids;
   }
