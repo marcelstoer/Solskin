@@ -32,11 +32,11 @@ Ext.define('SunApp.controller.Application', {
 
   onMainPush: function (view, item) {
     this.getMain().getNavigationBar().down('#back').setHidden(true);
-   },
+  },
 
   onMainPop: function (view, item) {
-	this.getMain().getNavigationBar().down('#back').setHidden(false);
-    this.getMain().getNavigationBar().setTitle(SunApp.app.getCurrentLocation().getClosestStation());
+    this.getMain().getNavigationBar().down('#back').setHidden(false);
+    this.getMain().getNavigationBar().setTitle(SunApp.app.getCurrentLocation().getClosestPublicTransportStation().name);
     this.stationDetail.destroy();
   },
 
@@ -59,7 +59,7 @@ Ext.define('SunApp.controller.Application', {
 //          var long = geo.getLongitude();
     var lat = 47.46342478;
     var long = 8.95429439;
-          SunApp.app.getController('Application').onGeoLocationDetermined(lat, long);
+    SunApp.app.getController('Application').onGeoLocationDetermined(lat, long);
 //        },
 //        locationerror: function () {
 //            var noGeoMsg = [
@@ -102,7 +102,7 @@ Ext.define('SunApp.controller.Application', {
     launchingView = Ext.Viewport.getComponent(0);
     launchingView.updateMessageForClosestStationFound(station.name);
 
-    SunApp.app.getCurrentLocation().setClosestStation(station.name);
+    SunApp.app.getCurrentLocation().setClosestPublicTransportStation({"name": station.name, "id": station.id});
     launchingView.updateMessageForLoadingAllStations();
     Ext.getStore('Stations').load();
   },
@@ -120,10 +120,10 @@ Ext.define('SunApp.controller.Application', {
     var storeSize = Ext.getStore('Stations').getData().length;
 
     if (storeSize > 0) {
-     // containerView = Ext.create('SunApp.view.Container');
+      // containerView = Ext.create('SunApp.view.Container');
       mainView = Ext.create('SunApp.view.Main');
-      mainView.getNavigationBar().setTitle(SunApp.app.getCurrentLocation().getClosestStation());
-     // mainView.add(containerView);
+      mainView.getNavigationBar().setTitle(SunApp.app.getCurrentLocation().getClosestPublicTransportStation().name);
+      // mainView.add(containerView);
       Ext.Viewport.removeAll(true, true);
       Ext.Viewport.add(mainView);
     } else {

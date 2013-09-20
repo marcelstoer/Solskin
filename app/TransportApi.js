@@ -30,7 +30,7 @@ Ext.define('SunApp.TransportApi', {
       url: this.baseUrl + '/connections',
       method: 'GET',
       params: {
-        from: SunApp.app.getCurrentLocation().getClosestStation(),
+        from: SunApp.app.getCurrentLocation().getClosestPublicTransportStation().id,
         to: place
       },
       success: function (response) {

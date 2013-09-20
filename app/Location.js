@@ -8,7 +8,7 @@ Ext.define('SunApp.Location', {
   config: {
     lat: null,
     long: null,
-    closestStation: null
+    closestPublicTransportStation: null
   },
 
   constructor: function (config) {

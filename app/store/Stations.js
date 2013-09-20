@@ -27,17 +27,16 @@ Ext.define('SunApp.store.Stations', {
 
   reduceToRelevant: function (store, records) {
     var tmpStationsArray = [],
-      places = [],
+      publicTransportIds = [],
       getConnectionsSuccessFunc,
       getConnectionsFailureFunc,
       sunLevelToRecordsMap = this.buildSunLevelToRecordsMap(records),
       transportApi = Ext.create('SunApp.TransportApi');
 
     if (sunLevelToRecordsMap[4].length >= 3) {
-      debugger;
       console.log('there are at least 3 level-4 records - excellent');
       tmpStationsArray = sunLevelToRecordsMap[4].slice(0, 5); // get items 0-4
-      places = this.extractNames(tmpStationsArray);
+      publicTransportIds = this.extractPublicTransportIds(tmpStationsArray);
 
       getConnectionsSuccessFunc = function (connections) {
         for (var k = 0; k < tmpStationsArray.length; k++) {
@@ -49,7 +48,7 @@ Ext.define('SunApp.store.Stations', {
       };
       getConnectionsFailureFunc  = function (connections, failedConnectionIndexes) {
         var successfulStations = [];
-        console.log("Failed to get connection to '" + places[failedConnectionIndexes] + "'.");
+        console.log("Failed to get connection to '" + publicTransportIds[failedConnectionIndexes] + "'.");
         for (var k = 0; k < connections.length; k++) {
           if (connections[k] !== undefined) {
             tmpStationsArray[k].data.arrival = Date.parseIso8601(connections[k].to.arrival);
@@ -60,7 +59,7 @@ Ext.define('SunApp.store.Stations', {
         store.setData(successfulStations);
         store.fireEvent('storeFiltered');
       };
-      transportApi.getConnectionsTo(places, getConnectionsSuccessFunc, getConnectionsFailureFunc);
+      transportApi.getConnectionsTo(publicTransportIds, getConnectionsSuccessFunc, getConnectionsFailureFunc);
     } else {
       store.setData([]);
       store.fireEvent('storeFiltered');
@@ -91,11 +90,11 @@ Ext.define('SunApp.store.Stations', {
     });
   },
 
-  extractNames: function (stations) {
-    var names = [];
+  extractPublicTransportIds: function (stations) {
+    var ids = [];
     for (var i = 0; i < stations.length; i++) {
-      names[i] = stations[i].data.name;
+      ids[i] = stations[i].data.publicTransportId;
     }
-    return names;
+    return ids;
   }
 });
