@@ -162,6 +162,21 @@ $list-active-color: mix(#043F62, #fff, 0);
     position: initial;  // TODO MKE: this displays it also in chrome, but does not seem sustainable solution
 }
 
+.appImg{
+    width: 36px;
+    height: 24px;
+    //background-size: 300% !important;
+    margin: 0 0 0 10px !important;
+}
+
+.menuImg {
+    width: 36px;
+    height: 36px;
+    background-size: 400% !important;
+    margin: 0 10px 0 0 !important;
+}
+
+
 .meteofon-box {
     background-color: rgba(0,0,0,.02);
     padding: .3em 1em;

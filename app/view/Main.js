@@ -28,7 +28,7 @@ Ext.define('SunApp.view.Main', {
         {
           xtype: 'image',
           id: 'menu',
-          src: 'resources/images/menu.svg',
+          src: 'resources/images/shades.svg',
           cls: 'menuImg',
           align: 'right',
         }
