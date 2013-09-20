@@ -28,14 +28,12 @@ Ext.define('SunApp.controller.Application', {
     Ext.getStore('Stations').on({ storeFiltered: this.onStoreFiltered, scope: this });
     Ext.getStore('Stations').on({ storeLoaded: this.onStoreLoaded, scope: this });
     SunApp.app.on({launching: this.onLaunching, scope: this});
-  },
+ },
 
   onMainPush: function (view, item) {
-    this.getMain().getNavigationBar().down('#back').setHidden(true);
   },
 
   onMainPop: function (view, item) {
-    this.getMain().getNavigationBar().down('#back').setHidden(false);
     this.getMain().getNavigationBar().setTitle(SunApp.app.getCurrentLocation().getClosestPublicTransportStation().name);
     this.stationDetail.destroy();
   },
@@ -136,5 +134,10 @@ Ext.define('SunApp.controller.Application', {
     }
     Ext.Viewport.removeAll(true, true);
     Ext.Viewport.add(Ext.create('SunApp.view.Error', {html: htmlMsg}));
+  },
+
+  displayDisclaimer: function () {
+    this.getMain().push(Ext.create('SunApp.view.Disclaimer'));
   }
+
 });

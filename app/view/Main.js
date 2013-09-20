@@ -5,10 +5,12 @@ Ext.define('SunApp.view.Main', {
   requires: [
     'Ext.Img',
     'SunApp.view.BackButtonOverride',
+    'SunApp.view.MenuButton',
     'SunApp.view.Overview',
     'SunApp.view.Stations',
     'SunApp.view.StationDetail',
     'SunApp.view.Meteotest',
+    'SunApp.view.Disclaimer'
   ],
 
   config: {
@@ -18,19 +20,9 @@ Ext.define('SunApp.view.Main', {
         xtype: 'backButtonOverride'
       },
       items: [
-//        {
-//          id: 'back',
-//          xtype: 'backButton',
-////          src: 'resources/images/shades.svg',
-////          cls: 'appImg',
-//          align: 'left'
-//        },
         {
-          xtype: 'image',
-          id: 'menu',
-          src: 'resources/images/shades.svg',
-          cls: 'menuImg',
-          align: 'right',
+          xtype: 'menuButton',
+
         }
       ]
     },

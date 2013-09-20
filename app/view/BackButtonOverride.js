@@ -4,9 +4,9 @@ Ext.define('SunApp.view.BackButtonOverride', {
   id: 'backButtonOverride',
 
   config: {
-          src: 'resources/images/back-small.svg',
+          src: 'resources/images/back.svg',
           text: '', // none, just needed so that there is no error
           cls: 'appImg'
-// js error on down -> needs to be more like button
+
   }
 });
