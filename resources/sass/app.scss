@@ -1,4 +1,4 @@
-@import url(http://fonts.googleapis.com/css?family=Voltaire);
+//@import url(http://fonts.googleapis.com/css?family=Voltaire);
 
 $font-size-big:4em;
 $font-size-medium:1.7em;
@@ -8,10 +8,10 @@ $base-gradient: matte;
 $list-pressed-color: mix(#08679F, #fff, 10);
 $list-active-color: mix(#043F62, #fff, 0);
 
+
 //import the sencha touch theme
 @import 'sencha-touch/default';
 @import 'sencha-touch/default/all';
-
 
 //.x-scroll-view {
 //  position: initial;
@@ -36,7 +36,6 @@ $list-active-color: mix(#043F62, #fff, 0);
         -webkit-box-shadow: inset 0 3px 3px rgba(0,0,0,.4);
     }
 }
-
 .x-list-normal .x-list-item.x-item-selected.x-list-item-tpl {
   background-image: none;
   background-color: #f7f7f7;
@@ -101,17 +100,17 @@ $list-active-color: mix(#043F62, #fff, 0);
     background-image:linear-gradient(#080808,#141414 10%,#212121 65%,#222222)}
 
 
-
 .stationList {
     background-size:contain;
     background-repeat:no-repeat;
-    background-position:50% 50%;
+    background-position:99% 50%;
+    //height: 100%;
 }
 
 .stationDetail {
     background-size:contain;
     background-repeat:no-repeat;
-    background-position:50% 50%;
+    background-position:75% 50%;
     min-width: 250px;
 }
 
@@ -157,10 +156,14 @@ $list-active-color: mix(#043F62, #fff, 0);
 
 .stationList>.arrivalTime {
     font-size:$font-size-big;
-    text-align:right;
+    vertical-align:bottom;  // of no use yet
 }
 
-.metefon-box {
+.stations {
+    position: initial;  // TODO MKE: this displays it also in chrome, but does not seem sustainable solution
+}
+
+.meteofon-box {
     background-color: rgba(0,0,0,.02);
     padding: .3em 1em;
     margin: 1em 0 0;

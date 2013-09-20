@@ -57,19 +57,24 @@ Ext.define('SunApp.controller.Application', {
         locationupdate: function (geo) {
           var lat = geo.getLatitude();
           var long = geo.getLongitude();
-//    var lat = 47.46342478;
-//    var long = 8.95429439;
           SunApp.app.getController('Application').onGeoLocationDetermined(lat, long);
         },
         locationerror: function () {
-            var noGeoMsg = [
-              'Error detecting your geo location, no more details, sorry. ',
-              'The option to select your location manually is still missing. Again, sorry.'
-            ].join('');
-            SunApp.app.getController('Application').displayError(noGeoMsg);
-          }
+//            var noGeoMsg = [
+//              'Error detecting your geo location, no more details, sorry. ',
+//              'The option to select your location manually is still missing. Again, sorry.'
+//            ].join('');
+//            SunApp.app.getController('Application').displayError(noGeoMsg);
+
+            var lat = 47.46342478;
+            var long = 8.95429439;
+            SunApp.app.getController('Application').onGeoLocationDetermined(lat, long);
+        }
       }
     }).updateLocation();
+    var lat = 47.46342478;
+    var long = 8.95429439;
+    this.onGeoLocationDetermined(lat, long);
   },
 
   onGeoLocationDetermined: function (lat, long) {
@@ -129,6 +134,10 @@ Ext.define('SunApp.controller.Application', {
     } else {
       this.displayError('Sorry, according to our data there really isn\'t any sun at the moment in Switzerland.');
     }
+  },
+
+  onMenuClicked: function () {
+    this.displayError('test');
   },
 
   displayError: function (htmlMsg) {

@@ -39,3 +39,9 @@ displays the main navigation view with the stations list instead.
 Build Android:
 - run "sencha app package build packager.json" in C:\Users\mkessler\git\sun\SunApp
 - run "sencha app package run packager.json" in C:\Users\mkessler\git\sun\SunApp
+
+To update local data structure wmo2sbb:
+- copy/paste data from https://github.com/marcelstoer/SunApp/blob/bc40afdbf480ec9ec5ef93b89438afb5351a5d9b/wmo2sbb.md into map.xmls
+- copy/paste column I into wmo2sbb-excel.txt
+- run sed '/Id":""/d' wmo2sbb-excel.txt > wmo2sbb-final.txt
+- copy paste date from wmo2sbb-final.txt

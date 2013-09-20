@@ -1,17 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="22cd0136-cbe4-408f-952b-557e2517cc6e" name="Default" comment="switching back to Ext.util.Geolocation due to non-working Ext.device.Geolocation on android (see also http://www.sencha.com/forum/showthread.php?214165-No-Response-from-Ext.device.Geolocation.getCurrentPosition()-on-Android.&amp;p=975083)">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/images/iphone_white.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/view/Meteotest.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/view/Overview.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/watcherTasks.xml" />
+    <list default="true" id="22cd0136-cbe4-408f-952b-557e2517cc6e" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controller/Application.js" afterPath="$PROJECT_DIR$/app/controller/Application.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/view/Main.js" afterPath="$PROJECT_DIR$/app/view/Main.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/view/MyBackButton.js" afterPath="$PROJECT_DIR$/app/view/MyBackButton.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/view/StationDetail.js" afterPath="$PROJECT_DIR$/app/view/StationDetail.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/view/Stations.js" afterPath="$PROJECT_DIR$/app/view/Stations.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/css/app.css" afterPath="$PROJECT_DIR$/resources/css/app.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app.js" afterPath="$PROJECT_DIR$/app.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/sass/app.scss" afterPath="$PROJECT_DIR$/resources/sass/app.scss" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
@@ -19,7 +14,7 @@
     <ignored path=".idea/workspace.xml" />
     <ignored path="resources/sass/.sass-cache/" />
     <ignored path="build/" />
-    <file path="/Dummy.txt" changelist="22cd0136-cbe4-408f-952b-557e2517cc6e" time="1373544730531" ignored="false" />
+    <file path="/Dummy.txt" changelist="22cd0136-cbe4-408f-952b-557e2517cc6e" time="1378574479825" ignored="false" />
     <file path="/README.md" changelist="22cd0136-cbe4-408f-952b-557e2517cc6e" time="1373544694955" ignored="false" />
     <file path="$APPLICATION_HOME_DIR$/plugins/JavaEE/lib/javaee-impl.jar!/standardSchemas/ejb-jar_3_0.xsd" changelist="22cd0136-cbe4-408f-952b-557e2517cc6e" time="1367954036965" ignored="false" />
     <file path="$APPLICATION_HOME_DIR$/plugins/JavaEE/lib/javaee-impl.jar!/standardSchemas/ejb-jar_2_1.xsd" changelist="22cd0136-cbe4-408f-952b-557e2517cc6e" time="1367954036965" ignored="false" />
@@ -137,7 +132,7 @@
     <file path="$PROJECT_DIR$/../STGettingStarted/app/view/Main.js" changelist="22cd0136-cbe4-408f-952b-557e2517cc6e" time="1367997186980" ignored="false" />
     <file path="$PROJECT_DIR$/../STGettingStarted/app.js" changelist="22cd0136-cbe4-408f-952b-557e2517cc6e" time="1367997576565" ignored="false" />
     <file path="$PROJECT_DIR$/../STGettingStarted/app/controller/Main.js" changelist="22cd0136-cbe4-408f-952b-557e2517cc6e" time="1367997186980" ignored="false" />
-    <file path="/Main.js" changelist="22cd0136-cbe4-408f-952b-557e2517cc6e" time="1373541783030" ignored="false" />
+    <file path="/Main.js" changelist="22cd0136-cbe4-408f-952b-557e2517cc6e" time="1378567086530" ignored="false" />
     <file path="$PROJECT_DIR$/../STGettingStarted/app/view/Home.js" changelist="22cd0136-cbe4-408f-952b-557e2517cc6e" time="1367186808513" ignored="false" />
     <file path="$PROJECT_DIR$/../STGettingStarted/app/view/Wait.js" changelist="22cd0136-cbe4-408f-952b-557e2517cc6e" time="1367187159158" ignored="false" />
     <file path="$PROJECT_DIR$/../STGettingStarted/app/view/Launch.js" changelist="22cd0136-cbe4-408f-952b-557e2517cc6e" time="1367238236146" ignored="false" />
@@ -222,7 +217,7 @@
     <file path="$PROJECT_DIR$/../STGettingStarted/index.html" changelist="22cd0136-cbe4-408f-952b-557e2517cc6e" time="1367997174759" ignored="false" />
     <file path="$PROJECT_DIR$/../STGettingStarted/.sencha/workspace/plugin.xml" changelist="22cd0136-cbe4-408f-952b-557e2517cc6e" time="1367997186980" ignored="false" />
     <file path="/__dummy.js" changelist="22cd0136-cbe4-408f-952b-557e2517cc6e" time="1368021272543" ignored="false" />
-    <file path="/a.dummy" changelist="22cd0136-cbe4-408f-952b-557e2517cc6e" time="1373542503996" ignored="false" />
+    <file path="/a.dummy" changelist="22cd0136-cbe4-408f-952b-557e2517cc6e" time="1378570709980" ignored="false" />
     <file path="$PROJECT_DIR$/../SunAppReloaded/app.js" changelist="22cd0136-cbe4-408f-952b-557e2517cc6e" time="1369307392975" ignored="false" />
     <file path="$PROJECT_DIR$/../SunAppReloaded/app/controller/Application.js" changelist="22cd0136-cbe4-408f-952b-557e2517cc6e" time="1368469373394" ignored="false" />
     <file path="$PROJECT_DIR$/../SunAppReloaded/app/store/Contacts.js" changelist="22cd0136-cbe4-408f-952b-557e2517cc6e" time="1368046248400" ignored="false" />
@@ -233,19 +228,19 @@
     <file path="$PROJECT_DIR$/../SunAppReloaded/app/view/Main.js" changelist="22cd0136-cbe4-408f-952b-557e2517cc6e" time="1368605440655" ignored="false" />
     <file path="$PROJECT_DIR$/../SunAppReloaded/build.xml" changelist="22cd0136-cbe4-408f-952b-557e2517cc6e" time="1368022172082" ignored="false" />
     <file path="$PROJECT_DIR$/../SunAppReloaded/index.html" changelist="22cd0136-cbe4-408f-952b-557e2517cc6e" time="1368446924013" ignored="false" />
-    <file path="/Application.js" changelist="22cd0136-cbe4-408f-952b-557e2517cc6e" time="1373539505388" ignored="false" />
+    <file path="/Application.js" changelist="22cd0136-cbe4-408f-952b-557e2517cc6e" time="1378571021373" ignored="false" />
     <file path="/Show.js" changelist="22cd0136-cbe4-408f-952b-557e2517cc6e" time="1368444287023" ignored="false" />
     <file path="/Contacts.js" changelist="22cd0136-cbe4-408f-952b-557e2517cc6e" time="1368046276240" ignored="false" />
     <file path="$PROJECT_DIR$/../SunAppReloaded/app/store/Stations.js" changelist="22cd0136-cbe4-408f-952b-557e2517cc6e" time="1368562259216" ignored="false" />
     <file path="/Station.js" changelist="22cd0136-cbe4-408f-952b-557e2517cc6e" time="1370298227723" ignored="false" />
     <file path="$PROJECT_DIR$/../SunAppReloaded/app/model/Station.js" changelist="22cd0136-cbe4-408f-952b-557e2517cc6e" time="1368563641000" ignored="false" />
-    <file path="/Stations.js" changelist="22cd0136-cbe4-408f-952b-557e2517cc6e" time="1373541797414" ignored="false" />
+    <file path="/Stations.js" changelist="22cd0136-cbe4-408f-952b-557e2517cc6e" time="1378584730534" ignored="false" />
     <file path="$PROJECT_DIR$/../SunAppReloaded/app/store/StationReader.js" changelist="22cd0136-cbe4-408f-952b-557e2517cc6e" time="1368474448675" ignored="false" />
     <file path="$PROJECT_DIR$/../SunAppReloaded/app/view/Stations.js" changelist="22cd0136-cbe4-408f-952b-557e2517cc6e" time="1368472809900" ignored="false" />
     <file path="$PROJECT_DIR$/../SunAppReloaded/app/view/station/Show.js" changelist="22cd0136-cbe4-408f-952b-557e2517cc6e" time="1368444353594" ignored="false" />
     <file path="$PROJECT_DIR$/../SunAppReloaded/app/view/StationsPanel.js" changelist="22cd0136-cbe4-408f-952b-557e2517cc6e" time="1368137530240" ignored="false" />
     <file path="/StationsPanel.js" changelist="22cd0136-cbe4-408f-952b-557e2517cc6e" time="1368137417079" ignored="false" />
-    <file path="/StationReader.js" changelist="22cd0136-cbe4-408f-952b-557e2517cc6e" time="1369510838175" ignored="false" />
+    <file path="/StationReader.js" changelist="22cd0136-cbe4-408f-952b-557e2517cc6e" time="1378366009036" ignored="false" />
     <file path="$PROJECT_DIR$/../SunAppReloaded/app/AppState.js" changelist="22cd0136-cbe4-408f-952b-557e2517cc6e" time="1368220052175" ignored="false" />
     <file path="/AppState.js" changelist="22cd0136-cbe4-408f-952b-557e2517cc6e" time="1368219499944" ignored="false" />
     <file path="$PROJECT_DIR$/../SunAppReloaded/app/Location.js" changelist="22cd0136-cbe4-408f-952b-557e2517cc6e" time="1368474322514" ignored="false" />
@@ -253,16 +248,20 @@
     <file path="/index.html" changelist="22cd0136-cbe4-408f-952b-557e2517cc6e" time="1368446922642" ignored="false" />
     <file path="$PROJECT_DIR$/../SunAppReloaded/app/view/Error.js" changelist="22cd0136-cbe4-408f-952b-557e2517cc6e" time="1369231779307" ignored="false" />
     <file path="/Error.js" changelist="22cd0136-cbe4-408f-952b-557e2517cc6e" time="1369231747530" ignored="false" />
-    <file path="/TransportApi.js" changelist="22cd0136-cbe4-408f-952b-557e2517cc6e" time="1370113360657" ignored="false" />
+    <file path="/TransportApi.js" changelist="22cd0136-cbe4-408f-952b-557e2517cc6e" time="1378367504076" ignored="false" />
     <file path="/Launching.js" changelist="22cd0136-cbe4-408f-952b-557e2517cc6e" time="1369507895329" ignored="false" />
     <file path="/connections-to-stations.txt" changelist="22cd0136-cbe4-408f-952b-557e2517cc6e" time="1369596101269" ignored="false" />
-    <file path="/app.scss" changelist="22cd0136-cbe4-408f-952b-557e2517cc6e" time="1373543355837" ignored="false" />
+    <file path="/app.scss" changelist="22cd0136-cbe4-408f-952b-557e2517cc6e" time="1378588307960" ignored="false" />
     <file path="/*.regexp" changelist="22cd0136-cbe4-408f-952b-557e2517cc6e" time="1370297582051" ignored="false" />
-    <file path="/StationDetail.js" changelist="22cd0136-cbe4-408f-952b-557e2517cc6e" time="1370383258596" ignored="false" />
+    <file path="/StationDetail.js" changelist="22cd0136-cbe4-408f-952b-557e2517cc6e" time="1378575643369" ignored="false" />
     <file path="/Container.js" changelist="22cd0136-cbe4-408f-952b-557e2517cc6e" time="1370375257161" ignored="false" />
-    <file path="/Meteotest.js" changelist="22cd0136-cbe4-408f-952b-557e2517cc6e" time="1373534582308" ignored="false" />
+    <file path="/Meteotest.js" changelist="22cd0136-cbe4-408f-952b-557e2517cc6e" time="1378463527897" ignored="false" />
     <file path="/watcherTasks.xml" changelist="22cd0136-cbe4-408f-952b-557e2517cc6e" time="1373536326557" ignored="false" />
     <file path="/Overview.js" changelist="22cd0136-cbe4-408f-952b-557e2517cc6e" time="1373544473081" ignored="false" />
+    <file path="/a.groovy" changelist="22cd0136-cbe4-408f-952b-557e2517cc6e" time="1375820303618" ignored="false" />
+    <file path="/app.css" changelist="22cd0136-cbe4-408f-952b-557e2517cc6e" time="1378574588595" ignored="false" />
+    <file path="/BackButton.js" changelist="22cd0136-cbe4-408f-952b-557e2517cc6e" time="1378568081839" ignored="false" />
+    <file path="/MyBackButton.js" changelist="22cd0136-cbe4-408f-952b-557e2517cc6e" time="1378573103409" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -331,7 +330,7 @@
       <file leaf-file-name="StationDetail.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/view/StationDetail.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="25" column="57" selection-start="445" selection-end="453" vertical-scroll-proportion="0.0">
+            <state line="81" column="45" selection-start="2318" selection-end="2318" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -340,7 +339,7 @@
       <file leaf-file-name="Application.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/controller/Application.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="41" column="59" selection-start="1082" selection-end="1082" vertical-scroll-proportion="0.0">
+            <state line="71" column="0" selection-start="2134" selection-end="2292" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -349,50 +348,32 @@
       <file leaf-file-name="Stations.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/view/Stations.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="3" column="16" selection-start="96" selection-end="96" vertical-scroll-proportion="0.0">
+            <state line="7" column="18" selection-start="144" selection-end="144" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="app.css" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/resources/css/app.css">
+      <file leaf-file-name="Stations.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/store/Stations.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="1" column="0" selection-start="264872" selection-end="264872" vertical-scroll-proportion="0.0">
+            <state line="58" column="8" selection-start="2177" selection-end="2177" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Meteotest.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/view/Meteotest.js">
+      <file leaf-file-name="MyBackButton.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/view/MyBackButton.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="7" column="0" selection-start="84" selection-end="391" vertical-scroll-proportion="0.0">
+            <state line="9" column="51" selection-start="310" selection-end="310" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Overview.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/view/Overview.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="15" column="34" selection-start="293" selection-end="293" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="README.md" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/README.md">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="40" column="43" selection-start="2414" selection-end="2414" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="workspace.xml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
+      <file leaf-file-name="Launching.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/view/Launching.js">
           <provider selected="true" editor-type-id="text-editor">
             <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
               <folding />
@@ -400,19 +381,19 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="app.scss" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/resources/sass/app.scss">
+      <file leaf-file-name="Main.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/view/Main.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="21" column="2" selection-start="462" selection-end="462" vertical-scroll-proportion="0.0">
+            <state line="17" column="19" selection-start="368" selection-end="368" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Main.js" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/view/Main.js">
+      <file leaf-file-name="app.scss" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/resources/sass/app.scss">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="33" column="26" selection-start="672" selection-end="672" vertical-scroll-proportion="1.1292373">
+            <state line="156" column="43" selection-start="7309" selection-end="7309" vertical-scroll-proportion="0.69415295">
               <folding />
             </state>
           </provider>
@@ -437,22 +418,22 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/.sencha/app/codegen.json" />
-        <option value="$PROJECT_DIR$/index.html" />
-        <option value="$PROJECT_DIR$/app/model/Station.js" />
-        <option value="$PROJECT_DIR$/app/view/Container.js" />
-        <option value="$PROJECT_DIR$/app/view/StationDetail.js" />
-        <option value="$PROJECT_DIR$/packager.json" />
-        <option value="$PROJECT_DIR$/app/view/Meteotest.js" />
-        <option value="$PROJECT_DIR$/.idea/watcherTasks.xml" />
-        <option value="$PROJECT_DIR$/resources/css/app.css" />
         <option value="$PROJECT_DIR$/app.js" />
-        <option value="$PROJECT_DIR$/app/controller/Application.js" />
-        <option value="$PROJECT_DIR$/app/view/Stations.js" />
-        <option value="$PROJECT_DIR$/app/view/Main.js" />
-        <option value="$PROJECT_DIR$/resources/sass/app.scss" />
         <option value="$PROJECT_DIR$/app/view/Overview.js" />
         <option value="$PROJECT_DIR$/README.md" />
+        <option value="$PROJECT_DIR$/app/store/StationReader.js" />
+        <option value="$PROJECT_DIR$/app/TransportApi.js" />
+        <option value="$PROJECT_DIR$/index.html" />
+        <option value="$PROJECT_DIR$/app/view/Meteotest.js" />
+        <option value="$PROJECT_DIR$/app/view/BackButton.js" />
+        <option value="$PROJECT_DIR$/app/view/Main.js" />
+        <option value="$PROJECT_DIR$/app/view/MyBackButton.js" />
+        <option value="$PROJECT_DIR$/resources/css/app.css" />
+        <option value="$PROJECT_DIR$/app/view/StationDetail.js" />
+        <option value="$PROJECT_DIR$/app/store/Stations.js" />
+        <option value="$PROJECT_DIR$/app/controller/Application.js" />
+        <option value="$PROJECT_DIR$/app/view/Stations.js" />
+        <option value="$PROJECT_DIR$/resources/sass/app.scss" />
       </list>
     </option>
   </component>
@@ -470,21 +451,36 @@
             <id />
           </State>
           <State>
-            <id>General</id>
+            <id>Android Lint</id>
           </State>
           <State>
-            <id>Internationalization issues</id>
+            <id>Class metrics</id>
           </State>
           <State>
-            <id>Javadoc issues</id>
+            <id>Data flow issues</id>
           </State>
           <State>
-            <id>Properties Files</id>
+            <id>Error handling</id>
+          </State>
+          <State>
+            <id>Groovy</id>
+          </State>
+          <State>
+            <id>Method MetricsGroovy</id>
+          </State>
+          <State>
+            <id>Method metrics</id>
+          </State>
+          <State>
+            <id>Naming conventions</id>
+          </State>
+          <State>
+            <id>UI Form Problems</id>
           </State>
         </expanded-state>
         <selected-state>
           <State>
-            <id>Ant inspections</id>
+            <id>Abstraction issues</id>
           </State>
         </selected-state>
       </profile-state>
@@ -516,7 +512,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -532,6 +527,176 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="SunApp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SunApp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SunApp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="touch" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SunApp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SunApp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="touch" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SunApp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SunApp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="touch" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="resources" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SunApp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SunApp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="touch" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="resources" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="sass" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SunApp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SunApp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="touch" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="microloader" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SunApp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SunApp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="resources" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SunApp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SunApp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="resources" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="sass" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SunApp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SunApp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="resources" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="sass" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="stylesheets" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="fonts" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="pictos" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SunApp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SunApp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="resources" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="css" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -581,6 +746,42 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="store" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SunApp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SunApp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="model" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SunApp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SunApp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="controller" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -588,6 +789,7 @@
         </subPane>
       </pane>
       <pane id="PackagesPane" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -619,7 +821,7 @@
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder3" value="3" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder1" value="1" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder2" value="2" />
-    <property name="options.lastSelected" value="settings" />
+    <property name="options.lastSelected" value="preferences.keymap" />
     <property name="JavaScriptLanguageLevel" value="JS_1_8_5" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="DefaultHtmlFileTemplate" value="Html5" />
@@ -781,7 +983,15 @@
       <created>1371584122056</created>
       <updated>1371584122056</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="added meteotest logo, moved station list and logo in new container overview, added sass/scss watchertask">
+      <created>1373544828762</created>
+      <updated>1373544828762</updated>
+    </task>
+    <task id="LOCAL-00007" summary="offline mode, back button replaced by shades, css improved">
+      <created>1378572584179</created>
+      <updated>1378572584179</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TodoView" selected-index="4">
@@ -808,11 +1018,10 @@
     <frame x="-8" y="-8" width="1456" height="886" extended-state="6" />
     <editor active="false" />
     <layout>
-      <window_info id="Changes" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.31687242" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.31600547" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32098764" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.31687242" sideWeight="0.5" order="11" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -821,14 +1030,15 @@
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.19440459" sideWeight="0.18930042" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.19440459" sideWeight="0.6831276" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32921812" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.19440459" sideWeight="0.6803841" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32831737" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3196159" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="3" side_tool="false" content_ui="combo" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -874,7 +1084,7 @@
     <option name="WRAP_WHEN_TYPING_REACHES_RIGHT_MARGIN" value="false" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="switching back to Ext.util.Geolocation due to non-working Ext.device.Geolocation on android (see also http://www.sencha.com/forum/showthread.php?214165-No-Response-from-Ext.device.Geolocation.getCurrentPosition()-on-Android.&amp;p=975083)" />
+    <option name="LAST_COMMIT_MESSAGE" value="offline mode, back button replaced by shades, css improved" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="false" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -893,6 +1103,8 @@
     <MESSAGE value="LnF slightly improved (still far away from being responsive)&#10;nicer menu icon&#10;shades removed on detail&#10;lots of stuff added to detail" />
     <MESSAGE value="icons for android&#10;LnF improved" />
     <MESSAGE value="switching back to Ext.util.Geolocation due to non-working Ext.device.Geolocation on android (see also http://www.sencha.com/forum/showthread.php?214165-No-Response-from-Ext.device.Geolocation.getCurrentPosition()-on-Android.&amp;p=975083)" />
+    <MESSAGE value="added meteotest logo, moved station list and logo in new container overview, added sass/scss watchertask" />
+    <MESSAGE value="offline mode, back button replaced by shades, css improved" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -902,98 +1114,79 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/.idea/watcherTasks.xml">
+    <entry file="file://$PROJECT_DIR$/connections-to-stations.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="17" column="59" selection-start="791" selection-end="791" vertical-scroll-proportion="0.0">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/parsing-json.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/TransportApi.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="86" column="35" selection-start="2824" selection-end="2824" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="69" column="0" selection-start="2016" selection-end="2016" vertical-scroll-proportion="-9.615385">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/sass/config.rb">
+    <entry file="file://$PROJECT_DIR$/app/model/Station.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/view/Meteotest.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="5" column="28" selection-start="124" selection-end="124" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/view/Overview.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="11" column="9" selection-start="222" selection-end="222" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/view/Main.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="17" column="19" selection-start="368" selection-end="368" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/touch/resources/themes/lib/theme_images.rb">
+    <entry file="file://$PROJECT_DIR$/app/view/MyBackButton.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/touch/resources/themes/compass_init.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/build/package/app.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="63650" column="6" selection-start="2012407" selection-end="2012407" vertical-scroll-proportion="0.33186814">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="78" column="44" selection-start="2548" selection-end="2548" vertical-scroll-proportion="0.0">
+        <state line="9" column="51" selection-start="310" selection-end="310" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/resources/css/app.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="1" column="0" selection-start="264872" selection-end="264872" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/view/Stations.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="3" column="16" selection-start="96" selection-end="96" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/view/Meteotest.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="0" selection-start="84" selection-end="391" vertical-scroll-proportion="0.0">
+        <state line="0" column="264869" selection-start="264869" selection-end="264869" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/view/StationDetail.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="25" column="57" selection-start="445" selection-end="453" vertical-scroll-proportion="0.0">
+        <state line="81" column="45" selection-start="2318" selection-end="2318" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/sass/app.scss">
+    <entry file="file://$PROJECT_DIR$/app/store/Stations.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="21" column="2" selection-start="462" selection-end="462" vertical-scroll-proportion="0.0">
+        <state line="58" column="8" selection-start="2177" selection-end="2177" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/view/Overview.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="15" column="34" selection-start="293" selection-end="293" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/README.md">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="40" column="43" selection-start="2414" selection-end="2414" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
+    <entry file="file://$PROJECT_DIR$/app/view/Launching.js">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
           <folding />
@@ -1002,14 +1195,21 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/controller/Application.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="41" column="59" selection-start="1082" selection-end="1082" vertical-scroll-proportion="0.0">
+        <state line="71" column="0" selection-start="2134" selection-end="2292" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/view/Main.js">
+    <entry file="file://$PROJECT_DIR$/app/view/Stations.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="33" column="26" selection-start="672" selection-end="672" vertical-scroll-proportion="1.1292373">
+        <state line="7" column="18" selection-start="144" selection-end="144" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/sass/app.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="156" column="43" selection-start="7309" selection-end="7309" vertical-scroll-proportion="0.69415295">
           <folding />
         </state>
       </provider>

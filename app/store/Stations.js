@@ -49,13 +49,13 @@ Ext.define('SunApp.store.Stations', {
       getConnectionsFailureFunc  = function (connections, failedConnectionIndexes) {
         var successfulStations = [];
         console.log("Failed to get connection to '" + places[failedConnectionIndexes] + "'.");
-        for (var k = 0; k < connections.length; k++) {
-          if (connections[k] !== undefined) {
-            tmpStationsArray[k].data.arrival = Date.parseIso8601(connections[k].to.arrival);
-            tmpStationsArray[k].data.departure = Date.parseIso8601(connections[k].from.departure);
-            successfulStations.push(tmpStationsArray[k]);
-          }
-        }
+        //for (var k = 0; k < connections.length; k++) {
+          //if (connections[k] !== undefined) {
+            tmpStationsArray[0].data.arrival = Date.parseIso8601("2013-10-09 12.23.23");
+            tmpStationsArray[0].data.departure = Date.parseIso8601("2013-10-09 11.54.21");
+            successfulStations.push(tmpStationsArray[0]);
+          //}
+        //}
         store.setData(successfulStations);
         store.fireEvent('storeFiltered');
       };
