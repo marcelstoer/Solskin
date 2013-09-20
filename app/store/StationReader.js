@@ -32,8 +32,6 @@ Ext.define('SunApp.store.StationReader', {
       // sort descending, most recent date first
       return -1 * (time1 > time2 ? 1 : time1 < time2 ? -1 : 0);
     });
-
-    debugger;
     var station = this.createStationObject(wmo, wmoData[wmoDataKeys[0]]);
     this.addSunlevelTo(station);
     this.addDistanceTo(station);
