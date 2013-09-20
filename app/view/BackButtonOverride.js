@@ -1,7 +1,7 @@
-Ext.define('SunApp.view.MyBackButton', {
+Ext.define('SunApp.view.BackButtonOverride', {
   extend: 'Ext.Img',
-  xtype: 'myBackButton',
-  id: 'myBackButton',
+  xtype: 'backButtonOverride',
+  id: 'backButtonOverride',
 
   config: {
           src: 'resources/images/back-small.svg',

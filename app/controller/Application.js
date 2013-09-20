@@ -120,10 +120,8 @@ Ext.define('SunApp.controller.Application', {
     var storeSize = Ext.getStore('Stations').getData().length;
 
     if (storeSize > 0) {
-      // containerView = Ext.create('SunApp.view.Container');
       mainView = Ext.create('SunApp.view.Main');
       mainView.getNavigationBar().setTitle(SunApp.app.getCurrentLocation().getClosestPublicTransportStation().name);
-      // mainView.add(containerView);
       Ext.Viewport.removeAll(true, true);
       Ext.Viewport.add(mainView);
     } else {
