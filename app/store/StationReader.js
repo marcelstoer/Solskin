@@ -8,8 +8,8 @@ Ext.define('SunApp.store.StationReader', {
   },
 
   filter: function (data) {
-    var forcast = data.payload.mos;
-    var forecastKeys = Object.keys(forcast);
+    var forecast = data.payload.mos;
+    var forecastKeys = Object.keys(forecast);
     var dbklima = data.payload.dbklima;
 
     var filteredData = [];
@@ -18,10 +18,27 @@ Ext.define('SunApp.store.StationReader', {
       var wmoData = dbklima[wmo];
       // must have WMO data and station must be in our mapping file
       if (wmoData !== undefined && wmo2sbb[wmo] !== undefined) {
-        filteredData.push(this.newStation(wmo, wmoData));
+        var station = this.newStation(wmo, wmoData);
+        station['forecast'] = this.newForecast(wmo, forecast);
+        filteredData.push(station);
       }
     }
     return filteredData;
+  },
+
+  newForecast: function (wmo, forecastData) {
+    var that = this;
+    var forecast = [];
+    var forecastForWmo = forecastData[wmo];
+    var forecastDates = Object.keys(forecastForWmo);
+    Ext.each(forecastDates, function (date) {
+      var sunshine = that.resetTo0IfNullOrEmpty(forecastForWmo[date]['ss']);
+      var sunLevel = that.calculateSunLevel(sunshine);
+      var temperature = forecastForWmo[date]['tt10'];
+      var obj = {"date": date, "sunshine": sunshine, "sunLevel": sunLevel, "temperature": temperature};
+      forecast.push(obj);
+    });
+    return forecast;
   },
 
   newStation: function (wmo, wmoData) {
@@ -33,8 +50,8 @@ Ext.define('SunApp.store.StationReader', {
       return -1 * (time1 > time2 ? 1 : time1 < time2 ? -1 : 0);
     });
     var station = this.createStationObject(wmo, wmoData[wmoDataKeys[0]]);
-    this.addSunlevelTo(station);
-    this.addDistanceTo(station);
+    station['sunLevel'] = this.calculateSunLevel(station['sunshine']);
+    station['linearDistance'] = this.calculateDistanceToCurrentLocation(station);
     return station;
   },
 
@@ -42,10 +59,10 @@ Ext.define('SunApp.store.StationReader', {
     return {
       name: wmo2sbb[wmo]['name'],
       sunshine: this.resetTo0IfNullOrEmpty(parseFloat(wmoStationData.ss)),
-      temperature: this.resetTo0IfNullOrEmpty(parseFloat(wmoStationData.tt10)),
-      lat: parseFloat(wmo2sbb[wmo]['lat']),
-      long: parseFloat(wmo2sbb[wmo]['long']),
-      publicTransportId: parseInt(wmo2sbb[wmo]['stationId'])
+      temperature: wmoStationData.tt10, // resetting to 0 wouldn't be cool...
+      lat: wmo2sbb[wmo]['lat'],
+      long: wmo2sbb[wmo]['long'],
+      publicTransportId: wmo2sbb[wmo]['stationId']
     };
   },
 
@@ -57,9 +74,8 @@ Ext.define('SunApp.store.StationReader', {
     }
   },
 
-  addSunlevelTo: function (station) {
-    var sunLevel, sunshine;
-    sunshine = station['sunshine'];
+  calculateSunLevel: function (sunshine) {
+    var sunLevel;
 
     if (sunshine < 5) {         // 0-4
       sunLevel = 0;
@@ -72,10 +88,10 @@ Ext.define('SunApp.store.StationReader', {
     } else {                    // 60
       sunLevel = 4;
     }
-    station['sunLevel'] = sunLevel;
+    return sunLevel;
   },
 
-  addDistanceTo: function (station) {
+  calculateDistanceToCurrentLocation: function (station) {
     var stationLocation, currentLocation;
     stationLocation = Ext.create('SunApp.Location', {
         lat: parseFloat(station['lat']),
@@ -83,6 +99,6 @@ Ext.define('SunApp.store.StationReader', {
       }
     );
     currentLocation = SunApp.app.getCurrentLocation();
-    station['linearDistance'] = currentLocation.distanceTo(stationLocation);
+    return currentLocation.distanceTo(stationLocation);
   }
 });
