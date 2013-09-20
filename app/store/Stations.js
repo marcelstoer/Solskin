@@ -34,6 +34,7 @@ Ext.define('SunApp.store.Stations', {
       transportApi = Ext.create('SunApp.TransportApi');
 
     if (sunLevelToRecordsMap[4].length >= 3) {
+      debugger;
       console.log('there are at least 3 level-4 records - excellent');
       tmpStationsArray = sunLevelToRecordsMap[4].slice(0, 5); // get items 0-4
       places = this.extractNames(tmpStationsArray);
