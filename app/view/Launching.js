@@ -2,7 +2,7 @@ Ext.define('SunApp.view.Launching', {
   extend: 'Ext.Panel',
 
   config: {
-    html: 'Welcome to SunApp<br>Detecting your geo location...',
+    html: 'Welcome to SunApp!<br>Detecting your geo location...',
     styleHtmlContent: true
   },
 
