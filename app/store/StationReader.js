@@ -8,27 +8,60 @@ Ext.define('SunApp.store.StationReader', {
   },
 
   filter: function (data) {
-    var i;
-    var record;
-    for (i = 0; i < data.length; i++) {
-      record = data[i];
-      this.cleanSSPropertyIn(record);
-      this.addSunlevelTo(record);
-      this.addDistanceTo(record);
+    var forcast = data.payload.mos;
+    var forecastKeys = Object.keys(forcast);
+    var dbklima = data.payload.dbklima;
+
+    var filteredData = [];
+    for (var i = 0; i < forecastKeys.length; i++) {
+      var wmo = forecastKeys[i];
+      var wmoData = dbklima[wmo];
+      // must have WMO data and station must be in our mapping file
+      if (wmoData !== undefined && wmo2sbb[wmo] !== undefined) {
+        filteredData.push(this.newStation(wmo, wmoData));
+      }
     }
-    return data;
+    return filteredData;
   },
 
-  cleanSSPropertyIn: function (record) {
-    var sunshine = record['ss'];
-    if (sunshine === '' || sunshine === null) {
-      record['ss'] = '0';
+  newStation: function (wmo, wmoData) {
+    var wmoDataKeys = Object.keys(wmoData);
+    wmoDataKeys.sort(function (dateString1, dateString2) {
+      var time1 = new Date(dateString1).getTime();
+      var time2 = new Date(dateString2).getTime();
+      // sort descending, most recent date first
+      return -1 * (time1 > time2 ? 1 : time1 < time2 ? -1 : 0);
+    });
+
+    debugger;
+    var station = this.createStationObject(wmo, wmoData[wmoDataKeys[0]]);
+    this.addSunlevelTo(station);
+    this.addDistanceTo(station);
+    return station;
+  },
+
+  createStationObject: function (wmo, wmoStationData) {
+    return {
+      name: wmo2sbb[wmo]['name'],
+      sunshine: this.resetTo0IfNullOrEmpty(parseFloat(wmoStationData.ss)),
+      temperature: this.resetTo0IfNullOrEmpty(parseFloat(wmoStationData.tt10)),
+      lat: parseFloat(wmo2sbb[wmo]['lat']),
+      long: parseFloat(wmo2sbb[wmo]['long']),
+      publicTransportId: parseInt(wmo2sbb[wmo]['stationId'])
+    };
+  },
+
+  resetTo0IfNullOrEmpty: function (someValue) {
+    if (someValue === '' || someValue === null || someValue === undefined) {
+      return 0;
+    } else {
+      return someValue;
     }
   },
 
-  addSunlevelTo: function (record) {
+  addSunlevelTo: function (station) {
     var sunLevel, sunshine;
-    sunshine = record['ss'];
+    sunshine = station['sunshine'];
 
     if (sunshine < 5) {         // 0-4
       sunLevel = 0;
@@ -41,17 +74,17 @@ Ext.define('SunApp.store.StationReader', {
     } else {                    // 60
       sunLevel = 4;
     }
-    record['sunLevel'] = sunLevel;
+    station['sunLevel'] = sunLevel;
   },
 
-  addDistanceTo: function (record) {
+  addDistanceTo: function (station) {
     var stationLocation, currentLocation;
     stationLocation = Ext.create('SunApp.Location', {
-        lat: parseFloat(record.lat),
-        long: parseFloat(record.lon)
+        lat: parseFloat(station['lat']),
+        long: parseFloat(station['long'])
       }
     );
     currentLocation = SunApp.app.getCurrentLocation();
-    record['linearDistance'] = currentLocation.distanceTo(stationLocation);
+    station['linearDistance'] = currentLocation.distanceTo(stationLocation);
   }
 });
