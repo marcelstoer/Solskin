@@ -4,7 +4,7 @@ Ext.define('SunApp.view.Main', {
 
   requires: [
     'Ext.Img',
-    'SunApp.view.MyBackButton',
+    'SunApp.view.BackButtonOverride',
     'SunApp.view.Overview',
     'SunApp.view.Stations',
     'SunApp.view.StationDetail',
@@ -15,7 +15,7 @@ Ext.define('SunApp.view.Main', {
     autoDestroy: false,
     navigationBar: {
       backButton: {
-        xtype: 'myBackButton'
+        xtype: 'backButtonOverride'
       },
       items: [
 //        {
