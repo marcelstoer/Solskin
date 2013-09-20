@@ -18,7 +18,7 @@ Ext.define('SunApp.store.Stations', {
     },
     proxy: {
       type: 'ajax',
-      url: 'data.json',
+      url: 'http://mdx.meteotest.ch/api_v1?key=0C700754FE957E01393621C4756DC4BA&service=prod2data&action=dreamweb_combined&format=json',
       reader: {
         type: 'stationReader'
       }
