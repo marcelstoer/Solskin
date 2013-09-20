@@ -31,11 +31,15 @@ Ext.define('SunApp.controller.Application', {
  },
 
   onMainPush: function (view, item) {
+      this.getMain().getNavigationBar().down('#menuButton').setHidden(true);
   },
 
   onMainPop: function (view, item) {
     this.getMain().getNavigationBar().setTitle(SunApp.app.getCurrentLocation().getClosestPublicTransportStation().name);
-    this.stationDetail.destroy();
+    this.getMain().getNavigationBar().down('#menuButton').setHidden(false);
+    if (this.stationDetail !== undefined) {
+       this.stationDetail.destroy();
+    }
   },
 
   onStationSelect: function (list, index, node, record) {

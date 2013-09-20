@@ -9,20 +9,21 @@ Ext.define('SunApp.view.MenuButton', {
 
 
   config: {
-          src: 'resources/images/shades.svg',
-          text: '', // none, just needed so that there is no error
+    src: 'resources/images/shades.svg',
+    text: '', // none, just needed so that there is no error
 
-          cls: 'menuImg',
-          align: 'right',
+    cls: 'menuImg',
+    align: 'right',
 
     refs: {
       main: 'mainview',
     },
-          listeners: {
-            tap: function() {
-              SunApp.app.getController('Application').displayDisclaimer();
-            }
-          }
+
+    listeners: {
+        tap: function() {
+          SunApp.app.getController('Application').displayDisclaimer();
+        }
+    }
 
   }
 
