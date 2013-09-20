@@ -79,7 +79,7 @@ Ext.define('SunApp.store.Stations', {
       recordsForLevel.push(record);
     }
     for (i = 0; i < map.length; i++) {
-      map[i] = this.sortByDistanceAsc(map[i]);
+      map[i] = map[i] === undefined ? undefined: this.sortByDistanceAsc(map[i]);
     }
     return map;
   },

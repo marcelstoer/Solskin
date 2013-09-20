@@ -32,7 +32,7 @@ Ext.define('SunApp.store.StationReader', {
     var forecastForWmo = forecastData[wmo];
     var forecastDates = Object.keys(forecastForWmo);
     Ext.each(forecastDates, function (date) {
-      var sunshine = that.resetTo0IfNullOrEmpty(forecastForWmo[date]['ss']);
+      var sunshine = that.resetTo0IfFalsy(forecastForWmo[date]['ss']);
       var sunLevel = that.calculateSunLevel(sunshine);
       var temperature = forecastForWmo[date]['tt10'];
       var obj = {"date": date, "sunshine": sunshine, "sunLevel": sunLevel, "temperature": temperature};
@@ -58,7 +58,7 @@ Ext.define('SunApp.store.StationReader', {
   createStationObject: function (wmo, wmoStationData) {
     return {
       name: wmo2sbb[wmo]['name'],
-      sunshine: this.resetTo0IfNullOrEmpty(parseFloat(wmoStationData.ss)),
+      sunshine: this.resetTo0IfFalsy(parseFloat(wmoStationData.ss)),
       temperature: wmoStationData.tt10, // resetting to 0 wouldn't be cool...
       lat: wmo2sbb[wmo]['lat'],
       long: wmo2sbb[wmo]['long'],
@@ -66,12 +66,8 @@ Ext.define('SunApp.store.StationReader', {
     };
   },
 
-  resetTo0IfNullOrEmpty: function (someValue) {
-    if (someValue === '' || someValue === null || someValue === undefined) {
-      return 0;
-    } else {
-      return someValue;
-    }
+  resetTo0IfFalsy: function (someValue) {
+    return someValue ? someValue : 0;
   },
 
   calculateSunLevel: function (sunshine) {
