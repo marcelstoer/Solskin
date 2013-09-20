@@ -82,11 +82,12 @@ Ext.define('SunApp.view.StationDetail', {
         xtype: 'container',
         id: 'map',
         padding: 10,
-        height: 300,
+        //height: 300,
+        layout: 'fit',
         items: [
           {
             xtype: 'map',
-            //height : 200,
+            height : 300,
             id: 'googleMap',
             mapOptions: {
               zoom: 8,
