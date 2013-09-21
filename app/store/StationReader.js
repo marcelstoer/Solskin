@@ -35,7 +35,7 @@ Ext.define('SunApp.store.StationReader', {
       var sunshine = that.resetTo0IfFalsy(forecastForWmo[date]['ss']);
       var sunLevel = that.calculateSunLevel(sunshine);
       var temperature = forecastForWmo[date]['tt'];
-      var obj = {"date": date, "sunshine": sunshine, "sunLevel": sunLevel, "temperature": temperature};
+      var obj = {"date": Date.parseIso8601(date), "sunshine": sunshine, "sunLevel": sunLevel, "temperature": temperature};
       forecast.push(obj);
     });
     return forecast;
