@@ -11,6 +11,8 @@ Ext.define('SunApp.model.Station', {
       {name: 'long', type: 'float'},
       {name: 'temperature', type: 'float'},
       {name: 'publicTransportId', type: 'int'},
+      {name: 'arrival', type: 'date'},
+      {name: 'departure', type: 'date'},
       'forecast'
     ]
   }
