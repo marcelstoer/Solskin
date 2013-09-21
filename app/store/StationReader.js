@@ -34,7 +34,7 @@ Ext.define('SunApp.store.StationReader', {
     Ext.each(forecastDates, function (date) {
       var sunshine = that.resetTo0IfFalsy(forecastForWmo[date]['ss']);
       var sunLevel = that.calculateSunLevel(sunshine);
-      var temperature = forecastForWmo[date]['tt10'];
+      var temperature = forecastForWmo[date]['tt'];
       var obj = {"date": date, "sunshine": sunshine, "sunLevel": sunLevel, "temperature": temperature};
       forecast.push(obj);
     });
