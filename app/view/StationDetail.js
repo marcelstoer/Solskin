@@ -38,9 +38,9 @@ Ext.define('SunApp.view.StationDetail', {
             id: 'weatherForecast',
             padding: 10,
             tpl: [
-              '<div class="stationDetail sunLevel{sunLevel}">', // TODO MKE '"forecastSunLevel}">',
-              '    <p class="time">{arrival:date("H")}:00</p>', // TODO MKE '{forecastTime}</p>',
-              '    <p class="temperature">{temperature}&deg;</p>', // TODO MKE '{forecastTemperature}&deg;</p>',
+              '<div class="stationDetail sunLevel{forecastSunLevel}">',
+              '    <p class="time">{forecastTime:date("H:i")}</p>',
+              '    <p class="temperature">{forecastTemperature}&deg;</p>',
               '</div>' ]
           }
         ]
@@ -109,12 +109,18 @@ Ext.define('SunApp.view.StationDetail', {
   },
 
   updateRecord: function (newRecord) {
+    var forecast;
     if (newRecord) {
       this.down('#weatherNow').setData({
         "sunLevel": newRecord.get('sunLevel'),
-        "temperature": newRecord.get('temperature')
+        "temperature": newRecord.get('temperature') ? newRecord.get('temperature') : " - "
       });
-      this.down('#weatherForecast').setData(newRecord.data);
+      forecast = newRecord.getForecastMostClosestToArrivalTime();
+      this.down('#weatherForecast').setData({
+        "forecastSunLevel": forecast['sunLevel'],
+        "forecastTime": forecast['date'],
+        "forecastTemperature": forecast['temperature'] ? forecast['temperature'] : " - "
+      });
       this.down('#connectionDeparture').setData({
           "stationName": SunApp.app.getCurrentLocation().getClosestPublicTransportStation()['name'],
           "departure": newRecord.get('departure')}
