@@ -5,16 +5,16 @@ Ext.define('SunApp.view.Overview', {
 
   requires: [
     'SunApp.view.Stations',
-    'SunApp.view.StationDetail',
-    'SunApp.view.Meteotest'
+    'SunApp.view.StationDetail'
+//    'SunApp.view.Meteotest'
   ],
 
   config: {
     layout: 'vbox',
 
     items: [
-      { xtype: 'stations', flex: 1 },
-      { xtype: 'meteotest', docked: 'bottom' }
+      { xtype: 'stations', flex: 1 }
+//      { xtype: 'meteotest', docked: 'bottom' }
     ]
   }
 });

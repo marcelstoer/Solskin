@@ -2,8 +2,8 @@ Ext.define('SunApp.controller.Application', {
   extend: 'Ext.app.Controller',
 
   requires: [
-    'SunApp.Location', 'SunApp.TransportApi'
-  ],
+    'SunApp.Location', 'SunApp.TransportApi', 'SunApp.view.Launching', 'SunApp.view.LaunchingContainer',
+      ],
 
   config: {
     refs: {
@@ -50,7 +50,10 @@ Ext.define('SunApp.controller.Application', {
 
   onLaunching: function () {
     Ext.fly('appLoadingIndicator').destroy();
-    Ext.Viewport.add(Ext.create('SunApp.view.Launching'));
+    //debugger;
+//    Ext.create('SunApp.view.Launching');
+Ext.Viewport.add(Ext.create('SunApp.view.LaunchingContainer'));
+//    Ext.Viewport.add('SunApp.view.Launching');
 
 //    Ext.create('Ext.util.Geolocation', {
 //      autoUpdate: false,
@@ -77,7 +80,7 @@ Ext.define('SunApp.controller.Application', {
   onGeoLocationDetermined: function (lat, long) {
     var launchingView, transportApi, transportApiErrorFunc;
 
-    launchingView = Ext.Viewport.getComponent(0);
+    launchingView = Ext.Viewport.getComponent(0).getComponent(0);
     launchingView.updateMessageForGeoLocationFound(lat, long);
     launchingView.updateMessageForClosestStationStart();
 
@@ -101,7 +104,7 @@ Ext.define('SunApp.controller.Application', {
   onClosestStationDetermined: function (station) {
     var launchingView;
 
-    launchingView = Ext.Viewport.getComponent(0);
+    launchingView = Ext.Viewport.getComponent(0).getComponent(0);
     launchingView.updateMessageForClosestStationFound(station.name);
 
     SunApp.app.getCurrentLocation().setClosestPublicTransportStation({"name": station.name, "id": station.id});
@@ -111,7 +114,7 @@ Ext.define('SunApp.controller.Application', {
 
   onStoreLoaded: function (numberOfRecords) {
     if (numberOfRecords > 0) {
-      Ext.Viewport.getComponent(0).updateMessageForLoadingAllStationsDone(numberOfRecords);
+      Ext.Viewport.getComponent(0).getComponent(0).updateMessageForLoadingAllStationsDone(numberOfRecords);
     } else {
       SunApp.app.getController('Application').displayError('No data weather data available due to technical errors, sorry.');
     }
@@ -141,7 +144,7 @@ Ext.define('SunApp.controller.Application', {
   },
 
   displayDisclaimer: function () {
-    this.getMain().push(Ext.create('SunApp.view.Disclaimer'));
+    this.getMain().push(Ext.create('SunApp.view.DisclaimerContainer'));
   }
 
 });

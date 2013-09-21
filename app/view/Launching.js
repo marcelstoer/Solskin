@@ -1,5 +1,6 @@
 Ext.define('SunApp.view.Launching', {
   extend: 'Ext.Panel',
+  xtype: 'launching',
 
   config: {
     html: 'Welcome to SunApp!<br>Detecting your geo location...',

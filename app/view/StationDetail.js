@@ -84,6 +84,7 @@ Ext.define('SunApp.view.StationDetail', {
         padding: 10,
         //height: 300,
         layout: 'fit',
+        //docked: 'bottom',
         items: [
           {
             xtype: 'map',
