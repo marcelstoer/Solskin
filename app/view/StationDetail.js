@@ -109,7 +109,10 @@ Ext.define('SunApp.view.StationDetail', {
 
   updateRecord: function (newRecord) {
     if (newRecord) {
-      this.down('#weatherNow').setData(newRecord.data);
+      this.down('#weatherNow').setData({
+        "sunLevel": newRecord.get('sunLevel'),
+        "temperature": newRecord.get('temperature')
+      });
       this.down('#weatherForecast').setData(newRecord.data);
       this.down('#connectionDeparture').setData({
           "stationName": SunApp.app.getCurrentLocation().getClosestPublicTransportStation()['name'],
