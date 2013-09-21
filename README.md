@@ -36,11 +36,15 @@ to find candidates and to pick the relevant ones for the user. It calls the Tran
 - The event is processed by the controller's `onStoreFiltered()` function. It takes down the launching view and
 displays the main navigation view with the stations list instead.
 
-Build Android:
+Build Android
+-------------
 - run "sencha app package run packager.json" in C:\Users\mkessler\git\sun\SunApp
 
-To update local data structure wmo2sbb:
-- copy/paste data from https://github.com/marcelstoer/SunApp/blob/master/wmo2sbb.md into map.xmls
-- copy/paste column I into wmo2sbb-excel.txt
-- run "sed '/Id":""/d' wmo2sbb-excel.txt > wmo2sbb-final.txt"
-- copy paste date from wmo2sbb-final.txt into app.js
+To update local data structure wmo2sbb
+--------------------------------------
+- run awk -F ' *\\| *' 'FNR>2 && $7 !=""{printf "  \"%s\": \{\"name\": \"%s\", \"stationId\": \"%s\", \"lat\": %s,
+\"long\": %s\},\n", $2, $7, substr($6,3), $4, $5}' wmo2sbb.md
+- copy/paste the output to [app.js](app.js)
+
+http://stackoverflow.com/q/18926849/131929
+http://www.theunixschool.com/2012/05/awk-match-pattern-in-file-in-linux.html
