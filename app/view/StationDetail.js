@@ -60,7 +60,7 @@ Ext.define('SunApp.view.StationDetail', {
             padding: 10,
             tpl: [
               '    <div class="connection departure">',
-              '        <p class="departureStation">{origin}</p>',
+              '        <p class="departureStation">{stationName}</p>',
               '        <p class="departureTime">{departure:date("H:i")}</p>',
               '    </div>' ]
           },
@@ -71,7 +71,7 @@ Ext.define('SunApp.view.StationDetail', {
             padding: 10,
             tpl: [
               '    <div class="connection arrival">',
-              '        <p class="arrivalStation">{name}</p>',
+              '        <p class="arrivalStation">{stationName}</p>',
               '        <p class="arrivalTime">{arrival:date("H:i")}</p>',
               '    </div>' ]
           }
@@ -87,7 +87,7 @@ Ext.define('SunApp.view.StationDetail', {
         items: [
           {
             xtype: 'map',
-            height : 300,
+            height: 300,
             id: 'googleMap',
             mapOptions: {
               zoom: 8,
@@ -111,9 +111,14 @@ Ext.define('SunApp.view.StationDetail', {
     if (newRecord) {
       this.down('#weatherNow').setData(newRecord.data);
       this.down('#weatherForecast').setData(newRecord.data);
-      this.down('#connectionArrival').setData(newRecord.data);
-      newRecord.data.origin = SunApp.app.getCurrentLocation().getClosestPublicTransportStation().name; // TODO MKE nicer way to get current location
-      this.down('#connectionDeparture').setData(newRecord.data);
+      this.down('#connectionDeparture').setData({
+          "stationName": SunApp.app.getCurrentLocation().getClosestPublicTransportStation()['name'],
+          "departure": newRecord.get('departure')}
+      );
+      this.down('#connectionArrival').setData({
+          "stationName": newRecord.get('name'),
+          "arrival": newRecord.get('arrival')}
+      );
     }
   }
 });
