@@ -4,6 +4,7 @@ Ext.define('SunApp.model.Station', {
   config: {
     fields: [
       'name',
+      {name: 'timestamp', type: 'date'},
       {name: 'sunshine', type: 'int'},
       {name: 'sunLevel', type: 'int'},
       {name: 'linearDistance', type: 'float'},
@@ -22,7 +23,7 @@ Ext.define('SunApp.model.Station', {
     arrival = this.get('arrival');
     minTimeBetweenArrivalAndForecast = Number.MAX_VALUE;
     Ext.each(this.get('forecast'), function(f){
-      var timeBetweenArrivalAndForecast = Math.abs(new Date(f['date']).getTime() - arrival.getTime());
+      var timeBetweenArrivalAndForecast = Math.abs(f['timestamp'].getTime() - arrival.getTime());
       if(timeBetweenArrivalAndForecast < minTimeBetweenArrivalAndForecast){
         forecast = f;
         minTimeBetweenArrivalAndForecast = timeBetweenArrivalAndForecast;

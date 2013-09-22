@@ -35,7 +35,7 @@ Ext.define('SunApp.store.StationReader', {
       var sunshine = that.resetTo0IfFalsy(forecastForWmo[date]['ss']);
       var sunLevel = that.calculateSunLevel(sunshine);
       var temperature = forecastForWmo[date]['tt'];
-      var obj = {"date": Date.parseIso8601(date), "sunshine": sunshine, "sunLevel": sunLevel, "temperature": temperature};
+      var obj = {"timestamp": Date.parseIso8601(date), "sunshine": sunshine, "sunLevel": sunLevel, "temperature": temperature};
       forecast.push(obj);
     });
     return forecast;
@@ -44,20 +44,21 @@ Ext.define('SunApp.store.StationReader', {
   newStation: function (wmo, wmoData) {
     var wmoDataKeys = Object.keys(wmoData);
     wmoDataKeys.sort(function (dateString1, dateString2) {
-      var time1 = new Date(dateString1).getTime();
-      var time2 = new Date(dateString2).getTime();
+      var time1 = Date.parseIso8601(dateString1).getTime();
+      var time2 = Date.parseIso8601(dateString2).getTime();
       // sort descending, most recent date first
       return -1 * (time1 > time2 ? 1 : time1 < time2 ? -1 : 0);
     });
-    var station = this.createStationObject(wmo, wmoData[wmoDataKeys[0]]);
+    var station = this.createStationObject(wmo, wmoData[wmoDataKeys[0]], wmoDataKeys[0]);
     station['sunLevel'] = this.calculateSunLevel(station['sunshine']);
     station['linearDistance'] = this.calculateDistanceToCurrentLocation(station);
     return station;
   },
 
-  createStationObject: function (wmo, wmoStationData) {
+  createStationObject: function (wmo, wmoStationData, timestamp) {
     return {
       name: wmo2sbb[wmo]['name'],
+      timestamp: Date.parseIso8601(timestamp),
       sunshine: this.resetTo0IfFalsy(parseFloat(wmoStationData.ss)),
       temperature: wmoStationData.tt10, // resetting to 0 wouldn't be cool...
       lat: wmo2sbb[wmo]['lat'],
