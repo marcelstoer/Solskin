@@ -13,6 +13,8 @@
 // DO NOT DELETE - this directive is required for Sencha Cmd packages to work.
 //@require @packageOverrides
 
+// Support for new Date(iso8601) was only added in ES5. Even browsers that support it
+// may interpret it differently. This here, however, is well defined.
 // http://stackoverflow.com/questions/6228302/javascript-date-iso8601
 // http://dev.enekoalonso.com/2010/09/21/date-from-iso-8601-string/
 // http://en.wikipedia.org/wiki/ISO_8601#Time_offsets_from_UTC
@@ -20,6 +22,14 @@ if (Date.parseIso8601 === undefined) {
   Date.parseIso8601 = function (isoString) {
     var parts = isoString.match(/\d+/g);
     return new Date(parts[0], parts[1] - 1, parts[2], parts[3], parts[4], parts[5]);
+  };
+}
+
+// Meteotest delivers 'YYYY-MM-DD hh:mm:ss' which has to be interpreted as UTC!
+if (Date.parseMeteotest === undefined) {
+  Date.parseMeteotest = function (meteotestString) {
+    var utcString = meteotestString.replace(' ', 'T') + 'Z';
+    return new Date(utcString);
   };
 }
 
