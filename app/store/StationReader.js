@@ -80,9 +80,9 @@ Ext.define('SunApp.store.StationReader', {
       sunLevel = 1;
     } else if (sunshine < 50) { // 30 - 49
       sunLevel = 2;
-    } else if (sunshine < 60) { // 50 - 59
+    } else if (sunshine < 58) { // 50 - 57
       sunLevel = 3;
-    } else {                    // 60
+    } else {                    // 58 - 60
       sunLevel = 4;
     }
     return sunLevel;
