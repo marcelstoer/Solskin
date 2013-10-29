@@ -4,7 +4,8 @@ Ext.define('SunApp.view.Launching', {
 
   config: {
     html: 'Welcome to SunApp!<br>Detecting your geo location...',
-    styleHtmlContent: true
+    styleHtmlContent: true,
+    scrollable: 'vertical'
   },
 
   updateMessageForGeoLocationFound: function (lat, long) {
