@@ -1,8 +1,8 @@
 @import url(http://fonts.googleapis.com/css?family=Voltaire);
 
-$font-size-big:4em;
-$font-size-medium:1.7em;
-$font-size-small:1em;
+$font-size-big:2.5em;    //4em
+$font-size-medium:1.3em;    //1.7em
+$font-size-small:.7em;      //1em
 $font-size-smaller:.8em;
 $font-family: Voltaire,Helvetica;
 $base-gradient: matte;
@@ -112,7 +112,7 @@ $list-active-color: mix(#043F62, #fff, 0);
 .stationDetail {
     background-size:contain;
     background-repeat:no-repeat;
-    background-position:75% 50%;
+    background-position:30% 50%;
     min-width: 250px;
 }
 
@@ -144,6 +144,16 @@ $list-active-color: mix(#043F62, #fff, 0);
     min-width: 250px;
 }
 
+#weather {
+  border-bottom: 1px solid #dedede;
+  padding-bottom: 5px;
+}
+
+#connection {
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
 .departure>.departureTime, .arrival>.arrivalTime {
     font-size:$font-size-big;
 }
@@ -153,7 +163,7 @@ $list-active-color: mix(#043F62, #fff, 0);
 }
 
 .stationDetail>.temperature {
-    padding-top:85px;
+    padding-top:40px; //85
 }
 
 .stationList>.arrivalTime {
