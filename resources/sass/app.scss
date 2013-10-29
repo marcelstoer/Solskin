@@ -3,6 +3,7 @@
 $font-size-big:4em;
 $font-size-medium:1.7em;
 $font-size-small:1em;
+$font-size-smaller:.8em;
 $font-family: Voltaire,Helvetica;
 $base-gradient: matte;
 $list-pressed-color: mix(#08679F, #fff, 10);
@@ -21,25 +22,27 @@ $list-active-color: mix(#043F62, #fff, 0);
 //}
 
 //custom shadow on map
-.x-map {
-    position: relative;
-
-    &:before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        z-index: 999;
-        -webkit-box-shadow: inset 0 3px 3px rgba(0,0,0,.4);
-    }
-}
+//.x-map {
+//    position: relative;
+//
+//    &:before {
+//        content: "";
+//        position: absolute;
+//        top: 0;
+//        left: 0;
+//        right: 0;
+//        bottom: 0;
+//        z-index: 999;
+//        -webkit-box-shadow: inset 0 3px 3px rgba(0,0,0,.4);
+//    }
+//}
 .x-list-normal .x-list-item.x-item-selected.x-list-item-tpl {
   background-image: none;
   background-color: #f7f7f7;
-  border-top: 1px solid #dedede;
-  border-bottom: 1px solid #dedede}
+  border-top-color: #dedede;
+//  border-top: 1px solid #dedede;
+//  border-bottom: 1px solid #dedede
+}
 .x-toolbar {
     height:2.6em;
     padding:0 0.2em;
@@ -178,6 +181,7 @@ $list-active-color: mix(#043F62, #fff, 0);
 
 
 .meteofon-box {
+    font-size:$font-size-smaller;
     background-color: rgba(0,0,0,.02);
     padding: .3em 1em;
     margin: 1em 0 0;
