@@ -9,7 +9,7 @@ Ext.define('SunApp.view.DisclaimerContainer', {
 
   config: {
     layout: 'vbox',
-
+    title: 'Disclaimer',
     items: [
       { xtype: 'disclaimer', flex: 1 },
       { xtype: 'meteotest', docked: 'bottom' }
