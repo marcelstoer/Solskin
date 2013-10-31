@@ -124,8 +124,8 @@ $list-active-color: mix(#043F62, #fff, 0);
 .stationDetail {
     background-size:contain;
     background-repeat:no-repeat;
-    background-position:30% 50%;
-    min-width: 250px;
+    background-position:75% 50%;
+    //min-width: 250px;
 }
 
 .stationList.sunLevel4, .stationDetail.sunLevel4  {
@@ -153,7 +153,10 @@ $list-active-color: mix(#043F62, #fff, 0);
 }
 
 .departure>.departureStation, .arrival>.arrivalStation, .connection  {
-    min-width: 250px;
+    //min-width: 250px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space:nowrap;
 }
 
 #weather {
