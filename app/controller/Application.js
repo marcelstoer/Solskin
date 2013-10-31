@@ -49,7 +49,10 @@ Ext.define('SunApp.controller.Application', {
   },
 
   onLaunching: function () {
-    Ext.fly('appLoadingIndicator').destroy();
+    var appLoadingIndicator = Ext.fly('appLoadingIndicator');
+    if (appLoadingIndicator !== null) {
+        appLoadingIndicator.destroy();
+    }
     Ext.Viewport.add(Ext.create('SunApp.view.LaunchingContainer'));
 
 //    Ext.create('Ext.util.Geolocation', {
