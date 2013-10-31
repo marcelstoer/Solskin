@@ -27,6 +27,10 @@ Ext.define('SunApp.store.Stations', {
     }
   },
 
+  atLeast3RecordsForLevel: function (sunLevelToRecordsMap, sunLevel) {
+    return sunLevelToRecordsMap[sunLevel] !== undefined && sunLevelToRecordsMap[sunLevel].length >= 3;
+  },
+
   reduceToRelevant: function (store, records) {
     var sunLevel,
       filteredAwayEverything = true,
@@ -38,7 +42,7 @@ Ext.define('SunApp.store.Stations', {
       transportApi = Ext.create('SunApp.TransportApi');
 
     for (sunLevel = 4; sunLevel >= 1; sunLevel--) {
-      if (sunLevelToRecordsMap[sunLevel] !== undefined && sunLevelToRecordsMap[sunLevel].length >= 3) {
+      if (this.atLeast3RecordsForLevel(sunLevelToRecordsMap, sunLevel)) {
         filteredAwayEverything = false;
         console.log('there are at least 3 level-' + sunLevel + ' records - excellent');
         tmpRecordsArray = sunLevelToRecordsMap[sunLevel].slice(0, 5); // get items 0-4
@@ -66,6 +70,8 @@ Ext.define('SunApp.store.Stations', {
           store.fireEvent('storeFiltered');
         };
         transportApi.getConnectionsTo(publicTransportIds, getConnectionsSuccessFunc, getConnectionsFailureFunc);
+        // TODO msr: for now (i.e. until algorithm is further enhanced) the loop has to be interrupted
+        break;
       }
     }
     if (filteredAwayEverything) {
