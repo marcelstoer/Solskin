@@ -1,0 +1,31 @@
+{
+  "applicationName":"Solskin",
+  "applicationId":"ch.solskinapp.Solskin",
+	"versionString":"1.0",
+	"versionCode":"1",
+	"icon": {
+		"36":"resources/icons/android/drawable-ldpi/ic_launcher.png",
+		"48":"resources/icons/android/drawable-mdpi/ic_launcher.png"
+	},
+	"inputPath":"./",
+	"outputPath":"../build/",
+	"configuration":"Debug",
+	"platform":"Android",
+	"certificatePath":"/path/to/certificate.file",
+	"certificatePassword":"",
+	"sdkPath":"C:\\Program Files (x86)\\Android\\android-sdk",
+	"androidAPILevel":"16",
+	"permissions":[
+            "INTERNET",
+            "ACCESS_NETWORK_STATE",
+            "ACCESS_FINE_LOCATION",
+            "ACCESS_COARSE_LOCATION",
+            "ACCESS_LOCATION_EXTRA_COMMANDS"
+        ],
+	"orientations": [
+		"portrait",
+		"landscapeLeft",
+		"landscapeRight",
+		"portraitUpsideDown"
+	]
+}

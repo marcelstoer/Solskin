@@ -1,2 +1,4 @@
 build/
 resources/sass/.sass-cache/
+Solskin.mobileprovision
+deploy-ad-hoc.sh

@@ -1,0 +1,36 @@
+{
+  "applicationName": "Solskin",
+  "applicationId": "ch.solskinapp.Solskin",
+  "bundleSeedId": "GW4853VBR6",
+  "versionString": "1.0",
+  /* iOS icon docs: http://goo.gl/yTIsa8 */
+  "icon": {
+    "57": "resources/icons/iOS/Icon.png",
+    "114": "resources/icons/iOS/Icon@2x.png",
+    "29": "resources/icons/iOS/Icon-Small.png",
+    "58": "resources/icons/iOS/Icon-Small@2x.png",
+    "40": "resources/icons/iOS/Icon-40.png",
+    "80": "resources/icons/iOS/Icon-40@2x.png",
+    "50": "resources/icons/iOS/Icon-Small-50.png",
+    "100": "resources/icons/iOS/Icon-Small-50@2x.png",
+    "60": "resources/icons/iOS/Icon-60.png",
+    "120": "resources/icons/iOS/Icon-60@2x.png",
+    "72": "resources/icons/iOS/Icon-72.png",
+    "144": "resources/icons/iOS/Icon-72@2x.png",
+    "76": "resources/icons/iOS/Icon-76.png",
+    "152": "resources/icons/iOS/Icon-76@2x.png"
+  },
+  "inputPath": "./",
+  "outputPath": "../dist/Payload",
+  "configuration": "Release",
+  "platform": "iOS",
+  "deviceType": "Universal",
+  "certificateAlias": "iPhone Distribution: Marcel Stoer (GW4853VBR6)",
+  "provisionProfile": "Solskin.mobileprovision",
+  "orientations": [
+    "portrait",
+    "landscapeLeft",
+    "landscapeRight",
+    "portraitUpsideDown"
+  ]
+}
