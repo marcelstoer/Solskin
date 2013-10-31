@@ -3,7 +3,8 @@ Ext.define('SunApp.controller.Application', {
 
   requires: [
     'SunApp.Location', 'SunApp.TransportApi', 'SunApp.view.Launching', 'SunApp.view.LaunchingContainer',
-      ],
+    'Ext.device.Geolocation'
+  ],
 
   config: {
     refs: {
@@ -55,6 +56,27 @@ Ext.define('SunApp.controller.Application', {
     }
     Ext.Viewport.add(Ext.create('SunApp.view.LaunchingContainer'));
 
+    Ext.device.Geolocation.getCurrentPosition({
+      maximumAge: 0,
+      allowHighAccuracy: true,
+      success: function(position) {
+        var lat = position.coords.latitude;
+        var long = position.coords.longitude;
+        SunApp.app.getController('Application').onGeoLocationDetermined(lat, long);
+      },
+      failure: function() {
+        var noGeoMsg = [
+          'Error detecting your geo location, no more details, sorry. ',
+          'The option to select your location manually is still missing. Again, sorry.'
+        ].join('');
+        SunApp.app.getController('Application').displayError(noGeoMsg);
+      }
+    });
+
+    // Alternative I: setting location statically
+//    SunApp.app.getController('Application').onGeoLocationDetermined(47.46342478, 8.95429439);
+
+    // Alternative II: using Ext.util.Geolocation
 //    Ext.create('Ext.util.Geolocation', {
 //      autoUpdate: false,
 //      maximumAge: 0,
@@ -62,9 +84,7 @@ Ext.define('SunApp.controller.Application', {
 //        locationupdate: function (geo) {
 //          var lat = geo.getLatitude();
 //          var long = geo.getLongitude();
-    var lat = 47.46342478;
-    var long = 8.95429439;
-    SunApp.app.getController('Application').onGeoLocationDetermined(lat, long);
+//          SunApp.app.getController('Application').onGeoLocationDetermined(lat, long);
 //        },
 //        locationerror: function () {
 //            var noGeoMsg = [
@@ -130,7 +150,12 @@ Ext.define('SunApp.controller.Application', {
       Ext.Viewport.removeAll(true, true);
       Ext.Viewport.add(mainView);
     } else {
-      this.displayError('Sorry, according to our data there really isn\'t any sun at the moment in Switzerland.');
+      var msg = [
+        'Sorry, according to our data the sun really does\'t shine currently in Switzerland. ',
+        'It\'s overrated anyway...',
+        'after all you should Have Sunshine in Your Heart!'
+      ].join('');
+      this.displayError(msg);
     }
   },
 
