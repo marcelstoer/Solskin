@@ -6,6 +6,7 @@ Ext.define('SunApp.store.Stations', {
     model: 'SunApp.model.Station',
     autoLoad: false, // 'load' called manually
     sorters: [
+      // will be applied after reduceToRelevant returns
       {property: 'arrival', direction: 'ASC'}
     ],
     listeners: {
@@ -19,7 +20,7 @@ Ext.define('SunApp.store.Stations', {
     proxy: {
       type: 'ajax',
       url: 'http://mdx.meteotest.ch/api_v1?key=0C700754FE957E01393621C4756DC4BA&service=prod2data&action=dreamweb_combined&format=json',
-      //url: 'meteotest-data-2013-09-20-morning.json',    // for debug @ night, use this
+//      url: 'meteotest-data-2013-09-20-morning.json',    // for debug @ night, use this
       reader: {
         type: 'stationReader'
       }
@@ -27,41 +28,47 @@ Ext.define('SunApp.store.Stations', {
   },
 
   reduceToRelevant: function (store, records) {
-    var tmpStationsArray = [],
+    var sunLevel,
+      filteredAwayEverything = true,
+      tmpRecordsArray = [],
       publicTransportIds = [],
       getConnectionsSuccessFunc,
       getConnectionsFailureFunc,
       sunLevelToRecordsMap = this.buildSunLevelToRecordsMap(records),
       transportApi = Ext.create('SunApp.TransportApi');
 
-    if (sunLevelToRecordsMap[4].length >= 3) {
-      console.log('there are at least 3 level-4 records - excellent');
-      tmpStationsArray = sunLevelToRecordsMap[4].slice(0, 5); // get items 0-4
-      publicTransportIds = this.extractPublicTransportIds(tmpStationsArray);
+    for (sunLevel = 4; sunLevel >= 1; sunLevel--) {
+      if (sunLevelToRecordsMap[sunLevel] !== undefined && sunLevelToRecordsMap[sunLevel].length >= 3) {
+        filteredAwayEverything = false;
+        console.log('there are at least 3 level-' + sunLevel + ' records - excellent');
+        tmpRecordsArray = sunLevelToRecordsMap[sunLevel].slice(0, 5); // get items 0-4
+        publicTransportIds = this.extractPublicTransportIds(tmpRecordsArray);
 
-      getConnectionsSuccessFunc = function (connections) {
-        for (var k = 0; k < tmpStationsArray.length; k++) {
-          tmpStationsArray[k].set('arrival', Date.parseIso8601(connections[k].to.arrival));
-          tmpStationsArray[k].set('departure', Date.parseIso8601(connections[k].from.departure));
-        }
-        store.setData(tmpStationsArray);
-        store.fireEvent('storeFiltered');
-      };
-      getConnectionsFailureFunc  = function (connections, failedConnectionIndexes) {
-        var successfulStations = [];
-        console.log("Failed to get connection to '" + publicTransportIds[failedConnectionIndexes] + "'.");
-        for (var k = 0; k < connections.length; k++) {
-          if (connections[k] !== undefined) {
-            tmpStationsArray[k].set('arrival', Date.parseIso8601(connections[k].to.arrival));
-            tmpStationsArray[k].set('departure', Date.parseIso8601(connections[k].from.departure));
-            successfulStations.push(tmpStationsArray[k]);
+        getConnectionsSuccessFunc = function (connections) {
+          for (var k = 0; k < tmpRecordsArray.length; k++) {
+            tmpRecordsArray[k].set('arrival', Date.parseIso8601(connections[k].to.arrival));
+            tmpRecordsArray[k].set('departure', Date.parseIso8601(connections[k].from.departure));
           }
-        }
-        store.setData(successfulStations);
-        store.fireEvent('storeFiltered');
-      };
-      transportApi.getConnectionsTo(publicTransportIds, getConnectionsSuccessFunc, getConnectionsFailureFunc);
-    } else {
+          store.setData(tmpRecordsArray);
+          store.fireEvent('storeFiltered');
+        };
+        getConnectionsFailureFunc  = function (connections, failedConnectionIndexes) {
+          var successfulStations = [];
+          console.log("Failed to get connection to '" + publicTransportIds[failedConnectionIndexes] + "'.");
+          for (var k = 0; k < connections.length; k++) {
+            if (connections[k] !== undefined) {
+              tmpRecordsArray[k].set('arrival', Date.parseIso8601(connections[k].to.arrival));
+              tmpRecordsArray[k].set('departure', Date.parseIso8601(connections[k].from.departure));
+              successfulStations.push(tmpRecordsArray[k]);
+            }
+          }
+          store.setData(successfulStations);
+          store.fireEvent('storeFiltered');
+        };
+        transportApi.getConnectionsTo(publicTransportIds, getConnectionsSuccessFunc, getConnectionsFailureFunc);
+      }
+    }
+    if (filteredAwayEverything) {
       store.setData([]);
       store.fireEvent('storeFiltered');
     }
