@@ -1,4 +1,4 @@
-Ext.define('SunApp.view.Meteotest', {
+Ext.define('Solskin.view.Meteotest', {
   extend: 'Ext.Panel',
   xtype: 'meteotest',
 

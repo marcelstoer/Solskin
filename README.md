@@ -1,4 +1,4 @@
-SunApp
+Solskin
 ======
 Start your iPhone or Android phone and this app will tell you right after you started it how to get to a sunny place
 in Switzerland using public transportation.

@@ -1,4 +1,4 @@
-Ext.define('SunApp.store.StationReader', {
+Ext.define('Solskin.store.StationReader', {
   extend: 'Ext.data.reader.Json',
   alias: 'reader.stationReader',
 
@@ -90,12 +90,12 @@ Ext.define('SunApp.store.StationReader', {
 
   calculateDistanceToCurrentLocation: function (station) {
     var stationLocation, currentLocation;
-    stationLocation = Ext.create('SunApp.Location', {
+    stationLocation = Ext.create('Solskin.Location', {
         lat: parseFloat(station['lat']),
         long: parseFloat(station['long'])
       }
     );
-    currentLocation = SunApp.app.getCurrentLocation();
+    currentLocation = Solskin.app.getCurrentLocation();
     return currentLocation.distanceTo(stationLocation);
   }
 });

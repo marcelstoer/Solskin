@@ -1,9 +1,9 @@
-Ext.define('SunApp.store.Stations', {
+Ext.define('Solskin.store.Stations', {
   extend: 'Ext.data.Store',
-  requires: ['SunApp.store.StationReader'],
+  requires: ['Solskin.store.StationReader'],
 
   config: {
-    model: 'SunApp.model.Station',
+    model: 'Solskin.model.Station',
     autoLoad: false, // 'load' called manually
     sorters: [
       // will be applied after reduceToRelevant returns
@@ -33,17 +33,17 @@ Ext.define('SunApp.store.Stations', {
 
   reduceToRelevant: function (store, records) {
     var sunLevel,
-      filteredAwayEverything = true,
+      noSunshine = true,
       tmpRecordsArray = [],
       publicTransportIds = [],
       getConnectionsSuccessFunc,
       getConnectionsFailureFunc,
       sunLevelToRecordsMap = this.buildSunLevelToRecordsMap(records),
-      transportApi = Ext.create('SunApp.TransportApi');
+      transportApi = Ext.create('Solskin.TransportApi');
 
     for (sunLevel = 4; sunLevel >= 1; sunLevel--) {
       if (this.atLeast3RecordsForLevel(sunLevelToRecordsMap, sunLevel)) {
-        filteredAwayEverything = false;
+        noSunshine = false;
         console.log('there are at least 3 level-' + sunLevel + ' records - excellent');
         tmpRecordsArray = sunLevelToRecordsMap[sunLevel].slice(0, 5); // get items 0-4
         publicTransportIds = this.extractPublicTransportIds(tmpRecordsArray);
@@ -74,7 +74,7 @@ Ext.define('SunApp.store.Stations', {
         break;
       }
     }
-    if (filteredAwayEverything) {
+    if (noSunshine) {
       store.setData([]);
       store.fireEvent('storeFiltered');
     }

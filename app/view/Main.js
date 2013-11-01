@@ -1,16 +1,16 @@
-Ext.define('SunApp.view.Main', {
+Ext.define('Solskin.view.Main', {
   extend: 'Ext.navigation.View',
   xtype: 'mainview',
 
   requires: [
     'Ext.Img',
-    'SunApp.view.BackButtonOverride',
-    'SunApp.view.MenuButton',
-    'SunApp.view.Overview',
-    'SunApp.view.Stations',
-    'SunApp.view.StationDetail',
-    'SunApp.view.Meteotest',
-    'SunApp.view.Disclaimer'
+    'Solskin.view.BackButtonOverride',
+    'Solskin.view.MenuButton',
+    'Solskin.view.Overview',
+    'Solskin.view.Stations',
+    'Solskin.view.StationDetail',
+    'Solskin.view.Meteotest',
+    'Solskin.view.Disclaimer'
   ],
 
   config: {

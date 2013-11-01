@@ -1,4 +1,4 @@
-Ext.define('SunApp.view.StationDetail', {
+Ext.define('Solskin.view.StationDetail', {
   extend: 'Ext.Container',
   xtype: 'stationDetail',
 
@@ -123,7 +123,7 @@ Ext.define('SunApp.view.StationDetail', {
         "forecastTemperature": forecast['temperature'] ? forecast['temperature'] : " - "
       });
       this.down('#connectionDeparture').setData({
-          "stationName": SunApp.app.getCurrentLocation().getClosestPublicTransportStation()['name'],
+          "stationName": Solskin.app.getCurrentLocation().getClosestPublicTransportStation()['name'],
           "departure": newRecord.get('departure')}
       );
       this.down('#connectionArrival').setData({

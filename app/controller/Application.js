@@ -1,8 +1,8 @@
-Ext.define('SunApp.controller.Application', {
+Ext.define('Solskin.controller.Application', {
   extend: 'Ext.app.Controller',
 
   requires: [
-    'SunApp.Location', 'SunApp.TransportApi', 'SunApp.view.Launching', 'SunApp.view.LaunchingContainer',
+    'Solskin.Location', 'Solskin.TransportApi', 'Solskin.view.Launching', 'Solskin.view.LaunchingContainer',
     'Ext.device.Geolocation'
   ],
 
@@ -28,7 +28,7 @@ Ext.define('SunApp.controller.Application', {
   init: function () {
     Ext.getStore('Stations').on({ storeFiltered: this.onStoreFiltered, scope: this });
     Ext.getStore('Stations').on({ storeLoaded: this.onStoreLoaded, scope: this });
-    SunApp.app.on({launching: this.onLaunching, scope: this});
+    Solskin.app.on({launching: this.onLaunching, scope: this});
  },
 
   onMainPush: function (view, item) {
@@ -36,7 +36,7 @@ Ext.define('SunApp.controller.Application', {
   },
 
   onMainPop: function (view, item) {
-    this.getMain().getNavigationBar().setTitle(SunApp.app.getCurrentLocation().getClosestPublicTransportStation().name);
+    this.getMain().getNavigationBar().setTitle(Solskin.app.getCurrentLocation().getClosestPublicTransportStation().name);
     this.getMain().getNavigationBar().down('#menuButton').setHidden(false);
     if (this.stationDetail !== undefined) {
        this.stationDetail.destroy();
@@ -44,7 +44,7 @@ Ext.define('SunApp.controller.Application', {
   },
 
   onStationSelect: function (list, index, node, record) {
-    this.stationDetail = Ext.create('SunApp.view.StationDetail', { title: record.get('name') });
+    this.stationDetail = Ext.create('Solskin.view.StationDetail', { title: record.get('name') });
     this.stationDetail.setRecord(record);
     this.getMain().push(this.stationDetail);
   },
@@ -54,7 +54,7 @@ Ext.define('SunApp.controller.Application', {
     if (appLoadingIndicator !== null) {
         appLoadingIndicator.destroy();
     }
-    Ext.Viewport.add(Ext.create('SunApp.view.LaunchingContainer'));
+    Ext.Viewport.add(Ext.create('Solskin.view.LaunchingContainer'));
 
     Ext.device.Geolocation.getCurrentPosition({
       maximumAge: 0,
@@ -62,19 +62,19 @@ Ext.define('SunApp.controller.Application', {
       success: function(position) {
         var lat = position.coords.latitude;
         var long = position.coords.longitude;
-        SunApp.app.getController('Application').onGeoLocationDetermined(lat, long);
+        Solskin.app.getController('Application').onGeoLocationDetermined(lat, long);
       },
       failure: function() {
         var noGeoMsg = [
           'Error detecting your geo location, no more details, sorry. ',
           'The option to select your location manually is still missing. Again, sorry.'
         ].join('');
-        SunApp.app.getController('Application').displayError(noGeoMsg);
+        Solskin.app.getController('Application').displayError(noGeoMsg);
       }
     });
 
     // Alternative I: setting location statically
-//    SunApp.app.getController('Application').onGeoLocationDetermined(47.46342478, 8.95429439);
+//    Solskin.app.getController('Application').onGeoLocationDetermined(47.46342478, 8.95429439);
 
     // Alternative II: using Ext.util.Geolocation
 //    Ext.create('Ext.util.Geolocation', {
@@ -84,14 +84,14 @@ Ext.define('SunApp.controller.Application', {
 //        locationupdate: function (geo) {
 //          var lat = geo.getLatitude();
 //          var long = geo.getLongitude();
-//          SunApp.app.getController('Application').onGeoLocationDetermined(lat, long);
+//          Solskin.app.getController('Application').onGeoLocationDetermined(lat, long);
 //        },
 //        locationerror: function () {
 //            var noGeoMsg = [
 //              'Error detecting your geo location, no more details, sorry. ',
 //              'The option to select your location manually is still missing. Again, sorry.'
 //            ].join('');
-//            SunApp.app.getController('Application').displayError(noGeoMsg);
+//            Solskin.app.getController('Application').displayError(noGeoMsg);
 //          }
 //      }
 //    }).updateLocation();
@@ -104,7 +104,7 @@ Ext.define('SunApp.controller.Application', {
     launchingView.updateMessageForGeoLocationFound(lat, long);
     launchingView.updateMessageForClosestStationStart();
 
-    transportApi = Ext.create('SunApp.TransportApi');
+    transportApi = Ext.create('Solskin.TransportApi');
     transportApiErrorFunc = function (response, opts) {
       var transportApiErrorMsg = [
         '<p>Error finding the closest public transport station: ',
@@ -114,10 +114,10 @@ Ext.define('SunApp.controller.Application', {
         ').</p>',
         'The option to select the closest station manually is still missing. Again, sorry.'
       ].join('');
-      SunApp.app.getController('Application').displayError(transportApiErrorMsg);
+      Solskin.app.getController('Application').displayError(transportApiErrorMsg);
     };
 
-    SunApp.app.setCurrentLocation(Ext.create('SunApp.Location', { lat: lat, long: long }));
+    Solskin.app.setCurrentLocation(Ext.create('Solskin.Location', { lat: lat, long: long }));
     transportApi.getClosestStation(lat, long, this.onClosestStationDetermined, transportApiErrorFunc);
   },
 
@@ -127,7 +127,7 @@ Ext.define('SunApp.controller.Application', {
     launchingView = Ext.Viewport.getComponent(0).getComponent(0);
     launchingView.updateMessageForClosestStationFound(station.name);
 
-    SunApp.app.getCurrentLocation().setClosestPublicTransportStation({"name": station.name, "id": station.id});
+    Solskin.app.getCurrentLocation().setClosestPublicTransportStation({"name": station.name, "id": station.id});
     launchingView.updateMessageForLoadingAllStations();
     Ext.getStore('Stations').load();
   },
@@ -136,7 +136,7 @@ Ext.define('SunApp.controller.Application', {
     if (numberOfRecords > 0) {
       Ext.Viewport.getComponent(0).getComponent(0).updateMessageForLoadingAllStationsDone(numberOfRecords);
     } else {
-      SunApp.app.getController('Application').displayError('No data weather data available due to technical errors, sorry.');
+      Solskin.app.getController('Application').displayError('No data weather data available due to technical errors, sorry.');
     }
   },
 
@@ -145,8 +145,8 @@ Ext.define('SunApp.controller.Application', {
     var storeSize = Ext.getStore('Stations').getData().length;
 
     if (storeSize > 0) {
-      mainView = Ext.create('SunApp.view.Main');
-      mainView.getNavigationBar().setTitle(SunApp.app.getCurrentLocation().getClosestPublicTransportStation().name);
+      mainView = Ext.create('Solskin.view.Main');
+      mainView.getNavigationBar().setTitle(Solskin.app.getCurrentLocation().getClosestPublicTransportStation().name);
       Ext.Viewport.removeAll(true, true);
       Ext.Viewport.add(mainView);
     } else {
@@ -165,11 +165,11 @@ Ext.define('SunApp.controller.Application', {
       appLoadingIndicator.destroy();
     }
     Ext.Viewport.removeAll(true, true);
-    Ext.Viewport.add(Ext.create('SunApp.view.Error', {html: htmlMsg}));
+    Ext.Viewport.add(Ext.create('Solskin.view.Error', {html: htmlMsg}));
   },
 
   displayDisclaimer: function () {
-    this.getMain().push(Ext.create('SunApp.view.DisclaimerContainer'));
+    this.getMain().push(Ext.create('Solskin.view.DisclaimerContainer'));
   }
 
 });

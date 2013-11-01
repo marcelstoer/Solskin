@@ -1,10 +1,10 @@
-Ext.define('SunApp.view.DisclaimerContainer', {
+Ext.define('Solskin.view.DisclaimerContainer', {
   extend: 'Ext.Container',
   xtype: 'disclaimerContainer',
 
   requires: [
-    'SunApp.view.Disclaimer',
-    'SunApp.view.Meteotest'
+    'Solskin.view.Disclaimer',
+    'Solskin.view.Meteotest'
   ],
 
   config: {

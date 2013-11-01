@@ -1,4 +1,4 @@
-Ext.define('SunApp.model.Station', {
+Ext.define('Solskin.model.Station', {
   extend: 'Ext.data.Model',
 
   config: {

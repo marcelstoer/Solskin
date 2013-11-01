@@ -1,10 +1,10 @@
-Ext.define('SunApp.view.LaunchingContainer', {
+Ext.define('Solskin.view.LaunchingContainer', {
   extend: 'Ext.Container',
   xtype: 'launchingContainer',
 
   requires: [
-    'SunApp.view.Launching',
-    'SunApp.view.Meteotest'
+    'Solskin.view.Launching',
+    'Solskin.view.Meteotest'
   ],
 
   config: {

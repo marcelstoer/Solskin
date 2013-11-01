@@ -1,10 +1,10 @@
-Ext.define('SunApp.view.MenuButton', {
+Ext.define('Solskin.view.MenuButton', {
   extend: 'Ext.Img',
   xtype: 'menuButton',
   id: 'menuButton',
 
   requires: [
-    'SunApp.view.Disclaimer'
+    'Solskin.view.Disclaimer'
   ],
 
 
@@ -21,7 +21,7 @@ Ext.define('SunApp.view.MenuButton', {
 
     listeners: {
         tap: function() {
-          SunApp.app.getController('Application').displayDisclaimer();
+          Solskin.app.getController('Application').displayDisclaimer();
         }
     }
 

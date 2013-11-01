@@ -1,9 +1,9 @@
-Ext.define('SunApp.view.Launching', {
+Ext.define('Solskin.view.Launching', {
   extend: 'Ext.Panel',
   xtype: 'launching',
 
   config: {
-    html: 'Welcome to SunApp!<br>Detecting your geo location...',
+    html: 'Welcome to Solskin!<br>Detecting your geo location...',
     styleHtmlContent: true,
     scrollable: 'vertical'
   },

@@ -1,4 +1,4 @@
-Ext.define('SunApp.view.BackButtonOverride', {
+Ext.define('Solskin.view.BackButtonOverride', {
   extend: 'Ext.Img',
   xtype: 'backButtonOverride',
   id: 'backButtonOverride',

@@ -1,4 +1,4 @@
-Ext.define('SunApp.view.Stations', {
+Ext.define('Solskin.view.Stations', {
   extend: 'Ext.List',
   xtype: 'stations',
   id: 'stations',
@@ -19,7 +19,7 @@ Ext.define('SunApp.view.Stations', {
                 lastUpdatedDateFormat: 'H:i',
                 onLatestFetched: function(store) {
                     Ext.Viewport.removeAll(true, true);
-                    SunApp.app.fireEvent('launching');
+                    Solskin.app.fireEvent('launching');
                 }
             }
         ],

@@ -4,7 +4,7 @@ if (Number.prototype.toRad === undefined) {
     return this * Math.PI / 180;
   };
 }
-Ext.define('SunApp.Location', {
+Ext.define('Solskin.Location', {
   config: {
     lat: null,
     long: null,

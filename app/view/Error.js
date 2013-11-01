@@ -1,4 +1,4 @@
-Ext.define('SunApp.view.Error', {
+Ext.define('Solskin.view.Error', {
   extend: 'Ext.Panel',
 
   config: {

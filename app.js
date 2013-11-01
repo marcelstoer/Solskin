@@ -162,7 +162,7 @@ var wmo2sbb = {
 //<debug>
 Ext.Loader.setPath({
   'Ext': 'touch/src',
-  'SunApp': 'app'
+  'Solskin': 'app'
 });
 //</debug>
 
@@ -172,7 +172,7 @@ Ext.Loader.setConfig({
 });
 
 Ext.application({
-  name: 'SunApp',
+  name: 'Solskin',
   currentLocation: null,
 
   models: ['Station'],
@@ -199,7 +199,7 @@ Ext.application({
   },
 
   launch: function () {
-    SunApp.app.fireEvent('launching');
+    Solskin.app.fireEvent('launching');
   },
 
   setCurrentLocation: function (currentLocation) {

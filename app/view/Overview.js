@@ -1,12 +1,12 @@
-Ext.define('SunApp.view.Overview', {
+Ext.define('Solskin.view.Overview', {
   extend: 'Ext.Container',
   xtype: 'overview',
   id: 'overview',
 
   requires: [
-    'SunApp.view.Stations',
-    'SunApp.view.StationDetail'
-//    'SunApp.view.Meteotest'
+    'Solskin.view.Stations',
+    'Solskin.view.StationDetail'
+//    'Solskin.view.Meteotest'
   ],
 
   config: {

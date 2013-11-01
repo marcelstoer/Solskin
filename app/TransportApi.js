@@ -1,4 +1,4 @@
-Ext.define('SunApp.TransportApi', {
+Ext.define('Solskin.TransportApi', {
   baseUrl: 'http://transport.opendata.ch/v1',
 
   config: {},
@@ -30,7 +30,7 @@ Ext.define('SunApp.TransportApi', {
       url: this.baseUrl + '/connections',
       method: 'GET',
       params: {
-        from: SunApp.app.getCurrentLocation().getClosestPublicTransportStation().id,
+        from: Solskin.app.getCurrentLocation().getClosestPublicTransportStation().id,
         to: place
       },
       success: function (response) {
