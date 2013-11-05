@@ -151,9 +151,9 @@ Ext.define('Solskin.controller.Application', {
       Ext.Viewport.add(mainView);
     } else {
       var msg = [
-        'Sorry, according to our data the sun really does\'t shine currently in Switzerland. ',
+        'Sorry, according to our data the sun really doesn\'t shine currently in Switzerland. ',
         'It\'s overrated anyway...',
-        'after all you should Have Sunshine in Your Heart!'
+        'after all you should always have Sunshine in Your Heart!'
       ].join('');
       this.displayError(msg);
     }
