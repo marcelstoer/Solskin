@@ -74,27 +74,27 @@ Ext.define('Solskin.controller.Application', {
 //    });
 
     // Alternative I: setting location statically
-    Solskin.app.getController('Application').onGeoLocationDetermined(47.46342478, 8.95429439);
+//    Solskin.app.getController('Application').onGeoLocationDetermined(47.46342478, 8.95429439);
 
     // Alternative II: using Ext.util.Geolocation
-//    Ext.create('Ext.util.Geolocation', {
-//      autoUpdate: false,
-//      maximumAge: 0,
-//      listeners: {
-//        locationupdate: function (geo) {
-//          var lat = geo.getLatitude();
-//          var long = geo.getLongitude();
-//          Solskin.app.getController('Application').onGeoLocationDetermined(lat, long);
-//        },
-//        locationerror: function () {
-//            var noGeoMsg = [
-//              'Error detecting your geo location, no more details, sorry. ',
-//              'The option to select your location manually is still missing. Again, sorry.'
-//            ].join('');
-//            Solskin.app.getController('Application').displayError(noGeoMsg);
-//          }
-//      }
-//    }).updateLocation();
+    Ext.create('Ext.util.Geolocation', {
+      autoUpdate: false,
+      maximumAge: 0,
+      listeners: {
+        locationupdate: function (geo) {
+          var lat = geo.getLatitude();
+          var long = geo.getLongitude();
+          Solskin.app.getController('Application').onGeoLocationDetermined(lat, long);
+        },
+        locationerror: function () {
+            var noGeoMsg = [
+              'Error detecting your geo location, no more details, sorry. ',
+              'The option to select your location manually is still missing. Again, sorry.'
+            ].join('');
+            Solskin.app.getController('Application').displayError(noGeoMsg);
+          }
+      }
+    }).updateLocation();
   },
 
   onGeoLocationDetermined: function (lat, long) {
