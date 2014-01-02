@@ -2,8 +2,8 @@ Ext.define('Solskin.controller.Application', {
   extend: 'Ext.app.Controller',
 
   requires: [
-    'Solskin.Location', 'Solskin.TransportApi', 'Solskin.view.Launching', 'Solskin.view.LaunchingContainer',
-    'Ext.device.Geolocation'
+    'Solskin.Location', 'Solskin.TransportApi', 'Solskin.view.Launching', 'Solskin.view.ErrorContainer', 'Solskin.view.LaunchingContainer'
+    //, 'Ext.device.Geolocation' must be commented out for android build
   ],
 
   config: {
@@ -56,25 +56,25 @@ Ext.define('Solskin.controller.Application', {
     }
     Ext.Viewport.add(Ext.create('Solskin.view.LaunchingContainer'));
 
-    Ext.device.Geolocation.getCurrentPosition({
-      maximumAge: 0,
-      allowHighAccuracy: true,
-      success: function(position) {
-        var lat = position.coords.latitude;
-        var long = position.coords.longitude;
-        Solskin.app.getController('Application').onGeoLocationDetermined(lat, long);
-      },
-      failure: function() {
-        var noGeoMsg = [
-          'Error detecting your geo location, no more details, sorry. ',
-          'The option to select your location manually is still missing. Again, sorry.'
-        ].join('');
-        Solskin.app.getController('Application').displayError(noGeoMsg);
-      }
-    });
+//    Ext.device.Geolocation.getCurrentPosition({
+//      maximumAge: 0,
+//      allowHighAccuracy: true,
+//      success: function(position) {
+//        var lat = position.coords.latitude;
+//        var long = position.coords.longitude;
+//        Solskin.app.getController('Application').onGeoLocationDetermined(lat, long);
+//      },
+//      failure: function() {
+//        var noGeoMsg = [
+//          'Error detecting your geo location, no more details, sorry. ',
+//          'The option to select your location manually is still missing. Again, sorry.'
+//        ].join('');
+//        Solskin.app.getController('Application').displayError(noGeoMsg);
+//      }
+//    });
 
     // Alternative I: setting location statically
-//    Solskin.app.getController('Application').onGeoLocationDetermined(47.46342478, 8.95429439);
+    Solskin.app.getController('Application').onGeoLocationDetermined(47.46342478, 8.95429439);
 
     // Alternative II: using Ext.util.Geolocation
 //    Ext.create('Ext.util.Geolocation', {
@@ -152,7 +152,7 @@ Ext.define('Solskin.controller.Application', {
     } else {
       var msg = [
         'Sorry, according to our data the sun really doesn\'t shine currently in Switzerland. ',
-        'It\'s overrated anyway...',
+        'It\'s overrated anyway... ',
         'after all you should always have Sunshine in Your Heart!'
       ].join('');
       this.displayError(msg);
@@ -165,7 +165,10 @@ Ext.define('Solskin.controller.Application', {
       appLoadingIndicator.destroy();
     }
     Ext.Viewport.removeAll(true, true);
-    Ext.Viewport.add(Ext.create('Solskin.view.Error', {html: htmlMsg}));
+    var err = Ext.create('Solskin.view.Error', {html: htmlMsg});
+    var errCont = Ext.create('Solskin.view.ErrorContainer');
+    errCont.add(err);
+    Ext.Viewport.add(errCont);
   },
 
   displayDisclaimer: function () {
